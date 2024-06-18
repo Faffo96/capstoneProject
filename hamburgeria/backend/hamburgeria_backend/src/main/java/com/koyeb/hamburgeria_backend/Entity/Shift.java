@@ -4,7 +4,7 @@ import com.koyeb.hamburgeria_backend.Entity.User.Employee;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
+
 
 import java.time.LocalDateTime;
 
@@ -20,5 +20,7 @@ public class Shift {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    private LocalDateTime date;
+    private LocalDateTime startDate;
+
+    private LocalDateTime endDate;
 }

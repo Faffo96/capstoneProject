@@ -4,7 +4,6 @@ import com.koyeb.hamburgeria_backend.Entity.User.User;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDateTime;
 import java.util.List;

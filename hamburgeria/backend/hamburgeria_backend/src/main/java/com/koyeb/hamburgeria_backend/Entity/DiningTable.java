@@ -2,7 +2,6 @@ package com.koyeb.hamburgeria_backend.Entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public class DiningTable {
     private int seating;
     private boolean outside;
 
-    @OneToMany(mappedBy = "table")
+    @OneToMany(mappedBy = "diningTable")
     private List<Reservation> reservationList;
 }
 

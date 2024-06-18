@@ -4,7 +4,7 @@ import com.koyeb.hamburgeria_backend.Entity.User.User;
 import jakarta.persistence.*;
 import lombok.Data;
 import jakarta.persistence.Table;
-import org.springframework.data.annotation.Id;
+
 
 import java.time.LocalDateTime;
 
@@ -21,7 +21,7 @@ public class Reservation {
 
     @ManyToOne
     @JoinColumn(name = "table_id")
-    private Table table;
+    private DiningTable diningTable;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

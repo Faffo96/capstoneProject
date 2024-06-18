@@ -5,7 +5,6 @@ import com.koyeb.hamburgeria_backend.Entity.Reservation;
 import com.koyeb.hamburgeria_backend.Enum.Role;
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.data.annotation.Id;
 
 import java.time.LocalDate;
 import java.util.List;
