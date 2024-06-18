@@ -1,4 +1,5 @@
 package com.koyeb.hamburgeria_backend.Entity;
+import com.koyeb.hamburgeria_backend.Enum.Category;
 
 import jakarta.persistence.*;
 import jakarta.persistence.Table;

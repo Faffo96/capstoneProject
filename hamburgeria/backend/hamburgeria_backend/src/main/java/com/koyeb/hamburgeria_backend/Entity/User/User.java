@@ -2,7 +2,7 @@ package com.koyeb.hamburgeria_backend.Entity.User;
 
 import com.koyeb.hamburgeria_backend.Entity.Cart;
 import com.koyeb.hamburgeria_backend.Entity.Reservation;
-
+import com.koyeb.hamburgeria_backend.Enum.Role;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.springframework.data.annotation.Id;
@@ -16,12 +16,9 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
+    private String email;
     private String name;
     private String surname;
-    private String email;
     private String avatar;
 
     @Enumerated(EnumType.STRING)
