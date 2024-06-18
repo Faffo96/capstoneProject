@@ -1,5 +1,6 @@
 package com.koyeb.hamburgeria_backend.Entity.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.koyeb.hamburgeria_backend.Entity.Shift;
 import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
@@ -16,5 +17,14 @@ public class Employee extends User {
     private double salary;
 
     @OneToMany(mappedBy = "employee")
+    @JsonIgnore
     private List<Shift> shiftList;
+
+    @Override
+    public String toString() {
+        return "Employee{" +
+                "codiceFiscale='" + codiceFiscale + '\'' +
+                ", salary=" + salary +
+                '}';
+    }
 }

@@ -1,4 +1,5 @@
 package com.koyeb.hamburgeria_backend.Entity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.koyeb.hamburgeria_backend.Enum.Category;
 
 import jakarta.persistence.*;
@@ -16,6 +17,7 @@ public class Product {
     private Long id;
 
     @ManyToMany(mappedBy = "productList")
+    @JsonIgnore
     private List<Cart> cartList;
 
     private String name;
@@ -26,4 +28,16 @@ public class Product {
     private Category category;
 
     private boolean available;
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price=" + price +
+                ", category=" + category +
+                ", available=" + available +
+                '}';
+    }
 }

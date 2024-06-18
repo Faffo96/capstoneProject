@@ -1,5 +1,6 @@
 package com.koyeb.hamburgeria_backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.koyeb.hamburgeria_backend.Entity.User.User;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
@@ -17,9 +18,21 @@ public class Cart {
     private Long id;
 
     @OneToOne(mappedBy = "cart")
+    @JsonIgnore
     private Reservation reservation;
 
     private LocalDateTime creationDate;
+
+    @Override
+    public String toString() {
+        return "Cart{" +
+                "id=" + id +
+                ", creationDate=" + creationDate +
+                ", productList=" + productList +
+                ", user=" + user +
+                ", total=" + total +
+                '}';
+    }
 
     @ManyToMany
     @JoinTable(

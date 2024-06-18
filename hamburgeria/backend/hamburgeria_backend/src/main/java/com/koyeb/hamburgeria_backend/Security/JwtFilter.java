@@ -1,6 +1,8 @@
 package com.koyeb.hamburgeria_backend.Security;
 
 import com.koyeb.hamburgeria_backend.Entity.User.User;
+import com.koyeb.hamburgeria_backend.Exception.UnauthorizedException;
+import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -12,6 +14,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
+import com.koyeb.hamburgeria_backend.Service.UserService;
 
 import java.io.IOException;
 

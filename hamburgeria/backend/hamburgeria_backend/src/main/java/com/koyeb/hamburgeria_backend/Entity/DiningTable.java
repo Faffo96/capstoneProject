@@ -1,5 +1,6 @@
 package com.koyeb.hamburgeria_backend.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -17,6 +18,16 @@ public class DiningTable {
     private boolean outside;
 
     @OneToMany(mappedBy = "diningTable")
+    @JsonIgnore
     private List<Reservation> reservationList;
+
+    @Override
+    public String toString() {
+        return "DiningTable{" +
+                "id=" + id +
+                ", seating=" + seating +
+                ", outside=" + outside +
+                '}';
+    }
 }
 

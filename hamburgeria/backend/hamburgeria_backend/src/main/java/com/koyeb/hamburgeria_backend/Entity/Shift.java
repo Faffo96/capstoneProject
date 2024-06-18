@@ -1,9 +1,9 @@
 package com.koyeb.hamburgeria_backend.Entity;
 
-import com.koyeb.hamburgeria_backend.Entity.User.Employee;
 import jakarta.persistence.*;
 import jakarta.persistence.Table;
 import lombok.Data;
+import com.koyeb.hamburgeria_backend.Entity.User.Employee;
 
 
 import java.time.LocalDateTime;

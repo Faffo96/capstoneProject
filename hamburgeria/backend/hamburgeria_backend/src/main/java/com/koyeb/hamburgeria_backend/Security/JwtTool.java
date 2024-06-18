@@ -1,6 +1,7 @@
 package com.koyeb.hamburgeria_backend.Security;
 
 import com.koyeb.hamburgeria_backend.Entity.User.User;
+import com.koyeb.hamburgeria_backend.Exception.UnauthorizedException;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.MalformedJwtException;
