@@ -1,5 +1,4 @@
 package com.koyeb.hamburgeria_backend;
-import com.koyeb.hamburgeria_backend.Entity.User.User;
 import com.koyeb.hamburgeria_backend.Repository.EmployeeRepository;
 import com.koyeb.hamburgeria_backend.Repository.UserRepository;
 import com.koyeb.hamburgeria_backend.Service.EmployeeService;
@@ -49,8 +48,6 @@ public class Runner implements CommandLineRunner {
 
         /*Employee employee = employeeService.getEmployeeByEmail("mario.rossi@example.com");
         System.out.println(employee);*/
-
-
     }
 }
 

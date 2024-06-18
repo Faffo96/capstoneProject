@@ -33,6 +33,12 @@ public class EmployeeService {
     private UserRepository userRepository;
 
     @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private OwnerService ownerService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -48,28 +54,53 @@ public class EmployeeService {
     private static final Logger loggerDebug = LoggerFactory.getLogger("loggerDebug");
 
     public String createEmployee(EmployeeDTO employeeDTO) throws EmailAlreadyInUseException {
-        try {
-            getEmployeeByEmail(employeeDTO.getEmail());
+        if (isEmailInUse(employeeDTO.getEmail())) {
             throw new EmailAlreadyInUseException("Email " + employeeDTO.getEmail() + " already in use.");
-        } catch (UserNotFoundException e) {
-            Employee employee = new Employee();
-            employee.setName(employeeDTO.getName());
-            employee.setSurname(employeeDTO.getSurname());
-            employee.setEmail(employeeDTO.getEmail());
-            employee.setPassword(passwordEncoder.encode(employeeDTO.getPassword()));
-            employee.setAvatar(employeeDTO.getAvatar());
-            employee.setRole(Role.valueOf(Role.EMPLOYEE.name()));
-            employee.setCreationDate(employeeDTO.getCreationDate());
-            employee.setCodiceFiscale(employeeDTO.getCodiceFiscale());
-            employee.setSalary(employeeDTO.getSalary());
-
-            employeeRepository.save(employee);
-            loggerTrace.trace("Registration email sent to employee: " + employee.getEmail());
-            sendRegistrationMail(employee);
-            loggerTrace.trace("Employee with email " + employee.getEmail() + " saved.");
-            return "Employee with email " + employee.getEmail() + " saved.";
         }
+
+        Employee employee = new Employee();
+        employee.setName(employeeDTO.getName());
+        employee.setSurname(employeeDTO.getSurname());
+        employee.setEmail(employeeDTO.getEmail());
+        employee.setPassword(passwordEncoder.encode(employeeDTO.getPassword()));
+        employee.setAvatar(employeeDTO.getAvatar());
+        employee.setRole(Role.valueOf(Role.EMPLOYEE.name()));
+        employee.setCreationDate(employeeDTO.getCreationDate());
+        employee.setCodiceFiscale(employeeDTO.getCodiceFiscale());
+        employee.setSalary(employeeDTO.getSalary());
+
+        employeeRepository.save(employee);
+        loggerTrace.trace("Registration email sent to employee: " + employee.getEmail());
+        sendRegistrationMail(employee);
+        loggerTrace.trace("Employee with email " + employee.getEmail() + " saved.");
+        return "Employee with email " + employee.getEmail() + " saved.";
     }
+
+    private boolean isEmailInUse(String email) {
+        try {
+            ownerService.getOwnerByEmail(email);
+            return true;
+        } catch (UserNotFoundException e) {
+            // Email not found for Owner, continue checking
+        }
+
+        try {
+            getEmployeeByEmail(email);
+            return true;
+        } catch (UserNotFoundException e) {
+            // Email not found for Employee, continue checking
+        }
+
+        try {
+            customerService.getCustomerByEmail(email);
+            return true;
+        } catch (UserNotFoundException e) {
+            // Email not found for Customer, continue checking
+        }
+
+        return false;
+    }
+
 
     public Employee getEmployeeByEmail(String email) {
         return employeeRepository.findByEmail(email)

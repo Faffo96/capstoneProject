@@ -19,11 +19,11 @@ import java.util.List;
         @Autowired
         private ShiftService shiftService;
 
-        /*@PostMapping
+        @PostMapping
         public ResponseEntity<Shift> createShift(@RequestBody ShiftDTO shiftDTO) {
             Shift createdShift = shiftService.createShift(shiftDTO);
             return ResponseEntity.ok(createdShift);
-        }*/
+        }
 
         @GetMapping("/{id}")
         public ResponseEntity<Shift> getShiftById(@PathVariable Long id) {

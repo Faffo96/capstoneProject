@@ -7,6 +7,7 @@ import com.koyeb.hamburgeria_backend.Enum.Role;
 import com.koyeb.hamburgeria_backend.Exception.EmailAlreadyInUseException;
 import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Repository.CustomerRepository;
+import com.koyeb.hamburgeria_backend.Repository.EmployeeRepository;
 import com.koyeb.hamburgeria_backend.Repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,6 +34,12 @@ public class CustomerService {
     private UserRepository userRepository;
 
     @Autowired
+    private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private OwnerService ownerService;
+
+    @Autowired
     private PasswordEncoder passwordEncoder;
 
     @Autowired
@@ -48,25 +55,49 @@ public class CustomerService {
     private static final Logger loggerDebug = LoggerFactory.getLogger("loggerDebug");
 
     public String createCustomer(CustomerDTO customerDTO) throws EmailAlreadyInUseException {
-        try {
-            getCustomerByEmail(customerDTO.getEmail());
+        if (isEmailInUse(customerDTO.getEmail())) {
             throw new EmailAlreadyInUseException("Email " + customerDTO.getEmail() + " already in use.");
-        } catch (UserNotFoundException e) {
-            Customer customer = new Customer();
-            customer.setName(customerDTO.getName());
-            customer.setSurname(customerDTO.getSurname());
-            customer.setEmail(customerDTO.getEmail());
-            customer.setPassword(passwordEncoder.encode(customerDTO.getPassword()));
-            customer.setAvatar(customerDTO.getAvatar());
-            customer.setRole(Role.valueOf(Role.CUSTOMER.name()));
-            customer.setCreationDate(customerDTO.getCreationDate());
-
-            customerRepository.save(customer);
-            loggerTrace.trace("Registration email sent to customer: " + customer.getEmail());
-            sendRegistrationMail(customer);
-            loggerTrace.trace("Customer with email " + customer.getEmail() + " saved.");
-            return "Customer with email " + customer.getEmail() + " saved.";
         }
+
+        Customer customer = new Customer();
+        customer.setName(customerDTO.getName());
+        customer.setSurname(customerDTO.getSurname());
+        customer.setEmail(customerDTO.getEmail());
+        customer.setPassword(passwordEncoder.encode(customerDTO.getPassword()));
+        customer.setAvatar(customerDTO.getAvatar());
+        customer.setRole(Role.valueOf(Role.CUSTOMER.name()));
+        customer.setCreationDate(customerDTO.getCreationDate());
+
+        customerRepository.save(customer);
+        loggerTrace.trace("Registration email sent to customer: " + customer.getEmail());
+        sendRegistrationMail(customer);
+        loggerTrace.trace("Customer with email " + customer.getEmail() + " saved.");
+        return "Customer with email " + customer.getEmail() + " saved.";
+    }
+
+    private boolean isEmailInUse(String email) {
+        try {
+            ownerService.getOwnerByEmail(email);
+            return true;
+        } catch (UserNotFoundException e) {
+            // Email not found for Owner, continue checking
+        }
+
+        try {
+            employeeRepository.findByEmail(email);
+            return true;
+        } catch (UserNotFoundException e) {
+            // Email not found for Employee, continue checking
+        }
+
+        try {
+            getCustomerByEmail(email);
+            return true;
+        } catch (UserNotFoundException e) {
+            // Email not found for Customer, continue checking
+        }
+
+        return false;
     }
 
     public Customer getCustomerByEmail(String email) {

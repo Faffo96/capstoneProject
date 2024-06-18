@@ -1,6 +1,8 @@
 package com.koyeb.hamburgeria_backend.Service;
 
+import com.koyeb.hamburgeria_backend.Dto.ShiftDTO;
 import com.koyeb.hamburgeria_backend.Entity.Shift;
+import com.koyeb.hamburgeria_backend.Entity.User.Employee;
 import com.koyeb.hamburgeria_backend.Exception.ShiftNotFoundException;
 import com.koyeb.hamburgeria_backend.Repository.ShiftRepository;
 import org.slf4j.Logger;
@@ -10,6 +12,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -29,7 +35,7 @@ public class ShiftService {
     private static final Logger loggerError = LoggerFactory.getLogger("loggerError");
     private static final Logger loggerDebug = LoggerFactory.getLogger("loggerDebug");
 
-    /*public Shift createShift(ShiftDTO shiftDTO) {
+    public Shift createShift(ShiftDTO shiftDTO) {
         // Ottenere l'utente autenticato dal contesto di sicurezza
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = null;
@@ -59,7 +65,7 @@ public class ShiftService {
 
         loggerInfo.info("Shift for employee " + shift.getEmployee().getEmail() + " on date " + shift.getStartDate() + " created.");
         return shift;
-    }*/
+    }
 
 
 

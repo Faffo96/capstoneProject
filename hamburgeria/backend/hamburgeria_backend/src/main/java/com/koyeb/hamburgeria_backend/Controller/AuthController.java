@@ -28,12 +28,11 @@ public class AuthController {
     @Autowired
     private AuthService authService;
 
-
     @PostMapping("/auth/registerEmployee")
     public String registerEmployee(@RequestBody @Validated EmployeeDTO employeeDTO, BindingResult bindingResult) throws BadRequestException, EmailAlreadyInUseException {
-        if(bindingResult.hasErrors()){
-            throw new BadRequestException(bindingResult.getAllErrors().stream().map(error->error.getDefaultMessage()).
-                    reduce("", (s, s2) -> s+s2));
+        if (bindingResult.hasErrors()) {
+            throw new BadRequestException(bindingResult.getAllErrors().stream().map(error -> error.getDefaultMessage()).
+                    reduce("", (s, s2) -> s + s2));
         }
         try {
             employeeService.createEmployee(employeeDTO);
@@ -45,9 +44,9 @@ public class AuthController {
 
     @PostMapping("/auth/registerCustomer")
     public String registerCustomer(@RequestBody @Validated CustomerDTO customerDTO, BindingResult bindingResult) throws BadRequestException, EmailAlreadyInUseException {
-        if(bindingResult.hasErrors()){
-            throw new BadRequestException(bindingResult.getAllErrors().stream().map(error->error.getDefaultMessage()).
-                    reduce("", (s, s2) -> s+s2));
+        if (bindingResult.hasErrors()) {
+            throw new BadRequestException(bindingResult.getAllErrors().stream().map(error -> error.getDefaultMessage()).
+                    reduce("", (s, s2) -> s + s2));
         }
         try {
             customerService.createCustomer(customerDTO);
@@ -59,7 +58,7 @@ public class AuthController {
 
     @PostMapping("/auth/registerOwner")
     public String registerOwner(@RequestBody @Validated OwnerDTO ownerDTO, BindingResult bindingResult) throws BadRequestException, EmailAlreadyInUseException {
-        if(bindingResult.hasErrors()){
+        if (bindingResult.hasErrors()) {
             throw new BadRequestException(bindingResult.getAllErrors().stream().map(error -> error.getDefaultMessage()).
                     reduce("", (s, s2) -> s + s2));
         }
@@ -73,11 +72,12 @@ public class AuthController {
 
     @PostMapping("/auth/login")
     public String login(@RequestBody @Validated UserLoginDTO userLoginDTO, BindingResult bindingResult) throws BadRequestException {
-        if(bindingResult.hasErrors()){
-            throw new BadRequestException(bindingResult.getAllErrors().stream().map(error->error.getDefaultMessage()).
-                    reduce("", (s, s2) -> s+s2));
+        if (bindingResult.hasErrors()) {
+            throw new BadRequestException(bindingResult.getAllErrors().stream().map(error -> error.getDefaultMessage()).
+                    reduce("", (s, s2) -> s + s2));
         }
         return authService.authenticateUserAndCreateToken(userLoginDTO);
     }
 }
+
 

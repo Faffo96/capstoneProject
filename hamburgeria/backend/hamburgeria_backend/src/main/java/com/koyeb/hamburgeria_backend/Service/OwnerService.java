@@ -69,6 +69,31 @@ public class OwnerService {
         }
     }
 
+    /*private boolean isEmailInUse(String email) {
+        try {
+            getOwnerByEmail(email);
+            return true;
+        } catch (UserNotFoundException e) {
+            // Email not found for Owner, continue checking
+        }
+
+        try {
+            employeeService.getEmployeeByEmail(email);
+            return true;
+        } catch (UserNotFoundException e) {
+            // Email not found for Employee, continue checking
+        }
+
+        try {
+            customerService.getCustomerByEmail(email);
+            return true;
+        } catch (UserNotFoundException e) {
+            // Email not found for Customer, continue checking
+        }
+
+        return false;
+    }*/
+
     public Owner getOwnerByEmail(String email) {
         return ownerRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Owner not found with email: " + email));
