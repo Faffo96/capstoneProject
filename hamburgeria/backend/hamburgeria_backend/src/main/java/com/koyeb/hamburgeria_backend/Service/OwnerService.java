@@ -69,31 +69,6 @@ public class OwnerService {
         }
     }
 
-    /*private boolean isEmailInUse(String email) {
-        try {
-            getOwnerByEmail(email);
-            return true;
-        } catch (UserNotFoundException e) {
-            // Email not found for Owner, continue checking
-        }
-
-        try {
-            employeeService.getEmployeeByEmail(email);
-            return true;
-        } catch (UserNotFoundException e) {
-            // Email not found for Employee, continue checking
-        }
-
-        try {
-            customerService.getCustomerByEmail(email);
-            return true;
-        } catch (UserNotFoundException e) {
-            // Email not found for Customer, continue checking
-        }
-
-        return false;
-    }*/
-
     public Owner getOwnerByEmail(String email) {
         return ownerRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Owner not found with email: " + email));
@@ -109,10 +84,16 @@ public class OwnerService {
 
     public Owner updateOwner(String email, OwnerDTO ownerDTO) throws UserNotFoundException {
         Owner owner = getOwnerByEmail(email);
+        String ownerEmail = owner.getEmail();
         owner.setName(ownerDTO.getName());
+        owner.setSurname(ownerDTO.getSurname());
         owner.setEmail(ownerDTO.getEmail());
+        owner.setPassword(passwordEncoder.encode(ownerDTO.getPassword()));
+        owner.setAvatar(ownerDTO.getAvatar());
+        owner.setRole(Role.valueOf(Role.OWNER.name()));
+        owner.setCreationDate(ownerDTO.getCreationDate());
         ownerRepository.save(owner);
-        loggerInfo.info("Owner with email " + owner.getEmail() + " updated.");
+        loggerInfo.info("Owner with email " + ownerEmail + " updated.");
         return owner;
     }
 
@@ -130,6 +111,7 @@ public class OwnerService {
         message.setText("Congratulations, " + owner.getName() + " " + owner.getSurname() + "! Successful registration to this owner service");
 
         javaMailSender.send(message);
+        loggerInfo.info("Registration email sent to owner: " + owner.getEmail());
     }
 
     public String setOwnerAvatar(String ownerEmail, MultipartFile photo) throws IOException {

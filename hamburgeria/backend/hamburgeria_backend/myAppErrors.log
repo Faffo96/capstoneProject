@@ -6,3 +6,12 @@
 2024-06-18 23:18:08,867 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:79] -- Email mario.rossi@example.com already in use.
 2024-06-19 00:57:46,523 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:79] -- Email jane.doe@example.com already in use.
 2024-06-19 01:08:24,903 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:79] -- Email jane.doe@example.com already in use.
+2024-06-19 02:17:09,493 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:39] -- Employee not found with email: mario.rossi@example.com
+2024-06-19 02:26:00,892 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:79] -- Email jane.doe@example.com already in use.
+2024-06-19 02:26:57,376 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:79] -- Email jane.doe@example.com already in use.
+2024-06-19 02:27:45,406 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:79] -- Email jane.doe@example.com already in use.
+2024-06-19 02:28:11,231 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:79] -- Email jane.doe@example.com already in use.
+2024-06-19 02:30:23,028 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:79] -- Email jane.doe@example.com already in use.
+2024-06-19 02:32:42,131 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:79] -- Email jane.doe@example.com already in use.
+2024-06-19 02:33:57,085 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:79] -- Email jane.doe@example.com already in use.
+2024-06-19 02:39:08,576 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:39] -- Employee not found with email: jane.doe@example.com

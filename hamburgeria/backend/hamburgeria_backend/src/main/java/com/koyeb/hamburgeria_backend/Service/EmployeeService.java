@@ -117,10 +117,18 @@ public class EmployeeService {
 
     public Employee updateEmployee(String email, EmployeeDTO employeeDTO) throws UserNotFoundException {
         Employee employee = getEmployeeByEmail(email);
+        String employeeEmail = employee.getEmail();
         employee.setName(employeeDTO.getName());
+        employee.setSurname(employeeDTO.getSurname());
         employee.setEmail(employeeDTO.getEmail());
+        employee.setPassword(passwordEncoder.encode(employeeDTO.getPassword()));
+        employee.setAvatar(employeeDTO.getAvatar());
+        employee.setRole(Role.valueOf(Role.EMPLOYEE.name()));
+        employee.setCreationDate(employeeDTO.getCreationDate());
+        employee.setCodiceFiscale(employeeDTO.getCodiceFiscale());
+        employee.setSalary(employeeDTO.getSalary());
         employeeRepository.save(employee);
-        loggerInfo.info("Employee with email " + employee.getEmail() + " updated.");
+        loggerInfo.info("Employee with email " + employeeEmail + " updated.");
         return employee;
     }
 
@@ -138,6 +146,7 @@ public class EmployeeService {
         message.setText("Congratulations, " + employee.getName() + " " + employee.getSurname() + "! Successful registration to this employee service");
 
         javaMailSender.send(message);
+        loggerInfo.info("Registration email sent to owner: " + employee.getEmail());
     }
 
     public String setEmployeeAvatar(String employeeEmail, MultipartFile photo) throws IOException {

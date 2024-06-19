@@ -4,6 +4,7 @@ import com.koyeb.hamburgeria_backend.Dto.ShiftDTO;
 import com.koyeb.hamburgeria_backend.Entity.Shift;
 import com.koyeb.hamburgeria_backend.Entity.User.Employee;
 import com.koyeb.hamburgeria_backend.Exception.ShiftNotFoundException;
+import com.koyeb.hamburgeria_backend.Exception.UnauthorizedException;
 import com.koyeb.hamburgeria_backend.Repository.ShiftRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -68,7 +69,6 @@ public class ShiftService {
     }
 
 
-
     public Shift getShiftById(Long id) {
         return shiftRepository.findById(id)
                 .orElseThrow(() -> new ShiftNotFoundException("Shift not found with id: " + id));
@@ -80,40 +80,33 @@ public class ShiftService {
         return shifts;
     }
 
-    public Page<Shift> getAllShifts(int page, int size, String sortBy) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+    public Page<Shift> getAllShifts(int page, String sortBy) {
+        int fixedSize = 15; // Dimensione fissa della pagina
+        Pageable pageable = PageRequest.of(page, fixedSize, Sort.by(sortBy));
         Page<Shift> shifts = shiftRepository.findAll(pageable);
-        loggerInfo.info("Retrieved all shifts page " + page + " with size " + size + " sorted by " + sortBy);
+        loggerInfo.info("Retrieved shifts page " + page + " with fixed size " + fixedSize + " sorted by " + sortBy);
         return shifts;
     }
 
-    /*public Shift updateShift(Long id, ShiftDTO shiftDTO) throws ShiftNotFoundException, UnauthorizedException {
-        // Ottenere l'utente autenticato dal contesto di sicurezza
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String authenticatedUserEmail = authentication.getName(); // Assume che il nome dell'utente sia l'email
 
-        // Ottenere l'employee associato all'utente autenticato
-        Employee authenticatedEmployee = employeeService.getEmployeeByEmail(authenticatedUserEmail); // Metodo modificato per ottenere direttamente l'Employee
 
+    public Shift updateShift(Long id, ShiftDTO shiftDTO) throws ShiftNotFoundException, UnauthorizedException {
         // Ottenere lo shift dal repository
         Shift shift = getShiftById(id);
+        Employee employee = shift.getEmployee();
 
-        // Verificare se lo shift appartiene all'employee dell'utente autenticato
-        if (!shift.getEmployee().equals(authenticatedEmployee)) {
-            throw new UnauthorizedException("You are not authorized to update this shift.");
-        }
-
-        // Assegna l'employee all'oggetto ShiftDTO
-        shift.setEmployee(authenticatedEmployee);
+        shift.setEmployee(employee);
+        shift.setStartDate(shiftDTO.getStartDate());
+        shift.setEndDate(shiftDTO.getEndDate());
 
         // Aggiornare i dati dello shift con quelli forniti in shiftDTO
-        shift.setStartDate(shiftDTO.getStartDate()); // Assuming start date can be updated
+        shift.setStartDate(shiftDTO.getStartDate());
         shift.setEndDate(shiftDTO.getEndDate());
         shiftRepository.save(shift);
         loggerInfo.info("Shift with id " + id + " updated.");
 
         return shift;
-    }*/
+    }
 
 
 

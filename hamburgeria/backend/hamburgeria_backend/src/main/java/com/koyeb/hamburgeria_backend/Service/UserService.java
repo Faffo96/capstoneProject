@@ -3,8 +3,6 @@ package com.koyeb.hamburgeria_backend.Service;
 import com.cloudinary.Cloudinary;
 import com.koyeb.hamburgeria_backend.Dto.UserDTO;
 import com.koyeb.hamburgeria_backend.Entity.User.User;
-import com.koyeb.hamburgeria_backend.Enum.Role;
-import com.koyeb.hamburgeria_backend.Exception.EmailAlreadyInUseException;
 import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Repository.EmployeeRepository;
 import com.koyeb.hamburgeria_backend.Repository.UserRepository;

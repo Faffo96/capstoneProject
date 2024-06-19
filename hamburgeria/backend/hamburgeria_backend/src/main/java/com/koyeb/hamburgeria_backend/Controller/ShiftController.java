@@ -38,12 +38,15 @@ import java.util.List;
         }
 
         @GetMapping
-        public ResponseEntity<Page<Shift>> getAllShifts(@RequestParam int page, @RequestParam int size, @RequestParam String sortBy) {
-            Page<Shift> shifts = shiftService.getAllShifts(page, size, sortBy);
+        public ResponseEntity<Page<Shift>> getAllShifts(
+                @RequestParam(defaultValue = "0") int page,
+                @RequestParam(defaultValue = "id") String sortBy) {
+
+            Page<Shift> shifts = shiftService.getAllShifts(page, sortBy);
             return ResponseEntity.ok(shifts);
         }
 
-        /*@PutMapping("/{id}")
+        @PutMapping("/{id}")
         public ResponseEntity<Shift> updateShift(@PathVariable Long id, @RequestBody ShiftDTO shiftDTO) {
             try {
                 Shift updatedShift = shiftService.updateShift(id, shiftDTO);
@@ -51,7 +54,7 @@ import java.util.List;
             } catch (ShiftNotFoundException | UnauthorizedException e) {
                 return ResponseEntity.status(403).body(null); // Forbidden or not found
             }
-        }*/
+        }
 
         @DeleteMapping("/{id}")
         public ResponseEntity<String> deleteShift(@PathVariable Long id) {

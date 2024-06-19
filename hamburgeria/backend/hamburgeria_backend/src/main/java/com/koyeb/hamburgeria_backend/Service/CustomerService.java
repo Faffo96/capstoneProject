@@ -3,6 +3,7 @@ package com.koyeb.hamburgeria_backend.Service;
 import com.cloudinary.Cloudinary;
 import com.koyeb.hamburgeria_backend.Dto.CustomerDTO;
 import com.koyeb.hamburgeria_backend.Entity.User.Customer;
+import com.koyeb.hamburgeria_backend.Entity.User.Employee;
 import com.koyeb.hamburgeria_backend.Enum.Role;
 import com.koyeb.hamburgeria_backend.Exception.EmailAlreadyInUseException;
 import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
@@ -24,6 +25,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class CustomerService {
@@ -84,9 +86,11 @@ public class CustomerService {
         }
 
         try {
-            employeeRepository.findByEmail(email);
-            return true;
-        } catch (UserNotFoundException e) {
+            Optional<Employee> employeeOptional = employeeRepository.findByEmail(email);
+            if (employeeOptional.isPresent()) {
+                return true;
+            }
+        } catch (Exception e) {
             // Email not found for Employee, continue checking
         }
 
@@ -99,6 +103,7 @@ public class CustomerService {
 
         return false;
     }
+
 
     public Customer getCustomerByEmail(String email) {
         return customerRepository.findByEmail(email)
@@ -115,10 +120,16 @@ public class CustomerService {
 
     public Customer updateCustomer(String email, CustomerDTO customerDTO) throws UserNotFoundException {
         Customer customer = getCustomerByEmail(email);
+        String customerEmail = customer.getEmail();
         customer.setName(customerDTO.getName());
+        customer.setSurname(customerDTO.getSurname());
         customer.setEmail(customerDTO.getEmail());
+        customer.setPassword(passwordEncoder.encode(customerDTO.getPassword()));
+        customer.setAvatar(customerDTO.getAvatar());
+        customer.setRole(Role.valueOf(Role.CUSTOMER.name()));
+        customer.setCreationDate(customerDTO.getCreationDate());
         customerRepository.save(customer);
-        loggerInfo.info("Customer with email " + customer.getEmail() + " updated.");
+        loggerInfo.info("Customer with email " + customerEmail + " updated.");
         return customer;
     }
 
@@ -136,6 +147,7 @@ public class CustomerService {
         message.setText("Congratulations, " + customer.getName() + " " + customer.getSurname() + "! Successful registration to this customer service");
 
         javaMailSender.send(message);
+        loggerInfo.info("Registration email sent to owner: " + customer.getEmail());
     }
 
     public String setCustomerAvatar(String customerEmail, MultipartFile photo) throws IOException {
