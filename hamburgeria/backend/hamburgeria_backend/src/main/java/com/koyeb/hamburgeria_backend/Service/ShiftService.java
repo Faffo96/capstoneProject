@@ -57,7 +57,6 @@ public class ShiftService {
             throw new UsernameNotFoundException("Employee not found with email: " + currentUserName);
         }
 
-        // Creare e salvare il turno
         Shift shift = new Shift();
         shift.setEmployee(employee);
         shift.setStartDate(shiftDTO.getStartDate());
@@ -81,25 +80,20 @@ public class ShiftService {
     }
 
     public Page<Shift> getAllShifts(int page, String sortBy) {
-        int fixedSize = 15; // Dimensione fissa della pagina
+        int fixedSize = 15;
         Pageable pageable = PageRequest.of(page, fixedSize, Sort.by(sortBy));
         Page<Shift> shifts = shiftRepository.findAll(pageable);
         loggerInfo.info("Retrieved shifts page " + page + " with fixed size " + fixedSize + " sorted by " + sortBy);
         return shifts;
     }
 
-
-
     public Shift updateShift(Long id, ShiftDTO shiftDTO) throws ShiftNotFoundException, UnauthorizedException {
-        // Ottenere lo shift dal repository
         Shift shift = getShiftById(id);
         Employee employee = shift.getEmployee();
 
         shift.setEmployee(employee);
         shift.setStartDate(shiftDTO.getStartDate());
         shift.setEndDate(shiftDTO.getEndDate());
-
-        // Aggiornare i dati dello shift con quelli forniti in shiftDTO
         shift.setStartDate(shiftDTO.getStartDate());
         shift.setEndDate(shiftDTO.getEndDate());
         shiftRepository.save(shift);
@@ -107,9 +101,6 @@ public class ShiftService {
 
         return shift;
     }
-
-
-
 
     public String deleteShift(Long id) throws ShiftNotFoundException {
         Shift shift = getShiftById(id);
