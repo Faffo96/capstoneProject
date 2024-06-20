@@ -39,13 +39,20 @@ public class JwtFilter extends OncePerRequestFilter {
 
         String userEmail = jwtTool.getEmailFromToken(token);
 
-        User user =  userService.getUserByEmail(userEmail);
+        User user = null;
+        try {
+            user = userService.getUserByEmail(userEmail);
+        } catch (UserNotFoundException e) {
+            logger.error("User with email=" + userEmail + " not found");
+            System.out.println("User with email=" + userEmail + " not found");
+        }
 
         if (user != null) {
             Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
         } else{
-            throw new UserNotFoundException("User with email=" + userEmail + " not found");
+            logger.error("User with email=" + userEmail + " not found");
+            System.out.println("User with email=" + userEmail + " not found");
         }
         filterChain.doFilter(request, response);
     }

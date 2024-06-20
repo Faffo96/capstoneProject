@@ -2,6 +2,8 @@ package com.koyeb.hamburgeria_backend.Controller;
 
 import com.koyeb.hamburgeria_backend.Dto.*;
 import com.koyeb.hamburgeria_backend.Exception.EmailAlreadyInUseException;
+import com.koyeb.hamburgeria_backend.Exception.UnauthorizedException;
+import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Service.*;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -71,7 +73,7 @@ public class AuthController {
     }
 
     @PostMapping("/auth/login")
-    public String login(@RequestBody @Validated UserLoginDTO userLoginDTO, BindingResult bindingResult) throws BadRequestException {
+    public String login(@RequestBody @Validated UserLoginDTO userLoginDTO, BindingResult bindingResult) throws BadRequestException, UserNotFoundException, UnauthorizedException {
         if (bindingResult.hasErrors()) {
             throw new BadRequestException(bindingResult.getAllErrors().stream().map(error -> error.getDefaultMessage()).
                     reduce("", (s, s2) -> s + s2));

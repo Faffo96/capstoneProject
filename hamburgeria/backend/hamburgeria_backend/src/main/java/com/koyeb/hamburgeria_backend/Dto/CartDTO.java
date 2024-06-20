@@ -6,6 +6,7 @@ import java.util.List;
 
 @Data
 public class CartDTO {
+    private Long id;
     private ReservationDTO reservation;
     private LocalDateTime creationDate;
     private List<ProductDTO> productList;

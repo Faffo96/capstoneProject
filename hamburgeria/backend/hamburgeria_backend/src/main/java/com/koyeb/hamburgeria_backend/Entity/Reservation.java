@@ -24,7 +24,7 @@ public class Reservation {
     private DiningTable diningTable;
 
     @ManyToOne
-    @JoinColumn(name = "user_id")
+    @JoinColumn(name = "user_email")
     private User user;
 
     private int participants;

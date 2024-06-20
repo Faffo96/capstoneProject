@@ -2,6 +2,7 @@ package com.koyeb.hamburgeria_backend.Controller;
 
 import com.koyeb.hamburgeria_backend.Dto.OwnerDTO;
 import com.koyeb.hamburgeria_backend.Entity.User.Owner;
+import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Service.OwnerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,7 +22,7 @@ public class OwnerController {
     }*/
 
     @GetMapping("/{email}")
-    public ResponseEntity<Owner> getOwnerByEmail(@PathVariable String email) {
+    public ResponseEntity<Owner> getOwnerByEmail(@PathVariable String email) throws UserNotFoundException {
         Owner owner = ownerService.getOwnerByEmail(email);
         return ResponseEntity.ok(owner);
     }
@@ -39,13 +40,13 @@ public class OwnerController {
     public ResponseEntity<Owner> updateOwner(
             @PathVariable String email,
             @RequestBody OwnerDTO ownerDTO
-    ) {
+    ) throws UserNotFoundException {
         Owner updatedOwner = ownerService.updateOwner(email, ownerDTO);
         return ResponseEntity.ok(updatedOwner);
     }
 
     @DeleteMapping("/{email}")
-    public ResponseEntity<String> deleteOwner(@PathVariable String email) {
+    public ResponseEntity<String> deleteOwner(@PathVariable String email) throws UserNotFoundException {
         String message = ownerService.deleteOwner(email);
         return ResponseEntity.ok(message);
     }

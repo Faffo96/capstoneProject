@@ -23,7 +23,7 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/{email}")
-    public ResponseEntity<Employee> getEmployeeByEmail(@PathVariable String email) {
+    public ResponseEntity<Employee> getEmployeeByEmail(@PathVariable String email) throws UserNotFoundException {
         Employee employee = employeeService.getEmployeeByEmail(email);
         return ResponseEntity.ok(employee);
     }
@@ -62,7 +62,7 @@ public class EmployeeController {
     }
 
     @PostMapping("/{email}/avatar")
-    public ResponseEntity<String> setEmployeeAvatar(@PathVariable String email, @RequestParam("photo") MultipartFile photo) throws IOException {
+    public ResponseEntity<String> setEmployeeAvatar(@PathVariable String email, @RequestParam("photo") MultipartFile photo) throws IOException, UserNotFoundException {
         String message = employeeService.setEmployeeAvatar(email, photo);
         return ResponseEntity.ok(message);
     }

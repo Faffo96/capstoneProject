@@ -105,7 +105,7 @@ public class CustomerService {
     }
 
 
-    public Customer getCustomerByEmail(String email) {
+    public Customer getCustomerByEmail(String email) throws UserNotFoundException {
         return customerRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Customer not found with email: " + email));
     }
@@ -150,7 +150,7 @@ public class CustomerService {
         loggerInfo.info("Registration email sent to owner: " + customer.getEmail());
     }
 
-    public String setCustomerAvatar(String customerEmail, MultipartFile photo) throws IOException {
+    public String setCustomerAvatar(String customerEmail, MultipartFile photo) throws IOException, UserNotFoundException {
         Customer customer = getCustomerByEmail(customerEmail);
 
         if (customer != null) {

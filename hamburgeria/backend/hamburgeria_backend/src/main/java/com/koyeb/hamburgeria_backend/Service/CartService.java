@@ -1,9 +1,30 @@
 package com.koyeb.hamburgeria_backend.Service;
 
+import com.koyeb.hamburgeria_backend.Dto.CartDTO;
+import com.koyeb.hamburgeria_backend.Dto.ProductDTO;
+import com.koyeb.hamburgeria_backend.Dto.ReservationDTO;
+import com.koyeb.hamburgeria_backend.Dto.UserDTO;
+import com.koyeb.hamburgeria_backend.Entity.Cart;
+import com.koyeb.hamburgeria_backend.Entity.Product;
+import com.koyeb.hamburgeria_backend.Entity.Reservation;
+import com.koyeb.hamburgeria_backend.Entity.User.User;
+import com.koyeb.hamburgeria_backend.Exception.CartNotFoundException;
+import com.koyeb.hamburgeria_backend.Exception.ReservationNotFoundException;
+import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Repository.CartRepository;
 import com.koyeb.hamburgeria_backend.Repository.ProductRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CartService {
@@ -11,20 +32,34 @@ public class CartService {
     private CartRepository cartRepository;
 
     @Autowired
-    private UserService userService; // Assicurati che UserService abbia un metodo per ottenere l'utente loggato
+    private UserService userService;
+
+    @Autowired
+    private ReservationService reservationService;
 
     @Autowired
     private ProductRepository productRepository;
 
-    /*private static final Logger loggerInfo = LoggerFactory.getLogger("loggerInfo");
+    private static final Logger loggerInfo = LoggerFactory.getLogger("loggerInfo");
     private static final Logger loggerError = LoggerFactory.getLogger("loggerError");
-    private static final Logger loggerDebug = LoggerFactory.getLogger("loggerDebug");*/
+    private static final Logger loggerDebug = LoggerFactory.getLogger("loggerDebug");
+    private static final Logger loggerTrace = LoggerFactory.getLogger("loggerTrace");
+    private static final Logger loggerWarn = LoggerFactory.getLogger("loggerWarn");
 
-    /*public Cart createCart(CartDTO cartDTO) {
+    public Cart createCart(CartDTO cartDTO) throws ReservationNotFoundException, UserNotFoundException {
         Cart cart = new Cart();
-        Cart convertedCartDTO = convertDtoToEntity(cartDTO);
-        cart.setUser(convertedCartDTO.getUser());
-        cart.setProductList(convertedCartDTO.getProductList());
+        ReservationDTO reservationDTO = cartDTO.getReservation();
+        Reservation reservation = reservationService.getReservationById(reservationDTO.getId());
+        cart.setReservation(reservation);
+        UserDTO userDTO = cartDTO.getUser();
+        User user = userService.getUserByEmail(userDTO.getEmail());
+        cart.setUser(user);
+        List<ProductDTO> productDTOList = cartDTO.getProductList();
+        List<Product> productList = productDTOList.stream().map(productDTO -> {
+            Product product = productRepository.findById(productDTO.getId()).get();
+            return product;
+        }).collect(Collectors.toList());
+        cart.setProductList(productList);
         cart.setTotal(cartDTO.getTotal());
         cartRepository.save(cart);
         loggerInfo.info("Cart with id " + cart.getId() + " created.");
@@ -61,38 +96,5 @@ public class CartService {
         loggerInfo.info("Cart with id " + id + " deleted successfully.");
         return "Cart with id " + id + " deleted successfully.";
     }
-
-    public Cart convertDtoToEntity(CartDTO cartDTO) {
-        Cart cart = new Cart();
-        cart.setCreationDate(cartDTO.getCreationDate());
-        cart.setTotal(cartDTO.getTotal());
-
-        try {
-            UserDTO currentUserDTO = userService.getLoggedInUserDTO(); // Metodo che restituisce l'utente loggato come DTO
-            User currentUser = userService.convertDtoToEntity(currentUserDTO);
-            cart.setUser(currentUser);
-        } catch (Exception e) {
-            loggerError.error("Failed to fetch logged-in user: " + e.getMessage());
-            return null;
-        }
-
-        if (cartDTO.getReservation() != null) {
-            // Aggiungi la logica per gestire la conversione della ReservationDTO
-        } else {
-            loggerDebug.debug("No reservation linked to this cart.");
-        }
-
-        try {
-            List<Product> products = cartDTO.getProductList().stream()
-                    .map(dto -> productRepository.findById(dto.getId()).orElse(null))
-                    .collect(Collectors.toList());
-            cart.setProductList(products);
-        } catch (Exception e) {
-            loggerWarn.warn("Error while fetching products: " + e.getMessage());
-        }
-
-        loggerTrace.trace("Cart DTO converted to Cart entity successfully.");
-        return cart;
-    }*/
 }
 

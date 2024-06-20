@@ -60,33 +60,53 @@ public class CentralizedExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(error, HttpStatus.UNAUTHORIZED);
     }
 
-    /*@ExceptionHandler(BadRequestException.class)
-    public ResponseEntity<Object> badRequestHandler(BadRequestException e) {
+    @ExceptionHandler(ReservationNotFoundException.class)
+    public ResponseEntity<Object> ReservationNotFoundHandler(ReservationNotFoundException e) {
         Error error = new Error();
         error.setMessage(e.getMessage());
         error.setErrorDate(LocalDateTime.now());
-        error.setErrorState(HttpStatus.BAD_REQUEST);
+        error.setErrorState(HttpStatus.NOT_FOUND);
         loggerError.error(e.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }*/
-
-    @ExceptionHandler(EmailAlreadyInUseException.class)
-    public ResponseEntity<Object> EmailAlreadyInUseException(EmailAlreadyInUseException e) {
-        Error error = new Error();
-        error.setMessage(e.getMessage());
-        error.setErrorDate(LocalDateTime.now());
-        error.setErrorState(HttpStatus.BAD_REQUEST);
-        loggerError.error(e.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
-    /*@ExceptionHandler(PartecipantsLimitException.class)
-    public ResponseEntity<Object> PartecipantsLimitException(PartecipantsLimitException e) {
+    @ExceptionHandler(EmailAlreadyInUseException.class)
+    public ResponseEntity<Object> EmailAlreadyInUseHandler(EmailAlreadyInUseException e) {
         Error error = new Error();
         error.setMessage(e.getMessage());
         error.setErrorDate(LocalDateTime.now());
-        error.setErrorState(HttpStatus.BAD_REQUEST);
+        error.setErrorState(HttpStatus.NOT_ACCEPTABLE);
         loggerError.error(e.getMessage());
-        return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
-    }*/
+        return new ResponseEntity<>(error, HttpStatus.NOT_ACCEPTABLE);
+    }
+
+    @ExceptionHandler(DiningTableNotFoundException.class)
+    public ResponseEntity<Object> DiningTableNotFoundHandler(DiningTableNotFoundException e) {
+        Error error = new Error();
+        error.setMessage(e.getMessage());
+        error.setErrorDate(LocalDateTime.now());
+        error.setErrorState(HttpStatus.NOT_FOUND);
+        loggerError.error(e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(CartNotFoundException.class)
+    public ResponseEntity<Object> CartNotFoundHandler(CartNotFoundException e) {
+        Error error = new Error();
+        error.setMessage(e.getMessage());
+        error.setErrorDate(LocalDateTime.now());
+        error.setErrorState(HttpStatus.NOT_FOUND);
+        loggerError.error(e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(ProductNotFoundException.class)
+    public ResponseEntity<Object> ProductNotFoundHandler(ProductNotFoundException e) {
+        Error error = new Error();
+        error.setMessage(e.getMessage());
+        error.setErrorDate(LocalDateTime.now());
+        error.setErrorState(HttpStatus.NOT_FOUND);
+        loggerError.error(e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
 }

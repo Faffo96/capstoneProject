@@ -69,7 +69,7 @@ public class OwnerService {
         }
     }
 
-    public Owner getOwnerByEmail(String email) {
+    public Owner getOwnerByEmail(String email) throws UserNotFoundException {
         return ownerRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Owner not found with email: " + email));
     }
@@ -114,7 +114,7 @@ public class OwnerService {
         loggerInfo.info("Registration email sent to owner: " + owner.getEmail());
     }
 
-    public String setOwnerAvatar(String ownerEmail, MultipartFile photo) throws IOException {
+    public String setOwnerAvatar(String ownerEmail, MultipartFile photo) throws IOException, UserNotFoundException {
         Owner owner = getOwnerByEmail(ownerEmail);
 
         if (owner != null) {
