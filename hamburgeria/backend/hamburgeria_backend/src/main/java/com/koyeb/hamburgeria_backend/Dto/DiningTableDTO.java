@@ -5,6 +5,8 @@ import java.util.List;
 
 @Data
 public class DiningTableDTO {
+    private Long id;
+    private int tableNumber;
     private int seating;
     private boolean outside;
 }

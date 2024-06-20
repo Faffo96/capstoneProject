@@ -1,13 +1,23 @@
 package com.koyeb.hamburgeria_backend;
+
+import com.koyeb.hamburgeria_backend.Entity.Product;
+import com.koyeb.hamburgeria_backend.Entity.Reservation;
+import com.koyeb.hamburgeria_backend.Repository.DiningTableRepository;
 import com.koyeb.hamburgeria_backend.Repository.EmployeeRepository;
+import com.koyeb.hamburgeria_backend.Repository.ReservationRepository;
 import com.koyeb.hamburgeria_backend.Repository.UserRepository;
 import com.koyeb.hamburgeria_backend.Service.EmployeeService;
+import com.koyeb.hamburgeria_backend.Service.ProductService;
+import com.koyeb.hamburgeria_backend.Service.ReservationService;
 import com.koyeb.hamburgeria_backend.Service.UserService;
+import com.opencsv.exceptions.CsvException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-import org.springframework.boot.CommandLineRunner;
+import java.io.IOException;
+import java.util.List;
 
 @SpringBootApplication
 public class Runner implements CommandLineRunner {
@@ -16,10 +26,22 @@ public class Runner implements CommandLineRunner {
     private UserService userService;
 
     @Autowired
+    private ReservationRepository reservationRepository;
+
+    @Autowired
     private EmployeeService employeeService;
 
     @Autowired
+    private ProductService productService;
+
+    @Autowired
     private EmployeeRepository employeeRepository;
+
+    @Autowired
+    private DiningTableRepository diningTableRepository;
+
+    @Autowired
+    private ReservationService reservationService;
 
     @Autowired
     private UserRepository userRepository;
@@ -48,6 +70,25 @@ public class Runner implements CommandLineRunner {
 
         /*Employee employee = employeeService.getEmployeeByEmail("mario.rossi@example.com");
         System.out.println(employee);*/
+
+        /*List<Class<? extends User>> types = Arrays.asList(Customer.class, Owner.class, Employee.class);*/
+        /*Reservation reservation1 = new Reservation();
+        reservation1.setUser(employeeService.getEmployeeByEmail("jane.doe@example.com"));
+        reservationRepository.save(reservation1);*/
+
+        /*List<Reservation> reservations = reservationService.getReservationsByUserEmail("jane.doe@example.com");
+        for (Reservation reservation : reservations) {
+            System.out.println(reservation);
+        }*/
+
+        List<Product> products = productService.getProducts();
+        if (products.isEmpty()) {
+            try {
+                productService.importProductsFromCSV();
+            } catch (IOException | CsvException e) {
+                e.printStackTrace();
+            }
+        }
     }
 }
 

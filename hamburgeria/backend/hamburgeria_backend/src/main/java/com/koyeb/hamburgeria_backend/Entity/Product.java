@@ -20,8 +20,10 @@ public class Product {
     @JsonIgnore
     private List<Cart> cartList;
 
-    private String name;
-    private String description;
+    private String italianName;
+    private String englishName;
+    private String italianDescription;
+    private String englishDescription;
     private double price;
 
     @Enumerated(EnumType.STRING)
@@ -33,8 +35,10 @@ public class Product {
     public String toString() {
         return "Product{" +
                 "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
+                ", italianName='" + italianName + '\'' +
+                ", englishName='" + englishName + '\'' +
+                ", italianDescription='" + italianDescription + '\'' +
+                ", englishDescription='" + englishDescription + '\'' +
                 ", price=" + price +
                 ", category=" + category +
                 ", available=" + available +

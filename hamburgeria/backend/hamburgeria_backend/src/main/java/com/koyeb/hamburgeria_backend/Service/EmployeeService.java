@@ -102,7 +102,7 @@ public class EmployeeService {
     }
 
 
-    public Employee getEmployeeByEmail(String email) {
+    public Employee getEmployeeByEmail(String email) throws UserNotFoundException {
         return employeeRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Employee not found with email: " + email));
     }
@@ -149,7 +149,7 @@ public class EmployeeService {
         loggerInfo.info("Registration email sent to owner: " + employee.getEmail());
     }
 
-    public String setEmployeeAvatar(String employeeEmail, MultipartFile photo) throws IOException {
+    public String setEmployeeAvatar(String employeeEmail, MultipartFile photo) throws IOException, UserNotFoundException {
         Employee employee = getEmployeeByEmail(employeeEmail);
 
         if (employee != null) {

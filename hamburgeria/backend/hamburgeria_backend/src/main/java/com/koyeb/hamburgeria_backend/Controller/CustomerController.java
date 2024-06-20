@@ -3,6 +3,7 @@ package com.koyeb.hamburgeria_backend.Controller;
 import com.koyeb.hamburgeria_backend.Dto.CustomerDTO;
 import com.koyeb.hamburgeria_backend.Entity.User.Customer;
 import com.koyeb.hamburgeria_backend.Exception.EmailAlreadyInUseException;
+import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Service.CustomerService;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,7 +23,7 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/{email}")
-    public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) {
+    public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) throws UserNotFoundException {
         Customer customer = customerService.getCustomerByEmail(email);
         return ResponseEntity.ok(customer);
     }
@@ -40,13 +41,13 @@ public class CustomerController {
     public ResponseEntity<Customer> updateCustomer(
             @PathVariable String email,
             @RequestBody CustomerDTO customerDTO
-    ) {
+    ) throws UserNotFoundException {
         Customer updatedCustomer = customerService.updateCustomer(email, customerDTO);
         return ResponseEntity.ok(updatedCustomer);
     }
 
     @DeleteMapping("/{email}")
-    public ResponseEntity<String> deleteCustomer(@PathVariable String email) {
+    public ResponseEntity<String> deleteCustomer(@PathVariable String email) throws UserNotFoundException {
         String message = customerService.deleteCustomer(email);
         return ResponseEntity.ok(message);
     }
@@ -62,7 +63,7 @@ public class CustomerController {
     }
 
     @PostMapping("/{email}/avatar")
-    public ResponseEntity<String> setCustomerAvatar(@PathVariable String email, @RequestParam("photo") MultipartFile photo) throws IOException {
+    public ResponseEntity<String> setCustomerAvatar(@PathVariable String email, @RequestParam("photo") MultipartFile photo) throws IOException, UserNotFoundException {
         String message = customerService.setCustomerAvatar(email, photo);
         return ResponseEntity.ok(message);
     }

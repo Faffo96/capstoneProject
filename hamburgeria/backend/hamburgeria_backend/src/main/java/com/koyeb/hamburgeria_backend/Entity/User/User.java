@@ -1,5 +1,6 @@
 package com.koyeb.hamburgeria_backend.Entity.User;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.koyeb.hamburgeria_backend.Entity.Cart;
 import com.koyeb.hamburgeria_backend.Entity.Reservation;
 import com.koyeb.hamburgeria_backend.Enum.Role;
@@ -29,9 +30,11 @@ public abstract class User implements UserDetails {
     private Role role;
 
     @OneToMany(mappedBy = "user")
+    @JsonIgnore
     private List<Reservation> reservationList;
 
     @OneToMany(mappedBy = "user")
+    /*@JsonIgnore*/
     private List<Cart> cartList;
 
     private LocalDate creationDate;

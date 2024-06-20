@@ -14,6 +14,7 @@ public class DiningTable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private int tableNumber;
     private int seating;
     private boolean outside;
 

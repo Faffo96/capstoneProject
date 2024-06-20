@@ -5,6 +5,7 @@ import com.koyeb.hamburgeria_backend.Entity.Shift;
 import com.koyeb.hamburgeria_backend.Entity.User.Employee;
 import com.koyeb.hamburgeria_backend.Exception.ShiftNotFoundException;
 import com.koyeb.hamburgeria_backend.Exception.UnauthorizedException;
+import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Repository.ShiftRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,7 +37,7 @@ public class ShiftService {
     private static final Logger loggerError = LoggerFactory.getLogger("loggerError");
     private static final Logger loggerDebug = LoggerFactory.getLogger("loggerDebug");
 
-    public Shift createShift(ShiftDTO shiftDTO) {
+    public Shift createShift(ShiftDTO shiftDTO) throws UserNotFoundException {
         // Ottenere l'utente autenticato dal contesto di sicurezza
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = null;
@@ -68,7 +69,7 @@ public class ShiftService {
     }
 
 
-    public Shift getShiftById(Long id) {
+    public Shift getShiftById(Long id) throws ShiftNotFoundException {
         return shiftRepository.findById(id)
                 .orElseThrow(() -> new ShiftNotFoundException("Shift not found with id: " + id));
     }

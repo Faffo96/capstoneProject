@@ -60,7 +60,7 @@ public class UserService {
         }
     }
 
-    public User getUserByEmail(String email) {
+    public User getUserByEmail(String email) throws UserNotFoundException {
         return userRepository.findByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("User not found with email: " + email));
     }
@@ -98,7 +98,7 @@ public class UserService {
         javaMailSender.send(message);
     }
 
-    public String setUserAvatar(String userEmail, MultipartFile photo) throws IOException {
+    public String setUserAvatar(String userEmail, MultipartFile photo) throws IOException, UserNotFoundException {
         User user = getUserByEmail(userEmail);
 
         if (user != null) {

@@ -4,6 +4,7 @@ import com.koyeb.hamburgeria_backend.Dto.ShiftDTO;
 import com.koyeb.hamburgeria_backend.Entity.Shift;
 import com.koyeb.hamburgeria_backend.Exception.ShiftNotFoundException;
 import com.koyeb.hamburgeria_backend.Exception.UnauthorizedException;
+import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Service.ShiftService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,13 +21,13 @@ import java.util.List;
         private ShiftService shiftService;
 
         @PostMapping
-        public ResponseEntity<Shift> createShift(@RequestBody ShiftDTO shiftDTO) {
+        public ResponseEntity<Shift> createShift(@RequestBody ShiftDTO shiftDTO) throws UserNotFoundException {
             Shift createdShift = shiftService.createShift(shiftDTO);
             return ResponseEntity.ok(createdShift);
         }
 
         @GetMapping("/{id}")
-        public ResponseEntity<Shift> getShiftById(@PathVariable Long id) {
+        public ResponseEntity<Shift> getShiftById(@PathVariable Long id) throws ShiftNotFoundException {
             Shift shift = shiftService.getShiftById(id);
             return ResponseEntity.ok(shift);
         }

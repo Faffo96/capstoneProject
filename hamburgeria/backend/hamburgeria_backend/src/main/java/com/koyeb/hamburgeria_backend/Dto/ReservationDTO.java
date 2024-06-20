@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 
 @Data
 public class ReservationDTO {
+    private Long id;
     private LocalDateTime creationDate;
     private LocalDateTime bookedDate;
     private DiningTableDTO diningTable;
