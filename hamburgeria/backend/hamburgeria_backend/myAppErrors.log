@@ -24,3 +24,4 @@
 2024-06-21 12:22:50,074 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:79] -- Email fabioscar96@gmail.com already in use.
 2024-06-21 12:23:05,259 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:79] -- Email fabioscar96@gmail.com already in use.
 2024-06-21 12:24:54,809 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:119] -- Owner already exists!
+2024-06-21 12:38:23,273 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:79] -- Email jane.doee@example.com already in use.
