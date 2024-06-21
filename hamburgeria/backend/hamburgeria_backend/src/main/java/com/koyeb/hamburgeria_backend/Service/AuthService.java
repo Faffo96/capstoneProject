@@ -22,11 +22,6 @@ public class AuthService {
     public String authenticateUserAndCreateToken(UserLoginDTO userLoginDTO) throws UnauthorizedException, UserNotFoundException {
         User user = userService.getUserByEmail(userLoginDTO.getEmail());
         if (user != null) {
-            // Logging per debug
-            System.out.println("User found: " + user.getEmail());
-            System.out.println("Password from DTO: " + userLoginDTO.getPassword());
-            System.out.println("Encoded Password from User: " + user.getPassword());
-
             if (passwordEncoder.matches(userLoginDTO.getPassword(), user.getPassword())) {
                 return jwtTool.createToken(user);
             } else {
