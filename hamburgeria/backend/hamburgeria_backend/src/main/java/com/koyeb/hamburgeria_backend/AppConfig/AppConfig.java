@@ -21,18 +21,6 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:application.properties")
 public class AppConfig {
-    /*@Bean
-    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
-    public OwnerDTO ownerDTO() throws EmailAlreadyInUseException {
-        OwnerDTO ownerDTO = new OwnerDTO();
-        ownerDTO.setEmail(System.getenv("OWNER_EMAIL"));
-        ownerDTO.setName(System.getenv("OWNER_NAME"));
-        ownerDTO.setSurname(System.getenv("OWNER_SURNAME"));
-        ownerDTO.setAvatar(System.getenv("OWNER_AVATAR"));
-        ownerDTO.setPassword(System.getenv("OWNER_PASSWORD"));
-        System.out.println(ownerDTO);
-        return ownerDTO;
-    }*/
 
     @Bean
     @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
