@@ -109,4 +109,14 @@ public class CentralizedExceptionHandler extends ResponseEntityExceptionHandler 
         loggerError.error(e.getMessage());
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
+
+    @ExceptionHandler(OwnerAlreadyExistsException.class)
+    public ResponseEntity<Object> OwnerAlreadyExistsHandler(OwnerAlreadyExistsException e) {
+        Error error = new Error();
+        error.setMessage(e.getMessage());
+        error.setErrorDate(LocalDateTime.now());
+        error.setErrorState(HttpStatus.PRECONDITION_REQUIRED);
+        loggerError.error(e.getMessage());
+        return new ResponseEntity<>(error, HttpStatus.PRECONDITION_REQUIRED);
+    }
 }

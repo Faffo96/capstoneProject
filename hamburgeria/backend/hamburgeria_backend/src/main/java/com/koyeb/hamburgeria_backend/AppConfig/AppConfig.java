@@ -1,10 +1,17 @@
 package com.koyeb.hamburgeria_backend.AppConfig;
 
 import com.cloudinary.Cloudinary;
+import com.koyeb.hamburgeria_backend.Dto.OwnerDTO;
+import com.koyeb.hamburgeria_backend.Entity.User.Owner;
+import com.koyeb.hamburgeria_backend.Exception.EmailAlreadyInUseException;
+import com.koyeb.hamburgeria_backend.Service.OwnerService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.Scope;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
 import java.util.HashMap;
@@ -14,6 +21,34 @@ import java.util.Properties;
 @Configuration
 @PropertySource("classpath:application.properties")
 public class AppConfig {
+    /*@Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public OwnerDTO ownerDTO() throws EmailAlreadyInUseException {
+        OwnerDTO ownerDTO = new OwnerDTO();
+        ownerDTO.setEmail(System.getenv("OWNER_EMAIL"));
+        ownerDTO.setName(System.getenv("OWNER_NAME"));
+        ownerDTO.setSurname(System.getenv("OWNER_SURNAME"));
+        ownerDTO.setAvatar(System.getenv("OWNER_AVATAR"));
+        ownerDTO.setPassword(System.getenv("OWNER_PASSWORD"));
+        System.out.println(ownerDTO);
+        return ownerDTO;
+    }*/
+
+    @Bean
+    @Scope(ConfigurableBeanFactory.SCOPE_SINGLETON)
+    public Owner owner(@Value("${owner.email}") String email,
+                       @Value("${owner.name}") String name,
+                       @Value("${owner.surname}") String surname,
+                       @Value("${owner.avatar}") String avatar,
+                       @Value("${owner.password}") String password) {
+        Owner owner = new Owner();
+        owner.setEmail(email);
+        owner.setName(name);
+        owner.setSurname(surname);
+        owner.setAvatar(avatar);
+        owner.setPassword(password);
+        return owner;
+    }
 
     @Bean
     public Cloudinary getCloudinary(@Value("${cloudinary.name}") String name,

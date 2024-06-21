@@ -48,3 +48,27 @@
 2024-06-20 23:28:34,416 TRACE [http-nio-8080-exec-2] loggerTrace [OwnerService.java:67] -- Owner with email jane.00egyo@example.com saved.
 2024-06-20 23:31:54,993 TRACE [http-nio-8080-exec-1] loggerTrace [OwnerService.java:65] -- Registration email sent to owner: admin@example.com
 2024-06-20 23:31:56,313 TRACE [http-nio-8080-exec-1] loggerTrace [OwnerService.java:67] -- Owner with email admin@example.com saved.
+2024-06-21 10:38:01,055 TRACE [main] loggerTrace [OwnerService.java:65] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-06-21 10:38:03,716 TRACE [main] loggerTrace [OwnerService.java:67] -- Owner with email fabioscar96@gmail.com saved.
+2024-06-21 11:32:39,555 TRACE [http-nio-8080-exec-3] loggerTrace [CustomerService.java:74] -- Registration email sent to customer: admin@example.com
+2024-06-21 11:32:41,395 TRACE [http-nio-8080-exec-3] loggerTrace [CustomerService.java:76] -- Customer with email admin@example.com saved.
+2024-06-21 11:35:51,346 TRACE [main] loggerTrace [OwnerService.java:74] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-06-21 11:35:52,554 TRACE [main] loggerTrace [OwnerService.java:76] -- Owner with email fabioscar96@gmail.com saved.
+2024-06-21 11:37:30,613 TRACE [main] loggerTrace [OwnerService.java:74] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-06-21 11:37:32,534 TRACE [main] loggerTrace [OwnerService.java:76] -- Owner with email fabioscar96@gmail.com saved.
+2024-06-21 11:48:31,078 TRACE [main] loggerTrace [OwnerService.java:75] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-06-21 11:48:32,415 TRACE [main] loggerTrace [OwnerService.java:77] -- Owner with email fabioscar96@gmail.com saved.
+2024-06-21 11:51:00,254 TRACE [main] loggerTrace [OwnerService.java:75] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-06-21 11:51:01,625 TRACE [main] loggerTrace [OwnerService.java:77] -- Owner with email fabioscar96@gmail.com saved.
+2024-06-21 11:51:14,341 TRACE [http-nio-8080-exec-1] loggerTrace [OwnerService.java:75] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-06-21 11:51:15,521 TRACE [http-nio-8080-exec-1] loggerTrace [OwnerService.java:77] -- Owner with email fabioscar96@gmail.com saved.
+2024-06-21 11:55:10,176 TRACE [http-nio-8080-exec-3] loggerTrace [OwnerService.java:75] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-06-21 11:55:11,479 TRACE [http-nio-8080-exec-3] loggerTrace [OwnerService.java:77] -- Owner with email fabioscar96@gmail.com saved.
+2024-06-21 11:57:20,312 TRACE [http-nio-8080-exec-1] loggerTrace [OwnerService.java:75] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-06-21 11:57:21,854 TRACE [http-nio-8080-exec-1] loggerTrace [OwnerService.java:77] -- Owner with email fabioscar96@gmail.com saved.
+2024-06-21 12:19:30,996 TRACE [main] loggerTrace [OwnerService.java:74] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-06-21 12:19:32,484 TRACE [main] loggerTrace [OwnerService.java:76] -- Owner with email fabioscar96@gmail.com saved.
+2024-06-21 12:23:49,189 TRACE [http-nio-8080-exec-4] loggerTrace [CustomerService.java:74] -- Registration email sent to customer: fabioscar96@gmail.com
+2024-06-21 12:23:50,646 TRACE [http-nio-8080-exec-4] loggerTrace [CustomerService.java:76] -- Customer with email fabioscar96@gmail.com saved.
+2024-06-21 12:24:11,317 TRACE [main] loggerTrace [OwnerService.java:74] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-06-21 12:24:12,658 TRACE [main] loggerTrace [OwnerService.java:76] -- Owner with email fabioscar96@gmail.com saved.

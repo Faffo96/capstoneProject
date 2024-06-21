@@ -33,9 +33,6 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private EmployeeRepository employeeRepository;
 
     @Autowired
@@ -85,13 +82,9 @@ public class CustomerService {
             // Email not found for Owner, continue checking
         }
 
-        try {
-            Optional<Employee> employeeOptional = employeeRepository.findByEmail(email);
-            if (employeeOptional.isPresent()) {
-                return true;
-            }
-        } catch (Exception e) {
-            // Email not found for Employee, continue checking
+        Optional<Employee> employeeOptional = employeeRepository.findByEmail(email);
+        if (employeeOptional.isPresent()) {
+            return true;
         }
 
         try {

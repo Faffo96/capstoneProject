@@ -2,6 +2,7 @@ package com.koyeb.hamburgeria_backend.Controller;
 
 import com.koyeb.hamburgeria_backend.Dto.*;
 import com.koyeb.hamburgeria_backend.Exception.EmailAlreadyInUseException;
+import com.koyeb.hamburgeria_backend.Exception.OwnerAlreadyExistsException;
 import com.koyeb.hamburgeria_backend.Exception.UnauthorizedException;
 import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Service.*;
@@ -59,15 +60,16 @@ public class AuthController {
     }
 
     @PostMapping("/auth/registerOwner")
-    public String registerOwner(@RequestBody @Validated OwnerDTO ownerDTO, BindingResult bindingResult) throws BadRequestException, EmailAlreadyInUseException {
+    public String registerOwner(@RequestBody @Validated OwnerDTO ownerDTO, BindingResult bindingResult) throws BadRequestException, EmailAlreadyInUseException, OwnerAlreadyExistsException {
         if (bindingResult.hasErrors()) {
             throw new BadRequestException(bindingResult.getAllErrors().stream().map(error -> error.getDefaultMessage()).
                     reduce("", (s, s2) -> s + s2));
         }
         try {
-            ownerService.createOwner(ownerDTO);
-        } catch (EmailAlreadyInUseException e) {
-            throw new EmailAlreadyInUseException(e.getMessage());
+            ownerService.createOwner();
+        } catch (OwnerAlreadyExistsException e) {
+            throw new OwnerAlreadyExistsException(e.getMessage());
+        } catch (UserNotFoundException e) {
         }
         return "Owner with email " + ownerDTO.getEmail() + " has been created!";
     }

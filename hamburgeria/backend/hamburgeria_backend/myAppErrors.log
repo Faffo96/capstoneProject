@@ -18,3 +18,9 @@
 2024-06-20 10:59:29,724 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:39] -- User not found with email: null
 2024-06-20 23:57:21,101 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:39] -- User not found with email: jane.doe@example.com
 2024-06-20 23:57:23,109 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:39] -- User not found with email: jane.doe@example.com
+2024-06-21 11:54:25,401 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:119] -- Owner already exists!
+2024-06-21 11:54:56,313 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:119] -- Owner already exists!
+2024-06-21 11:55:21,137 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:119] -- Owner already exists!
+2024-06-21 12:22:50,074 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:79] -- Email fabioscar96@gmail.com already in use.
+2024-06-21 12:23:05,259 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:79] -- Email fabioscar96@gmail.com already in use.
+2024-06-21 12:24:54,809 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:119] -- Owner already exists!
