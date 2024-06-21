@@ -1,0 +1,6 @@
+2024-06-22 00:10:38,773 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:109] -- The cart is empty!
+2024-06-22 00:45:01,427 ERROR [http-nio-8080-exec-2] loggerError [CartService.java:132] -- Cart with id 7 not found.
+2024-06-22 00:47:25,426 ERROR [http-nio-8080-exec-1] loggerError [CartService.java:132] -- Cart with id 8 not found.
+2024-06-22 00:47:43,234 ERROR [http-nio-8080-exec-7] loggerError [CartService.java:132] -- Cart with id 8 not found.
+2024-06-22 00:47:44,378 ERROR [http-nio-8080-exec-6] loggerError [CartService.java:132] -- Cart with id 8 not found.
+2024-06-22 01:22:44,897 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:39] -- User not found with email: jane.doe@example.com
