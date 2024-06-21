@@ -7,8 +7,12 @@ import com.koyeb.hamburgeria_backend.Dto.UserDTO;
 import com.koyeb.hamburgeria_backend.Entity.Cart;
 import com.koyeb.hamburgeria_backend.Entity.Product;
 import com.koyeb.hamburgeria_backend.Entity.Reservation;
+import com.koyeb.hamburgeria_backend.Entity.User.Customer;
+import com.koyeb.hamburgeria_backend.Entity.User.Employee;
+import com.koyeb.hamburgeria_backend.Entity.User.Owner;
 import com.koyeb.hamburgeria_backend.Entity.User.User;
 import com.koyeb.hamburgeria_backend.Exception.CartNotFoundException;
+import com.koyeb.hamburgeria_backend.Exception.ProductNotFoundException;
 import com.koyeb.hamburgeria_backend.Exception.ReservationNotFoundException;
 import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Repository.CartRepository;
@@ -20,8 +24,12 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -38,7 +46,16 @@ public class CartService {
     private ReservationService reservationService;
 
     @Autowired
-    private ProductRepository productRepository;
+    private CustomerService customerService;
+
+    @Autowired
+    private EmployeeService employeeService;
+
+    @Autowired
+    private OwnerService ownerService;
+
+    @Autowired
+    private ProductService productService;
 
     private static final Logger loggerInfo = LoggerFactory.getLogger("loggerInfo");
     private static final Logger loggerError = LoggerFactory.getLogger("loggerError");
@@ -46,30 +63,91 @@ public class CartService {
     private static final Logger loggerTrace = LoggerFactory.getLogger("loggerTrace");
     private static final Logger loggerWarn = LoggerFactory.getLogger("loggerWarn");
 
-    public Cart createCart(CartDTO cartDTO) throws ReservationNotFoundException, UserNotFoundException {
+    public Cart createCart(CartDTO cartDTO) throws ReservationNotFoundException, UserNotFoundException, ProductNotFoundException {
         Cart cart = new Cart();
-        ReservationDTO reservationDTO = cartDTO.getReservation();
-        Reservation reservation = reservationService.getReservationById(reservationDTO.getId());
-        cart.setReservation(reservation);
-        UserDTO userDTO = cartDTO.getUser();
-        User user = userService.getUserByEmail(userDTO.getEmail());
-        cart.setUser(user);
+
+        // Gestione della prenotazione
+        if (cartDTO.getReservation() != null) {
+            Reservation reservation = reservationService.getReservationById(cartDTO.getReservation().getId());
+            cart.setReservation(reservation);
+        } else {
+            cart.setReservation(null);
+        }
+
+        // Ottenere l'utente autenticato dal contesto di sicurezza
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = null;
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                currentUserName = ((UserDetails) principal).getUsername();
+            } else {
+                currentUserName = principal.toString();
+            }
+        }
+        try {
+            Employee employee = employeeService.getEmployeeByEmail(currentUserName);
+            cart.setUser(employee);
+        } catch (UserNotFoundException e) {
+            // User not found for Employee, continue checking
+        }
+
+        try {
+            Customer customer = customerService.getCustomerByEmail(currentUserName);
+            cart.setUser(customer);
+        } catch (UserNotFoundException e) {
+            // User not found for Customer, continue checking
+        }
+
+        try {
+            Owner owner = ownerService.getOwnerByEmail(currentUserName);
+            cart.setUser(owner);
+        } catch (UserNotFoundException e) {
+            // User not found for Owner, continue checking
+        }
+
+        // Gestione della lista dei prodotti
+        if (cartDTO.getProductList() == null || cartDTO.getProductList().isEmpty()) {
+            throw new ProductNotFoundException("The cart is empty!");
+        }
+
         List<ProductDTO> productDTOList = cartDTO.getProductList();
-        List<Product> productList = productDTOList.stream().map(productDTO -> {
-            Product product = productRepository.findById(productDTO.getId()).get();
-            return product;
-        }).collect(Collectors.toList());
+        List<Product> productList = new ArrayList<>();
+
+        for (ProductDTO productDTO : productDTOList) {
+            Product product = productService.getProductById(productDTO.getId());
+            if (product != null) {
+                productList.add(product);
+            } else {
+                loggerError.error("Product not found with id: " + productDTO.getId());
+                throw new ProductNotFoundException("Product not found with id: " + productDTO.getId());
+            }
+        }
+
+        if (productList.isEmpty()) {
+            throw new ProductNotFoundException("The cart is empty!");
+        }
+
         cart.setProductList(productList);
-        cart.setTotal(cartDTO.getTotal());
+        cart.setCreationDate(cartDTO.getCreationDate());
         cartRepository.save(cart);
         loggerInfo.info("Cart with id " + cart.getId() + " created.");
         return cart;
     }
 
-    public Page<Cart> getCarts(int page, int size, String sortBy) {
-        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
-        return cartRepository.findAll(pageable);
+
+
+
+
+    public Page<Cart> getCarts(int page, String sortBy) {
+        int fixedSize = 15;  // Dimensione fissa impostata a 15
+        Pageable pageable = PageRequest.of(page, fixedSize, Sort.by(sortBy));
+        Page<Cart> carts = cartRepository.findAll(pageable);
+        loggerInfo.info("Retrieved carts page " + page + " with fixed size " + fixedSize + " sorted by " + sortBy);
+        return carts;
     }
+
 
     public Cart getCartById(Long id) throws CartNotFoundException {
         Optional<Cart> cart = cartRepository.findById(id);

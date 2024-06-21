@@ -34,7 +34,7 @@ public abstract class User implements UserDetails {
     private List<Reservation> reservationList;
 
     @OneToMany(mappedBy = "user")
-    /*@JsonIgnore*/
+    @JsonIgnore
     private List<Cart> cartList;
 
     private LocalDate creationDate;

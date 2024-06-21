@@ -93,8 +93,11 @@ public class OwnerService {
                 .orElseThrow(() -> new UserNotFoundException("Owner not found with email: " + email));
     }
 
-    public Owner getOwner() {
+    public Owner getOwner() throws UserNotFoundException {
         List<Owner> owner = ownerRepository.findAll();
+        if (owner.isEmpty()) {
+            throw new UserNotFoundException("Owner not found.");
+        }
         return owner.get(0);
     }
 
