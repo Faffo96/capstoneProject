@@ -30,9 +30,6 @@ public class EmployeeService {
     private EmployeeRepository employeeRepository;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private CustomerService customerService;
 
     @Autowired

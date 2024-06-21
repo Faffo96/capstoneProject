@@ -32,12 +32,6 @@ public class UserService {
     private UserRepository userRepository;
 
     @Autowired
-    private EmployeeRepository employeeRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
-
-    @Autowired
     private JavaMailSender javaMailSender;
 
     @Autowired

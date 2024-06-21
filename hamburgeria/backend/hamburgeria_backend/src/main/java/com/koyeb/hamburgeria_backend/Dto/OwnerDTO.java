@@ -4,4 +4,10 @@ import lombok.Data;
 
 @Data
 public class OwnerDTO extends UserDTO {
+    @Override
+    public String toString() {
+        return "OwnerDTO{" +
+                super.toString() +
+                '}';
+    }
 }
