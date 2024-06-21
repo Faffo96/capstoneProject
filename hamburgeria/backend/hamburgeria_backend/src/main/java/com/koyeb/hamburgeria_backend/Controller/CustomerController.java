@@ -1,6 +1,7 @@
 package com.koyeb.hamburgeria_backend.Controller;
 
 import com.koyeb.hamburgeria_backend.Dto.CustomerDTO;
+import com.koyeb.hamburgeria_backend.Dto.CustomerResponseDTO;
 import com.koyeb.hamburgeria_backend.Entity.User.Customer;
 import com.koyeb.hamburgeria_backend.Exception.EmailAlreadyInUseException;
 import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
@@ -23,19 +24,26 @@ public class CustomerController {
     private CustomerService customerService;
 
     @GetMapping("/{email}")
-    public ResponseEntity<Customer> getCustomerByEmail(@PathVariable String email) throws UserNotFoundException {
+    public ResponseEntity<CustomerResponseDTO> getCustomerByEmail(@PathVariable String email) throws UserNotFoundException {
         Customer customer = customerService.getCustomerByEmail(email);
-        return ResponseEntity.ok(customer);
+        if (customer == null) {
+            throw new UserNotFoundException("Customer not found with email: " + email);
+        }
+        CustomerResponseDTO customerResponse = new CustomerResponseDTO(customer.getName(), customer.getSurname(), customer.getEmail(), customer.getAvatar(), customer.getRole(), customer.getCreationDate());
+        return ResponseEntity.ok(customerResponse);
     }
 
+
     @GetMapping
-    public ResponseEntity<Page<Customer>> getAllCustomers(
+    public ResponseEntity<Page<CustomerResponseDTO>> getAllCustomers(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "email") String sortBy
     ) {
         Page<Customer> customers = customerService.getCustomers(page, sortBy);
-        return ResponseEntity.ok(customers);
+        Page<CustomerResponseDTO> customerResponses = customers.map(customer -> new CustomerResponseDTO(customer.getName(), customer.getSurname(), customer.getEmail(), customer.getAvatar(), customer.getRole(), customer.getCreationDate()));
+        return ResponseEntity.ok(customerResponses);
     }
+
 
     @PutMapping("/{email}")
     public ResponseEntity<Customer> updateCustomer(
