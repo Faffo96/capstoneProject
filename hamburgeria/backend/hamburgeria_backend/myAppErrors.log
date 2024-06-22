@@ -26,3 +26,10 @@
 2024-06-22 04:43:53,293 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:145] -- Owner already exists!
 2024-06-22 04:51:21,296 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: jane.doee@example.com
 2024-06-22 04:51:50,280 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:41] -- Customer not found with email: jane.doe@example.com
+2024-06-22 15:02:00,637 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:145] -- Owner already exists!
+2024-06-22 15:06:21,027 ERROR [http-nio-8080-exec-1] loggerError [CartService.java:151] -- Cart with id 24 not found.
+2024-06-22 15:06:21,027 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:119] -- Cart id 24 not found
+2024-06-22 15:06:27,766 ERROR [http-nio-8080-exec-2] loggerError [CartService.java:151] -- Cart with id 25 not found.
+2024-06-22 15:06:27,767 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:119] -- Cart id 25 not found
+2024-06-22 15:07:36,416 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:158] -- The minimum amount must be 8.5€
+2024-06-22 15:16:55,836 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:158] -- The minimum amount must be 8.5€
