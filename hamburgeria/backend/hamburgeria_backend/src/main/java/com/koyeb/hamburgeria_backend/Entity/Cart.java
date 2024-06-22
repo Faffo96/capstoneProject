@@ -56,11 +56,11 @@ public class Cart {
     }
 
     public void setProductList(List<Product> newProductList) {
-        List<Product> productList = getProductList();
+        final List<Product> initialProductList = productList;
         if (productList == null) {
             productList = new ArrayList<>();
         }
-        final List<Product> initialProductList = productList;
+
         double currentTotal = initialProductList.stream().mapToDouble(Product::getPrice).sum();
 
         if (newProductList.size() > initialProductList.size()) {
