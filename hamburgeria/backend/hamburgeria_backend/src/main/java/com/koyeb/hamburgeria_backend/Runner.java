@@ -95,7 +95,7 @@ public class Runner implements CommandLineRunner {
             }
         }
 
-        if (ownerService.getOwner() == null) {
+        if (!ownerService.existsOwner()) {
             ownerService.instantiateOwner();
         }
 

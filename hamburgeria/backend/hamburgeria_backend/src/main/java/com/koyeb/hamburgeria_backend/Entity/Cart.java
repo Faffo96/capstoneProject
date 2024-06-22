@@ -37,6 +37,9 @@ public class Cart {
     private User user;
 
     private double total;
+    private boolean paid;
+    private boolean delivery;
+    private double deliveryFee;
 
     @Override
     public String toString() {
@@ -46,35 +49,40 @@ public class Cart {
                 ", productList=" + productList +
                 ", user=" + user +
                 ", total=" + total +
+                ", paid=" + paid +
+                ", delivery=" + delivery +
+                ", deliveryFee=" + deliveryFee +
                 '}';
     }
 
     public void setProductList(List<Product> newProductList) {
-
         List<Product> productList = getProductList();
-        /*List<Product> productsToAdd = new ArrayList<>();
-        List<Product> productsToRemove = new ArrayList<>();*/
-
-        if (productList != null) {
-            if (newProductList.size() > productList.size()) {
-                List<Product> productsToAdd = newProductList.stream()
-                        .filter(product -> !productList.contains(product))
-                        .toList();
-                setTotal(getTotal() + productsToAdd.stream().mapToDouble(Product::getPrice).sum());
-            } else if (newProductList.size() < productList.size()) {
-                List<Product> productsToRemove = productList.stream()
-                        .filter(product -> !newProductList.contains(product))
-                        .toList();
-                setTotal(getTotal() - productsToRemove.stream().mapToDouble(Product::getPrice).sum());
-            }
-            this.productList = newProductList;
-        } else {
-            this.productList = newProductList;
-            setTotal(newProductList.stream().mapToDouble(Product::getPrice).sum());
+        if (productList == null) {
+            productList = new ArrayList<>();
         }
+        final List<Product> initialProductList = productList;
+        double currentTotal = initialProductList.stream().mapToDouble(Product::getPrice).sum();
+
+        if (newProductList.size() > initialProductList.size()) {
+            List<Product> productsToAdd = newProductList.stream()
+                    .filter(product -> !initialProductList.contains(product))
+                    .toList();
+            currentTotal += productsToAdd.stream().mapToDouble(Product::getPrice).sum();
+        } else if (newProductList.size() < initialProductList.size()) {
+            List<Product> productsToRemove = initialProductList.stream()
+                    .filter(product -> !newProductList.contains(product))
+                    .toList();
+            currentTotal -= productsToRemove.stream().mapToDouble(Product::getPrice).sum();
         }
 
-
+        this.productList = newProductList;
+        this.total = currentTotal + (this.delivery ? this.deliveryFee : 0);
     }
+
+
+
+
+
+}
 
 

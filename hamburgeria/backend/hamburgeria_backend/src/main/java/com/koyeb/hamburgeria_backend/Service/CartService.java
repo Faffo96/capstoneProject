@@ -11,10 +11,7 @@ import com.koyeb.hamburgeria_backend.Entity.User.Customer;
 import com.koyeb.hamburgeria_backend.Entity.User.Employee;
 import com.koyeb.hamburgeria_backend.Entity.User.Owner;
 import com.koyeb.hamburgeria_backend.Entity.User.User;
-import com.koyeb.hamburgeria_backend.Exception.CartNotFoundException;
-import com.koyeb.hamburgeria_backend.Exception.ProductNotFoundException;
-import com.koyeb.hamburgeria_backend.Exception.ReservationNotFoundException;
-import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
+import com.koyeb.hamburgeria_backend.Exception.*;
 import com.koyeb.hamburgeria_backend.Repository.CartRepository;
 import com.koyeb.hamburgeria_backend.Repository.ProductRepository;
 import org.slf4j.Logger;
@@ -108,33 +105,30 @@ public class CartService {
         }
 
         // Gestione della lista dei prodotti
-        if (cartDTO.getProductList() == null || cartDTO.getProductList().isEmpty()) {
-            throw new ProductNotFoundException("The cart is empty!");
-        }
-
         List<ProductDTO> productDTOList = cartDTO.getProductList();
         List<Product> productList = new ArrayList<>();
 
-        for (ProductDTO productDTO : productDTOList) {
-            Product product = productService.getProductById(productDTO.getId());
-            if (product != null) {
-                productList.add(product);
-            } else {
-                loggerError.error("Product not found with id: " + productDTO.getId());
-                throw new ProductNotFoundException("Product not found with id: " + productDTO.getId());
+        if (productDTOList != null) {
+            for (ProductDTO productDTO : productDTOList) {
+                Product product = productService.getProductById(productDTO.getId());
+                if (product != null) {
+                    productList.add(product);
+                } else {
+                    loggerError.error("Product not found with id: " + productDTO.getId());
+                    throw new ProductNotFoundException("Product not found with id: " + productDTO.getId());
+                }
             }
-        }
-
-        if (productList.isEmpty()) {
-            throw new ProductNotFoundException("The cart is empty!");
         }
 
         cart.setProductList(productList);
         cart.setCreationDate(cartDTO.getCreationDate());
+        cart.setPaid(cartDTO.isPaid());
+        cart.setDelivery(cartDTO.isDelivery());
         cartRepository.save(cart);
         loggerInfo.info("Cart with id " + cart.getId() + " created.");
         return cart;
     }
+
 
 
 
@@ -159,14 +153,42 @@ public class CartService {
         }
     }
 
-    public Cart updateCart(Long id, CartDTO cartDTO) throws CartNotFoundException {
+    public Cart updateCart(Long id, CartDTO cartDTO) throws CartNotFoundException, ProductNotFoundException, MinimumTotalException {
         Cart cart = getCartById(id);
-        cart.setProductList(cart.getProductList());
-        cart.setTotal(cart.getTotal());
+
+        List<ProductDTO> productDTOList = cartDTO.getProductList();
+        List<Product> productList = new ArrayList<>();
+
+        for (ProductDTO productDTO : productDTOList) {
+            Product product = productService.getProductById(productDTO.getId());
+            if (product != null) {
+                productList.add(product);
+            } else {
+                loggerError.error("Product not found with id: " + productDTO.getId());
+                throw new ProductNotFoundException("Product not found with id: " + productDTO.getId());
+            }
+        }
+
+        cart.setProductList(productList);
+        cart.setDelivery(cartDTO.isDelivery());
+        cart.setDeliveryFee(cartDTO.isDelivery() ? 2.0 : 0.0);
+
+        // Calculate the total price of the products in the cart
+        double total = productList.stream().mapToDouble(Product::getPrice).sum();
+        cart.setTotal(total + (cart.isDelivery() ? cart.getDeliveryFee() : 0));
+
+        // Check if the total is at least 8.5
+        if (total < 8.5) {
+            throw new MinimumTotalException("The total price of the cart must be at least 8.5");
+        }
+
         cartRepository.save(cart);
         loggerInfo.info("Cart with id " + cart.getId() + " updated.");
         return cart;
     }
+
+
+
 
     public String deleteCart(Long id) throws CartNotFoundException {
         Cart cart = getCartById(id);

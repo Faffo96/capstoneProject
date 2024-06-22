@@ -2,10 +2,7 @@ package com.koyeb.hamburgeria_backend.Controller;
 
 import com.koyeb.hamburgeria_backend.Dto.CartDTO;
 import com.koyeb.hamburgeria_backend.Entity.Cart;
-import com.koyeb.hamburgeria_backend.Exception.CartNotFoundException;
-import com.koyeb.hamburgeria_backend.Exception.ProductNotFoundException;
-import com.koyeb.hamburgeria_backend.Exception.ReservationNotFoundException;
-import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
+import com.koyeb.hamburgeria_backend.Exception.*;
 import com.koyeb.hamburgeria_backend.Service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,12 +53,16 @@ public class CartController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Cart> updateCart(@PathVariable Long id, @RequestBody CartDTO cartDTO) {
+    public ResponseEntity<Cart> updateCart(@PathVariable Long id, @RequestBody CartDTO cartDTO) throws ProductNotFoundException, CartNotFoundException, MinimumTotalException {
         try {
             Cart updatedCart = cartService.updateCart(id, cartDTO);
             return ResponseEntity.ok(updatedCart);
         } catch (CartNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Cart not found
+            throw new CartNotFoundException("Cart id " + id + " not found");
+        } catch (ProductNotFoundException e) {
+            throw new ProductNotFoundException("Product id " + id + " not found");
+        } catch (MinimumTotalException e) {
+            throw new MinimumTotalException ("The minimum amount must be 8.5€");
         }
     }
 

@@ -12,5 +12,8 @@ public class CartDTO {
     private List<ProductDTO> productList;
     private UserDTO user;
     private double total;
+    private boolean paid;
+    private boolean delivery;
+    private double deliveryFee;
 }
 

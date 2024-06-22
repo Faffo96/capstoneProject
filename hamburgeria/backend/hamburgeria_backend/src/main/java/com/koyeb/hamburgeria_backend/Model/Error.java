@@ -8,6 +8,9 @@ import java.time.LocalDateTime;
 @Data
 public class Error {
     private String message;
-    private LocalDateTime errorDate;
-    private HttpStatus errorState;
+    private LocalDateTime timestamp;
+    private HttpStatus status;
+    private int statusCode;
+    private String errorCode;
+    private String details;
 }

@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.util.AntPathMatcher;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -20,45 +21,58 @@ import java.io.IOException;
 
 @Component
 public class JwtFilter extends OncePerRequestFilter {
+
     @Autowired
     private JwtTool jwtTool;
+
     @Autowired
     private UserService userService;
 
-    @Override //metodo per verificare che nella richiesta ci sia il token, altrimenti non si è autorizzati
+    @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         String authHeader = request.getHeader("Authorization");
 
         if (authHeader == null || !authHeader.startsWith("Bearer ")) {
-            throw new UnauthorizedException("Error in authorization, token missing!");
+            handleUnauthorized(response, "Error in authorization, token missing or does not start with 'Bearer '!");
+            return;
         }
 
         String token = authHeader.substring(7);
 
-        jwtTool.verifyToken(token);
+        try {
+            jwtTool.verifyToken(token);
+        } catch (Exception e) {
+            handleUnauthorized(response, "Invalid token!");
+            return;
+        }
 
         String userEmail = jwtTool.getEmailFromToken(token);
 
-        User user = null;
+        User user;
         try {
             user = userService.getUserByEmail(userEmail);
         } catch (UserNotFoundException e) {
             logger.error("User with email=" + userEmail + " not found");
-            System.out.println("User with email=" + userEmail + " not found");
+            handleUnauthorized(response, "User with email=" + userEmail + " not found");
+            return;
         }
 
         if (user != null) {
             Authentication authentication = new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
-        } else{
-            logger.error("User with email=" + userEmail + " not found");
-            System.out.println("User with email=" + userEmail + " not found");
         }
+
         filterChain.doFilter(request, response);
     }
 
-    @Override //permette di non effettuare l'autenticazione per usare i servizi di autenticazione
+    @Override
     protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
-        return new AntPathMatcher().match("/auth/**", request.getServletPath());
+        return new AntPathRequestMatcher("/auth/**").matches(request);
+    }
+
+    private void handleUnauthorized(HttpServletResponse response, String message) throws IOException {
+        response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+        response.setContentType("application/json");
+        response.getWriter().write("{\"error\": \"" + message + "\"}");
     }
 }

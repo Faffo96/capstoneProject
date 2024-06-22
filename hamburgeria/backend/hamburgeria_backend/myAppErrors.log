@@ -4,3 +4,25 @@
 2024-06-22 00:47:43,234 ERROR [http-nio-8080-exec-7] loggerError [CartService.java:132] -- Cart with id 8 not found.
 2024-06-22 00:47:44,378 ERROR [http-nio-8080-exec-6] loggerError [CartService.java:132] -- Cart with id 8 not found.
 2024-06-22 01:22:44,897 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:39] -- User not found with email: jane.doe@example.com
+2024-06-22 02:26:13,737 ERROR [http-nio-8080-exec-1] loggerError [CartService.java:157] -- Cart with id 15 not found.
+2024-06-22 02:26:21,937 ERROR [http-nio-8080-exec-2] loggerError [CartService.java:157] -- Cart with id 16 not found.
+2024-06-22 02:27:27,052 ERROR [http-nio-8080-exec-6] loggerError [CartService.java:157] -- Cart with id 17 not found.
+2024-06-22 02:29:25,830 ERROR [http-nio-8080-exec-7] loggerError [CartService.java:157] -- Cart with id 17 not found.
+2024-06-22 02:30:00,992 ERROR [http-nio-8080-exec-10] loggerError [CartService.java:157] -- Cart with id 17 not found.
+2024-06-22 02:30:20,304 ERROR [http-nio-8080-exec-1] loggerError [CartService.java:157] -- Cart with id 17 not found.
+2024-06-22 02:40:27,655 ERROR [http-nio-8080-exec-9] loggerError [CartService.java:157] -- Cart with id 19 not found.
+2024-06-22 02:40:27,660 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:99] -- Cart id 19 not found
+2024-06-22 02:55:35,168 ERROR [http-nio-8080-exec-4] loggerError [CartService.java:157] -- Cart with id 20 not found.
+2024-06-22 02:55:41,163 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:99] -- Cart id 20 not found
+2024-06-22 03:21:26,916 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:109] -- The cart is empty!
+2024-06-22 03:31:53,364 ERROR [http-nio-8080-exec-1] loggerError [CartService.java:152] -- Cart with id 23 not found.
+2024-06-22 03:31:53,370 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:99] -- Cart id 23 not found
+2024-06-22 03:32:14,124 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:109] -- Product id 24 not found
+2024-06-22 03:33:14,708 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:109] -- Product id 24 not found
+2024-06-22 03:38:58,513 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:129] -- The minimum amount must be 8.5€
+2024-06-22 03:39:07,883 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:129] -- The minimum amount must be 8.5€
+2024-06-22 04:33:49,859 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:39] -- User not found with email: fabioscar96@gmail.com
+2024-06-22 04:36:19,882 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:119] -- Owner already exists!
+2024-06-22 04:43:53,293 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:145] -- Owner already exists!
+2024-06-22 04:51:21,296 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: jane.doee@example.com
+2024-06-22 04:51:50,280 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:41] -- Customer not found with email: jane.doe@example.com
