@@ -33,3 +33,8 @@
 2024-06-22 15:06:27,767 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:119] -- Cart id 25 not found
 2024-06-22 15:07:36,416 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:158] -- The minimum amount must be 8.5€
 2024-06-22 15:16:55,836 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:158] -- The minimum amount must be 8.5€
+2024-06-23 00:39:35,195 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- Email alien@gmail.com already in use.
+2024-06-23 00:39:36,296 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- Email alien@gmail.com already in use.
+2024-06-23 00:39:37,172 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- Email alien@gmail.com already in use.
+2024-06-23 02:21:01,248 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:67] -- Error in authorization, relogin!
+2024-06-23 02:29:40,178 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:67] -- Error in authorization, relogin!

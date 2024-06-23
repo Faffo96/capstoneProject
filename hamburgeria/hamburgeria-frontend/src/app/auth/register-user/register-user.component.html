@@ -1,0 +1,51 @@
+<div class="d-flex justify-content-center align-items-center mt-2">
+    <form [formGroup]="signupForm" class="form" (ngSubmit)="onSubmit(signupForm)">
+        <p class="title">Register </p>
+        <p class="message">Signup now and get full access to our app. </p>
+        <div class="flex">
+            <label>
+                <input id="name" required="" placeholder="" type="text" class="input" formControlName="name">
+                <span>Firstname</span>
+            </label>
+
+            <label>
+                <input id="surname" required="" placeholder="" type="text" class="input" formControlName="surname">
+                <span>Lastname</span>
+            </label>
+        </div>
+        <label>
+            <input id="email" required="" placeholder="" type="email" class="input" formControlName="email">
+            <span>Email</span>
+        </label>
+        <label>
+            <input id="password" required="" placeholder="" type="password" class="input" formControlName="password">
+            <span>Password</span>
+        </label>
+       <!--  <label>
+            <input id="confirmPassword" required="" placeholder="" type="password" class="input"
+                formControlName="confirmPassword">
+            <span>Confirm password</span>
+            <span *ngIf="
+                                getFormC('user.username')?.invalid &&
+                                getFormC('user.username')?.touched
+                            ">
+                <ng-container *ngIf="
+                                    getErrorsC('userInfo.username', 'required')
+                                "><strong class="text-danger">Campo username obbligatorio</strong></ng-container>
+                <ng-container *ngIf="
+                                    getErrorsC('userInfo.username', 'proibito')
+                                "><strong class="text-danger">Username non consentito</strong>
+                </ng-container>
+            </span>
+        </label> -->
+        <label>
+            <span>Profile image</span>
+            <input id="avatar" placeholder="" type="file" class="input" formControlName="avatar">
+
+        </label>
+
+        <button type="button" (click)="onSubmit(signupForm)" class="submit" [disabled]="signupForm.invalid">Submit</button>
+        <p class="signin">Already have an account ? <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
+        </p>
+    </form>
+</div>
