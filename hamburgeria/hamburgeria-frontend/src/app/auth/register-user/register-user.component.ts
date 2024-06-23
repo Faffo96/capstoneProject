@@ -24,7 +24,7 @@ export class RegisterUserComponent {
         const { confirmPassword, ...userData } = form.value;
         const newUser: User = { ...userData };
         this.authSrv.signup(newUser).subscribe(() => {
-            this.router.navigate(['/login']);
+            this.router.navigate(['/profile/login']);
         });
     } catch (error) {
         console.error(error);
