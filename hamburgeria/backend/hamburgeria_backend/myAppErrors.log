@@ -38,3 +38,18 @@
 2024-06-23 00:39:37,172 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- Email alien@gmail.com already in use.
 2024-06-23 02:21:01,248 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:67] -- Error in authorization, relogin!
 2024-06-23 02:29:40,178 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:67] -- Error in authorization, relogin!
+2024-06-23 03:39:02,217 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- Email alieno@gmail.com already in use.
+2024-06-23 03:39:24,538 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- Email alieno@gmail.com already in use.
+2024-06-23 03:39:33,897 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:39:34,350 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:39:34,874 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:39:35,065 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:39:35,255 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:39:44,312 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:40:32,712 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- Email alienooo@gmail.com already in use.
+2024-06-23 03:44:28,798 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- Email alieni@gmail.com already in use.
+2024-06-23 03:49:49,680 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:145] -- Owner already exists!
+2024-06-23 13:46:43,680 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- Email fabioscar956@gmail.com already in use.
+2024-06-23 14:04:11,796 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:41] -- Customer not found with email: fabioscarra96@gmail.com
+2024-06-23 14:12:08,112 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- Email customer@example.com already in use.
+2024-06-23 14:12:20,109 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- Email customer@example.com already in use.

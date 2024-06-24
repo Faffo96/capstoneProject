@@ -8,11 +8,16 @@ import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
 import com.koyeb.hamburgeria_backend.Service.*;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.HashMap;
+import java.util.Map;
 
 @RestController
 public class AuthController {
@@ -46,18 +51,22 @@ public class AuthController {
     }
 
     @PostMapping("/auth/registerCustomer")
-    public String registerCustomer(@RequestBody @Validated CustomerDTO customerDTO, BindingResult bindingResult) throws BadRequestException, EmailAlreadyInUseException {
+    public ResponseEntity<Map<String, String>> registerCustomer(@RequestBody @Validated CustomerDTO customerDTO, BindingResult bindingResult) throws BadRequestException, EmailAlreadyInUseException {
         if (bindingResult.hasErrors()) {
-            throw new BadRequestException(bindingResult.getAllErrors().stream().map(error -> error.getDefaultMessage()).
-                    reduce("", (s, s2) -> s + s2));
+            throw new BadRequestException(bindingResult.getAllErrors().stream()
+                    .map(error -> error.getDefaultMessage())
+                    .reduce("", (s, s2) -> s + s2));
         }
         try {
             customerService.createCustomer(customerDTO);
         } catch (EmailAlreadyInUseException e) {
             throw new EmailAlreadyInUseException(e.getMessage());
         }
-        return "Customer with email " + customerDTO.getEmail() + " has been created!";
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Customer with email " + customerDTO.getEmail() + " has been created!");
+        return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
+
 
     @PostMapping("/auth/registerOwner")
     public String registerOwner(@RequestBody @Validated OwnerDTO ownerDTO, BindingResult bindingResult) throws BadRequestException, EmailAlreadyInUseException, OwnerAlreadyExistsException {

@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, catchError, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
@@ -7,6 +7,7 @@ import { AuthData } from '../models/auth-data.interface';
 import { Register } from '../models/register.interface';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { Role } from '../models/role';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root',
@@ -49,11 +50,26 @@ export class AuthService {
     });
   }
 
-  signup(data: Register) {
-    return this.http
-      .post(`${this.apiURL}auth/registerCustomer`, data)
-      .pipe(catchError(this.handleError));
+  signup(data: User): Observable<any> {
+    return this.http.post(`${this.apiURL}auth/registerCustomer`, data).pipe(
+      tap(response => {
+        console.log('Signup response: ', response);
+        const loginData = { email: data.email, password: data.password };
+        this.login(loginData).subscribe(
+          loginResponse => {
+            console.log('Login response: ', loginResponse);
+          },
+          loginError => {
+            console.error('Login error: ', loginError);
+          }
+        );
+      }),
+      catchError(this.handleError)
+    );
   }
+  
+  
+  
 
   logout() {
     this.authSub.next(null);
