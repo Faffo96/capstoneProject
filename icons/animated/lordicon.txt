@@ -78,3 +78,5 @@ export class HomeComponent implements AfterViewInit {
   
 }
 
+-Eventualmente rimuovere lo sfondo con questo link: https://onlinegiftools.com/remove-gif-background#tool
+
