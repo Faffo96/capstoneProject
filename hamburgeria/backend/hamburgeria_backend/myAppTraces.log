@@ -6,3 +6,47 @@
 2024-06-23 00:39:36,344 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:73] -- Customer with email alien@gmail.com saved.
 2024-06-23 00:52:56,953 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: alienW@gmail.com
 2024-06-23 00:52:58,214 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:73] -- Customer with email alienW@gmail.com saved.
+2024-06-23 03:34:37,387 TRACE [http-nio-8080-exec-7] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: alieno@gmail.com
+2024-06-23 03:34:39,104 TRACE [http-nio-8080-exec-7] loggerTrace [CustomerService.java:73] -- Customer with email alieno@gmail.com saved.
+2024-06-23 03:39:31,398 TRACE [http-nio-8080-exec-6] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: alienoo@gmail.com
+2024-06-23 03:39:32,585 TRACE [http-nio-8080-exec-6] loggerTrace [CustomerService.java:73] -- Customer with email alienoo@gmail.com saved.
+2024-06-23 03:39:49,054 TRACE [http-nio-8080-exec-3] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: alienooo@gmail.com
+2024-06-23 03:39:50,283 TRACE [http-nio-8080-exec-3] loggerTrace [CustomerService.java:73] -- Customer with email alienooo@gmail.com saved.
+2024-06-23 03:42:02,893 TRACE [http-nio-8080-exec-7] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: alienoooo@gmail.com
+2024-06-23 03:42:04,047 TRACE [http-nio-8080-exec-7] loggerTrace [CustomerService.java:73] -- Customer with email alienoooo@gmail.com saved.
+2024-06-23 03:43:21,550 TRACE [http-nio-8080-exec-1] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: alieni@gmail.com
+2024-06-23 03:43:22,834 TRACE [http-nio-8080-exec-1] loggerTrace [CustomerService.java:73] -- Customer with email alieni@gmail.com saved.
+2024-06-23 03:49:37,690 TRACE [http-nio-8080-exec-8] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: aliena@gmail.com
+2024-06-23 03:49:38,784 TRACE [http-nio-8080-exec-8] loggerTrace [CustomerService.java:73] -- Customer with email aliena@gmail.com saved.
+2024-06-23 13:27:02,997 TRACE [http-nio-8080-exec-5] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscar96f@gmail.com
+2024-06-23 13:27:04,735 TRACE [http-nio-8080-exec-5] loggerTrace [CustomerService.java:73] -- Customer with email fabioscar96f@gmail.com saved.
+2024-06-23 13:37:30,702 TRACE [http-nio-8080-exec-8] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscarrrr96@gmail.com
+2024-06-23 13:37:31,865 TRACE [http-nio-8080-exec-8] loggerTrace [CustomerService.java:73] -- Customer with email fabioscarrrr96@gmail.com saved.
+2024-06-23 13:39:02,399 TRACE [http-nio-8080-exec-1] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscarrrrr96@gmail.com
+2024-06-23 13:39:03,500 TRACE [http-nio-8080-exec-1] loggerTrace [CustomerService.java:73] -- Customer with email fabioscarrrrr96@gmail.com saved.
+2024-06-23 13:40:33,087 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscar9996@gmail.com
+2024-06-23 13:40:34,236 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:73] -- Customer with email fabioscar9996@gmail.com saved.
+2024-06-23 13:45:25,026 TRACE [http-nio-8080-exec-7] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscar956@gmail.com
+2024-06-23 13:45:26,087 TRACE [http-nio-8080-exec-7] loggerTrace [CustomerService.java:73] -- Customer with email fabioscar956@gmail.com saved.
+2024-06-23 13:51:26,778 TRACE [http-nio-8080-exec-4] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscar9565@gmail.com
+2024-06-23 13:51:27,962 TRACE [http-nio-8080-exec-4] loggerTrace [CustomerService.java:73] -- Customer with email fabioscar9565@gmail.com saved.
+2024-06-23 13:51:42,406 TRACE [http-nio-8080-exec-6] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscar95655@gmail.com
+2024-06-23 13:51:43,488 TRACE [http-nio-8080-exec-6] loggerTrace [CustomerService.java:73] -- Customer with email fabioscar95655@gmail.com saved.
+2024-06-23 13:54:26,571 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscar945655@gmail.com
+2024-06-23 13:54:27,799 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:73] -- Customer with email fabioscar945655@gmail.com saved.
+2024-06-23 13:55:56,997 TRACE [http-nio-8080-exec-9] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscar9f6@gmail.com
+2024-06-23 13:55:58,102 TRACE [http-nio-8080-exec-9] loggerTrace [CustomerService.java:73] -- Customer with email fabioscar9f6@gmail.com saved.
+2024-06-23 14:01:17,699 TRACE [http-nio-8080-exec-6] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscare96@gmail.com
+2024-06-23 14:01:18,906 TRACE [http-nio-8080-exec-6] loggerTrace [CustomerService.java:73] -- Customer with email fabioscare96@gmail.com saved.
+2024-06-23 14:05:47,202 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscarra96@gmail.com
+2024-06-23 14:05:48,347 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:73] -- Customer with email fabioscarra96@gmail.com saved.
+2024-06-23 14:12:26,449 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: customer2@example.com
+2024-06-23 14:12:27,560 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:73] -- Customer with email customer2@example.com saved.
+2024-06-23 14:14:08,913 TRACE [http-nio-8080-exec-5] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscar96@gmmail.com
+2024-06-23 14:14:10,020 TRACE [http-nio-8080-exec-5] loggerTrace [CustomerService.java:73] -- Customer with email fabioscar96@gmmail.com saved.
+2024-06-23 14:14:43,965 TRACE [http-nio-8080-exec-7] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscaaar96@gmail.com
+2024-06-23 14:14:45,166 TRACE [http-nio-8080-exec-7] loggerTrace [CustomerService.java:73] -- Customer with email fabioscaaar96@gmail.com saved.
+2024-06-24 12:03:49,977 TRACE [http-nio-8080-exec-10] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: thomasbrine33@gmail.com
+2024-06-24 12:03:51,402 TRACE [http-nio-8080-exec-10] loggerTrace [CustomerService.java:73] -- Customer with email thomasbrine33@gmail.com saved.
+2024-06-24 13:04:10,170 TRACE [http-nio-8080-exec-10] loggerTrace [CustomerService.java:71] -- Registration email sent to customer: fabioscar9rer6@gmail.com
+2024-06-24 13:04:11,541 TRACE [http-nio-8080-exec-10] loggerTrace [CustomerService.java:73] -- Customer with email fabioscar9rer6@gmail.com saved.

@@ -20,16 +20,18 @@ export class RegisterUserComponent {
 
   onSubmit(form: FormGroup) {
     console.log(form.value);
-    try {
-        const { confirmPassword, ...userData } = form.value;
-        const newUser: User = { ...userData };
-        this.authSrv.signup(newUser).subscribe(() => {
-            this.router.navigate(['/profile/login']);
-        });
-    } catch (error) {
+    const { confirmPassword, ...userData } = form.value;
+    const newUser: User = { ...userData };
+    
+    this.authSrv.signup(newUser).subscribe(
+      () => {
+        this.router.navigate(['profile/login']);
+      },
+      error => {
         console.error(error);
-    }
-}
+      }
+    );
+  }
 
 
   ngOnInit(): void {
@@ -38,7 +40,7 @@ export class RegisterUserComponent {
       surname: [null, [Validators.required, Validators.maxLength(15)]],
       email: [null, [Validators.required, Validators.maxLength(25)]],
       password: [null, [Validators.required, Validators.minLength(8)]],
-      /* confirmPassword: [null, Validators.required], */
+      confirmPassword: [null, Validators.required],
       avatar: [/* null, this.fileTypeValidator(['jpeg', 'png', 'gif']) */], // Utilizza la tua funzione di validazione
     }, { validator: this.passwordMatchValidator });
     
