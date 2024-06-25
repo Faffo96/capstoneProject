@@ -1,4 +1,4 @@
-<nav [ngStyle]="{'height': headerHeight}" class="header-bg-img navbar p-0 flex-column navbar-expand-lg bg-body-tertiary">
+<nav class="header-bg-img navbar p-0 flex-column navbar-expand-lg bg-body-tertiary">
   <div class="p-0 nav container-fluid transparent align-items-center bg-dark50">
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
       aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -6,42 +6,50 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavDropdown">
       <ul class="navbar-nav ms-3 d-flex align-items-center justify-content-center">
-        <li class="my-fs-3 nav-item"><a class="nav-link active color2 fw-bolder" aria-current="page"
-            routerLink="/">Home</a>
+        <li class="my-fs-3 nav-item">
+          <a class="nav-link text-light fw-bolder" routerLink="/" routerLinkActive="color2" [routerLinkActiveOptions]="{ exact: true }" aria-current="page">Home</a>
         </li>
-        <li class="my-fs-3 nav-item"><a class="nav-link text-light fw-bolder" routerLink="/menu">Menu</a></li>
-
-        <li class="my-fs-3 nav-item"><a class="nav-link text-light fw-bolder" routerLink="/reservation">Prenotazioni</a>
+        <li class="my-fs-3 nav-item">
+          <a class="nav-link text-light fw-bolder" routerLink="/menu" routerLinkActive="color2">Menu</a>
         </li>
-        <li class="my-fs-3 nav-item"><a class="nav-link text-light fw-bolder" routerLink="/reservation">Contatti</a>
+        <li class="my-fs-3 nav-item">
+          <a class="nav-link text-light fw-bolder" routerLink="/reservation" routerLinkActive="color2">Prenotazioni</a>
         </li>
-        <li class="my-fs-3 nav-item"><a class="nav-link text-light fw-bolder" routerLink="/backoffice">Backoffice</a>
+        <li class="my-fs-3 nav-item">
+          <a class="nav-link text-light fw-bolder" routerLink="/contacts" routerLinkActive="color2">Contatti</a>
+        </li>
+        <li class="my-fs-3 nav-item">
+          <a class="nav-link text-light fw-bolder" routerLink="/backoffice" routerLinkActive="color2">Backoffice</a>
         </li>
       </ul>
 
-      <div class="px-5 bg-color2 logo d-flex align-items-center "><img src="../../../assets/img/logo.png"
-          alt="Hamburgeria logo" width="200px"></div>
+      <div class="px-5 bg-color2 logo d-flex align-items-center">
+        <img src="../../../assets/img/logo.png" alt="Hamburgeria logo" width="200px">
+      </div>
 
       <ul class="navbar-nav me-3 align-items-center justify-content-center">
-        <li class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/login">Accedi</a></li>
-        <li class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/register">Registrati</a></li>
+        <li class="my-fs-3 nav-item2">
+          <a class="nav-link text-light fw-bolder" routerLink="/profile" routerLinkActive="color2">Accedi</a>
+        </li>
+        <li class="my-fs-3 nav-item2">
+          <a class="nav-link text-light fw-bolder" routerLink="/profile" routerLinkActive="color2">Registrati</a>
+        </li>
         <li class="my-fs-3 nav-item2 d-flex align-items-center">
           <img src="../../../assets/img/hamburgeria-logo.png" alt="" width="50px" height="50px">
-          <p class="nav-link pointer nav-item2 text-light fw-bolder" routerLink="/backoffice">Mario Rossi</p>
+          <p class="nav-link nav-item2 text-light fw-bolder">Mario Rossi</p>
         </li>
       </ul>
-
     </div>
   </div>
 
-  <div *ngIf="currentRoute === '/'" class="d-flex justify-content-center">
+  <div class="d-flex justify-content-center">
     <img class="mt-4" src="../../../assets/img/hamburgeria-logo2.png" alt="" width="500px">
   </div>
 
-  <div *ngIf="currentRoute === '/'" class="container justify-content-center">
+  <div class="container justify-content-center" *ngIf="currentRoute === '/'">
     <div class="row row-cols-2">
       <div class="cta hover-div me-5 bg-light d-flex flex-column justify-content-center align-items-center">
-        <div class="image-icon mb-4 ">
+        <div class="image-icon mb-4">
           <img class="hover-image shadowed-image" src="../../../assets/icons/animate/gif/cart.gif" alt="Cart Icon">
         </div>
         <div class="cta-h3 bg-color2">
