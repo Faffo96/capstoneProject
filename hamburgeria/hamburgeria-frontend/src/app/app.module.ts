@@ -20,6 +20,10 @@ import { FooterComponent } from './Components/footer/footer.component';
 
 const routes: Route[] = [
   {
+    path: 'home',
+    component: HomeComponent
+  },
+  {
     path: '',
     component: HomeComponent
   },
@@ -46,20 +50,18 @@ const routes: Route[] = [
   {
     path: 'profile',
     component: ProfileComponent,
-    children: [
-      {
-        path: 'test',
-        component: TestComponent
-      },
-      {
-        path: 'register',
-        component: RegisterUserComponent
-      },
-      {
-        path: 'login',
-        component: LoginComponent
-      }
-    ]
+  },
+  {
+    path: 'test',
+    component: TestComponent
+  },
+  {
+    path: 'register',
+    component: RegisterUserComponent
+  },
+  {
+    path: 'login',
+    component: LoginComponent
   },
   {
     path: 'reservation',
