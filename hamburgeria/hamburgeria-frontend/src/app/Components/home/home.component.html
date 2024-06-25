@@ -44,29 +44,41 @@
     </div>
 </section>
 
-<section class="others container-fluid bg-color3">
-    <div class="row row-cols-2">
-        <article class="w-50 pb-4 others_article1 d-flex flex-column justify-content-end">
-            <div class="w-75 ms-3 d-flex flex-column">
-                <h3 class="color2 fs-1 mb-4 playwrite-font text-shadow">Sandwitch</h3>
-                <p class="text-light">I nostri sandwich sono preparati con ingredienti freschi e tanto amore. Scoprite
-                    le nostre deliziose combinazioni, dai classici ai più originali. Ce n'è per tutti i gusti! Venite a
-                    provarli e lasciatevi conquistare!</p>
-            </div>
-        </article>
 
-        <article class="w-50 pb-4 others_article2 d-flex flex-column justify-content-end">
-            <div class="w-75 ms-3 d-flex flex-column">
-                <h3 class="color2 fs-1 mb-4 playwrite-font text-shadow">Fritture</h3>
-                <p class="text-light">I nostri dolci sono un'esplosione di creatività e bontà! Preparati con ingredienti
-                    particolari e arricchiti con snack e biscotti, sono perfetti per chi ama le golosità uniche. </p>
-            </div>
-        </article>
-    </div>
+<ngb-carousel
+  #carousel
+  [interval]="4000"
+  [pauseOnHover]="pauseOnHover"
+  [pauseOnFocus]="pauseOnFocus"
+  (slide)="onSlide($event)"
+>
+  <ng-template ngbSlide *ngFor="let othersPost1 of othersPosts1; let i = index">
+    <section class="others container-fluid bg-color3">
+        <div class="row row-cols-2">
+            <article class="w-50 pb-4 others_article3 d-flex flex-column justify-content-end" [ngStyle]="{'background-image': 'url(' + othersPosts1[i].photoUrl + ')'}">
+                <div class="w-75 ms-3 d-flex flex-column">
+                    <h3 class="color2 fs-1 mb-4 playwrite-font text-shadow">{{othersPost1.name}}</h3>
+                    <p class="text-light">{{othersPost1.description}}</p>
+                </div>
+            </article>
+    
+            <article *ngIf="othersPosts2[i]" class="w-50 pb-4 others_article4 d-flex flex-column justify-content-end" [ngStyle]="{'background-image': 'url(' + othersPosts2[i].photoUrl + ')'}">
+                <div class="w-75 ms-3 d-flex flex-column">
+                    <h3 class="color2 fs-1 mb-4 playwrite-font text-shadow">{{othersPosts2[i].name}}</h3>
+                    <p class="text-light">{{othersPosts2[i].description}}</p>
+                </div>
+            </article>
+        </div>
+    
+    </section>
+  </ng-template>
+</ngb-carousel>
 
-</section>
 
-<section class="others container-fluid bg-color3">
+
+
+
+<!-- <section class="others container-fluid bg-color3">
     <div class="row row-cols-2">
         <article class="w-50 pb-4 others_article3 d-flex flex-column justify-content-end">
             <div class="w-75 ms-3 d-flex flex-column">
@@ -75,6 +87,7 @@
                     le nostre deliziose combinazioni, dai classici ai più originali. Ce n'è per tutti i gusti! Venite a
                     provarli e lasciatevi conquistare!</p>
             </div>
+            <img class="carousel-img" [src]="othersPosts2[i].photoUrl" alt="My image {{ i + 1 }} description" />
         </article>
 
         <article class="w-50 pb-4 others_article4 d-flex flex-column justify-content-end">
@@ -86,4 +99,4 @@
         </article>
     </div>
 
-</section>
+</section> -->

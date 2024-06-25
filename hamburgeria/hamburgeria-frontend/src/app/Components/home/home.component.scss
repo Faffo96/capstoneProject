@@ -53,10 +53,35 @@
     object-fit: cover; 
 }
 
-/* OTHERS */
+/* OTHERS CAROUSEL */
+
+.carousel-article {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+  }
+  
+  .carousel-inner {
+    height: 500px;
+  }
+  
+  .carousel-article .carousel-img {
+    
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+  }
+  
 
 .others {
-    transform: translateY(-300px);
+    /* transform: translateY(-300px); */
+}
+
+ngb-carousel{
+    height: 500px;
+    z-index: 2;
 }
 
 .others_article1 , .others_article2, .others_article3, .others_article4 {
@@ -79,5 +104,5 @@
 }
 
 .others_article4 {
-    background-image: url('../../../assets/img/dolce.png');
+    background-image: url('../../../assets/img/dessert2.png');
 }
