@@ -18,61 +18,6 @@ import { RegisterUserComponent } from './auth/register-user/register-user.compon
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './Components/footer/footer.component';
 
-const routes: Route[] = [
-  {
-    path: 'home',
-    component: HomeComponent
-  },
-  {
-    path: '',
-    component: HomeComponent
-  },
-  {
-    path: 'backoffice',
-    component: BackofficeComponent,
-    children: [
-      {
-        path: 'test',
-        component: TestComponent
-      },
-    ]
-  },
-  {
-    path: 'menu',
-    component: MenuComponent,
-    children: [
-      {
-        path: 'test',
-        component: TestComponent
-      },
-    ]
-  },
-  {
-    path: 'profile',
-    component: ProfileComponent,
-  },
-  {
-    path: 'test',
-    component: TestComponent
-  },
-  {
-    path: 'register',
-    component: RegisterUserComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'reservation',
-    component: ReservationComponent
-  },
-  {
-    path: '**',
-    redirectTo:''
-  }
-]
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -91,7 +36,6 @@ const routes: Route[] = [
     NgbModule,
     BrowserModule,
     AppRoutingModule,
-    RouterModule.forRoot(routes),
     ReactiveFormsModule,
     HttpClientModule
   ],

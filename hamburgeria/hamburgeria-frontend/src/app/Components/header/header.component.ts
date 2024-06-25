@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
 import { RouteService } from '../../Services/route.service';
 
 @Component({
@@ -6,15 +6,47 @@ import { RouteService } from '../../Services/route.service';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterViewInit, OnInit {
+export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked {
   currentRoute: string = '';
   headerHeight: string = '930px';
+  private initialized = false;
+
+ 
 
   constructor(
     private routeService: RouteService,
     private renderer: Renderer2,
-    private el: ElementRef
-  ) {}
+    private el: ElementRef,
+    private cdr: ChangeDetectorRef) {}
+
+  ngAfterViewInit() {
+    this.cdr.detectChanges();
+  }
+
+  ngAfterViewChecked() {
+    if (!this.initialized) {
+      const imgs = document.getElementsByClassName('hover-image') as HTMLCollectionOf<HTMLImageElement>;
+      const divs = document.getElementsByClassName('cta-h3') as HTMLCollectionOf<HTMLDivElement>;
+
+      if (imgs.length && divs.length) {
+        this.initialized = true;
+        const iconName = ["cart", "dining-table"];
+
+        for (let i = 0; i < imgs.length; i++) {
+          const img = imgs[i];
+          const div = divs[i];
+          div.addEventListener('mouseenter', () => {
+            const hoverSrc = img.getAttribute('src');
+            if (hoverSrc) {
+              img.src = hoverSrc;
+              console.log(hoverSrc);
+              img.src = `../../../assets/icons/animate/gif/${iconName[i]}.gif`;
+            }
+          });
+        }
+      }
+    }
+  }
 
 
   ngOnInit() {
@@ -44,23 +76,5 @@ export class HeaderComponent implements AfterViewInit, OnInit {
     });
   }
 
-  ngAfterViewInit() {
-    const imgs = document.getElementsByClassName('hover-image') as HTMLCollectionOf<HTMLImageElement>;
-    const divs = document.getElementsByClassName('cta-h3') as HTMLCollectionOf<HTMLDivElement>;
-    const iconName = ["cart", "dining-table"];
-
-
-    for (let i = 0; i < imgs.length; i++) {
-      const img = imgs[i];
-
-      const div = divs[i];
-      div.addEventListener('mouseenter', () => {
-        const hoverSrc = img.getAttribute('src');
-        if (hoverSrc) {
-          img.src = hoverSrc;
-          img.src = `../../../assets/icons/animate/gif/${iconName[i]}.gif`;
-        }
-      });
-    }
-  }
+  
 }
