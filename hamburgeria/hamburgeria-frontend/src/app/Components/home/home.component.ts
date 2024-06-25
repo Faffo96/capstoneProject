@@ -6,7 +6,7 @@ import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/n
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent implements AfterViewInit {
+export class HomeComponent {
  
 
   ourBurgersPosts = [
@@ -27,25 +27,6 @@ export class HomeComponent implements AfterViewInit {
       photoUrl: "../../../assets/img/header-home.png"
     },
   ];
-  ngAfterViewInit() {
-    const imgs = document.getElementsByClassName('hover-image') as HTMLCollectionOf<HTMLImageElement>;
-    const divs = document.getElementsByClassName('cta-h3') as HTMLCollectionOf<HTMLDivElement>;
-    const iconName = ["cart", "dining-table"];
-
-
-    for (let i = 0; i < imgs.length; i++) {
-      const img = imgs[i];
-
-      const div = divs[i];
-      div.addEventListener('mouseenter', () => {
-        const hoverSrc = img.getAttribute('src');
-        if (hoverSrc) {
-          img.src = hoverSrc;
-          img.src = `${iconName[i]}.gif`;
-        }
-      });
-    }
-  }
 
   othersPosts1 = [
     {
