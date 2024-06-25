@@ -16,6 +16,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterUserComponent } from './auth/register-user/register-user.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { FooterComponent } from './Components/footer/footer.component';
 
 const routes: Route[] = [
   {
@@ -81,7 +82,8 @@ const routes: Route[] = [
     ProfileComponent,
     TestComponent,
     LoginComponent,
-    RegisterUserComponent
+    RegisterUserComponent,
+    FooterComponent
   ],
   imports: [
     NgbModule,

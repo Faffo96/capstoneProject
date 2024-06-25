@@ -1,4 +1,4 @@
-<section class="our-burgers container-fluid bg-color3">
+<section class="our-burgers container-fluid bg-color2">
     <div class="container bg-light">
         <div class="text-center mb-6">
             <h2 class="playwrite-font color2 fs-2 pt-5 mb-5">Hamburgeria</h2>
@@ -29,7 +29,7 @@
   (slide)="onSlide($event)"
 >
   <ng-template ngbSlide *ngFor="let othersPost1 of othersPosts1; let i = index">
-    <section class="others container-fluid bg-color3">
+    <section class="others container-fluid bg-color2">
         <div class="row row-cols-2">
             <article class="w-50 pb-4 others_article3 d-flex flex-column justify-content-end" [ngStyle]="{'background-image': 'url(' + othersPosts1[i].photoUrl + ')'}">
                 <div class="w-75 ms-3 d-flex flex-column">
@@ -51,12 +51,12 @@
 </ngb-carousel>
 
 
-<div class="trustpilot w-100">
-    
+<div class="trustpilot w-100 d-flex justify-content-center">
+    <h2 class="playwrite-font color2 fs-2 pt-5 mb-5">Le vostre recensioni</h2>
 </div>
 
 
-<!-- <section class="others container-fluid bg-color3">
+<!-- <section class="others container-fluid bg-color2">
     <div class="row row-cols-2">
         <article class="w-50 pb-4 others_article3 d-flex flex-column justify-content-end">
             <div class="w-75 ms-3 d-flex flex-column">
