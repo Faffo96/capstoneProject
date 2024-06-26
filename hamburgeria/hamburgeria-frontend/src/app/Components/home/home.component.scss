@@ -1,74 +1,60 @@
-
-
-
-
 /* OUR BURGERS */
-
-.our-burgers {
-    /* transform: translateY(-300px); */
-}
-
 .our-burgers_img {
     border-radius: 50%;
     object-fit: cover; 
+    transition: transform 0.5s ease-in-out; /* Aggiungi una transizione per uno zoom fluido */
+}
+
+.our-burgers_img:hover {
+    transform: scale(1.1); /* Applica lo zoom */
 }
 
 /* OTHERS CAROUSEL */
-
 .carousel-article {
     position: relative;
     background-size: cover;
     background-position: center;
-  }
-  
-  .carousel-inner {
+}
+
+.carousel-inner {
     height: 500px;
-  }
-  
-  .carousel-article .carousel-img {
-    
+}
+
+.carousel-article .carousel-img {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     object-fit: cover;
-  }
-  
+}
 
 .others {
     /* transform: translateY(-300px); */
 }
 
-ngb-carousel{
+ngb-carousel {
     height: 500px;
     z-index: 2;
 }
 
-.others_article1 , .others_article2, .others_article3, .others_article4 {
+.overflow-hidden {
+
+}
+
+.others_article1, .others_article2 {
     height: 500px;
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+    transition: transform 0.5s ease-in-out;
+    overflow: hidden; /* Aggiungi overflow: hidden per evitare che l'immagine ingrandita invada l'immagine adiacente */
 }
 
-.others_article1 {
-    background-image: url('../../../assets/img/hamburger2.jpg');
-}
-
-.others_article2 {
-    background-image: url('../../../assets/img/hamburger3.jpg');
-}
-
-.others_article3 {
-    background-image: url('../../../assets/img/sandwich.png');
-}
-
-.others_article4 {
-    background-image: url('../../../assets/img/dessert2.png');
+.others_article1:hover, .others_article2:hover {
+    transform: scale(1.01); /* Applica lo zoom */
 }
 
 /* TRUSTPILOT */
-
 .trustpilot {
     height: 700px;
 }

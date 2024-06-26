@@ -8,6 +8,8 @@ import { ProfileComponent } from './Components/profile/profile.component';
 import { TestComponent } from './Components/test/test.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterUserComponent } from './auth/register-user/register-user.component';
+import { CustomizeBurgerComponent } from './Components/customize-burger/customize-burger.component';
+import { FriesComponent } from './Components/fries/fries.component';
 
 const routes: Routes = [
   {
@@ -33,9 +35,42 @@ const routes: Routes = [
     component: MenuComponent,
     children: [
       {
-        path: 'test',
-        component: TestComponent
+        path: 'customizeBurger',
+        component: CustomizeBurgerComponent
       },
+      {
+        path: 'fries',
+        component: FriesComponent
+      }
+      /* {
+      {
+          path: 'clubSandwichComponibili',
+          component: ClubSandwichComponibiliComponent
+        },
+        {
+          path: 'hotdog',
+          component: HotdogComponent
+        },
+        {
+          path: 'insalatone',
+          component: InsalatoneComponent
+        },
+        {
+          path: 'dolci',
+          component: DolciComponent
+        },
+        {
+          path: 'bevande',
+          component: BevandeComponent
+        },
+        {
+          path: 'burger',
+          component: BurgerComponent
+        },
+        {
+          path: 'sandwich',
+          component: SandwichComponent
+        } */
     ]
   },
   {

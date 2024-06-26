@@ -1,19 +1,85 @@
-import { AfterViewInit, Component } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { Router, NavigationEnd, Event } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements AfterViewInit {
+export class MenuComponent implements OnInit, AfterViewInit {
+  menuSections = [
+    {
+      gif: "../../../assets/icons/animate/gif/hamburger.gif",
+      name: "Burger Componibili",
+      route: "customizeBurger"
+    },
+    {
+      gif: "../../../assets/icons/animate/gif/chips.gif",
+      name: "Fritture",
+      route: "fries"
+    },
+    {
+      gif: "../../../assets/icons/animate/gif/sandwich.gif",
+      name: "Club Sandwich Componibili",
+      route: "customizeSandwich"
+    },
+    {
+      gif: "../../../assets/icons/animate/gif/hotdog.gif",
+      name: "Hotdog",
+      route: "hotdog"
+    },
+    {
+      gif: "../../../assets/icons/animate/gif/salad.gif",
+      name: "Insalatone",
+      route: "salad"
+    },
+    {
+      gif: "../../../assets/icons/animate/gif/dessert.gif",
+      name: "Dolci",
+      route: "dessert"
+    },
+    {
+      gif: "../../../assets/icons/animate/gif/beer.gif",
+      name: "Bevande",
+      route: "beer"
+    },
+    {
+      gif: "../../../assets/icons/animate/gif/hamburger2.gif",
+      name: "Burger",
+      route: "hamburger"
+    },
+    {
+      gif: "../../../assets/icons/animate/gif/sandwich2.gif",
+      name: "Sandwich",
+      route: "sandwich"
+    },
+  ];
+
+  currentRoute: string;
+
+  constructor(private router: Router) {
+    this.currentRoute = '';
+  }
+
+  ngOnInit() {
+    this.router.events.pipe(
+      filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
+    ).subscribe((event: NavigationEnd) => {
+      this.currentRoute = event.urlAfterRedirects;
+    });
+  }
+
   ngAfterViewInit() {
     const imgs = document.getElementsByClassName('hover-image') as HTMLCollectionOf<HTMLImageElement>;
-    const iconName = ["hamburger", "chips", "sandwich", "hotdog", "salad", "dessert", "beer", "chicken", "gluten-free"];
-  
+    const divs = document.getElementsByClassName('menu-section') as HTMLCollectionOf<HTMLDivElement>;
+    const iconName = ["hamburger", "chips", "sandwich", "hotdog", "salad", "dessert", "beer", "hamburger2", "sandwich2"];
+
     for (let i = 0; i < imgs.length; i++) {
       const img = imgs[i];
-  
-      img.addEventListener('mouseenter', () => {
+      const div = divs[i];
+
+      div.addEventListener('mouseenter', () => {
         const hoverSrc = img.getAttribute('src');
         if (hoverSrc) {
           img.src = hoverSrc;
@@ -22,5 +88,9 @@ export class MenuComponent implements AfterViewInit {
       });
     }
   }
-  
+
+  isSelected(route: string): boolean {
+    const fullRoute = `/menu/${route}`;
+    return this.currentRoute === fullRoute;
+  }
 }

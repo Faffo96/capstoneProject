@@ -236,6 +236,14 @@ body {
 	filter: drop-shadow(-10px 4px 2px rgba(0, 0, 0, 0.5));
 }
 
+.border-gray {
+		border: 1px solid gray;
+}
+
+.border-bottom-gray {
+	border-bottom: 1px solid gray;
+}
+
 .playwrite-font {
 	font-family: "Playwrite MX", cursive;
 }

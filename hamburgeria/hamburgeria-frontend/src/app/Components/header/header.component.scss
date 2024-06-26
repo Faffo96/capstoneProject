@@ -20,6 +20,10 @@
     width: 100%;
 }
 
+.hover-div:hover {
+    filter: brightness(110%);
+}
+
 .bg-dark50 {
     /* background-color: rgba(0, 0, 0, 0.351); */
 }

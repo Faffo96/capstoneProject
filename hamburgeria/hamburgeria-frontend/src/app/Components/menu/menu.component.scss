@@ -1,3 +1,27 @@
+/* MENU SECTIONS */
+
+.menu-section {
+    padding: 0 75px
+}
+
+.selected-menu-section {
+    background-color: #f9e188;
+}
+
+.menu-section:hover {
+    /* background-color: rgb(233, 231, 231); */
+    background-color: #f9e188;
+}
+
+.rounded-top {
+    border-top-left-radius: 2rem !important; 
+    border-top-right-radius: 2rem !important; 
+}
+
+.rounded-bottom {
+    border-bottom-left-radius: 2rem !important; 
+    border-bottom-right-radius: 2rem !important; 
+}
 
 /* ICONS */
 
@@ -12,5 +36,5 @@
 }
 
 .my-image-icon img {
-    width: 80px;
+    width: 50px;
 }

@@ -17,6 +17,8 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterUserComponent } from './auth/register-user/register-user.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './Components/footer/footer.component';
+import { CustomizeBurgerComponent } from './Components/customize-burger/customize-burger.component';
+import { FriesComponent } from './Components/fries/fries.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +32,9 @@ import { FooterComponent } from './Components/footer/footer.component';
     TestComponent,
     LoginComponent,
     RegisterUserComponent,
-    FooterComponent
+    FooterComponent,
+    CustomizeBurgerComponent,
+    FriesComponent
   ],
   imports: [
     NgbModule,
