@@ -15,10 +15,12 @@ import { TestComponent } from './Components/test/test.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterUserComponent } from './auth/register-user/register-user.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './Components/footer/footer.component';
 import { CustomizeBurgerComponent } from './Components/customize-burger/customize-burger.component';
 import { FriesComponent } from './Components/fries/fries.component';
+import { TokenInterceptor } from './auth/token.interceptor';
+import { CartComponent } from './Components/cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { FriesComponent } from './Components/fries/fries.component';
     RegisterUserComponent,
     FooterComponent,
     CustomizeBurgerComponent,
-    FriesComponent
+    FriesComponent,
+    CartComponent
   ],
   imports: [
     NgbModule,
@@ -43,7 +46,11 @@ import { FriesComponent } from './Components/fries/fries.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

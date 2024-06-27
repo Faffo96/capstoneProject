@@ -1,27 +1,21 @@
-
-
-<!-- <nav aria-label="breadcrumb">
-  <ol class="breadcrumb">
-    <li class="breadcrumb-item"><a class="text-dark" href="#">Home</a></li>
-    <li class="breadcrumb-item"><a class="text-dark" href="#">Menu</a></li>
-    <li class="breadcrumb-item active" aria-current="page">hamburgerComponibili</li>
-  </ol>
-</nav> -->
-
 <div class="container-fluid">
   <div class="container">
-    <div class="row menu-sections">
-      <div class="col-3 border-gray mt-5 rounded-5 p-0 mb-5">
+    <div class="row menu-sections mb-5">
+      <div class="col-3 border-gray mt-5 rounded-5 p-0">
         <div class="d-flex flex-column">
           <div>
-            <a *ngFor="let menuSection of menuSections; let i = index" [ngClass]="{
-                   'border-bottom-gray': i !== menuSections.length - 1,
-                   'rounded-top': i === 0,
-                   'rounded-bottom': i === menuSections.length - 1,
-                   'selected-menu-section': isSelected(menuSection.route)
-                 }" class="menu-section text-dark pointer d-flex align-items-center py-3" aria-current="page"
-              [routerLink]="['/menu', menuSection.route]">
-              <div class="my-image-icon me-3">
+            <a *ngFor="let menuSection of menuSections; let i = index" 
+               [ngClass]="{
+                 'border-bottom-gray': i !== menuSections.length - 1,
+                 'rounded-top': i === 0,
+                 'rounded-bottom': i === menuSections.length - 1,
+                 'selected-menu-section': isSelected(menuSection.route)
+               }" 
+               class="menu-section text-dark pointer d-flex align-items-center py-3" 
+               aria-current="page"
+               [routerLink]="['/menu', menuSection.route]">
+              <div class="me-3" 
+                   [ngClass]="{'my-image-icon': true, 'biggerGif': biggerGif(menuSection.name)}">
                 <img class="hover-image" [src]="menuSection.gif" alt="Hamburger Icon">
               </div>
               <p class="w-50 my-fs-2 fw-semibold">{{menuSection.name}}</p>
@@ -30,18 +24,18 @@
         </div>
       </div>
 
-      <div class="w-50 border-gray rounded-5 col-6 mt-5">
-        <div>
+      <div class="menu border-gray rounded-5 col-6 mt-5 mx-4">
+        <div class="py-3">
           <h1 class="fs-1 fw-bold">MENU</h1>
-          <h2 class="">Componi il tuo ordine come preferisci!</h2>
+          <h2>Componi il tuo ordine come preferisci!</h2>
         </div>
-        <div class="border-gray rounded-5">
+        <div class="">
           <router-outlet></router-outlet>
         </div>
       </div>
 
-      <div class="border-gray rounded-5 col-3 mt-5">
-        <h4 class="text-dark">Carrello</h4>
+      <div class="cart border-gray rounded-5 col-3 mt-5">
+        <h4 class="text-dark fs-3 fw-bold py-3">Carrello</h4>
       </div>
     </div>
   </div>

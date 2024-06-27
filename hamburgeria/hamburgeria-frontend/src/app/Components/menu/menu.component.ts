@@ -1,6 +1,9 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { MenuService } from '../../Services/menu.service';
+import { Product } from '../../models/product';
+import { CartService } from '../../Services/cart.service';
 
 @Component({
   selector: 'app-menu',
@@ -55,19 +58,32 @@ export class MenuComponent implements OnInit, AfterViewInit {
       route: "sandwich"
     },
   ];
-
+  products: Product[] = [];
   currentRoute: string;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private menuService: MenuService, private cartService: CartService) {
     this.currentRoute = '';
-  }
 
-  ngOnInit() {
     this.router.events.pipe(
       filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.currentRoute = event.urlAfterRedirects;
+
+      this.cartService.cart$.subscribe(data => {
+        this.products = data;
+      })
+    
+      /* console.log(  this.isSelected(event.urlAfterRedirects.split("/menu/",)[0])) */
     });
+
+    
+    
+  }
+
+  ngOnInit() {
+    
+
+    
   }
 
   ngAfterViewInit() {
@@ -92,5 +108,9 @@ export class MenuComponent implements OnInit, AfterViewInit {
   isSelected(route: string): boolean {
     const fullRoute = `/menu/${route}`;
     return this.currentRoute === fullRoute;
+  }
+
+  biggerGif(menuSectionName: string): boolean {
+    return ['Fritture', 'Insalatone', 'Dolci', 'Bevande'].includes(menuSectionName);
   }
 }

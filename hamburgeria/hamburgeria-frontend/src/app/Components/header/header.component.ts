@@ -2,6 +2,8 @@ import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementR
 import { RouteService } from '../../Services/route.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { MenuService } from '../../Services/menu.service';
+import { Product } from '../../models/product';
 
 @Component({
   selector: 'app-header',
@@ -19,7 +21,9 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked 
     private renderer: Renderer2,
     private el: ElementRef,
     private cdr: ChangeDetectorRef,
-    private router: Router) {}
+    private router: Router,
+    private menuService: MenuService
+  ) {}
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
@@ -88,4 +92,7 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked 
       this.routeSubscription.unsubscribe();
     }
   }
+
+
+  
 }
