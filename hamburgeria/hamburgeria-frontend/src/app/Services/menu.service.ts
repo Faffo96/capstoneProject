@@ -15,6 +15,8 @@ export class MenuService {
   private cartProductsSubject = new BehaviorSubject<(Product | CustomizableProduct)[]>([]);
   currentCartProducts$ = this.cartProductsSubject.asObservable();
 
+  private selectedProducts = [];
+
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
@@ -26,11 +28,15 @@ export class MenuService {
   }
 
   getProductById(id: number): Product | undefined {
-    console.log()
     console.log("Current products:", this.productsSubject.getValue());
-    const product = this.productsSubject.getValue().find(product => product.id === id);
-    console.log("Found product:", product);
-    return product;
+    let products = this.productsSubject.getValue()
+    for (let i = 0; i < products.length; i++) {
+      const element = products[i];
+      if (element.id === id) {
+        return element;
+      } 
+    }
+    return undefined;
   }
 
   getCartProductsValue(): (Product | CustomizableProduct)[] {

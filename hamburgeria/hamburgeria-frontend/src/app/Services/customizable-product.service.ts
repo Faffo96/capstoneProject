@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CustomizableProduct } from '../models/customizable-product';
 import { environment } from '../../environments/environment.development';
+import { CustomizableProductDTO } from '../models/customizable-product-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ export class CustomizableProductService {
 
   constructor(private http:HttpClient) { }
 
-  createCustomizableProduct(data: Partial<CustomizableProduct>) {
+  createCustomizableProduct(data: Partial<CustomizableProductDTO>) {
     return this.http.post<CustomizableProduct>(`${this.apiURL}api/customizableProducts`, data);
   }
 

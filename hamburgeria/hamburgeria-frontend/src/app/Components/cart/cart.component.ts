@@ -23,12 +23,30 @@ export class CartComponent implements OnInit {
   }
 
   calculateTotal() {
-    this.total = this.cartProducts.reduce((sum, product) => sum + product.price, 0);
+    this.total = this.cartProducts.reduce((sum, product) => {
+      if (this.isCustomizableProduct(product)) {
+        return sum + product.price;
+      } else {
+        return sum + product.price;
+      }
+    }, 0);
   }
 
   removeProductFromCart(product: Product | CustomizableProduct) {
     this.cartProducts = this.cartProducts.filter(p => p.id !== product.id);
     this.menuService.setCartProducts(this.cartProducts);
+    this.calculateTotal();
+  }
+
+  removeIngredient(customizableProduct: CustomizableProduct, ingredient: Product) {
+    customizableProduct.productList = customizableProduct.productList.filter(i => i.id !== ingredient.id);
+    customizableProduct.price -= ingredient.price; // Aggiorna il prezzo del prodotto personalizzabile
+    this.calculateTotal();
+    this.menuService.setCartProducts(this.cartProducts);
+  }
+
+  isBreadOrMeat(ingredient: Product): boolean {
+    return ingredient.category === 'CUSTOMHAM_BREAD' || ingredient.category === 'CUSTOMHAM_MEAT';
   }
 
   checkout() {
