@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { MenuService } from '../../Services/menu.service';
+import { CustomizableProductService } from '../../Services/customizable-product.service';
+import { CustomizableProductDTO } from '../../models/customizable-product-dto';
+
 
 @Component({
   selector: 'app-salad',
   templateUrl: './salad.component.html',
-  styleUrl: './salad.component.scss'
+  styleUrls: ['./salad.component.scss']
 })
-export class SaladComponent {
+export class SaladComponent implements OnInit {
   menuProducts: Product[] = [];
   selectedProducts: Product[] = [];
   sections: { name: string, products: Product[] }[] = [
@@ -19,48 +22,41 @@ export class SaladComponent {
     { name: 'Varie', products: [] }
   ];
 
+  constructor(private menuService: MenuService, private customizableProductService: CustomizableProductService) {
+    this.menuService.products$.subscribe(data => {
+      this.menuProducts = data;
+      this.loadCategories();
+    });
+  }
+
   ngOnInit(): void {
     this.menuService.getProducts().subscribe(data => {
       this.menuService.setProducts(data);
     });
   }
 
-  constructor(private menuService: MenuService) {
-    this.menuService.products$.subscribe(data => {
-      this.menuProducts = data;
-      this.loadCategories();
-    });
-
-    this.menuService.currentCartProducts$.subscribe(data => {
-      this.selectedProducts = data;
-    });
-  }
   loadCategories() {
     this.sections.forEach(section => section.products = []); // Reset sections
 
-    for (let i = 0; i < this.menuProducts.length; i++) {
-      const e = this.menuProducts[i];
-      /* if (e.category === "CUSTOMSANDHOT_VEGETABLE" && e.italianName === "Melanzane" || e.italianName === "Peperoni" || e.italianName === "Radicchio Arrosto" || e.italianName === "Zucchine Arrosto") {
-        this.sections.find(section => section.name === 'Verdure Arrosto')?.products.push(e);
-      } */
-      switch (e.category) {
+    for (let product of this.menuProducts) {
+      switch (product.category) {
         case 'CUSTOMSALAD_BASE':
-          this.sections.find(section => section.name === 'Base')?.products.push(e);
+          this.sections.find(section => section.name === 'Base')?.products.push(product);
           break;
         case 'CUSTOMSALAD_CHEESE':
-          this.sections.find(section => section.name === 'Formaggi')?.products.push(e);
+          this.sections.find(section => section.name === 'Formaggi')?.products.push(product);
           break;
         case 'CUSTOMSALAD_FVEGETABLES':
-          this.sections.find(section => section.name === 'Verdure Fresche')?.products.push(e);
+          this.sections.find(section => section.name === 'Verdure Fresche')?.products.push(product);
           break;
         case 'CUSTOMSALAD_CVEGETABLES':
-          this.sections.find(section => section.name === 'Verdure Arrosto')?.products.push(e);
+          this.sections.find(section => section.name === 'Verdure Arrosto')?.products.push(product);
           break;
-          case 'CUSTOMSALAD_SAUCE':
-          this.sections.find(section => section.name === 'Varie')?.products.push(e);
+        case 'CUSTOMSALAD_SAUCE':
+          this.sections.find(section => section.name === 'Salse')?.products.push(product);
           break;
-          case 'CUSTOMSALAD_OTHER':
-          this.sections.find(section => section.name === 'Salse')?.products.push(e);
+        case 'CUSTOMSALAD_OTHER':
+          this.sections.find(section => section.name === 'Varie')?.products.push(product);
           break;
         default:
           break;
@@ -68,21 +64,59 @@ export class SaladComponent {
     }
   }
 
-  addProductToCart(cartProduct: Product) {
-    console.log('Product added to cart:', cartProduct);
-
-    let currentProducts = this.menuService.getCartProductsValue();
-
-    if (cartProduct.category === 'CUSTOMSALAD_BASE') {
-      currentProducts = currentProducts.filter(product => product.category !== cartProduct.category);
-      this.selectedProducts = this.selectedProducts.filter(product => product.category !== cartProduct.category);
-    }
-
-    this.menuService.setCartProducts([...currentProducts, cartProduct]);
+  toggleProductSelection(product: Product) {
+    /* if (this.isSelected(product)) {
+      const index = this.selectedProducts.findIndex(p => p.id === product.id);
+      if (index !== -1) {
+        this.selectedProducts.splice(index, 1);
+      }
+    } */ /* else { */
+      if (product.category === 'CUSTOMSALAD_BASE') {
+        this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
+      }
+      this.selectedProducts.push(product);
+    /* } */
+    console.log('Selected products:', this.selectedProducts.map(p => p.id));
   }
 
   isSelected(product: Product): boolean {
     return this.selectedProducts.some(p => p.id === product.id);
   }
 
+  isSelectionDisabled(sectionName: string, product: Product): boolean {
+    if (sectionName === 'Base') {
+      return false;
+    } else {
+      return !this.isBaseSelected();
+    }
+  }
+
+  isBaseSelected(): boolean {
+    return this.selectedProducts.some(p => p.category === 'CUSTOMSALAD_BASE');
+  }
+
+  resetSelections() {
+    this.selectedProducts = [];
+    console.log('Selections reset');
+  }
+
+  createCustomizableSalad() {
+    const customizableProduct: CustomizableProductDTO = {
+      id: 0,
+      italianName: 'Insalata',
+      englishName: 'Salad',
+      italianDescription: '',
+      englishDescription: '',
+      price: this.selectedProducts.reduce((sum, product) => sum + product.price, 0),
+      category: "SALAD",
+      available: true,
+      productList: this.selectedProducts.map(product => product.id)
+    };
+
+    this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
+      console.log('Customizable Salad created:', response);
+      this.menuService.setCartProducts([...this.menuService.getCartProductsValue(), response]);
+      this.selectedProducts = []; // Reset selected products after creating the salad
+    });
+  }
 }

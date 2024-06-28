@@ -39,14 +39,14 @@ export class CartComponent implements OnInit {
   }
 
   removeIngredient(customizableProduct: CustomizableProduct, ingredient: Product) {
-    customizableProduct.productList = customizableProduct.productList.filter(i => i.id !== ingredient.id);
+    customizableProduct.productList = customizableProduct.productList.filter(i => i !== ingredient);
     customizableProduct.price -= ingredient.price; // Aggiorna il prezzo del prodotto personalizzabile
     this.calculateTotal();
     this.menuService.setCartProducts(this.cartProducts);
   }
 
-  isBreadOrMeat(ingredient: Product): boolean {
-    return ingredient.category === 'CUSTOMHAM_BREAD' || ingredient.category === 'CUSTOMHAM_MEAT';
+  isBase(ingredient: Product): boolean {
+    return ingredient.category === 'DESSERT_BASE';
   }
 
   checkout() {

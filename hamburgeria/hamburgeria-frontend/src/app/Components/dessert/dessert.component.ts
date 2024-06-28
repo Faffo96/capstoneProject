@@ -1,13 +1,16 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
 import { MenuService } from '../../Services/menu.service';
+import { CustomizableProductService } from '../../Services/customizable-product.service';
+import { CustomizableProductDTO } from '../../models/customizable-product-dto';
+
 
 @Component({
   selector: 'app-dessert',
   templateUrl: './dessert.component.html',
-  styleUrl: './dessert.component.scss'
+  styleUrls: ['./dessert.component.scss']
 })
-export class DessertComponent {
+export class DessertComponent implements OnInit {
   menuProducts: Product[] = [];
   selectedProducts: Product[] = [];
   sections: { name: string, products: Product[] }[] = [
@@ -16,41 +19,32 @@ export class DessertComponent {
     { name: 'Snack e biscotti (Max 1)', products: [] },
   ];
 
+  constructor(private menuService: MenuService, private customizableProductService: CustomizableProductService) {
+    this.menuService.products$.subscribe(data => {
+      this.menuProducts = data;
+      this.loadCategories();
+    });
+  }
+
   ngOnInit(): void {
     this.menuService.getProducts().subscribe(data => {
       this.menuService.setProducts(data);
     });
   }
 
-  constructor(private menuService: MenuService) {
-    this.menuService.products$.subscribe(data => {
-      this.menuProducts = data;
-      this.loadCategories();
-    });
-
-    this.menuService.currentCartProducts$.subscribe(data => {
-      this.selectedProducts = data;
-    });
-  }
   loadCategories() {
     this.sections.forEach(section => section.products = []); // Reset sections
 
-    for (let i = 0; i < this.menuProducts.length; i++) {
-      const e = this.menuProducts[i];
-      /* if (e.category === "CUSTOMSANDHOT_VEGETABLE" && e.italianName === "Melanzane" || e.italianName === "Peperoni" || e.italianName === "Radicchio Arrosto" || e.italianName === "Zucchine Arrosto") {
-        this.sections.find(section => section.name === 'Verdure Arrosto')?.products.push(e);
-      } */
-
-
-      switch (e.category) {
+    for (let product of this.menuProducts) {
+      switch (product.category) {
         case 'DESSERT_BASE':
-          this.sections.find(section => section.name === 'Base')?.products.push(e);
+          this.sections.find(section => section.name === 'Base')?.products.push(product);
           break;
         case 'DESSERT_TOPPING':
-          this.sections.find(section => section.name === 'Topping (Max 2)')?.products.push(e);
+          this.sections.find(section => section.name === 'Topping (Max 2)')?.products.push(product);
           break;
         case 'DESSERT_SNACK':
-          this.sections.find(section => section.name === 'Snack e biscotti (Max 1)')?.products.push(e);
+          this.sections.find(section => section.name === 'Snack e biscotti (Max 1)')?.products.push(product);
           break;
         default:
           break;
@@ -58,21 +52,56 @@ export class DessertComponent {
     }
   }
 
-  addProductToCart(cartProduct: Product) {
-    console.log('Product added to cart:', cartProduct);
-
-    let currentProducts = this.menuService.getCartProductsValue();
-
-    if (cartProduct.category === 'DESSERT_BASE') {
-      currentProducts = currentProducts.filter(product => product.category !== cartProduct.category);
-      this.selectedProducts = this.selectedProducts.filter(product => product.category !== cartProduct.category);
-    }
-
-    this.menuService.setCartProducts([...currentProducts, cartProduct]);
+  toggleProductSelection(product: Product) {
+    /* if (this.isSelected(product)) {
+      this.selectedProducts = this.selectedProducts.filter(p => p.id !== product.id);
+    } else { */
+      if (product.category === 'DESSERT_BASE') {
+        this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
+      }
+      this.selectedProducts.push(product);
+    /* } */
+    console.log('Selected products:', this.selectedProducts.map(p => p.id));
   }
 
   isSelected(product: Product): boolean {
     return this.selectedProducts.some(p => p.id === product.id);
   }
 
+  isSelectionDisabled(sectionName: string, product: Product): boolean {
+    if (sectionName === 'Base') {
+      return false;
+    } else {
+      return !this.isBaseSelected();
+    }
+  }
+
+  isBaseSelected(): boolean {
+    return this.selectedProducts.some(p => p.category === 'DESSERT_BASE');
+  }
+
+  resetSelections() {
+    this.selectedProducts = [];
+    console.log('Selections reset');
+  }
+
+  createCustomizableDessert() {
+    const customizableProduct: CustomizableProductDTO = {
+      id: 0,
+      italianName: 'Dessert',
+      englishName: 'Dessert',
+      italianDescription: '',
+      englishDescription: '',
+      price: this.selectedProducts.reduce((sum, product) => sum + product.price, 0),
+      category: "DESSERT",
+      available: true,
+      productList: this.selectedProducts.map(product => product.id)
+    };
+
+    this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
+      console.log('Customizable Dessert created:', response);
+      this.menuService.setCartProducts([...this.menuService.getCartProductsValue(), response]);
+      this.selectedProducts = []; // Reset selected products after creating the dessert
+    });
+  }
 }

@@ -1,37 +1,36 @@
 <div *ngFor="let cartProduct of cartProducts; let i = index" class="container">
-    <div class="row">
-      <div class="col-10">
-        <ng-container *ngIf="isCustomizableProduct(cartProduct)">
-          <div class="dropdown d-flex">
-            <button class="btn btn-secondary dropdown-toggle d-flex" type="button" id="dropdownMenuButton"
-                    data-bs-toggle="dropdown" aria-expanded="false">
-              <h5 class="my-fs-1 text-dark me-2">{{ cartProduct.italianName }}</h5>
-              <p class="my-fs-1 text-dark">{{ cartProduct.price }}&euro;</p>
-            </button>
-  
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-              <li *ngFor="let ingredient of cartProduct.productList" class="d-flex align-items-center">
-                <p class="dropdown-item text-dark">{{ ingredient.italianName }}</p>
-                <p>{{ingredient.price}}&euro;</p>
-                <!-- Nascondi il bottone di rimozione per carne e pane -->
-                <button *ngIf="!isBreadOrMeat(ingredient)" (click)="removeIngredient(cartProduct, ingredient)" class="">X</button>
-              </li>
-            </ul>
-            <button (click)="removeProductFromCart(cartProduct)" class="col-2">X</button>
-          </div>
-        </ng-container>
-        <div *ngIf="isCustomizableProduct(cartProduct) == false" class="d-flex">
-          <div>
+  <div class="row">
+    <div class="col-10">
+      <ng-container *ngIf="isCustomizableProduct(cartProduct)">
+        <div class="dropdown d-flex">
+          <button class="btn btn-secondary dropdown-toggle d-flex" type="button" id="dropdownMenuButton"
+                  data-bs-toggle="dropdown" aria-expanded="false">
             <h5 class="my-fs-1 text-dark me-2">{{ cartProduct.italianName }}</h5>
             <p class="my-fs-1 text-dark">{{ cartProduct.price }}&euro;</p>
-          </div>
+          </button>
+
+          <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <li *ngFor="let ingredient of cartProduct.productList" class="d-flex align-items-center">
+              <p class="dropdown-item text-dark">{{ ingredient.italianName }}</p>
+              <p>{{ingredient.price}}&euro;</p>
+              <!-- Nascondi il bottone di rimozione per gli ingredienti della categoria "Base" -->
+              <button *ngIf="!isBase(ingredient)" (click)="removeIngredient(cartProduct, ingredient)" class="">X</button>
+            </li>
+          </ul>
           <button (click)="removeProductFromCart(cartProduct)" class="col-2">X</button>
         </div>
+      </ng-container>
+      <div *ngIf="!isCustomizableProduct(cartProduct)" class="d-flex">
+        <div>
+          <h5 class="my-fs-1 text-dark me-2">{{ cartProduct.italianName }}</h5>
+          <p class="my-fs-1 text-dark">{{ cartProduct.price }}&euro;</p>
+        </div>
+        <button (click)="removeProductFromCart(cartProduct)" class="col-2">X</button>
       </div>
     </div>
   </div>
-  <div class="total">
-    <h5>Totale: {{ total }}&euro;</h5>
-  </div>
-  <button (click)="checkout()" class="btn btn-primary mt-3">Checkout</button>
-  
+</div>
+<div class="total">
+  <h5>Totale: {{ total }}&euro;</h5>
+</div>
+<button (click)="checkout()" class="btn btn-primary mt-3">Checkout</button>
