@@ -6,6 +6,7 @@
         <button *ngFor="let product of section.products; let j = index"
                 (click)="toggleProductSelection(product)"
                 [class.selected]="isSelected(product)"
+                [disabled]="isSelectionDisabled(section.name, product)"
                 class="px-2 my-1 mx-1">
           <p class="my-fs-1 fw-bold me-1 d-inline">{{product.italianName}}
             <span *ngIf="product.price != 0" class=" my-fs-1 fw-bold d-inline"> - {{product.price}}&euro;</span>
@@ -13,6 +14,9 @@
         </button>
       </div>
     </section>
-    <button (click)="createCustomizableBurger()" class="btn btn-primary mt-3">Aggiungi Burger al Carrello</button>
+    <div class="d-flex justify-content-between mt-3">
+      <button (click)="createCustomizableBurger()" class="btn btn-primary">Aggiungi Burger al Carrello</button>
+      <button (click)="resetSelections()" class="btn btn-secondary">Reset</button>
+    </div>
   </div>
 </div>

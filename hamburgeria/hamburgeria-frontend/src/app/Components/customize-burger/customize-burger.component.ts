@@ -12,6 +12,7 @@ import { CustomizableProductDTO } from '../../models/customizable-product-dto';
   })
   export class CustomizeBurgerComponent implements OnInit {
     menuProducts: Product[] = [];
+    selectedProducts: Product[] = [];
     sections: { name: string, products: Product[] }[] = [
       { name: 'Pane', products: [] },
       { name: 'Hamburger', products: [] },
@@ -20,7 +21,6 @@ import { CustomizableProductDTO } from '../../models/customizable-product-dto';
       { name: 'Salse', products: [] },
       { name: 'Varie', products: [] }
     ];
-    selectedProducts: Product[] = [];
   
     constructor(private menuService: MenuService, private customizableProductService: CustomizableProductService) {
       this.menuService.products$.subscribe(data => {
@@ -65,19 +65,38 @@ import { CustomizableProductDTO } from '../../models/customizable-product-dto';
     }
   
     toggleProductSelection(product: Product) {
-      if (this.isSelected(product)) {
-        this.selectedProducts = this.selectedProducts.filter(p => p.id !== product.id);
-      } else {
-        if (product.category === 'CUSTOMHAM_MEAT' || product.category === 'CUSTOMHAM_BREAD') {
-          this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
-        }
-        this.selectedProducts.push(product);
+      if (product.category === 'CUSTOMHAM_MEAT' || product.category === 'CUSTOMHAM_BREAD') {
+        this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
       }
+      this.selectedProducts.push(product);
       console.log('Selected products:', this.selectedProducts.map(p => p.id));
     }
   
     isSelected(product: Product): boolean {
       return this.selectedProducts.some(p => p.id === product.id);
+    }
+  
+    isSelectionDisabled(sectionName: string, product: Product): boolean {
+      if (sectionName === 'Pane') {
+        return false;
+      } else if (sectionName === 'Hamburger') {
+        return !this.isBreadSelected();
+      } else {
+        return !this.isBreadSelected() || !this.isMeatSelected();
+      }
+    }
+  
+    isBreadSelected(): boolean {
+      return this.selectedProducts.some(p => p.category === 'CUSTOMHAM_BREAD');
+    }
+  
+    isMeatSelected(): boolean {
+      return this.selectedProducts.some(p => p.category === 'CUSTOMHAM_MEAT');
+    }
+  
+    resetSelections() {
+      this.selectedProducts = [];
+      console.log('Selections reset');
     }
   
     createCustomizableBurger() {

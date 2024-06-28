@@ -58,6 +58,12 @@ export class DessertComponent implements OnInit {
     } else { */
       if (product.category === 'DESSERT_BASE') {
         this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
+      } else if (product.category === 'DESSERT_TOPPING' && this.selectedProducts.filter(p => p.category === 'DESSERT_TOPPING').length >= 2) {
+        alert('You can select up to 2 toppings only.');
+        return;
+      } else if (product.category === 'DESSERT_SNACK' && this.selectedProducts.filter(p => p.category === 'DESSERT_SNACK').length >= 1) {
+        alert('You can select up to 1 snack or biscuit only.');
+        return;
       }
       this.selectedProducts.push(product);
     /* } */
@@ -71,6 +77,10 @@ export class DessertComponent implements OnInit {
   isSelectionDisabled(sectionName: string, product: Product): boolean {
     if (sectionName === 'Base') {
       return false;
+    } else if (sectionName === 'Topping (Max 2)') {
+      return this.selectedProducts.filter(p => p.category === 'DESSERT_TOPPING').length >= 2 && !this.isSelected(product);
+    } else if (sectionName === 'Snack e biscotti (Max 1)') {
+      return this.selectedProducts.filter(p => p.category === 'DESSERT_SNACK').length >= 1 && !this.isSelected(product);
     } else {
       return !this.isBaseSelected();
     }

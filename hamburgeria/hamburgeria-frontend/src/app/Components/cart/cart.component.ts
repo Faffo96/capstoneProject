@@ -24,12 +24,31 @@ export class CartComponent implements OnInit {
 
   calculateTotal() {
     this.total = this.cartProducts.reduce((sum, product) => {
-      if (this.isCustomizableProduct(product)) {
-        return sum + product.price;
-      } else {
-        return sum + product.price;
-      }
+      return sum + this.getProductTotal(product);
     }, 0);
+  }
+
+  getProductTotal(product: Product | CustomizableProduct): number {
+    if (this.isCustomizableProduct(product)) {
+      const basePrice = product.productList.reduce((sum, ingredient) => sum + ingredient.price, 0);
+      const freeIngredients = product.productList.filter(ingredient => ingredient.price === 0 && !this.isBreadOrMeat(ingredient));
+      const extraFreeIngredientsCount = Math.max(freeIngredients.length - 5, 0);
+      const extraCharge = extraFreeIngredientsCount * 0.50;
+      return basePrice + extraCharge;
+    } else {
+      return product.price;
+    }
+  }
+
+  getIngredientPrice(ingredient: Product, customizableProduct: CustomizableProduct): string {
+    const freeIngredients = customizableProduct.productList.filter(ing => ing.price === 0 && !this.isBreadOrMeat(ing));
+    const extraFreeIngredientsCount = Math.max(freeIngredients.length - 5, 0);
+    const ingredientIndex = freeIngredients.indexOf(ingredient);
+    if (ingredient.price === 0 && ingredientIndex >= 5) {
+      return (ingredient.price + 0.50).toFixed(2);
+    } else {
+      return ingredient.price.toFixed(2);
+    }
   }
 
   removeProductFromCart(product: Product | CustomizableProduct) {
@@ -38,15 +57,23 @@ export class CartComponent implements OnInit {
     this.calculateTotal();
   }
 
-  removeIngredient(customizableProduct: CustomizableProduct, ingredient: Product) {
-    customizableProduct.productList = customizableProduct.productList.filter(i => i !== ingredient);
-    customizableProduct.price -= ingredient.price; // Aggiorna il prezzo del prodotto personalizzabile
+  removeIngredient(customizableProduct: CustomizableProduct, ingredientIndex: number) {
+    const ingredient = customizableProduct.productList[ingredientIndex];
+    customizableProduct.productList.splice(ingredientIndex, 1);
+    this.updateProductPrice(customizableProduct); // Aggiorna il prezzo considerando gli ingredienti gratuiti in eccesso
     this.calculateTotal();
     this.menuService.setCartProducts(this.cartProducts);
   }
 
-  isBase(ingredient: Product): boolean {
-    return ingredient.category === 'DESSERT_BASE';
+  updateProductPrice(customizableProduct: CustomizableProduct) {
+    const freeIngredients = customizableProduct.productList.filter(ingredient => ingredient.price === 0 && !this.isBreadOrMeat(ingredient));
+    const extraFreeIngredientsCount = Math.max(freeIngredients.length - 5, 0);
+    const extraCharge = extraFreeIngredientsCount * 0.50;
+    customizableProduct.price = customizableProduct.productList.reduce((sum, ingredient) => sum + ingredient.price, 0) + extraCharge;
+  }
+
+  isBreadOrMeat(ingredient: Product): boolean {
+    return ingredient.category === 'CUSTOMHAM_BREAD' || ingredient.category === 'CUSTOMHAM_MEAT';
   }
 
   checkout() {

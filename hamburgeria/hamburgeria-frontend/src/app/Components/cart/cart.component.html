@@ -6,15 +6,15 @@
           <button class="btn btn-secondary dropdown-toggle d-flex" type="button" id="dropdownMenuButton"
                   data-bs-toggle="dropdown" aria-expanded="false">
             <h5 class="my-fs-1 text-dark me-2">{{ cartProduct.italianName }}</h5>
-            <p class="my-fs-1 text-dark">{{ cartProduct.price }}&euro;</p>
+            <p class="my-fs-1 text-dark">{{ getProductTotal(cartProduct) }}&euro;</p>
           </button>
 
           <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <li *ngFor="let ingredient of cartProduct.productList" class="d-flex align-items-center">
+            <li *ngFor="let ingredient of cartProduct.productList; let j = index" class="d-flex align-items-center">
               <p class="dropdown-item text-dark">{{ ingredient.italianName }}</p>
-              <p>{{ingredient.price}}&euro;</p>
-              <!-- Nascondi il bottone di rimozione per gli ingredienti della categoria "Base" -->
-              <button *ngIf="!isBase(ingredient)" (click)="removeIngredient(cartProduct, ingredient)" class="">X</button>
+              <p>{{getIngredientPrice(ingredient, cartProduct)}}&euro;</p>
+              <!-- Nascondi il bottone di rimozione per gli ingredienti della categoria "Pane" e "Hamburger" -->
+              <button *ngIf="!isBreadOrMeat(ingredient)" (click)="removeIngredient(cartProduct, j)" class="">X</button>
             </li>
           </ul>
           <button (click)="removeProductFromCart(cartProduct)" class="col-2">X</button>
