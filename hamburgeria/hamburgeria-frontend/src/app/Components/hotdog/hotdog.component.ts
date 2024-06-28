@@ -1,21 +1,17 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../../Services/menu.service';
 import { Product } from '../../models/product';
-import { Category } from '../../models/category';
+import { MenuService } from '../../Services/menu.service';
 
 @Component({
-  selector: 'app-fries',
-  templateUrl: './fries.component.html',
-  styleUrls: ['./fries.component.scss']
+  selector: 'app-hotdog',
+  templateUrl: './hotdog.component.html',
+  styleUrl: './hotdog.component.scss'
 })
-export class FriesComponent implements OnInit {
+export class HotdogComponent implements OnInit {
   menuProducts: Product[] = [];
   selectedProducts: Product[] = [];
   sections: { name: string, products: Product[] }[] = [
-    { name: 'Patate Fritte', products: [] },
-    { name: 'Pollo Fritto', products: [] },
-    { name: 'Altre Fritture', products: [] },
-    { name: 'Salse', products: [] }
+    { name: 'Hotdog', products: [] },
   ];
 
   ngOnInit(): void {
@@ -40,21 +36,8 @@ export class FriesComponent implements OnInit {
 
     for (let i = 0; i < this.menuProducts.length; i++) {
       const e = this.menuProducts[i];
-      switch (e.category) {
-        case 'FRI_FRENCHFRIES':
-          this.sections.find(section => section.name === 'Patate Fritte')?.products.push(e);
-          break;
-        case 'FRI_FRIEDCHICKEN':
-          this.sections.find(section => section.name === 'Pollo Fritto')?.products.push(e);
-          break;
-        case 'FRI_OTHERFRIE':
-          this.sections.find(section => section.name === 'Altre Fritture')?.products.push(e);
-          break;
-        case 'FRI_SAUCE':
-          this.sections.find(section => section.name === 'Salse')?.products.push(e);
-          break;
-        default:
-          break;
+      if (e.category === "HOTDOG") {
+        this.sections.find(section => section.name === 'Hotdog')?.products.push(e);
       }
     }
   }
@@ -70,5 +53,4 @@ export class FriesComponent implements OnInit {
   isSelected(product: Product): boolean {
     return this.selectedProducts.some(p => p.id === product.id);
   }
-
 }

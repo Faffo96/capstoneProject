@@ -15,7 +15,7 @@ export class CartService {
 
   constructor(private http: HttpClient) { }
 
-  createCart(data: Cart) {
+  createCart(data: Partial<Cart>) {
     return this.http.post<Cart>(`${this.apiURL}api/carts`, data);
   }
 

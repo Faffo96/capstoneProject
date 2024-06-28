@@ -45,12 +45,12 @@ export class MenuComponent implements OnInit, AfterViewInit {
     {
       gif: "../../../assets/icons/animate/gif/beer.gif",
       name: "Bevande",
-      route: "beer"
+      route: "drink"
     },
     {
       gif: "../../../assets/icons/animate/gif/hamburger2.gif",
       name: "Burger",
-      route: "hamburger"
+      route: "burger"
     },
     {
       gif: "../../../assets/icons/animate/gif/sandwich2.gif",
@@ -58,7 +58,7 @@ export class MenuComponent implements OnInit, AfterViewInit {
       route: "sandwich"
     },
   ];
-  products: Product[] = [];
+/*   menuProducts: Product[] = []; */
   currentRoute: string;
 
   constructor(private router: Router, private menuService: MenuService, private cartService: CartService) {
@@ -69,9 +69,11 @@ export class MenuComponent implements OnInit, AfterViewInit {
     ).subscribe((event: NavigationEnd) => {
       this.currentRoute = event.urlAfterRedirects;
 
-      this.cartService.cart$.subscribe(data => {
-        this.products = data;
-      })
+/*       this.cartService.cart$.subscribe(data => {
+        this.menuProducts = data;
+      }) */
+
+
     
       /* console.log(  this.isSelected(event.urlAfterRedirects.split("/menu/",)[0])) */
     });

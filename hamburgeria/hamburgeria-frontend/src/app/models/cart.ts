@@ -6,12 +6,9 @@ import { User } from "./user";
 export interface Cart {
     id: number;
     reservation: Reservation;
-    creationDate: string; // Usato 'string' per rappresentare LocalDateTime
     productList: Product[];
     user: User;
-    total: number;
     paid: boolean;
     delivery: boolean;
-    deliveryFee: number;
   }
   

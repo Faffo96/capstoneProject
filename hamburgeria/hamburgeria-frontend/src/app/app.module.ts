@@ -21,7 +21,12 @@ import { CustomizeBurgerComponent } from './Components/customize-burger/customiz
 import { FriesComponent } from './Components/fries/fries.component';
 import { TokenInterceptor } from './auth/token.interceptor';
 import { CartComponent } from './Components/cart/cart.component';
-
+import { HotdogComponent } from './Components/hotdog/hotdog.component';
+import { SaladComponent } from './Components/salad/salad.component';
+import { SandwichComponent } from './Components/sandwich/sandwich.component';
+import { CustomizeSandwichComponent } from './Components/customize-sandwich/customize-sandwich.component';
+import { DessertComponent } from './Components/dessert/dessert.component';
+import { DrinkComponent } from './Components/drink/drink.component';import { BurgerComponent } from './Components/burger/burger.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -37,7 +42,14 @@ import { CartComponent } from './Components/cart/cart.component';
     FooterComponent,
     CustomizeBurgerComponent,
     FriesComponent,
-    CartComponent
+    CartComponent,
+    HotdogComponent,
+    SaladComponent,
+    SandwichComponent,
+    CustomizeSandwichComponent,
+    DessertComponent,
+    DrinkComponent,
+    BurgerComponent
   ],
   imports: [
     NgbModule,

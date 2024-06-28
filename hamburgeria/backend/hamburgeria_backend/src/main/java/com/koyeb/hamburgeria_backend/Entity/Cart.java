@@ -1,6 +1,7 @@
 package com.koyeb.hamburgeria_backend.Entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import com.koyeb.hamburgeria_backend.Entity.User.User;
 
 import jakarta.persistence.*;
@@ -36,8 +37,6 @@ public class Cart {
     @JoinColumn(name = "user_id")
     private User user;
 
-
-
     private double total;
     private boolean paid;
     private boolean delivery;
@@ -58,33 +57,25 @@ public class Cart {
     }
 
     public void setProductList(List<Product> newProductList) {
-        final List<Product> initialProductList = productList;
-        if (productList == null) {
-            productList = new ArrayList<>();
+        if (this.productList == null) {
+            this.productList = new ArrayList<>();
         }
 
-        double currentTotal = initialProductList.stream().mapToDouble(Product::getPrice).sum();
+        double currentTotal = this.productList.stream().mapToDouble(Product::getPrice).sum();
 
-        if (newProductList.size() > initialProductList.size()) {
+        if (newProductList.size() > this.productList.size()) {
             List<Product> productsToAdd = newProductList.stream()
-                    .filter(product -> !initialProductList.contains(product))
-                    .toList();
+                    .filter(product -> !this.productList.contains(product))
+                    .collect(Collectors.toList());
             currentTotal += productsToAdd.stream().mapToDouble(Product::getPrice).sum();
-        } else if (newProductList.size() < initialProductList.size()) {
-            List<Product> productsToRemove = initialProductList.stream()
+        } else if (newProductList.size() < this.productList.size()) {
+            List<Product> productsToRemove = this.productList.stream()
                     .filter(product -> !newProductList.contains(product))
-                    .toList();
+                    .collect(Collectors.toList());
             currentTotal -= productsToRemove.stream().mapToDouble(Product::getPrice).sum();
         }
 
         this.productList = newProductList;
         this.total = currentTotal + (this.delivery ? this.deliveryFee : 0);
     }
-
-
-
-
-
 }
-
-

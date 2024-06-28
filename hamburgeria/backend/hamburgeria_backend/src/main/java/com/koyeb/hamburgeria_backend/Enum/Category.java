@@ -55,8 +55,6 @@ public enum Category {
     CUSTOMSALAD_SAUCE,
     CUSTOMSALAD_OTHER,
 
-    DESSERT,
-
     DESSERT_BASE,
     DESSERT_TOPPING,
     DESSERT_SNACK,

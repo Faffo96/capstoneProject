@@ -1,21 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { MenuService } from '../../Services/menu.service';
 import { Product } from '../../models/product';
-import { Category } from '../../models/category';
 
 @Component({
-  selector: 'app-fries',
-  templateUrl: './fries.component.html',
-  styleUrls: ['./fries.component.scss']
+  selector: 'app-sandwich',
+  templateUrl: './sandwich.component.html',
+  styleUrl: './sandwich.component.scss'
 })
-export class FriesComponent implements OnInit {
+export class SandwichComponent {
   menuProducts: Product[] = [];
   selectedProducts: Product[] = [];
   sections: { name: string, products: Product[] }[] = [
-    { name: 'Patate Fritte', products: [] },
-    { name: 'Pollo Fritto', products: [] },
-    { name: 'Altre Fritture', products: [] },
-    { name: 'Salse', products: [] }
+    { name: 'Sandwich', products: [] },
   ];
 
   ngOnInit(): void {
@@ -34,27 +30,14 @@ export class FriesComponent implements OnInit {
       this.selectedProducts = data;
     });
   }
-
   loadCategories() {
     this.sections.forEach(section => section.products = []); // Reset sections
 
     for (let i = 0; i < this.menuProducts.length; i++) {
       const e = this.menuProducts[i];
-      switch (e.category) {
-        case 'FRI_FRENCHFRIES':
-          this.sections.find(section => section.name === 'Patate Fritte')?.products.push(e);
-          break;
-        case 'FRI_FRIEDCHICKEN':
-          this.sections.find(section => section.name === 'Pollo Fritto')?.products.push(e);
-          break;
-        case 'FRI_OTHERFRIE':
-          this.sections.find(section => section.name === 'Altre Fritture')?.products.push(e);
-          break;
-        case 'FRI_SAUCE':
-          this.sections.find(section => section.name === 'Salse')?.products.push(e);
-          break;
-        default:
-          break;
+
+      if (e.category === "SANDWICH") {
+        this.sections.find(section => section.name === 'Sandwich')?.products.push(e);
       }
     }
   }
@@ -63,6 +46,11 @@ export class FriesComponent implements OnInit {
     console.log('Product added to cart:', cartProduct);
 
     let currentProducts = this.menuService.getCartProductsValue();
+
+    if (cartProduct.category === 'CUSTOMSALAD_BASE') {
+      currentProducts = currentProducts.filter(product => product.category !== cartProduct.category);
+      this.selectedProducts = this.selectedProducts.filter(product => product.category !== cartProduct.category);
+    }
 
     this.menuService.setCartProducts([...currentProducts, cartProduct]);
   }
