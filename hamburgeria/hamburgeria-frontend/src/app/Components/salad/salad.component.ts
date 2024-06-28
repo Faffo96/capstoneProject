@@ -31,7 +31,7 @@ export class SaladComponent {
       this.loadCategories();
     });
 
-    this.menuService.cartProducts$.subscribe(data => {
+    this.menuService.currentCartProducts$.subscribe(data => {
       this.selectedProducts = data;
     });
   }

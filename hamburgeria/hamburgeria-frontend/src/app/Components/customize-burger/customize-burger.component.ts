@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../Services/menu.service';
 import { Product } from '../../models/product';
 import { Category } from '../../models/category';
+import { CustomizableProduct } from '../../models/customizable-product';
+import { CustomizableProductService } from '../../Services/customizable-product.service';
 
 @Component({
   selector: 'app-customize-burger',
@@ -20,46 +22,41 @@ export class CustomizeBurgerComponent implements OnInit {
   ];
   selectedProducts: Product[] = [];
 
+  constructor(private menuService: MenuService, private customizableProductService: CustomizableProductService) {
+    this.menuService.products$.subscribe(data => {
+      this.menuProducts = data;
+      this.loadCategories();
+    });
+  }
+
   ngOnInit(): void {
     this.menuService.getProducts().subscribe(data => {
       this.menuService.setProducts(data);
     });
   }
 
-  constructor(private menuService: MenuService) {
-    this.menuService.products$.subscribe(data => {
-      this.menuProducts = data;
-      this.loadCategories();
-    });
-
-    this.menuService.cartProducts$.subscribe(data => {
-      this.selectedProducts = data;
-    });
-  }
-
   loadCategories() {
     this.sections.forEach(section => section.products = []); // Reset sections
 
-    for (let i = 0; i < this.menuProducts.length; i++) {
-      const e = this.menuProducts[i];
-      switch (e.category) {
+    for (let product of this.menuProducts) {
+      switch (product.category) {
         case 'CUSTOMHAM_MEAT':
-          this.sections.find(section => section.name === 'Hamburger')?.products.push(e);
+          this.sections.find(section => section.name === 'Hamburger')?.products.push(product);
           break;
         case 'CUSTOMHAM_BREAD':
-          this.sections.find(section => section.name === 'Pane')?.products.push(e);
+          this.sections.find(section => section.name === 'Pane')?.products.push(product);
           break;
         case 'CUSTOMHAM_CHEESE':
-          this.sections.find(section => section.name === 'Formaggi')?.products.push(e);
+          this.sections.find(section => section.name === 'Formaggi')?.products.push(product);
           break;
         case 'CUSTOMHAM_VEGETABLE':
-          this.sections.find(section => section.name === 'Verdure')?.products.push(e);
+          this.sections.find(section => section.name === 'Verdure')?.products.push(product);
           break;
         case 'CUSTOMHAM_SAUCE':
-          this.sections.find(section => section.name === 'Salse')?.products.push(e);
+          this.sections.find(section => section.name === 'Salse')?.products.push(product);
           break;
         case 'CUSTOMHAM_OTHER':
-          this.sections.find(section => section.name === 'Varie')?.products.push(e);
+          this.sections.find(section => section.name === 'Varie')?.products.push(product);
           break;
         default:
           break;
@@ -67,27 +64,40 @@ export class CustomizeBurgerComponent implements OnInit {
     }
   }
 
-  addProductToCart(cartProduct: Product) {
-    console.log('Product added to cart:', cartProduct);
-
-    let currentProducts = this.menuService.getCartProductsValue();
-
-    if (cartProduct.category === 'CUSTOMHAM_MEAT' || cartProduct.category === 'CUSTOMHAM_BREAD') {
-      currentProducts = currentProducts.filter(product => product.category !== cartProduct.category);
-      this.selectedProducts = this.selectedProducts.filter(product => product.category !== cartProduct.category);
+  toggleProductSelection(product: Product) {
+    if (this.isSelected(product)) {
+      this.selectedProducts = this.selectedProducts.filter(p => p.id !== product.id);
+    } else {
+      // Rimuovi prodotti della stessa categoria se necessario
+      if (product.category === 'CUSTOMHAM_MEAT' || product.category === 'CUSTOMHAM_BREAD') {
+        this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
+      }
+      this.selectedProducts.push(product);
     }
-
-    
-    this.menuService.setCartProducts([...currentProducts, cartProduct]);
+    console.log('Selected products:', this.selectedProducts.map(p => p.id)); // Aggiungi questo log
   }
-
-  /* removeProductFromCart(product: Product) {
-    let currentProducts = this.menuService.getCartProductsValue();
-    currentProducts = currentProducts.filter(p => p.id !== product.id);
-    this.menuService.setCartProducts(currentProducts);
-  } */
 
   isSelected(product: Product): boolean {
     return this.selectedProducts.some(p => p.id === product.id);
+  }
+
+  createCustomizableBurger() {
+    const customizableProduct: CustomizableProduct = {
+      id: 0,
+      italianName: 'Burger',
+      englishName: 'Burger',
+      italianDescription: '',
+      englishDescription: '',
+      price: this.selectedProducts.reduce((sum, product) => sum + product.price, 0),
+      category: "HAMBURGER",
+      available: true,
+      productList: this.selectedProducts.map(product => product.id)
+    };
+
+    this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
+      console.log('Customizable Burger created:', response);
+      this.menuService.setCartProducts([...this.menuService.getCartProductsValue(), response]);
+      this.selectedProducts = []; // Reset selected products after creating the burger
+    });
   }
 }

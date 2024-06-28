@@ -1,16 +1,27 @@
 <div>
-    <div *ngFor="let cartProduct of cartProducts; let i = index" class="container">
-      <div class="row">
-        <div class="col-10 d-flex">
-          <h5 class="my-fs-1 me-2">{{cartProduct.italianName}}</h5>
-          <p class="my-fs-1">{{cartProduct.price}}&euro;</p>
-        </div>
-        <button (click)="removeProductFromCart(cartProduct)" class="col-2">X</button>
+  <div *ngFor="let cartProduct of cartProducts; let i = index" class="container">
+    <div class="row">
+      <div class="col-10 d-flex">
+        <h5 class="my-fs-1 me-2">{{ cartProduct.italianName }}</h5>
+        <p class="my-fs-1">{{ cartProduct.price }}&euro;</p>
+        <ng-container *ngIf="isCustomizableProduct(cartProduct)">
+          <div class="dropdown">
+            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-expanded="false">
+              Ingredienti
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <li *ngFor="let ingredient of cartProduct.productList">
+                <a class="dropdown-item text-dark">{{ getProductById(ingredient)?.italianName || 'Prodotto non trovato' }}</a>
+              </li>
+            </ul>
+          </div>
+        </ng-container>
       </div>
+      <button (click)="removeProductFromCart(cartProduct)" class="col-2">X</button>
     </div>
-    <div class="total">
-      <h5>Totale: {{total}}&euro;</h5>
-    </div>
-    <button (click)="checkout()" class="btn btn-primary mt-3">Checkout</button>
   </div>
-  
+  <div class="total">
+    <h5>Totale: {{ total }}&euro;</h5>
+  </div>
+  <button (click)="checkout()" class="btn btn-primary mt-3">Checkout</button>
+</div>

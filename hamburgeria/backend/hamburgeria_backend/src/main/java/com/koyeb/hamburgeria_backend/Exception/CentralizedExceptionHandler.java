@@ -62,6 +62,32 @@ public class CentralizedExceptionHandler extends ResponseEntityExceptionHandler 
         return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
     }
 
+    /*@ExceptionHandler(CustomizableBurgerNotFoundException.class)
+    public ResponseEntity<Object> CustomizableBurgerNotFoundHandler(CustomizableBurgerNotFoundException e) {
+        loggerError.error(e.getMessage());
+        Error error = new Error();
+        error.setMessage(e.getMessage());
+        error.setTimestamp(LocalDateTime.now());
+        error.setStatus(HttpStatus.NOT_FOUND);
+        error.setStatusCode(HttpStatus.NOT_FOUND.value());
+        error.setErrorCode("CUSTOMIZABLE_PRODUCT_NOT_FOUND");
+        error.setDetails(e.getLocalizedMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }*/
+
+    @ExceptionHandler(CustomizableProductNotFoundException.class)
+    public ResponseEntity<Object> CustomizableProductNotFoundHandler(CustomizableProductNotFoundException e) {
+        loggerError.error(e.getMessage());
+        Error error = new Error();
+        error.setMessage(e.getMessage());
+        error.setTimestamp(LocalDateTime.now());
+        error.setStatus(HttpStatus.NOT_FOUND);
+        error.setStatusCode(HttpStatus.NOT_FOUND.value());
+        error.setErrorCode("CUSTOMIZABLE_PRODUCT_NOT_FOUND");
+        error.setDetails(e.getLocalizedMessage());
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
     @ExceptionHandler(UnauthorizedException.class)
     public ResponseEntity<Object> UnauthorizedHandler(UnauthorizedException e) {
         loggerError.error(e.getMessage());

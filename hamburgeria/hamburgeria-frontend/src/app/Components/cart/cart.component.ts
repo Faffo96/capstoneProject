@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { MenuService } from '../../Services/menu.service';
 import { CartService } from '../../Services/cart.service';
 import { Product } from '../../models/product';
+import { CustomizableProduct } from '../../models/customizable-product';
 
 @Component({
   selector: 'app-cart',
@@ -9,13 +10,13 @@ import { Product } from '../../models/product';
   styleUrls: ['./cart.component.scss']
 })
 export class CartComponent implements OnInit {
-  cartProducts: Product[] = [];
+  cartProducts: (Product | CustomizableProduct)[] = [];
   total: number = 0;
 
   constructor(private menuService: MenuService, private cartService: CartService) {}
 
   ngOnInit() {
-    this.menuService.cartProducts$.subscribe(data => {
+    this.menuService.currentCartProducts$.subscribe(data => {
       this.cartProducts = data;
       this.calculateTotal();
     });
@@ -25,7 +26,7 @@ export class CartComponent implements OnInit {
     this.total = this.cartProducts.reduce((sum, product) => sum + product.price, 0);
   }
 
-  removeProductFromCart(product: Product) {
+  removeProductFromCart(product: Product | CustomizableProduct) {
     this.cartProducts = this.cartProducts.filter(p => p.id !== product.id);
     this.menuService.setCartProducts(this.cartProducts);
   }
@@ -34,7 +35,6 @@ export class CartComponent implements OnInit {
     const cart = {
       productList: this.cartProducts
     };
-  
 
     this.cartService.createCart(cart).subscribe(response => {
       console.log('Cart saved:', response);
@@ -45,5 +45,15 @@ export class CartComponent implements OnInit {
     }, error => {
       console.error('Error saving cart:', error);
     });
+  }
+
+  getProductById(id: number): Product | undefined {
+    const product = this.menuService.getProductById(id);
+    console.log("Product in getProductById:", product);
+    return product;
+  }
+
+  isCustomizableProduct(product: Product | CustomizableProduct): product is CustomizableProduct {
+    return (product as CustomizableProduct).productList !== undefined;
   }
 }
