@@ -31,7 +31,7 @@ export class CartComponent implements OnInit {
   getProductTotal(product: Product | CustomizableProduct): number {
     if (this.isCustomizableProduct(product)) {
       const basePrice = product.productList.reduce((sum, ingredient) => sum + ingredient.price, 0);
-      const freeIngredients = product.productList.filter(ingredient => ingredient.price === 0 && !this.isBreadOrMeat(ingredient));
+      const freeIngredients = product.productList.filter(ingredient => ingredient.price === 0 && !this.isBase(ingredient));
       const extraFreeIngredientsCount = Math.max(freeIngredients.length - 5, 0);
       const extraCharge = extraFreeIngredientsCount * 0.50;
       return basePrice + extraCharge;
@@ -41,7 +41,7 @@ export class CartComponent implements OnInit {
   }
 
   getIngredientPrice(ingredient: Product, customizableProduct: CustomizableProduct): string {
-    const freeIngredients = customizableProduct.productList.filter(ing => ing.price === 0 && !this.isBreadOrMeat(ing));
+    const freeIngredients = customizableProduct.productList.filter(ing => ing.price === 0 && !this.isBase(ing));
     const extraFreeIngredientsCount = Math.max(freeIngredients.length - 5, 0);
     const ingredientIndex = freeIngredients.indexOf(ingredient);
     if (ingredient.price === 0 && ingredientIndex >= 5) {
@@ -57,7 +57,8 @@ export class CartComponent implements OnInit {
     this.calculateTotal();
   }
 
-  removeIngredient(customizableProduct: CustomizableProduct, ingredientIndex: number) {
+  removeIngredient(customizableProduct: CustomizableProduct, ingredientIndex: number, event: MouseEvent) {
+    event.stopPropagation();
     const ingredient = customizableProduct.productList[ingredientIndex];
     customizableProduct.productList.splice(ingredientIndex, 1);
     this.updateProductPrice(customizableProduct); // Aggiorna il prezzo considerando gli ingredienti gratuiti in eccesso
@@ -66,14 +67,14 @@ export class CartComponent implements OnInit {
   }
 
   updateProductPrice(customizableProduct: CustomizableProduct) {
-    const freeIngredients = customizableProduct.productList.filter(ingredient => ingredient.price === 0 && !this.isBreadOrMeat(ingredient));
+    const freeIngredients = customizableProduct.productList.filter(ingredient => ingredient.price === 0 && !this.isBase(ingredient));
     const extraFreeIngredientsCount = Math.max(freeIngredients.length - 5, 0);
     const extraCharge = extraFreeIngredientsCount * 0.50;
     customizableProduct.price = customizableProduct.productList.reduce((sum, ingredient) => sum + ingredient.price, 0) + extraCharge;
   }
 
-  isBreadOrMeat(ingredient: Product): boolean {
-    return ingredient.category === 'CUSTOMHAM_BREAD' || ingredient.category === 'CUSTOMHAM_MEAT';
+  isBase(ingredient: Product): boolean {
+    return ingredient.category === 'DESSERT_BASE';
   }
 
   checkout() {

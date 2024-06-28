@@ -60,14 +60,10 @@ export class CustomizeSandwichComponent implements OnInit {
   }
 
   toggleProductSelection(product: Product) {
-    /* if (this.isSelected(product)) {
-      this.selectedProducts = this.selectedProducts.filter(p => p.id !== product.id);
-    } else { */
-      if (product.category === 'CUSTOMSAND_BASE') {
-        this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
-      }
-      this.selectedProducts.push(product);
-    /* } */
+    if (product.category === 'CUSTOMSAND_BASE') {
+      this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
+    }
+    this.selectedProducts.push(product);
     console.log('Selected products:', this.selectedProducts.map(p => p.id));
   }
 
@@ -99,7 +95,7 @@ export class CustomizeSandwichComponent implements OnInit {
       englishName: 'Sandwich',
       italianDescription: '',
       englishDescription: '',
-      price: this.selectedProducts.reduce((sum, product) => sum + product.price, 0),
+      price: this.calculateProductPrice(this.selectedProducts),
       category: "SANDWICH",
       available: true,
       productList: this.selectedProducts.map(product => product.id)
@@ -110,5 +106,13 @@ export class CustomizeSandwichComponent implements OnInit {
       this.menuService.setCartProducts([...this.menuService.getCartProductsValue(), response]);
       this.selectedProducts = []; // Reset selected products after creating the sandwich
     });
+  }
+
+  calculateProductPrice(products: Product[]): number {
+    const basePrice = products.reduce((sum, product) => sum + product.price, 0);
+    const freeIngredients = products.filter(product => product.price === 0 && product.category !== 'CUSTOMSAND_BASE');
+    const extraFreeIngredientsCount = Math.max(freeIngredients.length - 5, 0);
+    const extraCharge = extraFreeIngredientsCount * 0.50;
+    return basePrice + extraCharge;
   }
 }

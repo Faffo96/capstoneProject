@@ -65,17 +65,10 @@ export class SaladComponent implements OnInit {
   }
 
   toggleProductSelection(product: Product) {
-    /* if (this.isSelected(product)) {
-      const index = this.selectedProducts.findIndex(p => p.id === product.id);
-      if (index !== -1) {
-        this.selectedProducts.splice(index, 1);
-      }
-    } */ /* else { */
-      if (product.category === 'CUSTOMSALAD_BASE') {
-        this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
-      }
-      this.selectedProducts.push(product);
-    /* } */
+    if (product.category === 'CUSTOMSALAD_BASE') {
+      this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
+    }
+    this.selectedProducts.push(product);
     console.log('Selected products:', this.selectedProducts.map(p => p.id));
   }
 
