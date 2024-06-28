@@ -26,6 +26,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -60,7 +61,7 @@ public class CartService {
     private static final Logger loggerTrace = LoggerFactory.getLogger("loggerTrace");
     private static final Logger loggerWarn = LoggerFactory.getLogger("loggerWarn");
 
-    public Cart createCart(CartDTO cartDTO) throws ReservationNotFoundException, UserNotFoundException, ProductNotFoundException {
+    public Cart createCart(CartDTO cartDTO) throws ReservationNotFoundException, UserNotFoundException, ProductNotFoundException, MinimumTotalException {
         Cart cart = new Cart();
 
         // Gestione della prenotazione
@@ -121,9 +122,20 @@ public class CartService {
         }
 
         cart.setProductList(productList);
-        cart.setCreationDate(cartDTO.getCreationDate());
+        cart.setCreationDate(LocalDateTime.now());
         cart.setPaid(cartDTO.isPaid());
         cart.setDelivery(cartDTO.isDelivery());
+        cart.setDeliveryFee(cartDTO.isDelivery() ? 2.0 : 0.0);
+
+        // Calcola il totale dei prodotti nel carrello
+        double total = productList.stream().mapToDouble(Product::getPrice).sum();
+        cart.setTotal(total + (cart.isDelivery() ? cart.getDeliveryFee() : 0));
+
+        // Verifica che il totale sia almeno 8.5
+        if (total < 8.5) {
+            throw new MinimumTotalException("The total price of the cart must be at least 8.5");
+        }
+
         cartRepository.save(cart);
         loggerInfo.info("Cart with id " + cart.getId() + " created.");
         return cart;

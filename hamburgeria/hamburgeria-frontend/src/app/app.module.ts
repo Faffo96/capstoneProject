@@ -15,11 +15,18 @@ import { TestComponent } from './Components/test/test.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterUserComponent } from './auth/register-user/register-user.component';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { FooterComponent } from './Components/footer/footer.component';
 import { CustomizeBurgerComponent } from './Components/customize-burger/customize-burger.component';
 import { FriesComponent } from './Components/fries/fries.component';
-
+import { TokenInterceptor } from './auth/token.interceptor';
+import { CartComponent } from './Components/cart/cart.component';
+import { HotdogComponent } from './Components/hotdog/hotdog.component';
+import { SaladComponent } from './Components/salad/salad.component';
+import { SandwichComponent } from './Components/sandwich/sandwich.component';
+import { CustomizeSandwichComponent } from './Components/customize-sandwich/customize-sandwich.component';
+import { DessertComponent } from './Components/dessert/dessert.component';
+import { DrinkComponent } from './Components/drink/drink.component';import { BurgerComponent } from './Components/burger/burger.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +41,15 @@ import { FriesComponent } from './Components/fries/fries.component';
     RegisterUserComponent,
     FooterComponent,
     CustomizeBurgerComponent,
-    FriesComponent
+    FriesComponent,
+    CartComponent,
+    HotdogComponent,
+    SaladComponent,
+    SandwichComponent,
+    CustomizeSandwichComponent,
+    DessertComponent,
+    DrinkComponent,
+    BurgerComponent
   ],
   imports: [
     NgbModule,
@@ -43,7 +58,11 @@ import { FriesComponent } from './Components/fries/fries.component';
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS, useClass: TokenInterceptor, multi: true
+  }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

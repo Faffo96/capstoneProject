@@ -20,7 +20,7 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping
-    public ResponseEntity<Cart> createCart(@RequestBody CartDTO cartDTO) throws UserNotFoundException, ProductNotFoundException, ReservationNotFoundException {
+    public ResponseEntity<Cart> createCart(@RequestBody CartDTO cartDTO) throws UserNotFoundException, ProductNotFoundException, ReservationNotFoundException, MinimumTotalException {
         try {
             Cart createdCart = cartService.createCart(cartDTO);
             return ResponseEntity.ok(createdCart);
@@ -30,6 +30,8 @@ public class CartController {
             throw new ReservationNotFoundException(e.getMessage());
         } catch (ProductNotFoundException e) {
             throw new ProductNotFoundException(e.getMessage()); // Product not found
+        } catch (MinimumTotalException e) {
+            throw new MinimumTotalException(e.getMessage());
         }
     }
 

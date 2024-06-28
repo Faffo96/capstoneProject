@@ -42,7 +42,13 @@ public class ProductController {
     }
 
     @GetMapping
-    public ResponseEntity<Page<Product>> getAllProducts(
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = productService.getProducts();
+        return ResponseEntity.ok(products);
+    }
+
+    @GetMapping("/page")
+    public ResponseEntity<Page<Product>> getProducts(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "id") String sortBy) {
         Page<Product> products = productService.getAllProducts(page, sortBy);

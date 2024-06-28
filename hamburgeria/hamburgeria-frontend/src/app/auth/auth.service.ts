@@ -23,6 +23,10 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router) {}
 
+  getToken(): string | null {
+    return localStorage.getItem('token');
+  }
+
   login(data: { email: string; password: string }) {
     return this.http.post(`${this.apiURL}auth/login`, data, { responseType: 'text' }).pipe(
       tap(token => {
@@ -41,9 +45,10 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
+  
 
-  fetchUserDetails(token: string) {
-    return this.http.get<{ name: string; surname: string; email: string; avatar: string; role: Role; creationDate: string; }>(`${this.apiURL}auth/user`, {
+  fetchUserDetails(token: string): Observable<User> {
+    return this.http.get<User>(`${this.apiURL}api/users`, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`
       })
@@ -79,13 +84,21 @@ export class AuthService {
   }
 
   restore() {
-    const userJson = localStorage.getItem('user');
-    if (!userJson) {
+    const token = this.getToken();
+    if (!token) {
       return;
     }
-    const user: AuthData = JSON.parse(userJson);
-    this.authSub.next(user);
-    this.autoLogout(user);
+    this.fetchUserDetails(token).subscribe(user => {
+      const authData: AuthData = {
+        accessToken: token,
+        User: user
+      };
+      this.authSub.next(authData);
+      this.autoLogout(authData);
+    }, error => {
+      console.error('Error fetching user details', error);
+      this.logout();
+    });
   }
 
   autoLogout(user: AuthData) {

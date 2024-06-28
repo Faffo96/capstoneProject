@@ -10,6 +10,13 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegisterUserComponent } from './auth/register-user/register-user.component';
 import { CustomizeBurgerComponent } from './Components/customize-burger/customize-burger.component';
 import { FriesComponent } from './Components/fries/fries.component';
+import { HotdogComponent } from './Components/hotdog/hotdog.component';
+import { SaladComponent } from './Components/salad/salad.component';
+import { CustomizeSandwichComponent } from './Components/customize-sandwich/customize-sandwich.component';
+import { SandwichComponent } from './Components/sandwich/sandwich.component';
+import { DessertComponent } from './Components/dessert/dessert.component';
+import { DrinkComponent } from './Components/drink/drink.component';
+import { BurgerComponent } from './Components/burger/burger.component';
 
 const routes: Routes = [
   {
@@ -41,27 +48,26 @@ const routes: Routes = [
       {
         path: 'fries',
         component: FriesComponent
-      }
-      /* {
+      },
       {
-          path: 'clubSandwichComponibili',
-          component: ClubSandwichComponibiliComponent
+          path: 'customizeSandwich',
+          component: CustomizeSandwichComponent
         },
         {
           path: 'hotdog',
           component: HotdogComponent
         },
         {
-          path: 'insalatone',
-          component: InsalatoneComponent
+          path: 'salad',
+          component: SaladComponent
         },
         {
-          path: 'dolci',
-          component: DolciComponent
+          path: 'dessert',
+          component: DessertComponent
         },
         {
-          path: 'bevande',
-          component: BevandeComponent
+          path: 'drink',
+          component: DrinkComponent
         },
         {
           path: 'burger',
@@ -70,7 +76,7 @@ const routes: Routes = [
         {
           path: 'sandwich',
           component: SandwichComponent
-        } */
+        }
     ]
   },
   {

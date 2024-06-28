@@ -1,0 +1,16 @@
+<div>
+    <div *ngFor="let cartProduct of cartProducts; let i = index" class="container">
+      <div class="row">
+        <div class="col-10 d-flex">
+          <h5 class="my-fs-1 me-2">{{cartProduct.italianName}}</h5>
+          <p class="my-fs-1">{{cartProduct.price}}&euro;</p>
+        </div>
+        <button (click)="removeProductFromCart(cartProduct)" class="col-2">X</button>
+      </div>
+    </div>
+    <div class="total">
+      <h5>Totale: {{total}}&euro;</h5>
+    </div>
+    <button (click)="checkout()" class="btn btn-primary mt-3">Checkout</button>
+  </div>
+  

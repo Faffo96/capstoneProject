@@ -1,1 +1,16 @@
-<p>customize-burger works!</p>
+<div class="container-fluid px-0">
+    <div class="d-flex flex-column bg-light rounded-5 p-2">
+      <section *ngFor="let section of sections; let i = index" class="">
+        <h5 class="fw-bold my-2">{{section.name}}</h5>
+        <div class="d-flex flex-wrap">
+          <button *ngFor="let product of section.products; let i = index" (click)="addProductToCart(product)"
+                  [class.selected]="isSelected(product)" class="px-2 my-1 mx-1">
+            <p class="my-fs-1 fw-bold me-1 d-inline">{{product.italianName}}
+              <span *ngIf="product.price != 0" class=" my-fs-1 fw-bold d-inline"> - {{product.price}}&euro;</span>
+            </p>
+          </button>
+        </div>
+      </section>
+    </div>
+  </div>
+  
