@@ -26,7 +26,7 @@ export class HotdogComponent implements OnInit {
       this.loadCategories();
     });
 
-    this.menuService.cartProducts$.subscribe(data => {
+    this.menuService.currentCartProducts$.subscribe(data => {
       this.selectedProducts = data;
     });
   }

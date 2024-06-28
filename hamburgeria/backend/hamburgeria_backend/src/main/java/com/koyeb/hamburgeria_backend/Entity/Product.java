@@ -3,7 +3,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.koyeb.hamburgeria_backend.Enum.Category;
 
 import jakarta.persistence.*;
-import jakarta.persistence.Table;
 import lombok.Data;
 
 import java.util.List;
@@ -25,6 +24,10 @@ public class Product {
     private String italianDescription;
     private String englishDescription;
     private double price;
+
+    @ManyToMany(mappedBy = "productList")
+    @JsonIgnore
+    private List<CustomizableBurger> customizableBurgerList;
 
     @Enumerated(EnumType.STRING)
     private Category category;

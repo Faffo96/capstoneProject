@@ -1,16 +1,22 @@
 <div class="container-fluid px-0">
-    <div class="d-flex flex-column bg-light rounded-5 p-2">
-      <section *ngFor="let section of sections; let i = index" class="">
-        <h5 class="fw-bold my-2">{{section.name}}</h5>
-        <div class="d-flex flex-wrap">
-          <button *ngFor="let product of section.products; let i = index" (click)="addProductToCart(product)"
-                  [class.selected]="isSelected(product)" class="px-2 my-1 mx-1">
-            <p class="my-fs-1 fw-bold me-1 d-inline">{{product.italianName}}
-              <span *ngIf="product.price != 0" class=" my-fs-1 fw-bold d-inline"> - {{product.price}}&euro;</span>
-            </p>
-          </button>
-        </div>
-      </section>
+  <div class="d-flex flex-column bg-light rounded-5 p-2">
+    <section *ngFor="let section of sections; let i = index">
+      <h5 class="fw-bold my-2">{{section.name}}</h5>
+      <div class="d-flex flex-wrap">
+        <button *ngFor="let product of section.products; let j = index"
+                (click)="toggleProductSelection(product)"
+                [class.selected]="isSelected(product)"
+                [disabled]="isSelectionDisabled(section.name, product)"
+                class="px-2 my-1 mx-1">
+          <p class="my-fs-1 fw-bold me-1 d-inline">{{product.italianName}}
+            <span *ngIf="product.price != 0" class="my-fs-1 fw-bold d-inline"> - {{product.price}}&euro;</span>
+          </p>
+        </button>
+      </div>
+    </section>
+    <div class="d-flex justify-content-between mt-3">
+      <button (click)="createCustomizableBurger()" class="btn btn-primary">Aggiungi Burger al Carrello</button>
+      <button (click)="resetSelections()" class="btn btn-secondary">Reset</button>
     </div>
   </div>
-  
+</div>

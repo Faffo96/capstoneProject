@@ -24,6 +24,8 @@ export enum Category {
     HOTDOG,
   
     CUSTOMHOTDOG_BASE,
+
+    SALAD,
   
     CUSTOMSALAD_BASE,
     CUSTOMSALAD_CHEESE,
@@ -31,6 +33,8 @@ export enum Category {
     CUSTOMSALAD_CVEGETABLES,
     CUSTOMSALAD_SAUCE,
     CUSTOMSALAD_OTHER,
+
+    DESSERT,
   
     DESSERT_BASE,
     DESSERT_TOPPING,
