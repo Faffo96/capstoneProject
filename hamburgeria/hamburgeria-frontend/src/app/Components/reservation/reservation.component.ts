@@ -6,5 +6,17 @@ import { Component } from '@angular/core';
   styleUrls: ['./reservation.component.scss']
 })
 export class ReservationComponent {
+  activeSeat: string | null = null;
 
+  toggleTooltip(seatId: string) {
+    this.activeSeat = this.activeSeat === seatId ? null : seatId;
+  }
+
+  activateTooltip(seatId: string) {
+    this.activeSeat = seatId;
+  }
+
+  deactivateTooltip() {
+    this.activeSeat = null;
+  }
 }
