@@ -1,6 +1,6 @@
-<div class="d-flex justify-content-center align-items-center mt-2">
+<div class="d-flex justify-content-center align-items-center my-5">
     <form [formGroup]="signupForm" class="form" (ngSubmit)="onSubmit(signupForm)">
-        <p class="title">Register </p>
+        <p class="title color1">Register </p>
         <p class="message">Signup now and get full access to our app. </p>
         <div class="flex">
             <label>
@@ -40,12 +40,12 @@
         </label>
         <label>
             <span>Profile image</span>
-            <input id="avatar" placeholder="" type="file" class="input" formControlName="avatar">
+            <input id="avatar" placeholder="" type="file" class="input mb-1" formControlName="avatar">
 
         </label>
 
         <button type="button" (click)="onSubmit(signupForm)" class="submit" [disabled]="signupForm.invalid">Submit</button>
-        <p class="signin">Already have an account ? <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
+        <p class="signin my-3">Already have an account ? <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
         </p>
     </form>
 </div>

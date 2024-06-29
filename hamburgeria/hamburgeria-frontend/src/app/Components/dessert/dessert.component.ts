@@ -53,20 +53,19 @@ export class DessertComponent implements OnInit {
   }
 
   toggleProductSelection(product: Product) {
-    /* if (this.isSelected(product)) {
-      this.selectedProducts = this.selectedProducts.filter(p => p.id !== product.id);
-    } else { */
-      if (product.category === 'DESSERT_BASE') {
-        this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
-      } else if (product.category === 'DESSERT_TOPPING' && this.selectedProducts.filter(p => p.category === 'DESSERT_TOPPING').length >= 2) {
-        alert('You can select up to 2 toppings only.');
-        return;
-      } else if (product.category === 'DESSERT_SNACK' && this.selectedProducts.filter(p => p.category === 'DESSERT_SNACK').length >= 1) {
-        alert('You can select up to 1 snack or biscuit only.');
-        return;
-      }
-      this.selectedProducts.push(product);
-    /* } */
+    if (product.category === 'DESSERT_BASE') {
+      this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
+    } else if (product.category === 'DESSERT_TOPPING' && this.selectedProducts.filter(p => p.category === 'DESSERT_TOPPING').length >= 2) {
+      alert('You can select up to 2 toppings only.');
+      return;
+    } else if (product.category === 'DESSERT_SNACK' && this.selectedProducts.filter(p => p.category === 'DESSERT_SNACK').length >= 1) {
+      alert('You can select up to 1 snack or biscuit only.');
+      return;
+    } else if (!this.isBaseSelected()) {
+      alert('Please select a base first.');
+      return;
+    }
+    this.selectedProducts.push(product);
     console.log('Selected products:', this.selectedProducts.map(p => p.id));
   }
 
@@ -77,10 +76,6 @@ export class DessertComponent implements OnInit {
   isSelectionDisabled(sectionName: string, product: Product): boolean {
     if (sectionName === 'Base') {
       return false;
-    } else if (sectionName === 'Topping (Max 2)') {
-      return this.selectedProducts.filter(p => p.category === 'DESSERT_TOPPING').length >= 2 && !this.isSelected(product);
-    } else if (sectionName === 'Snack e biscotti (Max 1)') {
-      return this.selectedProducts.filter(p => p.category === 'DESSERT_SNACK').length >= 1 && !this.isSelected(product);
     } else {
       return !this.isBaseSelected();
     }
@@ -102,8 +97,8 @@ export class DessertComponent implements OnInit {
       englishName: 'Dessert',
       italianDescription: '',
       englishDescription: '',
-      price: this.selectedProducts.reduce((sum, product) => sum + product.price, 0),
-      category: "DESSERT",
+      price: this.calculateProductPrice(this.selectedProducts),
+      category: "CUSTOM_DESSERT",
       available: true,
       productList: this.selectedProducts.map(product => product.id)
     };
@@ -113,5 +108,13 @@ export class DessertComponent implements OnInit {
       this.menuService.setCartProducts([...this.menuService.getCartProductsValue(), response]);
       this.selectedProducts = []; // Reset selected products after creating the dessert
     });
+  }
+
+  calculateProductPrice(products: Product[]): number {
+    const basePrice = products.reduce((sum, product) => sum + product.price, 0);
+    const freeIngredients = products.filter(product => product.price === 0 && product.category !== 'DESSERT_BASE');
+    const extraFreeIngredientsCount = Math.max(freeIngredients.length - 5, 0);
+    const extraCharge = extraFreeIngredientsCount * 0.50;
+    return basePrice + extraCharge;
   }
 }

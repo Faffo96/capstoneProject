@@ -7,16 +7,16 @@
                 (click)="toggleProductSelection(product)"
                 [class.selected]="isSelected(product)"
                 [disabled]="isSelectionDisabled(section.name, product)"
-                class="px-2 my-1 mx-1">
+                class="my-button px-2 my-1 mx-1">
           <p class="my-fs-1 fw-bold me-1 d-inline">{{product.italianName}}
             <span *ngIf="product.price != 0" class="my-fs-1 fw-bold d-inline"> - {{product.price}}&euro;</span>
           </p>
         </button>
       </div>
     </section>
-    <div class="d-flex justify-content-between mt-3">
-      <button (click)="createCustomizableSalad()" class="btn btn-primary">Aggiungi Insalata al Carrello</button>
-      <button (click)="resetSelections()" class="btn btn-secondary">Reset</button>
+    <div class="d-flex justify-content-between mt-5 mb-4">
+      <button (click)="resetSelections()" class="ms-3 btn btn-outline-danger">Ricomincia Insalata</button>
+      <button (click)="createCustomizableSalad()" class="me-3 btn btn-success">Aggiungi al Carrello</button>
     </div>
   </div>
 </div>

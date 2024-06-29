@@ -167,7 +167,7 @@ body {
 }
 
 .bg-color0 {
-	background-color: #f9e188;
+	background-image: linear-gradient(to top, #eb9438 0% , #eca934 0%, #fae38e 20%);
 }
 
 .color1 {
@@ -264,7 +264,7 @@ body {
 
 /* MENU PRODUCTS BUTTONS */
 
-button {
+.my-button {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -283,21 +283,28 @@ button {
     text-shadow: 0 1px #fff;
   }
   
-  button:hover {
+  .my-button:hover {
     box-shadow: 0 4px 3px 1px #fdbb46, 0 6px 8px #fdbb46, 0 -4px 4px #fdbb46, 0 -6px 4px #fdbb46, inset 0 0 3px 3px #fdbb46;
   }
   
-  button:active {
+  .my-button:active {
     box-shadow: 0 4px 3px 1px #fdbb46, 0 6px 8px #fdbb46, 0 -4px 4px #fdbb46, 0 -6px 4px #fdbb46, inset 0 0 5px 3px #fdbb46, inset 0 0 30px #fdbb46;
   }
   
-  button:focus {
+  .my-button:focus {
     box-shadow: 0 4px 3px 1px #fdbb46, 0 6px 8px #fdbb46, 0 -4px 4px #fdbb46, 0 -6px 4px #fdbb46, inset 0 0 5px 3px #fdbb46, inset 0 0 30px #fdbb46;
     background-image: linear-gradient(to top, #fae38e 0%, #eca934 80%, #eb9438 100%);
   }
   
-  button.selected {
+  .my-button.selected {
     background-image: linear-gradient(to top, #fae38e 0%, #eca934 80%, #eb9438 100%);
     box-shadow: 0 4px 3px 1px #fdbb46, 0 6px 8px #fdbb46, 0 -4px 4px #fdbb46, 0 -6px 4px #fdbb46, inset 0 0 5px 3px #fdbb46, inset 0 0 30px #fdbb46;
   }
   
+  .scrollable-content {
+    overflow-y: auto;
+  }
+  
+  .h-70 {
+  height: 70%;
+  }

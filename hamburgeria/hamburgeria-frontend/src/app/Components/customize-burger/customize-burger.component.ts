@@ -107,7 +107,7 @@ import { CustomizableProductDTO } from '../../models/customizable-product-dto';
         italianDescription: '',
         englishDescription: '',
         price: this.selectedProducts.reduce((sum, product) => sum + product.price, 0),
-        category: "HAMBURGER",
+        category: "CUSTOM_BURGER",
         available: true,
         productList: this.selectedProducts.map(product => product.id)
       };

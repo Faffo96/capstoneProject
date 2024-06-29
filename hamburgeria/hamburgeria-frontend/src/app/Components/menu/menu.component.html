@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="container">
-    <div class="row menu-sections mb-5">
-      <div class="col-3 border-gray mt-5 rounded-5 p-0">
+    <div class="row mb-5">
+      <div class="menu-sections col-3 border-gray mt-5 rounded-5 p-0">
         <div class="d-flex flex-column">
           <div>
             <a *ngFor="let menuSection of menuSections; let i = index" 
@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div class="menu border-gray rounded-5 col-6 mt-5 mx-4 bg-color1">
+      <div class="menu border-gray rounded-5 col-6 mt-5 mx-3 pb-3 bg-color0">
         <div class="py-3">
           <h1 class="fs-1 fw-bold">MENU</h1>
           <h2>Componi il tuo ordine come preferisci!</h2>
@@ -34,7 +34,7 @@
         </div>
       </div>
 
-      <div class="cart border-gray rounded-5 col-3 mt-5">
+      <div class="cart border-gray rounded-5 col-3 mt-5 bg-color0">
         <h4 class="text-dark fs-3 fw-bold py-3">Carrello</h4>
         <app-cart></app-cart>
       </div>

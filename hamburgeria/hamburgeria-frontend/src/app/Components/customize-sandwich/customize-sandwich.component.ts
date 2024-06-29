@@ -96,7 +96,7 @@ export class CustomizeSandwichComponent implements OnInit {
       italianDescription: '',
       englishDescription: '',
       price: this.calculateProductPrice(this.selectedProducts),
-      category: "SANDWICH",
+      category: "CUSTOM_SANDWICH",
       available: true,
       productList: this.selectedProducts.map(product => product.id)
     };

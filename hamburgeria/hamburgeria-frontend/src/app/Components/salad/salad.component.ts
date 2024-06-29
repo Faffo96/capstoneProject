@@ -101,7 +101,7 @@ export class SaladComponent implements OnInit {
       italianDescription: '',
       englishDescription: '',
       price: this.selectedProducts.reduce((sum, product) => sum + product.price, 0),
-      category: "SALAD",
+      category: "CUSTOM_SALAD",
       available: true,
       productList: this.selectedProducts.map(product => product.id)
     };

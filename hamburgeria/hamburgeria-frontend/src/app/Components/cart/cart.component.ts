@@ -52,9 +52,12 @@ export class CartComponent implements OnInit {
   }
 
   removeProductFromCart(product: Product | CustomizableProduct) {
-    this.cartProducts = this.cartProducts.filter(p => p.id !== product.id);
-    this.menuService.setCartProducts(this.cartProducts);
-    this.calculateTotal();
+    const index = this.cartProducts.findIndex(p => p.id === product.id);
+    if (index !== -1) {
+      this.cartProducts.splice(index, 1);
+      this.menuService.setCartProducts(this.cartProducts);
+      this.calculateTotal();
+    }
   }
 
   removeIngredient(customizableProduct: CustomizableProduct, ingredientIndex: number, event: MouseEvent) {
@@ -74,7 +77,7 @@ export class CartComponent implements OnInit {
   }
 
   isBase(ingredient: Product): boolean {
-    return ingredient.category === 'DESSERT_BASE';
+    return ingredient.category === 'DESSERT_BASE' || ingredient.category === 'CUSTOMHAM_BREAD' || ingredient.category === 'CUSTOMHAM_MEAT' || ingredient.category === 'CUSTOMSALAD_BASE' || ingredient.category === 'CUSTOMSAND_BASE';
   }
 
   checkout() {
