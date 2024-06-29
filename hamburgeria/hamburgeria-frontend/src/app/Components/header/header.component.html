@@ -22,11 +22,11 @@
           alt="Hamburgeria logo" width="200px"></div>
 
       <ul class="navbar-nav me-3 align-items-center justify-content-center">
-        <li class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/login">Accedi</a></li>
-        <li class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/register">Registrati</a></li>
-        <li class="my-fs-3 nav-item2 d-flex align-items-center">
-          <img src="../../../assets/img/hamburgeria-logo.png" alt="" width="50px" height="50px">
-          <p class="nav-link pointer nav-item2 text-light fw-bolder" routerLink="/profile">Mario Rossi</p>
+        <li *ngIf="!user" class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/login">Accedi</a></li>
+        <li *ngIf="!user" class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/register">Registrati</a></li>
+        <li *ngIf="user" class="my-fs-3 nav-item2 d-flex align-items-center">
+          <img src="{{user.avatar}}" alt="" width="50px" height="50px">
+          <p class="nav-link pointer nav-item2 text-light fw-bolder" routerLink="/profile">{{user.name}} {{user.surname}}</p>
         </li>
       </ul>
 

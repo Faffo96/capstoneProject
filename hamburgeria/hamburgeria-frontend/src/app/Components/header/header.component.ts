@@ -2,6 +2,8 @@ import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementR
 import { RouteService } from '../../Services/route.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { UserService } from '../../Services/user.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +15,7 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked 
   headerHeight: string = '930px';
   private initialized = false;
   private routeSubscription!: Subscription;
+  user: User | null = null;
 
   constructor(
     private routeService: RouteService,
@@ -20,7 +23,13 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked 
     private el: ElementRef,
     private cdr: ChangeDetectorRef,
     private router: Router,
-  ) {}
+    private userService: UserService,
+  ) {
+    this.userService.user$.subscribe(user => {
+      this.user = user;
+      console.log('User updated:', user);
+    });
+  }
 
   ngAfterViewInit() {
     this.cdr.detectChanges();
