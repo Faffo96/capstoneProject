@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { Product } from './models/product';
 import { ProductService } from './Services/product.service';
+import { DiningTableService } from './Services/dining-table.service';
+import { DiningTable } from './models/dining-table';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,11 +11,12 @@ import { ProductService } from './Services/product.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private authService: AuthService, private productService: ProductService) {}
+  constructor(private authService: AuthService, private productService: ProductService, private diningTableService: DiningTableService) {}
 
   ngOnInit() {
     this.authService.restore();
     this.loadProducts();
+    this.loadDiningTables();
   }
 
   loadProducts(): void {
@@ -23,6 +26,19 @@ export class AppComponent implements OnInit {
       },
       error => {
         console.error('Error loading products', error);
+      }
+    );
+  }
+
+  loadDiningTables(): void {
+    this.diningTableService.getDiningTables().subscribe(
+      (response: { content: DiningTable[] }) => {
+        const data = response.content;
+        console.log(data);
+        this.diningTableService.setDbDiningTables(data);
+      },
+      error => {
+        console.error('Error loading dining tables', error);
       }
     );
   }

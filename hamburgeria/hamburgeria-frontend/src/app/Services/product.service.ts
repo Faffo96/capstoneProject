@@ -3,11 +3,13 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { Product } from '../models/product';
 import { CustomizableProduct } from '../models/customizable-product';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environments/environment.development';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ProductService {
+  apiURL = environment.apiURL;
 
   private productsSubject = new BehaviorSubject<Product[]>([]);
   products$ = this.productsSubject.asObservable();
@@ -20,7 +22,7 @@ export class ProductService {
   constructor(private http: HttpClient) {}
 
   getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>('http://localhost:8080/api/products');
+    return this.http.get<Product[]>(`${this.apiURL}api/products`);
   }
 
   setProducts(products: Product[]): void {
@@ -29,14 +31,7 @@ export class ProductService {
 
   getProductById(id: number): Product | undefined {
     console.log("Current products:", this.productsSubject.getValue());
-    let products = this.productsSubject.getValue()
-    for (let i = 0; i < products.length; i++) {
-      const element = products[i];
-      if (element.id === id) {
-        return element;
-      } 
-    }
-    return undefined;
+    return this.productsSubject.getValue().find(product => product.id === id);
   }
 
   getCartProductsValue(): (Product | CustomizableProduct)[] {

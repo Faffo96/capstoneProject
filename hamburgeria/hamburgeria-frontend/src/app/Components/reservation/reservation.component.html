@@ -9,113 +9,19 @@
                 <div class="bg-plan">
                     <img class="w-55" src="../../../assets/img/plan.png" alt="">
                     <ul class="indoor d-flex">
-                        <li class="seat-0 bg-color1" (click)="toggleTooltip('seat-0')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-0'" class="tooltip-container p-0">
+                        <li *ngFor="let table of indoorTables; let i = index"
+                            [ngClass]="getClassList(table, i, false)"
+                            (click)="toggleTooltip('seat-' + i)">
+                            <div [class.tooltip-active]="activeSeat === 'seat-' + i" class="tooltip-container p-0">
                                 <div class="tooltip rounded-5 py-3 px-2">
                                     <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 1</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>4</span></h2>
+                                        <h1 class="fs-3 fw-6">Tavolo {{table.tableNumber}}</h1>
+                                        <h2 class="mb-3">Posti disponibili: <span>{{table.seating}}</span></h2>
                                         <div class="d-flex justify-content-end">
                                             <button class="my-button">Prenota</button>
                                         </div>
                                     </div>
-                                    <div class="tooltip-tail">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-1 bg-color1" (click)="toggleTooltip('seat-1')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-1'" class="tooltip-container p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 2</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>4</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-2 bg-color1" (click)="toggleTooltip('seat-2')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-2'" class="tooltip-container p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 3</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>4</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-3 bg-color1" (click)="toggleTooltip('seat-3')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-3'" class="tooltip-container p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 4</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>4</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-4 bg-color1" (click)="toggleTooltip('seat-4')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-4'" class="tooltip-container p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 5</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail tooltip-tail2">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-5 bg-color1" (click)="toggleTooltip('seat-5')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-5'" class="tooltip-container p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 6</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail tooltip-tail2">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-6 bg-color1" (click)="toggleTooltip('seat-6')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-6'" class="tooltip-container p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 7</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail tooltip-tail2">
+                                    <div class="tooltip-tail" [ngClass]="{'tooltip-tail2': table.seating === 2}">
                                         <div></div>
                                     </div>
                                 </div>
@@ -123,129 +29,19 @@
                         </li>
                     </ul>
                     <ul class="outdoor d-flex">
-                        <li class="seat-out-0 bg-color2" (click)="toggleTooltip('seat-out-0')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-out-0'" class="tooltip-container tooltip-container2 p-0">
+                        <li *ngFor="let table of outdoorTables; let i = index"
+                            [ngClass]="getClassList(table, i, true)"
+                            (click)="toggleTooltip('seat-out-' + i)">
+                            <div [class.tooltip-active]="activeSeat === 'seat-out-' + i" class="tooltip-container tooltip-container2 p-0">
                                 <div class="tooltip rounded-5 py-3 px-2">
                                     <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 8</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
+                                        <h1 class="fs-3 fw-6">Tavolo {{table.tableNumber}}</h1>
+                                        <h2 class="mb-3">Posti disponibili: <span>{{table.seating}}</span></h2>
                                         <div class="d-flex justify-content-end">
                                             <button class="my-button">Prenota</button>
                                         </div>
                                     </div>
-                                    <div class="tooltip-tail tooltip-tail2">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-out-1 bg-color2" (click)="toggleTooltip('seat-out-1')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-out-1'" class="tooltip-container tooltip-container2 p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 9</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail tooltip-tail2">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-out-2 bg-color2" (click)="toggleTooltip('seat-out-2')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-out-2'" class="tooltip-container tooltip-container2 p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 10</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail tooltip-tail2">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-out-3 bg-color2" (click)="toggleTooltip('seat-out-3')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-out-3'" class="tooltip-container tooltip-container2 p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 11</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail tooltip-tail2">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-out-4 bg-color2" (click)="toggleTooltip('seat-out-4')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-out-4'" class="tooltip-container tooltip-container2 p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 12</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail tooltip-tail2">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-out-5 bg-color2" (click)="toggleTooltip('seat-out-5')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-out-5'" class="tooltip-container tooltip-container2 p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 13</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-out-6 bg-color2" (click)="toggleTooltip('seat-out-6')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-out-6'" class="tooltip-container tooltip-container2 p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 14</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail">
-                                        <div></div>
-                                    </div>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="seat-out-7 bg-color2" (click)="toggleTooltip('seat-out-7')">
-                            <div [class.tooltip-active]="activeSeat === 'seat-out-7'" class="tooltip-container tooltip-container2 p-0">
-                                <div class="tooltip rounded-5 py-3 px-2">
-                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
-                                        <h1 class="fs-3 fw-6">Tavolo 15</h1>
-                                        <h2 class="mb-3">Posti disponibili: <span>2</span></h2>
-                                        <div class="d-flex justify-content-end">
-                                            <button class="my-button">Prenota</button>
-                                        </div>
-                                    </div>
-                                    <div class="tooltip-tail">
+                                    <div class="tooltip-tail" [ngClass]="{'tooltip-tail2': table.seating === 2}">
                                         <div></div>
                                     </div>
                                 </div>
