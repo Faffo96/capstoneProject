@@ -1,14 +1,14 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Product } from '../models/product';
-import { environment } from '../../environments/environment.development';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { Product } from '../models/product';
 import { CustomizableProduct } from '../models/customizable-product';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class MenuService {
+export class ProductService {
+
   private productsSubject = new BehaviorSubject<Product[]>([]);
   products$ = this.productsSubject.asObservable();
 
@@ -47,3 +47,4 @@ export class MenuService {
     this.cartProductsSubject.next(products);
   }
 }
+

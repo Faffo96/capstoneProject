@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../../Services/menu.service';
 import { CartService } from '../../Services/cart.service';
 import { Product } from '../../models/product';
 import { CustomizableProduct } from '../../models/customizable-product';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,10 +13,10 @@ export class CartComponent implements OnInit {
   cartProducts: (Product | CustomizableProduct)[] = [];
   total: number = 0;
 
-  constructor(private menuService: MenuService, private cartService: CartService) {}
+  constructor(private productService: ProductService, private cartService: CartService) {}
 
   ngOnInit() {
-    this.menuService.currentCartProducts$.subscribe(data => {
+    this.productService.currentCartProducts$.subscribe(data => {
       this.cartProducts = data;
       this.calculateTotal();
     });
@@ -55,7 +55,7 @@ export class CartComponent implements OnInit {
     const index = this.cartProducts.findIndex(p => p.id === product.id);
     if (index !== -1) {
       this.cartProducts.splice(index, 1);
-      this.menuService.setCartProducts(this.cartProducts);
+      this.productService.setCartProducts(this.cartProducts);
       this.calculateTotal();
     }
   }
@@ -66,7 +66,7 @@ export class CartComponent implements OnInit {
     customizableProduct.productList.splice(ingredientIndex, 1);
     this.updateProductPrice(customizableProduct); // Aggiorna il prezzo considerando gli ingredienti gratuiti in eccesso
     this.calculateTotal();
-    this.menuService.setCartProducts(this.cartProducts);
+    this.productService.setCartProducts(this.cartProducts);
   }
 
   updateProductPrice(customizableProduct: CustomizableProduct) {
@@ -89,7 +89,7 @@ export class CartComponent implements OnInit {
       console.log('Cart saved:', response);
       // Clear the cart after successful checkout
       this.cartProducts = [];
-      this.menuService.setCartProducts(this.cartProducts);
+      this.productService.setCartProducts(this.cartProducts);
       this.calculateTotal();
     }, error => {
       console.error('Error saving cart:', error);
@@ -97,7 +97,7 @@ export class CartComponent implements OnInit {
   }
 
   getProductById(id: number): Product | undefined {
-    const product = this.menuService.getProductById(id);
+    const product = this.productService.getProductById(id);
     console.log("Product in getProductById:", product);
     return product;
   }

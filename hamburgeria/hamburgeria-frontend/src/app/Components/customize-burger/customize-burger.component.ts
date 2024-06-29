@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuService } from '../../Services/menu.service';
 import { Product } from '../../models/product';
 import { Category } from '../../models/category';
 import { CustomizableProductService } from '../../Services/customizable-product.service';
 import { CustomizableProductDTO } from '../../models/customizable-product-dto';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
     selector: 'app-customize-burger',
@@ -22,16 +22,16 @@ import { CustomizableProductDTO } from '../../models/customizable-product-dto';
       { name: 'Varie', products: [] }
     ];
   
-    constructor(private menuService: MenuService, private customizableProductService: CustomizableProductService) {
-      this.menuService.products$.subscribe(data => {
+    constructor(private productService: ProductService, private customizableProductService: CustomizableProductService) {
+      this.productService.products$.subscribe(data => {
         this.menuProducts = data;
         this.loadCategories();
       });
     }
   
     ngOnInit(): void {
-      this.menuService.getProducts().subscribe(data => {
-        this.menuService.setProducts(data);
+      this.productService.getProducts().subscribe(data => {
+        this.productService.setProducts(data);
       });
     }
   
@@ -114,7 +114,7 @@ import { CustomizableProductDTO } from '../../models/customizable-product-dto';
   
       this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
         console.log('Customizable Burger created:', response);
-        this.menuService.setCartProducts([...this.menuService.getCartProductsValue(), response]);
+        this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
         this.selectedProducts = []; // Reset selected products after creating the burger
       });
     }

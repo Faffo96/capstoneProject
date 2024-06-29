@@ -1,16 +1,13 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter } from 'rxjs/operators';
-import { MenuService } from '../../Services/menu.service';
-import { Product } from '../../models/product';
-import { CartService } from '../../Services/cart.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements OnInit, AfterViewInit {
+export class MenuComponent implements AfterViewInit {
   menuSections = [
     {
       gif: "../../../assets/icons/animate/gif/hamburger.gif",
@@ -61,31 +58,14 @@ export class MenuComponent implements OnInit, AfterViewInit {
 /*   menuProducts: Product[] = []; */
   currentRoute: string;
 
-  constructor(private router: Router, private menuService: MenuService, private cartService: CartService) {
+  constructor(private router: Router) {
     this.currentRoute = '';
 
     this.router.events.pipe(
       filter((event: Event): event is NavigationEnd => event instanceof NavigationEnd)
     ).subscribe((event: NavigationEnd) => {
       this.currentRoute = event.urlAfterRedirects;
-
-/*       this.cartService.cart$.subscribe(data => {
-        this.menuProducts = data;
-      }) */
-
-
-    
-      /* console.log(  this.isSelected(event.urlAfterRedirects.split("/menu/",)[0])) */
     });
-
-    
-    
-  }
-
-  ngOnInit() {
-    
-
-    
   }
 
   ngAfterViewInit() {

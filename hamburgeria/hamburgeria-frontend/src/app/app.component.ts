@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { Product } from './models/product';
-import { MenuService } from './Services/menu.service';
-
+import { ProductService } from './Services/product.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,7 +9,7 @@ import { MenuService } from './Services/menu.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private authService: AuthService, private menuService: MenuService) {}
+  constructor(private authService: AuthService, private productService: ProductService) {}
 
   ngOnInit() {
     this.authService.restore();
@@ -18,9 +17,9 @@ export class AppComponent implements OnInit {
   }
 
   loadProducts(): void {
-    this.menuService.getProducts().subscribe(
+    this.productService.getProducts().subscribe(
       (data: Product[]) => {
-        this.menuService.setProducts(data);
+        this.productService.setProducts(data);
       },
       error => {
         console.error('Error loading products', error);

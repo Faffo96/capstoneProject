@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { MenuService } from '../../Services/menu.service';
 import { Product } from '../../models/product';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-sandwich',
@@ -15,18 +15,18 @@ export class SandwichComponent {
   ];
 
   ngOnInit(): void {
-    this.menuService.getProducts().subscribe(data => {
-      this.menuService.setProducts(data);
+    this.productService.getProducts().subscribe(data => {
+      this.productService.setProducts(data);
     });
   }
 
-  constructor(private menuService: MenuService) {
-    this.menuService.products$.subscribe(data => {
+  constructor(private productService: ProductService) {
+    this.productService.products$.subscribe(data => {
       this.menuProducts = data;
       this.loadCategories();
     });
 
-    this.menuService.currentCartProducts$.subscribe(data => {
+    this.productService.currentCartProducts$.subscribe(data => {
       this.selectedProducts = data;
     });
   }
@@ -45,14 +45,14 @@ export class SandwichComponent {
   addProductToCart(cartProduct: Product) {
     console.log('Product added to cart:', cartProduct);
 
-    let currentProducts = this.menuService.getCartProductsValue();
+    let currentProducts = this.productService.getCartProductsValue();
 
     if (cartProduct.category === 'CUSTOMSALAD_BASE') {
       currentProducts = currentProducts.filter(product => product.category !== cartProduct.category);
       this.selectedProducts = this.selectedProducts.filter(product => product.category !== cartProduct.category);
     }
 
-    this.menuService.setCartProducts([...currentProducts, cartProduct]);
+    this.productService.setCartProducts([...currentProducts, cartProduct]);
   }
 
   isSelected(product: Product): boolean {
