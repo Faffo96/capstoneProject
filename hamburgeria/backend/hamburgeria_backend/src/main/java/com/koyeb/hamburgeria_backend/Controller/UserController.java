@@ -8,6 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequestMapping("/api/users")
@@ -49,5 +52,10 @@ public class UserController {
     public ResponseEntity<String> deleteUser(@PathVariable String email) throws UserNotFoundException {
         String message = userService.deleteUser(email);
         return ResponseEntity.ok(message);
+    }
+
+    @PatchMapping("/{userEmail}")
+    public String PATCHUserAvatar(@RequestPart MultipartFile avatar, @PathVariable String userEmail) throws IOException, UserNotFoundException {
+        return userService.setUserAvatar(userEmail, avatar);
     }
 }

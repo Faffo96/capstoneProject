@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Product } from '../../models/product';
-import { MenuService } from '../../Services/menu.service';
 import { CustomizableProductService } from '../../Services/customizable-product.service';
 import { CustomizableProductDTO } from '../../models/customizable-product-dto';
+import { ProductService } from '../../Services/product.service';
 
 
 @Component({
@@ -22,16 +22,16 @@ export class SaladComponent implements OnInit {
     { name: 'Varie', products: [] }
   ];
 
-  constructor(private menuService: MenuService, private customizableProductService: CustomizableProductService) {
-    this.menuService.products$.subscribe(data => {
+  constructor(private productService: ProductService, private customizableProductService: CustomizableProductService) {
+    this.productService.products$.subscribe(data => {
       this.menuProducts = data;
       this.loadCategories();
     });
   }
 
   ngOnInit(): void {
-    this.menuService.getProducts().subscribe(data => {
-      this.menuService.setProducts(data);
+    this.productService.getProducts().subscribe(data => {
+      this.productService.setProducts(data);
     });
   }
 
@@ -108,7 +108,7 @@ export class SaladComponent implements OnInit {
 
     this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
       console.log('Customizable Salad created:', response);
-      this.menuService.setCartProducts([...this.menuService.getCartProductsValue(), response]);
+      this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
       this.selectedProducts = []; // Reset selected products after creating the salad
     });
   }

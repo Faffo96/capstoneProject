@@ -1,1 +1,55 @@
-<p>reservation works!</p>
+<div class="container-fluid">
+    <div class="container">
+        <div class="d-flex flex-column">
+            <div>
+                <h1 class="fs-6 fw-bold">Prenota un tavolo</h1>
+                <h2>Clicca, seleziona e prenota dove più ti piace!</h2>
+            </div>
+            <div class="row">
+                <div class="bg-plan">
+                    <img class="w-55" src="../../../assets/img/plan.png" alt="">
+                    <ul class="indoor d-flex">
+                        <li *ngFor="let table of indoorTables; let i = index"
+                            [ngClass]="getClassList(table, i, false)"
+                            (click)="toggleTooltip('seat-' + i)">
+                            <div [class.tooltip-active]="activeSeat === 'seat-' + i" class="tooltip-container p-0">
+                                <div class="tooltip rounded-5 py-3 px-2">
+                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
+                                        <h1 class="fs-3 fw-6">Tavolo {{table.tableNumber}}</h1>
+                                        <h2 class="mb-3">Posti disponibili: <span>{{table.seating}}</span></h2>
+                                        <div class="d-flex justify-content-end">
+                                            <button class="my-button">Prenota</button>
+                                        </div>
+                                    </div>
+                                    <div class="tooltip-tail" [ngClass]="{'tooltip-tail2': table.seating === 2}">
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <ul class="outdoor d-flex">
+                        <li *ngFor="let table of outdoorTables; let i = index"
+                            [ngClass]="getClassList(table, i, true)"
+                            (click)="toggleTooltip('seat-out-' + i)">
+                            <div [class.tooltip-active]="activeSeat === 'seat-out-' + i" class="tooltip-container tooltip-container2 p-0">
+                                <div class="tooltip rounded-5 py-3 px-2">
+                                    <div class="bg-light h-100 rounded-5 text-dark p-3">
+                                        <h1 class="fs-3 fw-6">Tavolo {{table.tableNumber}}</h1>
+                                        <h2 class="mb-3">Posti disponibili: <span>{{table.seating}}</span></h2>
+                                        <div class="d-flex justify-content-end">
+                                            <button class="my-button">Prenota</button>
+                                        </div>
+                                    </div>
+                                    <div class="tooltip-tail" [ngClass]="{'tooltip-tail2': table.seating === 2}">
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

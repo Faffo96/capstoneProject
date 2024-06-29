@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from './auth/auth.service';
 import { Product } from './models/product';
-import { MenuService } from './Services/menu.service';
-
+import { ProductService } from './Services/product.service';
+import { DiningTableService } from './Services/dining-table.service';
+import { DiningTable } from './models/dining-table';
+import { UserService } from './Services/user.service';
+import { User } from './models/user';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -10,20 +13,63 @@ import { MenuService } from './Services/menu.service';
 })
 export class AppComponent implements OnInit {
 
-  constructor(private authService: AuthService, private menuService: MenuService) {}
+  user: User | null = null;
+
+  constructor(
+    private authService: AuthService,
+    private userService: UserService,
+    private productService: ProductService,
+    private diningTableService: DiningTableService
+  ) {}
 
   ngOnInit() {
     this.authService.restore();
+    this.loadLoggedUser();
     this.loadProducts();
+    this.loadDiningTables();
+
+/*     this.userService.user$.subscribe(user => {
+      this.user = user;
+      console.log('User updated:', user);
+    }); */
+  }
+
+  loadLoggedUser(): void {
+    const token = this.authService.getToken();
+    if (token) {
+      this.userService.getUserFromToken(token).subscribe(
+        (user: User) => {
+          this.userService.setUser(user);
+        },
+        error => {
+          console.error('Error fetching user', error);
+        }
+      );
+    } else {
+      console.error('Token is null');
+    }
   }
 
   loadProducts(): void {
-    this.menuService.getProducts().subscribe(
+    this.productService.getProducts().subscribe(
       (data: Product[]) => {
-        this.menuService.setProducts(data);
+        this.productService.setProducts(data);
       },
       error => {
         console.error('Error loading products', error);
+      }
+    );
+  }
+
+  loadDiningTables(): void {
+    this.diningTableService.getDiningTables().subscribe(
+      (response: { content: DiningTable[] }) => {
+        const data = response.content;
+        console.log(data);
+        this.diningTableService.setDbDiningTables(data);
+      },
+      error => {
+        console.error('Error loading dining tables', error);
       }
     );
   }

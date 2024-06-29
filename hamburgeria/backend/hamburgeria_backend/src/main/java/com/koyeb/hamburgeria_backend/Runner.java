@@ -1,5 +1,6 @@
 package com.koyeb.hamburgeria_backend;
 
+import com.koyeb.hamburgeria_backend.Controller.JwtToolController;
 import com.koyeb.hamburgeria_backend.Dto.OwnerDTO;
 import com.koyeb.hamburgeria_backend.Entity.Product;
 import com.koyeb.hamburgeria_backend.Entity.Reservation;
@@ -44,6 +45,9 @@ public class Runner implements CommandLineRunner {
 
     @Autowired
     private OwnerService ownerService;
+
+    @Autowired
+    private JwtToolController jwtToolController;
 
     @Autowired
     private OwnerRepository ownerRepository;
@@ -99,6 +103,7 @@ public class Runner implements CommandLineRunner {
             ownerService.instantiateOwner();
         }
 
+        System.out.println(jwtToolController.getUserFromToken("eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk3MDA4OTYsImV4cCI6MTcxOTcwNDQ5Niwic3ViIjoiZmFiaW9zY2FyOTZAZ21haWwuY29tIn0.GTr-ykNZiSh25DOpQK-INr8jkll6MDqC40_yrTIxzWM"));
     }
 }
 

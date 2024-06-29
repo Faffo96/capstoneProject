@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Product } from '../../models/product';
-import { MenuService } from '../../Services/menu.service';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-burger',
@@ -13,30 +13,30 @@ export class BurgerComponent {
   sections: { name: string, products: Product[] }[] = [
     { name: 'Burger', products: [] },
   ];
-
-  ngOnInit(): void {
-    this.menuService.getProducts().subscribe(data => {
-      this.menuService.setProducts(data);
-    });
-  }
-
-  constructor(private menuService: MenuService) {
-    this.menuService.products$.subscribe(data => {
+  
+  constructor(private productService: ProductService) {
+    this.productService.products$.subscribe(data => {
       this.menuProducts = data;
       this.loadCategories();
     });
 
-    this.menuService.currentCartProducts$.subscribe(data => {
+    this.productService.currentCartProducts$.subscribe(data => {
       this.selectedProducts = data;
     });
   }
+  ngOnInit(): void {
+    this.productService.getProducts().subscribe(data => {
+      this.productService.setProducts(data);
+    });
+  }
+
 
   loadCategories() {
     this.sections.forEach(section => section.products = []); // Reset sections
 
     for (let i = 0; i < this.menuProducts.length; i++) {
       const e = this.menuProducts[i];
-      if (e.category === "HAMBURGER") {
+      if (e.category === "CUSTOM_BURGER") {
         this.sections.find(section => section.name === 'Burger')?.products.push(e);
       }
     }
@@ -45,9 +45,9 @@ export class BurgerComponent {
   addProductToCart(cartProduct: Product) {
     console.log('Product added to cart:', cartProduct);
 
-    let currentProducts = this.menuService.getCartProductsValue();
+    let currentProducts = this.productService.getCartProductsValue();
 
-    this.menuService.setCartProducts([...currentProducts, cartProduct]);
+    this.productService.setCartProducts([...currentProducts, cartProduct]);
   }
 
   isSelected(product: Product): boolean {
