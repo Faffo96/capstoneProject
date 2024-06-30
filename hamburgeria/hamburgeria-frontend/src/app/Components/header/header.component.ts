@@ -70,17 +70,17 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked 
           if (route === '/') {
             bgImagePath = '../../../assets/img/hamburger2.jpg';
           } else if (route.startsWith('/menu')) {
-            bgImagePath = '../../../assets/img/header.png';
+            bgImagePath = '../../../assets/img/header-menu.jpg';
           } else if (route.startsWith('/reservation')) {
-            bgImagePath = '../../../assets/img/reservation-header.png';
+            bgImagePath = '../../../assets/img/reservation-header.jpg';
           } else if (route.startsWith('/backoffice')) {
-            bgImagePath = '../../../assets/img/backoffice-header.png';
+            bgImagePath = '../../../assets/img/backoffice-header.jpg';
           } else if (route.startsWith('/login')) {
-            bgImagePath = '../../../assets/img/login-header.png';
+            bgImagePath = '../../../assets/img/login-header.jpg';
           } else if (route.startsWith('/register')) {
-            bgImagePath = '../../../assets/img/register-header.png';
+            bgImagePath = '../../../assets/img/register-header.jpg';
           } else if (route.startsWith('/profile')) {
-            bgImagePath = '../../../assets/img/profile-header.png';
+            bgImagePath = '../../../assets/img/profile-header.jpg';
           } else {
             bgImagePath = '../../../assets/img/default-bg.jpg';
           }

@@ -52,7 +52,11 @@ public class Config {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200"));
+        corsConfiguration.setAllowedOrigins(List.of(
+                "http://localhost:4200",
+                "https://essential-berget-faff-846119c1.koyeb.app",
+                "https://remarkable-jelly-3443f5.netlify.app/"
+        ));
         corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         corsConfiguration.setAllowCredentials(true); // Se vuoi permettere l'invio di cookie
@@ -62,5 +66,6 @@ public class Config {
 
         return new CorsFilter(source);
     }
-
 }
+
+

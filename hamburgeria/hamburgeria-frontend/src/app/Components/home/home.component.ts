@@ -37,12 +37,12 @@ export class HomeComponent {
     {
       name: "Sandwich",
       description: ", I nostri sandwich sono preparati con ingredienti freschi e tanto amore. Scoprite le nostre deliziose combinazioni, dai classici ai più originali. Ce n'è per tutti i gusti! Venite a provarli e lasciatevi conquistare!",
-      photoUrl: "../../../assets/img/sandwich.png"
+      photoUrl: "../../../assets/img/sandwich.jpg"
     },
     {
       name: "Insalatone",
       description: "Le nostre insalatone sono fresche, colorate e piene di gusto! Prepariamo ogni piatto con ingredienti di qualità, combinando sapori unici per un'esperienza leggera e deliziosa. Venite a scoprire le nostre creazioni e trovate la vostra insalatona preferita!",
-      photoUrl: "../../../assets/img/salad.png"
+      photoUrl: "../../../assets/img/salad.jpg"
     },
   ];
 
@@ -60,7 +60,7 @@ export class HomeComponent {
     {
       name: "Dolci",
       description: "I nostri dolci sono un'esplosione di creatività e bontà! Preparati con ingredienti particolari e arricchiti con snack e biscotti, sono perfetti per chi ama le golosità uniche.",
-      photoUrl: "../../../assets/img/dessert2.png"
+      photoUrl: "../../../assets/img/dessert.jpg"
     },
   ]
  paused = false;

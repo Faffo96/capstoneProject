@@ -126,10 +126,10 @@ Club Sandwich Crispy,Club Sandwich Crispy,10.00,SANDWICH,true,"Triplo strato di 
 Club Sandwich Crunchy,Club Sandwich Crunchy,10.00,SANDWICH,true,"Triplo strato di pane tostato, pollo panato fritto 200 gr, cheddar, bacon, salsa crispy, insalata iceberg","Triple layer of toasted bread, 200g breaded fried chicken, cheddar, bacon, crispy sauce, iceberg lettuce"
 Club Sandwich Turkey,Club Sandwich Turkey,9.50,SANDWICH,true,"Triplo strato di pane tostato, fesa di tacchino, scamorza affumicata, Insalata, pomodoro, maionese","Triple layer of toasted bread, turkey breast, smoked scamorza, lettuce, tomato, mayonnaise"
 Club Sandwich Veggy,Club Sandwich Veggy,9.50,SANDWICH,true,"Triplo strato di pane tostato, Insalata, Melanzane arrosto, Scamorza affumicata, Cipolla in agrodolce, Pomodori secchi, Maionese","Triple layer of toasted bread, Lettuce, Grilled eggplant, Smoked scamorza, Sweet and sour onion, Sun-dried tomatoes, Mayonnaise"
-Club componibile pollo panato,Customizable Club Sandwich with breaded chicken,10.00,CUSTOMSAND_BASE,true,,,
-Club Sandwich con fesa tacchino,Club Sandwich with turkey breast,9.50,CUSTOMSAND_BASE,true,,,
-Club Sandwich con hamburger italia 150,Club Sandwich with Italy 150g hamburger,10.00,CUSTOMSAND_BASE,true,,,
-Club Sandwich con hamburger pollo arrosto,Club Sandwich with roasted chicken hamburger,10.00,CUSTOMSAND_BASE,true,,,
+Club componibile pollo panato,Customizable Club Sandwich with breaded chicken,10.00,CUSTOMSAND_BASE,true,,
+Club Sandwich con fesa tacchino,Club Sandwich with turkey breast,9.50,CUSTOMSAND_BASE,true,,
+Club Sandwich con hamburger italia 150,Club Sandwich with Italy 150g hamburger,10.00,CUSTOMSAND_BASE,true,,
+Club Sandwich con hamburger pollo arrosto,Club Sandwich with roasted chicken hamburger,10.00,CUSTOMSAND_BASE,true,,
 Club Sandwich senza carne,Club Sandwich without meat,9.50,CUSTOMSAND_BASE,true,,
 Brie,Brie,0.00,CUSTOMSANDHOT_CHEESE,true,,
 Cheddar,Cheddar,0.00,CUSTOMSANDHOT_CHEESE,true,,

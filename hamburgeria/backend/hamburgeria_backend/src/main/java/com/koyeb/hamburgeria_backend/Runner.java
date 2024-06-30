@@ -102,8 +102,6 @@ public class Runner implements CommandLineRunner {
         if (!ownerService.existsOwner()) {
             ownerService.instantiateOwner();
         }
-
-        System.out.println(jwtToolController.getUserFromToken("eyJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3MTk3MDA4OTYsImV4cCI6MTcxOTcwNDQ5Niwic3ViIjoiZmFiaW9zY2FyOTZAZ21haWwuY29tIn0.GTr-ykNZiSh25DOpQK-INr8jkll6MDqC40_yrTIxzWM"));
     }
 }
 
