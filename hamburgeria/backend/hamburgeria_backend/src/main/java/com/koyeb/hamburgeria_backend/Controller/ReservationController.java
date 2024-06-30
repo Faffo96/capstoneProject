@@ -2,9 +2,7 @@ package com.koyeb.hamburgeria_backend.Controller;
 
 import com.koyeb.hamburgeria_backend.Dto.ReservationDTO;
 import com.koyeb.hamburgeria_backend.Entity.Reservation;
-import com.koyeb.hamburgeria_backend.Exception.ReservationNotFoundException;
-import com.koyeb.hamburgeria_backend.Exception.UnauthorizedException;
-import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
+import com.koyeb.hamburgeria_backend.Exception.*;
 import com.koyeb.hamburgeria_backend.Service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -21,7 +19,7 @@ public class ReservationController {
     private ReservationService reservationService;
 
     @PostMapping
-    public ResponseEntity<Reservation> createReservation(@RequestBody ReservationDTO reservationDTO) throws UserNotFoundException {
+    public ResponseEntity<Reservation> createReservation(@RequestBody ReservationDTO reservationDTO) throws UserNotFoundException, DiningTableNotFoundException, CartNotFoundException {
         Reservation createdReservation = reservationService.createReservation(reservationDTO);
         return ResponseEntity.ok(createdReservation);
     }

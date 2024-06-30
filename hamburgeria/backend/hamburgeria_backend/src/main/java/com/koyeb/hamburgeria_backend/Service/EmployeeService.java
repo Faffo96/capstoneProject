@@ -22,6 +22,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Collections;
 
 @Service
@@ -62,7 +63,7 @@ public class EmployeeService {
         employee.setPassword(passwordEncoder.encode(employeeDTO.getPassword()));
         employee.setAvatar(employeeDTO.getAvatar());
         employee.setRole(Role.valueOf(Role.EMPLOYEE.name()));
-        employee.setCreationDate(employeeDTO.getCreationDate());
+        employee.setCreationDate(LocalDate.now());
         employee.setCodiceFiscale(employeeDTO.getCodiceFiscale());
         employee.setSalary(employeeDTO.getSalary());
 

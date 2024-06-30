@@ -2,11 +2,18 @@ package com.koyeb.hamburgeria_backend.Service;
 
 import com.koyeb.hamburgeria_backend.Dto.ReservationDTO;
 import com.koyeb.hamburgeria_backend.Entity.Cart;
+import com.koyeb.hamburgeria_backend.Entity.CustomizableBurger;
 import com.koyeb.hamburgeria_backend.Entity.DiningTable;
 import com.koyeb.hamburgeria_backend.Entity.Reservation;
+import com.koyeb.hamburgeria_backend.Entity.User.Customer;
+import com.koyeb.hamburgeria_backend.Entity.User.Employee;
+import com.koyeb.hamburgeria_backend.Entity.User.Owner;
 import com.koyeb.hamburgeria_backend.Entity.User.User;
+import com.koyeb.hamburgeria_backend.Exception.CartNotFoundException;
+import com.koyeb.hamburgeria_backend.Exception.DiningTableNotFoundException;
 import com.koyeb.hamburgeria_backend.Exception.ReservationNotFoundException;
 import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
+import com.koyeb.hamburgeria_backend.Repository.CartRepository;
 import com.koyeb.hamburgeria_backend.Repository.ReservationRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,10 +22,15 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ReservationService {
@@ -29,29 +41,83 @@ public class ReservationService {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private DiningTableService diningTableService;
+
+    @Autowired
+    private EmployeeService employeeService;
+
+    @Autowired
+    private OwnerService ownerService;
+
+    @Autowired
+    private CustomerService customerService;
+
+    @Autowired
+    private CartRepository cartRepository;
+
     private static final Logger loggerInfo = LoggerFactory.getLogger("loggerInfo");
 
-    public Reservation createReservation(ReservationDTO reservationDTO) throws UserNotFoundException {
+    public Reservation createReservation(ReservationDTO reservationDTO) throws UserNotFoundException, DiningTableNotFoundException, CartNotFoundException {
         Reservation reservation = new Reservation();
-        reservation.setCreationDate(reservationDTO.getCreationDate());
+        reservation.setCreationDate(LocalDateTime.now());
         reservation.setBookedDate(reservationDTO.getBookedDate());
         reservation.setParticipants(reservationDTO.getParticipants());
 
-        DiningTable diningTable = new DiningTable();
-        diningTable.setId(reservationDTO.getDiningTable().getId());
+        DiningTable diningTable = diningTableService.getDiningTableById(reservationDTO.getId());
         reservation.setDiningTable(diningTable);
 
-        // Mapping User
-        User user = userService.getUserByEmail(reservationDTO.getUser().getEmail());
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found with id: " + reservationDTO.getUser().getEmail());
-        }
-        System.out.println(user.getEmail());
-        reservation.setUser(user);
+        // Ottenere l'utente autenticato dal contesto di sicurezza
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = null;
 
-        // Mapping Cart
-        Cart cart = new Cart();
-        cart.setId(reservationDTO.getCart().getId());
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                currentUserName = ((UserDetails) principal).getUsername();
+            } else {
+                currentUserName = principal.toString();
+            }
+        }
+
+        User currentUser = null;
+        try {
+            currentUser = employeeService.getEmployeeByEmail(currentUserName);
+        } catch (UserNotFoundException e) {
+            // User not found for Employee, continue checking
+        }
+
+        if (currentUser == null) {
+            try {
+                currentUser = customerService.getCustomerByEmail(currentUserName);
+            } catch (UserNotFoundException e) {
+                // User not found for Customer, continue checking
+            }
+        }
+
+        if (currentUser == null) {
+            try {
+                currentUser = ownerService.getOwnerByEmail(currentUserName);
+            } catch (UserNotFoundException e) {
+                // User not found for Owner, continue checking
+            }
+        }
+
+        if (currentUser == null) {
+            throw new UserNotFoundException("User not found for email: " + currentUserName);
+        }
+
+        reservation.setUser(currentUser);
+
+        Cart cart;
+        if (reservationDTO.getCart() == null) {
+            cart = new Cart();
+            cartRepository.save(cart); // Save the cart to generate an ID
+        } else {
+            cart = cartRepository.findById(reservationDTO.getCart().getId())
+                    .orElseThrow(() -> new CartNotFoundException("Cart not found with id: " + reservationDTO.getCart().getId()));
+        }
+
         reservation.setCart(cart);
 
         reservationRepository.save(reservation);

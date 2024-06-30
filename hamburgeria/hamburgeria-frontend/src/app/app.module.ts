@@ -12,7 +12,7 @@ import { HeaderComponent } from './Components/header/header.component';
 import { Route, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TestComponent } from './Components/test/test.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterUserComponent } from './auth/register-user/register-user.component';
 import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
@@ -27,6 +27,7 @@ import { SandwichComponent } from './Components/sandwich/sandwich.component';
 import { CustomizeSandwichComponent } from './Components/customize-sandwich/customize-sandwich.component';
 import { DessertComponent } from './Components/dessert/dessert.component';
 import { DrinkComponent } from './Components/drink/drink.component';import { BurgerComponent } from './Components/burger/burger.component';
+import { ProfileSettingsComponent } from './Components/profile-settings/profile-settings.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -49,14 +50,16 @@ import { DrinkComponent } from './Components/drink/drink.component';import { Bur
     CustomizeSandwichComponent,
     DessertComponent,
     DrinkComponent,
-    BurgerComponent
+    BurgerComponent,
+    ProfileSettingsComponent
   ],
   imports: [
     NgbModule,
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [
     {

@@ -33,14 +33,18 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
+      console.log('Login form is valid. Attempting to login...');
       this.authService.login(this.loginForm.value).subscribe(
         () => {
+          console.log('Login successful. Navigating to home page...');
           this.router.navigate(['/']);
         },
         error => {
-          console.error(error);
+          console.error('Login error:', error);
         }
       );
+    } else {
+      console.log('Login form is invalid.');
     }
   }
 }

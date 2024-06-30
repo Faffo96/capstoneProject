@@ -54,10 +54,11 @@ public class Config {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOrigins(List.of(
                 "http://localhost:4200",
+                "localhost:4200",
                 "https://essential-berget-faff-846119c1.koyeb.app",
-                "https://remarkable-jelly-3443f5.netlify.app/"
+                "https://hamburgeriarc.netlify.app/"
         ));
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH","DELETE", "OPTIONS"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         corsConfiguration.setAllowCredentials(true); // Se vuoi permettere l'invio di cookie
 

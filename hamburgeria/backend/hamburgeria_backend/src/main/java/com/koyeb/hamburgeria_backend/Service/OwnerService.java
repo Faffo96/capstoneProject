@@ -23,6 +23,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.List;
 
@@ -65,7 +66,7 @@ public class OwnerService {
             ownerToSave.setPassword(passwordEncoder.encode(owner.getPassword()));
             ownerToSave.setAvatar(owner.getAvatar());
             ownerToSave.setRole(Role.valueOf(Role.OWNER.name()));
-            ownerToSave.setCreationDate(owner.getCreationDate());
+            ownerToSave.setCreationDate(LocalDate.now());
 
             ownerRepository.save(ownerToSave);
             loggerTrace.trace("Registration email sent to owner: " + ownerToSave.getEmail());
@@ -114,7 +115,9 @@ public class OwnerService {
         owner.setName(ownerDTO.getName());
         owner.setSurname(ownerDTO.getSurname());
         owner.setEmail(ownerDTO.getEmail());
-        owner.setPassword(passwordEncoder.encode(ownerDTO.getPassword()));
+        if (ownerDTO.getPassword() != null) {
+            owner.setPassword(passwordEncoder.encode(ownerDTO.getPassword()));
+        }
         owner.setAvatar(ownerDTO.getAvatar());
         owner.setRole(Role.valueOf(Role.OWNER.name()));
         owner.setCreationDate(ownerDTO.getCreationDate());

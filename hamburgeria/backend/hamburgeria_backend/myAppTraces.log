@@ -58,3 +58,23 @@
 2024-06-28 22:19:11,864 TRACE [main] loggerTrace [OwnerService.java:73] -- Owner with email fabioscar96@gmail.com saved.
 2024-06-28 22:57:34,088 TRACE [main] loggerTrace [OwnerService.java:71] -- Registration email sent to owner: fabioscar96@gmail.com
 2024-06-28 22:57:35,855 TRACE [main] loggerTrace [OwnerService.java:73] -- Owner with email fabioscar96@gmail.com saved.
+2024-06-30 23:18:03,228 TRACE [http-nio-8080-exec-6] loggerTrace [CustomerService.java:72] -- Registration email sent to customer: alien@gmail.com
+2024-06-30 23:18:05,101 TRACE [http-nio-8080-exec-6] loggerTrace [CustomerService.java:74] -- Customer with email alien@gmail.com saved.
+2024-07-01 00:01:02,149 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-07-01 00:01:03,723 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-01 00:06:32,599 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-07-01 00:06:34,092 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-01 00:21:02,178 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-07-01 00:21:03,729 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-01 00:35:59,893 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-07-01 00:36:01,611 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-01 00:58:28,966 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-07-01 00:58:30,552 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-01 01:07:09,731 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-07-01 01:07:11,155 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-01 01:13:04,150 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-07-01 01:13:05,453 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-01 01:20:16,137 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-07-01 01:20:17,655 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-01 01:28:01,709 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-07-01 01:28:03,294 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.

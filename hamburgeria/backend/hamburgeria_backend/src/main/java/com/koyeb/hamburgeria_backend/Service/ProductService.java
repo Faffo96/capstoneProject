@@ -97,7 +97,7 @@ public class ProductService {
         return "Product with id " + id + " deleted successfully.";
     }
 
-    /*@Transactional
+    @Transactional
     public void importProductsFromCSV() throws IOException, CsvException {
         String filePath = "src/main/resources/hamburgeria-menu.csv";
         try (CSVReader csvReader = new CSVReaderBuilder(new FileReader(filePath))
@@ -145,11 +145,11 @@ public class ProductService {
                 }
             }
         }
-    }*/
+    }
 
 
     /*DEPLOY VERSION*/
-    @Transactional
+    /*@Transactional
     public void importProductsFromCSV() throws IOException, CsvException {
         String filePath = "hamburgeria-menu.csv";
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
@@ -199,5 +199,5 @@ public class ProductService {
                 }
             }
         }
-    }
+    }*/
 }

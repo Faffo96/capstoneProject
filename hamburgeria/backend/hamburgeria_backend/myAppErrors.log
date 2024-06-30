@@ -71,3 +71,24 @@
 2024-06-29 11:15:16,367 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
 2024-06-29 11:15:17,448 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
 2024-06-30 01:33:08,186 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: paola.rossi@example.com
+2024-07-01 00:35:24,542 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: fabioscar96@gmail.com
+2024-07-01 00:35:28,637 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: fabioscar96@gmail.com
+2024-07-01 00:56:01,716 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 00:57:17,447 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 00:57:17,581 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 00:57:17,660 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 00:57:17,840 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 00:57:33,542 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:29,752 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:30,522 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:31,153 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:31,356 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:31,519 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:31,687 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:31,845 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:10:23,962 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:12:40,605 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:14:24,770 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:26] -- Content-Type 'multipart/form-data;boundary=--------------------------720863866170266027980026;charset=UTF-8' not supported. Supported content types: application/json, application/*+json
+2024-07-01 01:17:57,494 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:18:04,097 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:27:36,803 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!

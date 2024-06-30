@@ -16,7 +16,6 @@ export class AuthService {
   apiURL = `${environment.apiURL}`;
   jwtHelper = new JwtHelperService();
 
-  // elementi per gestire la procedura di login
   private authSub = new BehaviorSubject<AuthData | null>(null);
   user$ = this.authSub.asObservable();
   timeOut: any;
@@ -27,16 +26,18 @@ export class AuthService {
     return localStorage.getItem('token');
   }
 
-  login(data: { email: string; password: string }) {
+  login(data: { email: string; password: string }): Observable<any> {
+    console.log('Sending login request...');
     return this.http.post(`${this.apiURL}auth/login`, data, { responseType: 'text' }).pipe(
       tap(token => {
-        console.log('Token received: ', token);
+        console.log('Token received:', token);
         localStorage.setItem('token', token);
         this.fetchUserDetails(token).subscribe(userDetails => {
           const authData: AuthData = {
             accessToken: token,
             User: userDetails
           };
+          console.log('User details fetched:', userDetails);
           this.authSub.next(authData);
           localStorage.setItem('user', JSON.stringify(authData));
           this.autoLogout(authData);
@@ -45,9 +46,9 @@ export class AuthService {
       catchError(this.handleError)
     );
   }
-  
 
   fetchUserDetails(token: string): Observable<User> {
+    console.log('Fetching user details...');
     return this.http.get<User>(`${this.apiURL}api/users`, {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`
@@ -58,23 +59,20 @@ export class AuthService {
   signup(data: User): Observable<any> {
     return this.http.post(`${this.apiURL}auth/registerCustomer`, data).pipe(
       tap(response => {
-        console.log('Signup response: ', response);
+        console.log('Signup response:', response);
         const loginData = { email: data.email, password: data.password };
         this.login(loginData).subscribe(
           loginResponse => {
-            console.log('Login response: ', loginResponse);
+            console.log('Login response:', loginResponse);
           },
           loginError => {
-            console.error('Login error: ', loginError);
+            console.error('Login error:', loginError);
           }
         );
       }),
       catchError(this.handleError)
     );
   }
-  
-  
-  
 
   logout() {
     this.authSub.next(null);
@@ -110,7 +108,7 @@ export class AuthService {
   }
 
   private handleError(err: any) {
-    console.log(err.error);
+    console.log('Error occurred:', err.error);
     let errorMessage = 'Errore nella chiamata';
     if (typeof err.error === 'string') {
       errorMessage = err.error;

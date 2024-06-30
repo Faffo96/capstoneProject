@@ -17,6 +17,7 @@ import { SandwichComponent } from './Components/sandwich/sandwich.component';
 import { DessertComponent } from './Components/dessert/dessert.component';
 import { DrinkComponent } from './Components/drink/drink.component';
 import { BurgerComponent } from './Components/burger/burger.component';
+import { ProfileSettingsComponent } from './Components/profile-settings/profile-settings.component';
 
 const routes: Routes = [
   {
@@ -82,6 +83,12 @@ const routes: Routes = [
   {
     path: 'profile',
     component: ProfileComponent,
+    children: [
+      {
+        path: 'profileSettings',
+        component: ProfileSettingsComponent
+      },
+    ]
   },
   {
     path: 'test',

@@ -11,18 +11,13 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/users")
 public class UserController {
     @Autowired
     private UserService userService;
-
-    /*@GetMapping("/current")
-    public ResponseEntity<User> getCurrentUser() {
-        User user = userService.getLoggedInUser();
-        return ResponseEntity.ok(user);
-    }*/
 
     @GetMapping("/{email}")
     public ResponseEntity<User> getUserByEmail(@PathVariable String email) throws UserNotFoundException {
@@ -54,8 +49,49 @@ public class UserController {
         return ResponseEntity.ok(message);
     }
 
-    @PatchMapping("/{userEmail}")
-    public String PATCHUserAvatar(@RequestPart MultipartFile avatar, @PathVariable String userEmail) throws IOException, UserNotFoundException {
-        return userService.setUserAvatar(userEmail, avatar);
+    @PatchMapping("/{userEmail}/avatar")
+    public ResponseEntity<String> patchUserAvatar(@RequestPart MultipartFile avatar, @PathVariable String userEmail) throws IOException, UserNotFoundException {
+        String message = userService.setUserAvatar(userEmail, avatar);
+        return ResponseEntity.ok(message);
+    }
+
+    @PatchMapping("/{email}/email")
+    public ResponseEntity<User> patchUserEmail(
+            @PathVariable String email,
+            @RequestBody Map<String, String> payload
+    ) throws UserNotFoundException {
+        String newEmail = payload.get("newEmail");
+        User updatedUser = userService.patchUserEmail(email, newEmail);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @PatchMapping("/{email}/password")
+    public ResponseEntity<User> patchUserPassword(
+            @PathVariable String email,
+            @RequestBody Map<String, String> payload
+    ) throws UserNotFoundException {
+        String newPassword = payload.get("newPassword");
+        User updatedUser = userService.patchUserPassword(email, newPassword);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @PatchMapping("/{email}/name")
+    public ResponseEntity<User> patchUserName(
+            @PathVariable String email,
+            @RequestBody Map<String, String> payload
+    ) throws UserNotFoundException {
+        String newName = payload.get("newName");
+        User updatedUser = userService.patchUserName(email, newName);
+        return ResponseEntity.ok(updatedUser);
+    }
+
+    @PatchMapping("/{email}/surname")
+    public ResponseEntity<User> patchUserSurname(
+            @PathVariable String email,
+            @RequestBody Map<String, String> payload
+    ) throws UserNotFoundException {
+        String newSurname = payload.get("newSurname");
+        User updatedUser = userService.patchUserSurname(email, newSurname);
+        return ResponseEntity.ok(updatedUser);
     }
 }
