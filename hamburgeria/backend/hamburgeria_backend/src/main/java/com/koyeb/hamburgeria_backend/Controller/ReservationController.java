@@ -6,9 +6,15 @@ import com.koyeb.hamburgeria_backend.Exception.*;
 import com.koyeb.hamburgeria_backend.Service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @RestController
@@ -31,16 +37,38 @@ public class ReservationController {
     }
 
     @GetMapping("/user")
-    public ResponseEntity<List<Reservation>> getReservationsByUserEmail(@RequestParam String email) {
-        List<Reservation> reservations = reservationService.getReservationsByUserEmail(email);
-        return ResponseEntity.ok(reservations);
+    public ResponseEntity<Page<Reservation>> getReservationsByUserEmail(
+            @RequestParam String email,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        try {
+            Page<Reservation> reservations = reservationService.getReservationsByUserEmail(email, page, sortBy);
+            return ResponseEntity.ok(reservations);
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); // Unauthorized
+        }
+    }
+
+    @GetMapping("/userAndDate")
+    public ResponseEntity<Page<Reservation>> getReservationsByUserEmailAndDateRange(
+            @RequestParam String email,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime startDate,
+            @RequestParam @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        try {
+            Page<Reservation> reservations = reservationService.getReservationsByUserEmailAndDateRange(email, startDate, endDate, page, sortBy);
+            return ResponseEntity.ok(reservations);
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); // Unauthorized
+        }
     }
 
     @GetMapping
     public ResponseEntity<Page<Reservation>> getAllReservations(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "id") String sortBy) {
-        Page<Reservation> reservations = reservationService.getAllReservations(page, sortBy);
+        Page<Reservation> reservations = reservationService.getReservations(page, sortBy);
         return ResponseEntity.ok(reservations);
     }
 

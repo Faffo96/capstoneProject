@@ -115,6 +115,7 @@ import { ProductService } from '../../Services/product.service';
       this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
         console.log('Customizable Burger created:', response);
         this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
+        window.alert("Burger aggiunto al carrello");
         this.selectedProducts = []; // Reset selected products after creating the burger
       });
     }

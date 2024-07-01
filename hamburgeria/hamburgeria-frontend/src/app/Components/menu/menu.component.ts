@@ -95,4 +95,9 @@ export class MenuComponent implements AfterViewInit {
   biggerGif(menuSectionName: string): boolean {
     return ['Fritture', 'Insalatone', 'Dolci', 'Bevande'].includes(menuSectionName);
   }
+
+  isCustomizableSection(): boolean {
+    const currentRoute = this.router.url;
+    return currentRoute.includes('customizeBurger') || currentRoute.includes('customizeSandwich') || currentRoute.includes('salad');
+  }
 }

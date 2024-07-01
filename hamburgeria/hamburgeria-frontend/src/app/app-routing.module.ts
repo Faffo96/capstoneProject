@@ -18,6 +18,8 @@ import { DessertComponent } from './Components/dessert/dessert.component';
 import { DrinkComponent } from './Components/drink/drink.component';
 import { BurgerComponent } from './Components/burger/burger.component';
 import { ProfileSettingsComponent } from './Components/profile-settings/profile-settings.component';
+import { UserReservationsComponent } from './Components/user-reservations/user-reservations.component';
+import { UserCartsComponent } from './Components/user-carts/user-carts.component';
 
 const routes: Routes = [
   {
@@ -85,8 +87,16 @@ const routes: Routes = [
     component: ProfileComponent,
     children: [
       {
-        path: 'profileSettings',
+        path: 'userSettings',
         component: ProfileSettingsComponent
+      },
+      {
+        path: 'userReservations',
+        component: UserReservationsComponent
+      },
+      {
+        path: 'userOrders',
+        component: UserCartsComponent
       },
     ]
   },

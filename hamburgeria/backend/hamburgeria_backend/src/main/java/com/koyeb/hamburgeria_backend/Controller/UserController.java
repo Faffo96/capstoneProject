@@ -1,11 +1,15 @@
 package com.koyeb.hamburgeria_backend.Controller;
 
 import com.koyeb.hamburgeria_backend.Dto.UserDTO;
+import com.koyeb.hamburgeria_backend.Entity.Reservation;
 import com.koyeb.hamburgeria_backend.Entity.User.User;
+import com.koyeb.hamburgeria_backend.Exception.UnauthorizedException;
 import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
+import com.koyeb.hamburgeria_backend.Service.ReservationService;
 import com.koyeb.hamburgeria_backend.Service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -19,11 +23,22 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping("/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) throws UserNotFoundException {
-        User user = userService.getUserByEmail(email);
-        return ResponseEntity.ok(user);
+    @Autowired
+    private ReservationService reservationService;
+
+    @GetMapping("/user")
+    public ResponseEntity<Page<Reservation>> getReservationsByUserEmail(
+            @RequestParam String email,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "id") String sortBy) {
+        try {
+            Page<Reservation> reservations = reservationService.getReservationsByUserEmail(email, page, sortBy);
+            return ResponseEntity.ok(reservations);
+        } catch (UnauthorizedException e) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null); // Unauthorized
+        }
     }
+
 
     @GetMapping
     public ResponseEntity<Page<User>> getAllUsers(

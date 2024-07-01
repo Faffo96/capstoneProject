@@ -104,6 +104,7 @@ export class CustomizeSandwichComponent implements OnInit {
     this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
       console.log('Customizable Sandwich created:', response);
       this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
+      window.alert("Club Sandwich aggiunto al carrello");
       this.selectedProducts = []; // Reset selected products after creating the sandwich
     });
   }

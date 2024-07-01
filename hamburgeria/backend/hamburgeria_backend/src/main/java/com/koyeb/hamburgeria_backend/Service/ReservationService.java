@@ -9,10 +9,7 @@ import com.koyeb.hamburgeria_backend.Entity.User.Customer;
 import com.koyeb.hamburgeria_backend.Entity.User.Employee;
 import com.koyeb.hamburgeria_backend.Entity.User.Owner;
 import com.koyeb.hamburgeria_backend.Entity.User.User;
-import com.koyeb.hamburgeria_backend.Exception.CartNotFoundException;
-import com.koyeb.hamburgeria_backend.Exception.DiningTableNotFoundException;
-import com.koyeb.hamburgeria_backend.Exception.ReservationNotFoundException;
-import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
+import com.koyeb.hamburgeria_backend.Exception.*;
 import com.koyeb.hamburgeria_backend.Repository.CartRepository;
 import com.koyeb.hamburgeria_backend.Repository.ReservationRepository;
 import org.slf4j.Logger;
@@ -23,6 +20,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -131,13 +129,83 @@ public class ReservationService {
                 .orElseThrow(() -> new ReservationNotFoundException("Reservation not found with id: " + id));
     }
 
-    public List<Reservation> getReservationsByUserEmail(String userEmail) {
-        List<Reservation> reservations = reservationRepository.findByUserEmail(userEmail);
-        loggerInfo.info("Retrieved reservations for user with id " + userEmail);
+    public Page<Reservation> getReservationsByUserEmail(String userEmail, int page, String sortBy) throws UnauthorizedException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = null;
+        boolean isAdminOrOwner = false;
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                currentUserName = ((UserDetails) principal).getUsername();
+                for (GrantedAuthority authority : ((UserDetails) principal).getAuthorities()) {
+                    if (authority.getAuthority().equals("ROLE_ADMIN") || authority.getAuthority().equals("ROLE_OWNER")) {
+                        isAdminOrOwner = true;
+                        break;
+                    }
+                }
+            } else {
+                currentUserName = principal.toString();
+            }
+        }
+
+        if (currentUserName == null) {
+            throw new UnauthorizedException("User not authenticated");
+        }
+
+        if (isAdminOrOwner || currentUserName.equals(userEmail)) {
+            int fixedSize = 15;
+            Pageable pageable = PageRequest.of(page, fixedSize, Sort.by(sortBy));
+            Page<Reservation> reservations = reservationRepository.findByUserEmail(userEmail, pageable);
+            loggerInfo.info("Retrieved reservations for user with email " + userEmail + ", page " + page);
+            return reservations;
+        } else {
+            throw new UnauthorizedException("User not authorized to access these reservations");
+        }
+    }
+
+    public Page<Reservation> getReservationsByUserEmailAndDateRange(String userEmail, LocalDateTime startDate, LocalDateTime endDate, int page, String sortBy) throws UnauthorizedException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = null;
+        boolean isAdminOrOwner = false;
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                currentUserName = ((UserDetails) principal).getUsername();
+                for (GrantedAuthority authority : ((UserDetails) principal).getAuthorities()) {
+                    if (authority.getAuthority().equals("ROLE_ADMIN") || authority.getAuthority().equals("ROLE_OWNER")) {
+                        isAdminOrOwner = true;
+                        break;
+                    }
+                }
+            } else {
+                currentUserName = principal.toString();
+            }
+        }
+
+        if (currentUserName == null) {
+            throw new UnauthorizedException("User not authenticated");
+        }
+
+        if (isAdminOrOwner || currentUserName.equals(userEmail)) {
+            int fixedSize = 15;
+            Pageable pageable = PageRequest.of(page, fixedSize, Sort.by(sortBy));
+            Page<Reservation> reservations = reservationRepository.findByUserEmailAndDateRange(userEmail, startDate, endDate, pageable);
+            loggerInfo.info("Retrieved reservations for user with email " + userEmail + ", page " + page);
+            return reservations;
+        } else {
+            throw new UnauthorizedException("User not authorized to access these reservations");
+        }
+    }
+
+    public List<Reservation> getAllReservations(String sortBy) {
+        List<Reservation> reservations = reservationRepository.findAll(Sort.by(sortBy));
+        loggerInfo.info("Retrieved all reservations sorted by " + sortBy);
         return reservations;
     }
 
-    public Page<Reservation> getAllReservations(int page, String sortBy) {
+    public Page<Reservation> getReservations(int page, String sortBy) {
         int fixedSize = 15;
         Pageable pageable = PageRequest.of(page, fixedSize, Sort.by(sortBy));
         Page<Reservation> reservations = reservationRepository.findAll(pageable);
@@ -180,4 +248,3 @@ public class ReservationService {
         return "Reservation with id " + id + " deleted successfully.";
     }
 }
-

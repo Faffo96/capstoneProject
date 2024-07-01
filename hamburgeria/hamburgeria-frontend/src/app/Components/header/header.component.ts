@@ -1,4 +1,4 @@
-import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnInit, Renderer2 } from '@angular/core';
+import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { RouteService } from '../../Services/route.service';
 import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -10,11 +10,12 @@ import { User } from '../../models/user';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked {
+export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked, OnDestroy {
   currentRoute: string = '';
   headerHeight: string = '930px';
   private initialized = false;
   private routeSubscription!: Subscription;
+  private userSubscription!: Subscription;
   user: User | null = null;
 
   constructor(
@@ -25,9 +26,10 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked 
     private router: Router,
     private userService: UserService,
   ) {
-    this.userService.user$.subscribe(user => {
+    this.userSubscription = this.userService.user$.subscribe(user => {
       this.user = user;
       console.log('User updated:', user);
+      this.cdr.detectChanges();  // Forza il rilevamento delle modifiche
     });
   }
 
@@ -97,8 +99,8 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked 
     if (this.routeSubscription) {
       this.routeSubscription.unsubscribe();
     }
+    if (this.userSubscription) {
+      this.userSubscription.unsubscribe();
+    }
   }
-
-
-  
 }

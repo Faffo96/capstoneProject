@@ -7,7 +7,7 @@
                   [class.selected]="isSelected(product)"
                   class="my-button px-2 my-1 mx-1">
             <p class="my-fs-1 fw-bold me-1 d-inline">{{product.italianName}}
-              <span *ngIf="product.price != 0" class=" my-fs-1 fw-bold d-inline"> - {{product.price}}&euro;</span>
+              <span *ngIf="product.price != 0" class=" my-fs-1 fw-bold d-inline"> - {{product.price | number:'1.2-2'}}&euro;</span>
             </p>
           </button>
         </div>

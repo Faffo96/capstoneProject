@@ -106,6 +106,7 @@ export class DessertComponent implements OnInit {
     this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
       console.log('Customizable Dessert created:', response);
       this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
+      window.alert("Dolce aggiunto al carrello");
       this.selectedProducts = []; // Reset selected products after creating the dessert
     });
   }

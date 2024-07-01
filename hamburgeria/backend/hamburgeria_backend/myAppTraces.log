@@ -78,3 +78,8 @@
 2024-07-01 01:20:17,655 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
 2024-07-01 01:28:01,709 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
 2024-07-01 01:28:03,294 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-01 01:38:07,468 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
+2024-07-01 01:38:08,878 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-01 01:47:48,088 TRACE [http-nio-8080-exec-9] loggerTrace [UserService.java:106] -- User with email=fabioscar96@gmail.com updated successfully with the sent photo.
+2024-07-01 10:29:08,667 TRACE [http-nio-8080-exec-10] loggerTrace [EmployeeService.java:71] -- Registration email sent to employee: customer@example.com
+2024-07-01 10:29:10,425 TRACE [http-nio-8080-exec-10] loggerTrace [EmployeeService.java:73] -- Employee with email customer@example.com saved.

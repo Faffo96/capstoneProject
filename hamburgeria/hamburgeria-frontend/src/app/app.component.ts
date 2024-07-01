@@ -28,10 +28,10 @@ export class AppComponent implements OnInit {
     this.loadProducts();
     this.loadDiningTables();
 
-/*     this.userService.user$.subscribe(user => {
+    this.userService.user$.subscribe(user => {
       this.user = user;
       console.log('User updated:', user);
-    }); */
+    });
   }
 
   loadLoggedUser(): void {

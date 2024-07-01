@@ -5,6 +5,7 @@ import { User } from "./user";
 
 export interface Cart {
     id: number;
+    creationDate: string;
     reservation: Reservation;
     productList: Product[];
     user: User;

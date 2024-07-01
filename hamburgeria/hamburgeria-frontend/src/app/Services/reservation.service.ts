@@ -23,19 +23,21 @@ export class ReservationService {
     return this.http.get<Reservation>(`${this.apiURL}/${id}`);
   }
 
-  getReservationsByUserEmail(email: string): Observable<Reservation[]> {
-    return this.http.get<Reservation[]>(`${this.apiURL}/user?email=${email}`);
+  getReservationsByUserEmail(email: string, page: number = 0, sortBy: string = 'id'): Observable<any> {
+    return this.http.get<any>(`${this.apiURL}api/reservations/user?email=${email}&page=${page}&sortBy=${sortBy}`);
   }
 
-  getAllReservations(page: number = 0, sortBy: string = 'id'): Observable<any> {
-    return this.http.get<any>(`${this.apiURL}?page=${page}&sortBy=${sortBy}`);
+  getAllReservations(sortBy: string = 'id'): Observable<Reservation[]> {
+    return this.http.get<Reservation[]>(`${this.apiURL}?sortBy=${sortBy}`);
   }
 
   updateReservation(id: number, reservationDTO: any): Observable<Reservation> {
-    return this.http.put<Reservation>(`${this.apiURL}/${id}`, reservationDTO);
+    return this.http.put<Reservation>(`${this.apiURL}api/reservations/${id}`, reservationDTO);
   }
 
   deleteReservation(id: number): Observable<string> {
-    return this.http.delete<string>(`${this.apiURL}/${id}`);
+    return this.http.delete(`${this.apiURL}api/reservations/${id}`, { responseType: 'text' });
   }
+  
 }
+

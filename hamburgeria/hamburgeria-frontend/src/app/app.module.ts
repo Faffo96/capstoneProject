@@ -28,6 +28,11 @@ import { CustomizeSandwichComponent } from './Components/customize-sandwich/cust
 import { DessertComponent } from './Components/dessert/dessert.component';
 import { DrinkComponent } from './Components/drink/drink.component';import { BurgerComponent } from './Components/burger/burger.component';
 import { ProfileSettingsComponent } from './Components/profile-settings/profile-settings.component';
+import { UserReservationsComponent } from './Components/user-reservations/user-reservations.component';
+import { UserCartsComponent } from './Components/user-carts/user-carts.component';
+import { DatePipe } from './pipes/date.pipe';
+import { CommonModule } from '@angular/common';
+import { PriceFormatPipe } from './pipes/price-format.pipe';
 @NgModule({
   declarations: [
     AppComponent,
@@ -51,7 +56,11 @@ import { ProfileSettingsComponent } from './Components/profile-settings/profile-
     DessertComponent,
     DrinkComponent,
     BurgerComponent,
-    ProfileSettingsComponent
+    ProfileSettingsComponent,
+    UserReservationsComponent,
+    UserCartsComponent,
+    DatePipe,
+    PriceFormatPipe
   ],
   imports: [
     NgbModule,
@@ -59,7 +68,8 @@ import { ProfileSettingsComponent } from './Components/profile-settings/profile-
     AppRoutingModule,
     ReactiveFormsModule,
     HttpClientModule,
-    FormsModule
+    FormsModule,
+    CommonModule
   ],
   providers: [
     {

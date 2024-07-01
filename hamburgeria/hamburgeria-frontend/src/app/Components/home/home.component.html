@@ -25,6 +25,7 @@
   [pauseOnHover]="pauseOnHover"
   [pauseOnFocus]="pauseOnFocus"
   (slide)="onSlide($event)"
+  class=".ngb-carousel"
 >
   <ng-template ngbSlide *ngFor="let othersPost1 of othersPosts1; let i = index">
     <section class="others container-fluid bg-color2">
@@ -47,6 +48,18 @@
   </ng-template>
 </ngb-carousel>
 
-<div class="trustpilot w-100 d-flex justify-content-center">
-    <h2 class="playwrite-font color2 fs-2 pt-5 mb-5">Le vostre recensioni</h2>
-</div>
+<div class="trustpilot mt-3 mb-5 d-flex flex-column align-items-center justify-content-center">
+    <div class="mb-3">
+      <h2 class="playwrite-font color2 fs-2 pt-5 mb-5">Le vostre recensioni</h2>
+    </div>
+    <div class="mb-5 w-100">
+      <ngb-carousel *ngIf="feedbacks.length > 0">
+        <ng-template ngbSlide *ngFor="let feedback of feedbacks; let i = index">
+          <div class="picsum-img-wrapper d-flex justify-content-center">
+            <img [src]="feedback" alt="Recensione {{ i + 1 }}">
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+  </div>
+  

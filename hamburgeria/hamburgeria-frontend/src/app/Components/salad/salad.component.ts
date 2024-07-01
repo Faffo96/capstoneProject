@@ -109,6 +109,7 @@ export class SaladComponent implements OnInit {
     this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
       console.log('Customizable Salad created:', response);
       this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
+      window.alert("Insalatona aggiunto al carrello");
       this.selectedProducts = []; // Reset selected products after creating the salad
     });
   }

@@ -7,8 +7,13 @@ import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/n
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
- 
 
+  feedbacks: string[] = [
+    '../../../assets/img/recensione1.png',
+    '../../../assets/img/recensione2.png',
+    '../../../assets/img/recensione3.png'
+  ];
+ 
   ourBurgersPosts = [
     {
       description: "Benvenuti nel cuore della città! Il nostro ristorante, accogliente e dal design curato, vi offre una deliziosa selezione di hamburger: Black Angus argentino, Fassona piemontese, Pollo, Chianina toscana e Cinghiale. Venite a trovarci per un'esperienza gustosa e rilassante!",
