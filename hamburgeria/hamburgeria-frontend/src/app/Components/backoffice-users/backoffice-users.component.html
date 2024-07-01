@@ -3,22 +3,22 @@
     <table class="table table-bordered">
       <thead>
         <tr>
+          <th class="fw-bold">Avatar</th>
           <th class="fw-bold">Nome</th>
           <th class="fw-bold">Cognome</th>
           <th class="fw-bold">Email</th>
-          <th class="fw-bold">Avatar</th>
           <th class="fw-bold">Ruolo</th>
           <th class="fw-bold">Data di Creazione</th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let customer of customers">
-          <td>{{ customer.name }}</td>
-          <td>{{ customer.surname }}</td>
-          <td>{{ customer.email }}</td>
           <td>
             <img *ngIf="customer.avatar" [src]="customer.avatar" alt="Avatar" width="50">
           </td>
+          <td>{{ customer.name }}</td>
+          <td>{{ customer.surname }}</td>
+          <td>{{ customer.email }}</td>
           <td>{{ customer.role }}</td>
           <td>{{ customer.creationDate | date }}</td>
           <td>

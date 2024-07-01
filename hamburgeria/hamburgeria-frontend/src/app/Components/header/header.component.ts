@@ -29,12 +29,12 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
     this.userSubscription = this.userService.user$.subscribe(user => {
       this.user = user;
       console.log('User updated:', user);
-      this.cdr.detectChanges();  // Forza il rilevamento delle modifiche
+
     });
   }
 
   ngAfterViewInit() {
-    this.cdr.detectChanges();
+    
   }
 
   ngAfterViewChecked() {

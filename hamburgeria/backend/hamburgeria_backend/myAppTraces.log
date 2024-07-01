@@ -83,3 +83,5 @@
 2024-07-01 01:47:48,088 TRACE [http-nio-8080-exec-9] loggerTrace [UserService.java:106] -- User with email=fabioscar96@gmail.com updated successfully with the sent photo.
 2024-07-01 10:29:08,667 TRACE [http-nio-8080-exec-10] loggerTrace [EmployeeService.java:71] -- Registration email sent to employee: customer@example.com
 2024-07-01 10:29:10,425 TRACE [http-nio-8080-exec-10] loggerTrace [EmployeeService.java:73] -- Employee with email customer@example.com saved.
+2024-07-01 16:09:12,392 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:72] -- Registration email sent to customer: customer1@example.com
+2024-07-01 16:09:14,316 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:74] -- Customer with email customer1@example.com saved.

@@ -6,6 +6,7 @@ import { DiningTableService } from './Services/dining-table.service';
 import { DiningTable } from './models/dining-table';
 import { UserService } from './Services/user.service';
 import { User } from './models/user';
+import { Observable, of, switchMap } from 'rxjs';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -20,9 +21,7 @@ export class AppComponent implements OnInit {
     private userService: UserService,
     private productService: ProductService,
     private diningTableService: DiningTableService
-  ) {}
-
-  ngOnInit() {
+  ) {
     this.authService.restore();
     this.loadLoggedUser();
     this.loadProducts();
@@ -34,12 +33,20 @@ export class AppComponent implements OnInit {
     });
   }
 
+  ngOnInit() {
+    
+  }
+
   loadLoggedUser(): void {
     const token = this.authService.getToken();
     if (token) {
-      this.userService.getUserFromToken(token).subscribe(
-        (user: User) => {
-          this.userService.setUser(user);
+      this.userService.getUserFromToken(token).pipe(
+        switchMap((user: User) => {
+          return this.userService.setUser(user)
+        })
+      ).subscribe(
+        (user: User | null) => {
+          console.log('User loaded and set:', user);
         },
         error => {
           console.error('Error fetching user', error);

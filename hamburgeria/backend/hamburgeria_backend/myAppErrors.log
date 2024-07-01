@@ -110,3 +110,5 @@
 2024-07-01 13:49:49,673 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
 2024-07-01 13:50:05,949 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
 2024-07-01 13:50:17,032 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 16:45:27,994 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 16:45:29,291 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!

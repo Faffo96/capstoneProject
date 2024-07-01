@@ -1,0 +1,41 @@
+<div class="container my-5">
+    <h1 class="fw-bold fs-1 mb-5">Impiegati</h1>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Avatar</th>
+          <th>Nome</th>
+          <th>Cognome</th>
+          <th>Email</th>
+          <th>Ruolo</th>
+          <th>Data di Creazione</th>
+          <th>Codice Fiscale</th>
+          <th>Stipendio</th>
+          <th>Azioni</th>
+        </tr>
+      </thead>
+      <tbody>
+          <tr *ngFor="let employee of employees">
+            <td>
+              <img *ngIf="employee.avatar" [src]="employee.avatar" alt="Avatar" width="50">
+            </td>
+          <td>{{ employee.name }}</td>
+          <td>{{ employee.surname }}</td>
+          <td>{{ employee.email }}</td>
+          <td>{{ employee.role }}</td>
+          <td>{{ employee.creationDate}}</td>
+          <td>{{ employee.codiceFiscale }}</td>
+          <td>{{ employee.salary | number:'1.2-2' }} &euro;</td>
+          <td>
+            <button class="btn btn-primary btn-sm" (click)="performAction(employee)">Azione</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <!-- Pagination controls -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <a class="page-link" (click)="changePage(currentPage - 1)" href="javascript:void(0)">Prec
+  
