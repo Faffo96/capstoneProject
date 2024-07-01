@@ -20,6 +20,7 @@ import { BurgerComponent } from './Components/burger/burger.component';
 import { ProfileSettingsComponent } from './Components/profile-settings/profile-settings.component';
 import { UserReservationsComponent } from './Components/user-reservations/user-reservations.component';
 import { UserCartsComponent } from './Components/user-carts/user-carts.component';
+import { BackofficeUsersComponent } from './Components/backoffice-users/backoffice-users.component';
 
 const routes: Routes = [
   {
@@ -35,8 +36,8 @@ const routes: Routes = [
     component: BackofficeComponent,
     children: [
       {
-        path: 'test',
-        component: TestComponent
+        path: 'backoffice-users',
+        component: BackofficeUsersComponent
       },
     ]
   },

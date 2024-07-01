@@ -33,6 +33,7 @@ import { UserCartsComponent } from './Components/user-carts/user-carts.component
 import { DatePipe } from './pipes/date.pipe';
 import { CommonModule } from '@angular/common';
 import { PriceFormatPipe } from './pipes/price-format.pipe';
+import { BackofficeUsersComponent } from './Components/backoffice-users/backoffice-users.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +61,8 @@ import { PriceFormatPipe } from './pipes/price-format.pipe';
     UserReservationsComponent,
     UserCartsComponent,
     DatePipe,
-    PriceFormatPipe
+    PriceFormatPipe,
+    BackofficeUsersComponent
   ],
   imports: [
     NgbModule,
