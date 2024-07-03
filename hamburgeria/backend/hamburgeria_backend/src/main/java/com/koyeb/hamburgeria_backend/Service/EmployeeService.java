@@ -101,7 +101,7 @@ public class EmployeeService {
 
 
     public Employee getEmployeeByEmail(String email) throws UserNotFoundException {
-        return employeeRepository.findByEmail(email)
+        return employeeRepository.findOneByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Employee not found with email: " + email));
     }
 

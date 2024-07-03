@@ -1,0 +1,99 @@
+<div class="container-fluid py-5">
+  <div class="container bg-color1 pt-4 rounded-5 pb-4 px-4">
+    <h1 class="fw-bold bg-light rounded-5 p-3 fs-1 mb-5">Prodotti</h1>
+    <h2 class="mb-5 fw-bold fs-5">Aggiungi prodotti:</h2>
+    <!-- Input Form for New Product -->
+    <div class="row mb-5">
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductName" class="mb-2">Nome (Italiano)</label>
+        <input type="text" id="newProductName" class="form-control" [(ngModel)]="newProduct.italianName">
+      </div>
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductEnglishName" class="mb-2">Name (English)</label>
+        <input type="text" id="newProductEnglishName" class="form-control" [(ngModel)]="newProduct.englishName">
+      </div>
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductItalianDescription" class="mb-2">Descrizione (Italiano)</label>
+        <input type="text" id="newProductItalianDescription" class="form-control" [(ngModel)]="newProduct.italianDescription">
+      </div>
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductEnglishDescription" class="mb-2">Description (English)</label>
+        <input type="text" id="newProductEnglishDescription" class="form-control" [(ngModel)]="newProduct.englishDescription">
+      </div>
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductPrice" class="mb-2">Prezzo</label>
+        <input type="number" id="newProductPrice" class="form-control" [(ngModel)]="newProduct.price">
+      </div>
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductCategory" class="mb-2">Categoria</label>
+        <div ngbDropdown class="d-inline-block w-100">
+          <button class="btn my-button2 dropdown-toggle w-100" id="newProductCategoryDropdown" ngbDropdownToggle>
+            {{newProduct.category || 'Select Category'}}
+          </button>
+          <div ngbDropdownMenu [attr.aria-labelledby]="'newProductCategoryDropdown'">
+            <button ngbDropdownItem *ngFor="let category of categories" (click)="selectNewProductCategory(category)">
+              {{category}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 text-end">
+        <button class="btn btn-success mt-2" (click)="addProduct()">Aggiungi Prodotto</button>
+      </div>
+    </div>
+
+    <!-- Dropdowns for Category Filtering -->
+    <div class="d-flex mb-3">
+      <div ngbDropdown class="d-inline-block me-2" *ngFor="let section of sections">
+        <button class="btn my-button2" id="{{section.id}}" ngbDropdownToggle>
+          {{section.name}}
+        </button>
+        <div ngbDropdownMenu [attr.aria-labelledby]="section.id">
+          <div *ngFor="let item of section.items" ngbDropdownItem class="d-flex align-items-center">
+            <input class="form-check-input me-2 border-black" type="radio" id="{{item}}" name="{{section.id}}" value="{{item}}" (change)="selectCategory(item)">
+            <label class="form-check-label fw-bold" for="{{item}}">{{item}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Accordion -->
+    <div ngbAccordion [closeOthers]="true" class="mt-3">
+      <div ngbAccordionItem *ngFor="let product of products$; let i = index">
+        <h2 ngbAccordionHeader>
+          <button ngbAccordionButton>{{product.italianName}}</button>
+        </h2>
+        <div ngbAccordionCollapse>
+          <div ngbAccordionBody>
+            <div class="row">
+              <div class="col-12 mb-2">
+                <strong>Id:</strong> {{product.id}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Nome:</strong> {{product.italianName}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Name:</strong> {{product.englishName}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Descrizione:</strong> {{product.italianDescription}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Description:</strong> {{product.englishDescription}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Prezzo:</strong> {{product.price}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Categoria:</strong> {{product.category}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Disponibile:</strong> {{product.available}}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

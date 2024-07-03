@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Cart } from '../../models/cart';
 import { CartService } from '../../Services/cart.service';
+import { UserService } from '../../Services/user.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-user-carts',
@@ -15,30 +17,42 @@ export class UserCartsComponent implements OnInit {
   pages: number[] = [];
   selectedCart!: Cart;
   isEditModalOpen: boolean = false;
+  user$!: User | null;
 
-  constructor(private cartService: CartService) { }
+  constructor(private cartService: CartService, private userService: UserService) { 
+    this.userService.user$.subscribe(user => {
+      this.user$ = user;
+      console.log('User updated:', user);
+      
+      this.getCarts(this.currentPage);
+    });
+  }
 
   ngOnInit(): void {
-    this.getCarts(this.currentPage);
+    
   }
 
   getCarts(page: number): void {
-    this.cartService.getCarts(page).subscribe(
-      (response: any) => {
-        this.carts = response.content;
-        this.currentPage = response.number;
-        this.totalPages = response.totalPages;
-        this.pages = Array.from({ length: this.totalPages }, (_, i) => i);
-      },
-      (error: any) => {
-        console.error('Error fetching carts', error);
-        if (error.status === 0) {
-          console.error('Could not connect to server. Please make sure the server is running.');
-        } else {
-          console.error(`Backend returned code ${error.status}, body was: ${error.message}`);
+    if (this.user$ != null) {
+      const email = this.user$?.email; 
+      this.cartService.getCartsByUserEmail(email, page, 'id').subscribe(
+        (response: any) => {
+          console.log("User carts:", response)
+          this.carts = response.content;
+          this.currentPage = response.number;
+          this.totalPages = response.totalPages;
+          this.pages = Array.from({ length: this.totalPages }, (_, i) => i);
+        },
+        (error: any) => {
+          console.error('Error fetching carts', error);
+          if (error.status === 0) {
+            console.error('Could not connect to server. Please make sure the server is running.');
+          } else {
+            console.error(`Backend returned code ${error.status}, body was: ${error.message}`);
+          }
         }
-      }
-    );
+      );
+    }
   }
 
   changePage(page: number): void {

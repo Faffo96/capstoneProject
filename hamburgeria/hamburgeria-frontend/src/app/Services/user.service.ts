@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { User } from '../models/user';
 
 
@@ -22,8 +22,9 @@ export class UserService {
     return this.http.get<User>(`${this.apiURL}api/jwt/getUserFromToken`, { headers });
   }
 
-  setUser(user: User): void {
+  setUser(user: User) {
     this.userSubject.next(user);
+    return this.user$;
   }
 
   clearUser(): void {

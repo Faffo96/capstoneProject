@@ -282,6 +282,25 @@ body {
     color: #606060;
     text-shadow: 0 1px #fff;
   }
+
+  .my-button2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    width: 170px;
+    height: 50px;
+    background-image: linear-gradient(to top, #f8e9b1 0%, #f7db77 80%, #f7d046 100%); 
+    border-radius: 30px;
+    border: 1px solid #8F9092;
+    transition: all 0.2s ease;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #606060;
+    text-shadow: 0 1px #fff;
+  }
   
   .my-button:hover {
     box-shadow: 0 4px 3px 1px #fdbb46, 0 6px 8px #fdbb46, 0 -4px 4px #fdbb46, 0 -6px 4px #fdbb46, inset 0 0 3px 3px #fdbb46;

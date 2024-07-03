@@ -32,17 +32,18 @@ export class AuthService {
       tap(token => {
         console.log('Token received: ', token);
         localStorage.setItem('token', token);
-        this.fetchUserDetails(token).subscribe(userDetails => {
+        this.userService.getUserFromToken(token).subscribe(userDetails => {
           const authData: AuthData = {
             accessToken: token,
             User: userDetails
           };
           this.authSub.next(authData);
-          this.userService.setUser(userDetails);
-          localStorage.setItem('user', JSON.stringify(authData));
-          this.autoLogout(authData);
-          // Sposta la navigazione qui per assicurarti che l'utente sia impostato
-          this.router.navigate(['/']);
+          this.userService.setUser(userDetails).subscribe(() => {
+            localStorage.setItem('user', JSON.stringify(authData));
+            this.autoLogout(authData);
+            // Sposta la navigazione qui per assicurarti che l'utente sia impostato
+            this.router.navigate(['/']);
+          });
         });
       }),
       catchError(this.handleError)

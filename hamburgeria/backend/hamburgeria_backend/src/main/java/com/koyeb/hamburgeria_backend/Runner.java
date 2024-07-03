@@ -3,6 +3,7 @@ package com.koyeb.hamburgeria_backend;
 import com.koyeb.hamburgeria_backend.Controller.JwtToolController;
 import com.koyeb.hamburgeria_backend.Dto.DiningTableDTO;
 import com.koyeb.hamburgeria_backend.Dto.OwnerDTO;
+import com.koyeb.hamburgeria_backend.Entity.Cart;
 import com.koyeb.hamburgeria_backend.Entity.DiningTable;
 import com.koyeb.hamburgeria_backend.Entity.Product;
 import com.koyeb.hamburgeria_backend.Entity.Reservation;
@@ -10,6 +11,7 @@ import com.koyeb.hamburgeria_backend.Entity.User.Owner;
 import com.koyeb.hamburgeria_backend.Repository.*;
 import com.koyeb.hamburgeria_backend.Service.*;
 import com.opencsv.exceptions.CsvException;
+import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.CommandLineRunner;
@@ -40,9 +42,6 @@ public class Runner implements CommandLineRunner {
     private DiningTableRepository diningTableRepository;
 
     @Autowired
-    private ReservationService reservationService;
-
-    @Autowired
     private UserRepository userRepository;
 
     @Autowired
@@ -59,6 +58,9 @@ public class Runner implements CommandLineRunner {
 
     @Autowired
     private Owner owner;
+
+    @Autowired
+    private CartService cartService;
 
     public static void main(String[] args) {
         SpringApplication.run(Runner.class, args);
@@ -90,9 +92,9 @@ public class Runner implements CommandLineRunner {
         reservation1.setUser(employeeService.getEmployeeByEmail("jane.doe@example.com"));
         reservationRepository.save(reservation1);*/
 
-        /*List<Reservation> reservations = reservationService.getReservationsByUserEmail("jane.doe@example.com");
-        for (Reservation reservation : reservations) {
-            System.out.println(reservation);
+        /*List<Cart> carts = cartService.getCartsByUserEmail("jane.doe@example.com", 0, "creationDate");
+        for (Cart cart : carts) {
+            System.out.println(cart);
         }*/
 
         List<DiningTable> diningTables = diningTableService.getAllDiningTables();

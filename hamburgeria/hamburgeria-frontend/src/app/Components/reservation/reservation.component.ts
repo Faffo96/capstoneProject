@@ -59,6 +59,11 @@ export class ReservationComponent implements OnInit {
       participants: this.participants
     };
 
+    if (!reservationDTO.bookedDate || !reservationDTO.participants) {
+      alert('Perfavore, inserisci una data di prenotazione e un numero di partecipanti.');
+      return;
+    }
+
     this.reservationService.createReservation(reservationDTO).subscribe(response => {
       alert('Prenotazione effettuata con successo!');
       // Aggiungi eventuali azioni aggiuntive, come l'aggiornamento della lista delle prenotazioni

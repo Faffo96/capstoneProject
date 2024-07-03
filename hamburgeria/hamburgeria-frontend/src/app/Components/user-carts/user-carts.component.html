@@ -1,76 +1,83 @@
-<div class="container my-5">
-   <h1 class="fw-bold fs-1 mb-5">I miei ordini</h1>
-   <div class="row">
-     <div class="col-md-4 mb-4" *ngFor="let cart of carts">
-       <div class="card h-100">
-         <div class="card-body">
-           <h5 class="card-title">Codice Ordine: {{ cart.id }}</h5>
-           <p class="card-text">
-             <strong>Delivery:</strong> 
-             <span *ngIf="cart.delivery">✅</span>
-             <span *ngIf="!cart.delivery">❌</span>
-           </p>
-           <p class="card-text">
-            <strong>Delivery:</strong> 
-            <span>{{cart.creationDate}}</span>
-          </p>
-           <button class="btn btn-primary btn-sm" (click)="openEditModal(cart)">Modifica</button>
-           <button class="btn btn-danger btn-sm" (click)="deleteCart(cart.id)">Annulla Ordine</button>
-         </div>
-         <div ngbAccordion>
-           <div ngbAccordionItem>
-             <h2 ngbAccordionHeader>
-               <button ngbAccordionButton>Carrello</button>
-             </h2>
-             <div ngbAccordionCollapse>
-               <div class="accordion-body">
-                 <ul class="list-group">
-                   <li class="list-group-item" *ngFor="let product of cart.productList">
-                     <strong>{{ product.italianName }}</strong>: {{ product.italianDescription }} - €{{ product.price }}
-                   </li>
-                 </ul>
-               </div>
-             </div>
-           </div>
-         </div>
-       </div>
-     </div>
-   </div>
- 
-   <!-- Pagination controls -->
-   <nav aria-label="Page navigation example">
-     <ul class="pagination justify-content-center">
-       <li class="page-item" [class.disabled]="currentPage === 0">
-         <a class="page-link" (click)="changePage(currentPage - 1)" href="javascript:void(0)">Precedente</a>
-       </li>
-       <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
-         <a class="page-link" (click)="changePage(page)" href="javascript:void(0)">{{ page + 1 }}</a>
-       </li>
-       <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
-         <a class="page-link" (click)="changePage(currentPage + 1)" href="javascript:void(0)">Successivo</a>
-       </li>
-     </ul>
-   </nav>
- 
-   <!-- Edit Modal -->
-   <div *ngIf="isEditModalOpen" class="modal fade show" style="display: block;" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
-     <div class="modal-dialog" role="document">
-       <div class="modal-content">
-         <div class="modal-header">
-           <h5 class="modal-title" id="editModalLabel">Modifica Ordine</h5>
-           <button type="button" class="close" aria-label="Close" (click)="closeEditModal()">
-             <span aria-hidden="true">&times;</span>
-           </button>
-         </div>
-         <div class="modal-body">
-           <p>Per modifiche all'ordine chiamare al numero +39 343243244.</p>
-         </div>
-         <div class="modal-footer">
-           <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Chiudi</button>
-         </div>
-       </div>
-     </div>
-   </div>
-   <div *ngIf="isEditModalOpen" class="modal-backdrop fade show"></div>
- </div>
- 
+<div class="container-fluid py-5">
+  <div class="container bg-color1 pt-4 rounded-5 pb-4 px-4">
+    <h1 class="fw-bold bg-light rounded-5 p-3 fs-1 mb-5">I miei ordini</h1>
+    <div class="row position-relative">
+      <div class="col-md-4 mb-4" *ngFor="let cart of carts">
+        <div class="bg-light rounded-4 p-3 h-100 position-relative">
+          <div class="card-body">
+            <h5 class="card-title my-2"><strong class="fw-bold">Codice Ordine:</strong> {{ cart.id }}</h5>
+            <p class="card-text my-2">
+              <strong class="fw-bold">Delivery:</strong>
+              <span *ngIf="cart.delivery">✅</span>
+              <span *ngIf="!cart.delivery">❌</span>
+            </p>
+            <p class="card-text my-2">
+              <strong class="fw-bold">Data di Creazione:</strong> {{ cart.creationDate | date }}
+            </p>
+            <p class="card-text my-2">
+              <strong class="fw-bold">Email Utente:</strong> {{ cart.user.email }}
+            </p>
+            <div class="mt-4 mb-4">
+              <button class="btn btn-primary btn-sm me-3" (click)="openEditModal(cart)">Modifica</button>
+              <button class="btn btn-danger btn-sm" (click)="deleteCart(cart.id)">Annulla Ordine</button>
+            </div>
+          </div>
+          <div class="accordion-container position-relative">
+            <div ngbAccordion>
+              <div ngbAccordionItem>
+                <h2 ngbAccordionHeader>
+                  <button ngbAccordionButton>Totale {{cart.total | priceFormat}}</button>
+                </h2>
+                <div ngbAccordionCollapse>
+                  <div class="accordion-body position-absolute bg-light rounded-4 p-3">
+                    <ul class="list-group">
+                      <li class="list-group-item" *ngFor="let product of cart.productList">
+                        <strong>{{ product.italianName }}</strong> - {{ product.price | priceFormat }}
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination controls -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <a class="page-link" (click)="changePage(currentPage - 1)" href="javascript:void(0)">Precedente</a>
+        </li>
+        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+          <a class="page-link" (click)="changePage(page)" href="javascript:void(0)">{{ page + 1 }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+          <a class="page-link" (click)="changePage(currentPage + 1)" href="javascript:void(0)">Successivo</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Edit Modal -->
+    <div *ngIf="isEditModalOpen" class="modal fade show" style="display: block;" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Modifica Ordine</h5>
+            <button type="button" class="close" aria-label="Close" (click)="closeEditModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <p>Per modifiche all'ordine chiamare al numero +39 343243244.</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Chiudi</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isEditModalOpen" class="modal-backdrop fade show"></div>
+  </div>
+</div>

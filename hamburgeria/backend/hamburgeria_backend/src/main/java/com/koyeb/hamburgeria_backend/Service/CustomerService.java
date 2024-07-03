@@ -83,7 +83,7 @@ public class CustomerService {
             // Email not found for Owner, continue checking
         }
 
-        Optional<Employee> employeeOptional = employeeRepository.findByEmail(email);
+        Optional<Employee> employeeOptional = employeeRepository.findOneByEmail(email);
         if (employeeOptional.isPresent()) {
             return true;
         }
@@ -100,7 +100,7 @@ public class CustomerService {
 
 
     public Customer getCustomerByEmail(String email) throws UserNotFoundException {
-        return customerRepository.findByEmail(email)
+        return customerRepository.findOneByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Customer not found with email: " + email));
     }
 

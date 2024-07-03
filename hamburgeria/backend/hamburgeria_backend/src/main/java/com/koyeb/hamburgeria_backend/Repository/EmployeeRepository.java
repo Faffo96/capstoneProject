@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface EmployeeRepository extends JpaRepository<Employee, Integer> {
-    public Optional<Employee> findByEmail(String email);
+    public Optional<Employee> findOneByEmail(String email);
 }
 
