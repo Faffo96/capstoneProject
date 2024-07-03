@@ -5,8 +5,8 @@
         <div class="card h-100">
           <div class="card-body">
             <h5 class="card-title">Codice Prenotazione: {{ reservation.id }}</h5>
-            <p class="card-text"><strong>Data di creazione:</strong> {{ reservation.creationDate }}</p>
-            <p class="card-text"><strong>Data di prenotazione:</strong> {{ reservation.bookedDate }}</p>
+            <p class="card-text"><strong>Data di creazione:</strong> {{ reservation.creationDate | date }}</p>
+            <p class="card-text"><strong>Data di prenotazione:</strong> {{ reservation.bookedDate | date }}</p>
             <p class="card-text"><strong>Numero di Partecipanti:</strong> {{ reservation.participants }}</p>
             <button class="btn btn-primary btn-sm" (click)="openEditModal(reservation)">Modifica</button>
             <button class="btn btn-danger btn-sm" (click)="deleteReservation(reservation.id)">Annulla Prenotazione</button>

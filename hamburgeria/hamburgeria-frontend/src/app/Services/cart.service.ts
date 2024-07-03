@@ -27,6 +27,10 @@ export class CartService {
     return this.http.get<Cart>(`${this.apiURL}api/carts/${id}`);
   }
 
+  getCartsByUserEmail(email: string, page: number = 0, sortBy: string = 'id'): Observable<any> {
+    return this.http.get<any>(`${this.apiURL}api/carts/user?email=${email}&page=${page}&sortBy=${sortBy}`);
+  }
+
   updateCart(id: number, data: Partial<Cart>): Observable<Cart> {
     return this.http.patch<Cart>(`${this.apiURL}api/carts/${id}`, data);
   }

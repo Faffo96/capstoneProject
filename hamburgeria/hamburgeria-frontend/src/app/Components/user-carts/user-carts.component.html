@@ -13,6 +13,7 @@
            <p class="card-text">
             <strong>Delivery:</strong> 
             <span>{{cart.creationDate}}</span>
+            <span>{{cart.user.email}}</span>
           </p>
            <button class="btn btn-primary btn-sm" (click)="openEditModal(cart)">Modifica</button>
            <button class="btn btn-danger btn-sm" (click)="deleteCart(cart.id)">Annulla Ordine</button>
@@ -20,13 +21,13 @@
          <div ngbAccordion>
            <div ngbAccordionItem>
              <h2 ngbAccordionHeader>
-               <button ngbAccordionButton>Carrello</button>
+               <button ngbAccordionButton>Totale {{cart.total | priceFormat}}</button>
              </h2>
              <div ngbAccordionCollapse>
                <div class="accordion-body">
                  <ul class="list-group">
                    <li class="list-group-item" *ngFor="let product of cart.productList">
-                     <strong>{{ product.italianName }}</strong>: {{ product.italianDescription }} - €{{ product.price }}
+                     <strong>{{ product.italianName }}</strong> - {{ product.price | priceFormat }}
                    </li>
                  </ul>
                </div>

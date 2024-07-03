@@ -16,7 +16,7 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
   private initialized = false;
   private routeSubscription!: Subscription;
   private userSubscription!: Subscription;
-  user: User | null = null;
+  user$: User | null = null;
 
   constructor(
     private routeService: RouteService,
@@ -27,7 +27,7 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
     private userService: UserService,
   ) {
     this.userSubscription = this.userService.user$.subscribe(user => {
-      this.user = user;
+      this.user$ = user;
       console.log('User updated:', user);
 
     });

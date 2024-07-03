@@ -1,0 +1,104 @@
+<div class="container-fluid">
+    <div class="container">
+        <div class="d-flex">
+            <div ngbDropdown class="d-inline-block me-2">
+                <button class="btn btn-secondary" id="dropdownMenu1" ngbDropdownToggle>
+                    Burger
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenu1">
+                    <div *ngFor="let section of burgerSections; let i = index" ngbDropdownItem>
+                        <input class="form-check-input" type="radio" id="{{section}}" name="burger" value="{{section}}" (change)="selectCategory(section)">
+                        <label class="form-check-label" for="{{section}}">{{section}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div ngbDropdown class="d-inline-block me-2">
+                <button class="btn btn-secondary" id="dropdownMenu2" ngbDropdownToggle>
+                    Club Sandwich
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenu2">
+                    <div *ngFor="let section of sandwichSections; let i = index" ngbDropdownItem>
+                        <input class="form-check-input" type="radio" id="{{section}}" name="sandwich" value="{{section}}" (change)="selectCategory(section)">
+                        <label class="form-check-label" for="{{section}}">{{section}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div ngbDropdown class="d-inline-block me-2">
+                <button class="btn btn-secondary" id="dropdownMenu3" ngbDropdownToggle>
+                    Insalatona
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenu3">
+                    <div *ngFor="let section of saladSections; let i = index" ngbDropdownItem>
+                        <input class="form-check-input" type="radio" id="{{section}}" name="salad" value="{{section}}" (change)="selectCategory(section)">
+                        <label class="form-check-label" for="{{section}}">{{section}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div ngbDropdown class="d-inline-block me-2">
+                <button class="btn btn-secondary" id="dropdownMenu4" ngbDropdownToggle>
+                    Dolce
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenu4">
+                    <div *ngFor="let section of dessertSections; let i = index" ngbDropdownItem>
+                        <input class="form-check-input" type="radio" id="{{section}}" name="dessert" value="{{section}}" (change)="selectCategory(section)">
+                        <label class="form-check-label" for="{{section}}">{{section}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div ngbDropdown class="d-inline-block me-2">
+                <button class="btn btn-secondary" id="dropdownMenu5" ngbDropdownToggle>
+                    Patate Fritte
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenu5">
+                    <div *ngFor="let section of friesSections; let i = index" ngbDropdownItem>
+                        <input class="form-check-input" type="radio" id="{{section}}" name="fries" value="{{section}}" (change)="selectCategory(section)">
+                        <label class="form-check-label" for="{{section}}">{{section}}</label>
+                    </div>
+                </div>
+            </div>
+
+            <div ngbDropdown class="d-inline-block me-2">
+                <button class="btn btn-secondary" id="dropdownMenu6" ngbDropdownToggle>
+                    Non componibili:
+                </button>
+                <div ngbDropdownMenu aria-labelledby="dropdownMenu6">
+                    <div *ngFor="let section of notCustomizableSections; let i = index" ngbDropdownItem>
+                        <input class="form-check-input" type="radio" id="{{section}}" name="notCustomizable" value="{{section}}" (change)="selectCategory(section)">
+                        <label class="form-check-label" for="{{section}}">{{section}}</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nome</th>
+                    <th>Name</th>
+                    <th>Descrizione</th>
+                    <th>Description</th>
+                    <th>Prezzo</th>
+                    <th>Categoria</th>
+                    <th>Disponibile</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let product of products$; let i = index">
+                    <td>{{product.id}}</td>
+                    <td>{{product.italianName}}</td>
+                    <td>{{product.englishName}}</td>
+                    <td>{{product.italianDescription}}</td>
+                    <td>{{product.englishDescription}}</td>
+                    <td>{{product.price}}</td>
+                    <td>{{product.category}}</td>
+                    <td>{{product.available}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

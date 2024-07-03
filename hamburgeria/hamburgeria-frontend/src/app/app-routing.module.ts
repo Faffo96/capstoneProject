@@ -22,6 +22,7 @@ import { UserReservationsComponent } from './Components/user-reservations/user-r
 import { UserCartsComponent } from './Components/user-carts/user-carts.component';
 import { BackofficeUsersComponent } from './Components/backoffice-users/backoffice-users.component';
 import { BackofficeEmployeesComponent } from './Components/backoffice-employees/backoffice-employees.component';
+import { BackofficeProductsComponent } from './Components/backoffice-products/backoffice-products.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,9 @@ const routes: Routes = [
         path: 'backoffice-employees',
         component: BackofficeEmployeesComponent
       },
+      {
+        path: 'backoffice-products',
+        component: BackofficeProductsComponent      },
     ]
   },
   {

@@ -45,6 +45,16 @@ public class CartController {
         }
     }
 
+    @GetMapping("/user")
+    public ResponseEntity<Page<Cart>> getCartsByUserEmail(
+            @RequestParam String email,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "id") String sortBy) {
+
+        Page<Cart> carts = cartService.getCartsByUserEmail(email, page, sortBy);
+        return ResponseEntity.ok(carts);
+    }
+
     @GetMapping
     public ResponseEntity<Page<Cart>> getAllCarts(
             @RequestParam(defaultValue = "0") int page,

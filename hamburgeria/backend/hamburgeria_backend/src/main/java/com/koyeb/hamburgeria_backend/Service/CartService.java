@@ -22,6 +22,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
@@ -164,6 +165,42 @@ public class CartService {
             throw new CartNotFoundException("Cart with id " + id + " not found.");
         }
     }
+
+    public Page<Cart> getCartsByUserEmail(String userEmail, int page, String sortBy) throws UnauthorizedException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = null;
+        boolean isAdminOrOwner = false;
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                currentUserName = ((UserDetails) principal).getUsername();
+                for (GrantedAuthority authority : ((UserDetails) principal).getAuthorities()) {
+                    if (authority.getAuthority().equals("ROLE_ADMIN") || authority.getAuthority().equals("ROLE_OWNER")) {
+                        isAdminOrOwner = true;
+                        break;
+                    }
+                }
+            } else {
+                currentUserName = principal.toString();
+            }
+        }
+
+        if (currentUserName == null) {
+            throw new UnauthorizedException("User not authenticated");
+        }
+
+        if (isAdminOrOwner || currentUserName.equals(userEmail)) {
+            int fixedSize = 15;
+            Pageable pageable = PageRequest.of(page, fixedSize, Sort.by(sortBy));
+            Page<Cart> carts = cartRepository.findByUserEmail(userEmail, pageable);
+            loggerInfo.info("Retrieved carts for user with email " + userEmail + ", page " + page);
+            return carts;
+        } else {
+            throw new UnauthorizedException("User not authorized to access these carts");
+        }
+    }
+
 
     public Cart updateCart(Long id, CartDTO cartDTO) throws CartNotFoundException, ProductNotFoundException, MinimumTotalException {
         Cart cart = getCartById(id);

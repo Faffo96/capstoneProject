@@ -5,11 +5,13 @@ import { User } from "./user";
 
 export interface Cart {
     id: number;
-    creationDate: string;
     reservation: Reservation;
+    creationDate: string;
     productList: Product[];
     user: User;
+    total: number;
     paid: boolean;
     delivery: boolean;
+    deliveryFee: number;
   }
   

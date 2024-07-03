@@ -35,6 +35,7 @@ import { CommonModule } from '@angular/common';
 import { PriceFormatPipe } from './pipes/price-format.pipe';
 import { BackofficeUsersComponent } from './Components/backoffice-users/backoffice-users.component';
 import { BackofficeEmployeesComponent } from './Components/backoffice-employees/backoffice-employees.component';
+import { BackofficeProductsComponent } from './Components/backoffice-products/backoffice-products.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -64,7 +65,8 @@ import { BackofficeEmployeesComponent } from './Components/backoffice-employees/
     DatePipe,
     PriceFormatPipe,
     BackofficeUsersComponent,
-    BackofficeEmployeesComponent
+    BackofficeEmployeesComponent,
+    BackofficeProductsComponent
   ],
   imports: [
     NgbModule,

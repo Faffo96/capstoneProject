@@ -14,7 +14,7 @@
         </li>
         <li class="my-fs-3 nav-item"><a class="nav-link text-light fw-bolder" routerLink="">Chi siamo</a>
         </li>
-        <li *ngIf="user?.role == 'OWNER' || user?.role == 'EMPLOYEE'" class="my-fs-3 nav-item"><a class="nav-link text-light fw-bolder" routerLinkActive="color2" routerLink="/backoffice">Backoffice</a>
+        <li *ngIf="user$?.role == 'OWNER' || user$?.role == 'EMPLOYEE'" class="my-fs-3 nav-item"><a class="nav-link text-light fw-bolder" routerLinkActive="color2" routerLink="/backoffice">Backoffice</a>
         </li>
       </ul>
 
@@ -22,11 +22,11 @@
           alt="Hamburgeria logo" width="200px"></div>
 
       <ul class="navbar-nav me-3 align-items-center justify-content-center">
-        <li *ngIf="!user" class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/login">Accedi</a></li>
-        <li *ngIf="!user" class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/register">Registrati</a></li>
-        <li *ngIf="user" class="my-fs-3 nav-item2 d-flex align-items-center">
-          <img *ngIf="user.avatar != null" src="{{user.avatar}}" class="rounded-5 me-2" alt="" width="50px" height="50px">
-          <p class="nav-link pointer nav-item2 text-light fw-bolder" routerLink="/profile/userSettings">{{user.name}} {{user.surname}}</p>
+        <li *ngIf="!user$" class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/login">Accedi</a></li>
+        <li *ngIf="!user$" class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/register">Registrati</a></li>
+        <li *ngIf="user$" class="my-fs-3 nav-item2 d-flex align-items-center">
+          <img *ngIf="user$.avatar != null" src="{{user$.avatar}}" class="rounded-5 me-2" alt="" width="50px" height="50px">
+          <p class="nav-link pointer nav-item2 text-light fw-bolder" routerLink="/profile/userSettings">{{user$.name}} {{user$.surname}}</p>
         </li>
       </ul>
 

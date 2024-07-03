@@ -147,9 +147,8 @@ public class ProductService {
         }
     }
 
-
     /*DEPLOY VERSION*/
-    /*@Transactional
+   /* @Transactional
     public void importProductsFromCSV() throws IOException, CsvException {
         String filePath = "hamburgeria-menu.csv";
         try (InputStream inputStream = getClass().getClassLoader().getResourceAsStream(filePath);
