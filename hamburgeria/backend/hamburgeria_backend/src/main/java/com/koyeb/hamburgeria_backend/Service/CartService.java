@@ -166,7 +166,7 @@ public class CartService {
         }
     }
 
-    public Page<Cart> getCartsByUserEmail(String userEmail, int page, String sortBy) throws UnauthorizedException {
+    public Page<Cart> getCartsByUserEmail(String userEmail, Pageable pageable) throws UnauthorizedException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = null;
         boolean isAdminOrOwner = false;
@@ -191,10 +191,8 @@ public class CartService {
         }
 
         if (isAdminOrOwner || currentUserName.equals(userEmail)) {
-            int fixedSize = 15;
-            Pageable pageable = PageRequest.of(page, fixedSize, Sort.by(sortBy));
             Page<Cart> carts = cartRepository.findByUserEmail(userEmail, pageable);
-            loggerInfo.info("Retrieved carts for user with email " + userEmail + ", page " + page);
+            loggerInfo.info("Retrieved carts for user with email " + userEmail + ", page " + pageable.getPageNumber());
             return carts;
         } else {
             throw new UnauthorizedException("User not authorized to access these carts");

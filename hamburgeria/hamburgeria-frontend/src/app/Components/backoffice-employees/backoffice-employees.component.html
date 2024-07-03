@@ -1,41 +1,60 @@
-<div class="container my-5">
-    <h1 class="fw-bold fs-1 mb-5">Impiegati</h1>
-    <table class="table table-bordered">
-      <thead>
-        <tr>
-          <th>Avatar</th>
-          <th>Nome</th>
-          <th>Cognome</th>
-          <th>Email</th>
-          <th>Ruolo</th>
-          <th>Data di Creazione</th>
-          <th>Codice Fiscale</th>
-          <th>Stipendio</th>
-          <th>Azioni</th>
-        </tr>
-      </thead>
-      <tbody>
-          <tr *ngFor="let employee of employees">
-            <td>
-              <img *ngIf="employee.avatar" [src]="employee.avatar" alt="Avatar" width="50">
-            </td>
-          <td>{{ employee.name }}</td>
-          <td>{{ employee.surname }}</td>
-          <td>{{ employee.email }}</td>
-          <td>{{ employee.role }}</td>
-          <td>{{ employee.creationDate}}</td>
-          <td>{{ employee.codiceFiscale }}</td>
-          <td>{{ employee.salary | number:'1.2-2' }} &euro;</td>
-          <td>
-            <button class="btn btn-primary btn-sm" (click)="performAction(employee)">Azione</button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  
+<div class="container-fluid py-5">
+  <div class="container bg-color1 pt-4 rounded-5 pb-4 px-4">
+    <h1 class="fw-bold bg-light rounded-5 p-3 fs-1 mb-5">Impiegati</h1>
+    <div ngbAccordion [closeOthers]="true" class="mt-3">
+      <div ngbAccordionItem *ngFor="let employee of employees">
+        <h2 ngbAccordionHeader>
+          <button ngbAccordionButton>{{employee.email}}</button>
+        </h2>
+        <div ngbAccordionCollapse>
+          <div ngbAccordionBody>
+            <div class="row">
+              <div class="col-12 mb-2">
+                <img *ngIf="employee.avatar" [src]="employee.avatar" alt="Avatar" width="50">
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Nome:</strong> {{employee.name}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Cognome:</strong> {{employee.surname}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Email:</strong> {{employee.email}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Ruolo:</strong> {{employee.role}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Data di Creazione:</strong> {{employee.creationDate}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Codice Fiscale:</strong> {{employee.codiceFiscale}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong>Stipendio:</strong> {{employee.salary | number:'1.2-2'}} &euro;
+              </div>
+              <div class="col-12 text-end mt-2">
+                <button class="btn btn-primary btn-sm" (click)="performAction(employee)">Azione</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <!-- Pagination controls -->
     <nav aria-label="Page navigation example">
-      <ul class="pagination justify-content-center">
+      <ul class="pagination justify-content-center mt-4">
         <li class="page-item" [class.disabled]="currentPage === 0">
-          <a class="page-link" (click)="changePage(currentPage - 1)" href="javascript:void(0)">Prec
-  
+          <a class="page-link" (click)="changePage(currentPage - 1)" href="javascript:void(0)">Precedente</a>
+        </li>
+        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+          <a class="page-link" (click)="changePage(page)" href="javascript:void(0)">{{ page + 1 }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+          <a class="page-link" (click)="changePage(currentPage + 1)" href="javascript:void(0)">Successivo</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>
