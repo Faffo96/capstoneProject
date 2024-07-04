@@ -3,9 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './Components/home/home.component';
 import { ReservationComponent } from './Components/reservation/reservation.component';
 import { MenuComponent } from './Components/menu/menu.component';
-import { BackofficeComponent } from './Components/backoffice/backoffice.component';
-import { ProfileComponent } from './Components/profile/profile.component';
-import { TestComponent } from './Components/test/test.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterUserComponent } from './auth/register-user/register-user.component';
 import { CustomizeBurgerComponent } from './Components/customize-burger/customize-burger.component';
@@ -34,21 +31,16 @@ const routes: Routes = [
     component: HomeComponent
   },
   {
-    path: 'backoffice',
-    component: BackofficeComponent,
-    children: [
-      {
-        path: 'backoffice-users',
-        component: BackofficeUsersComponent
-      },
-      {
-        path: 'backoffice-employees',
-        component: BackofficeEmployeesComponent
-      },
-      {
-        path: 'backoffice-products',
-        component: BackofficeProductsComponent      },
-    ]
+    path: 'backoffice-users',
+    component: BackofficeUsersComponent
+  },
+  {
+    path: 'backoffice-employees',
+    component: BackofficeEmployeesComponent
+  },
+  {
+    path: 'backoffice-products',
+    component: BackofficeProductsComponent
   },
   {
     path: 'menu',
@@ -63,56 +55,46 @@ const routes: Routes = [
         component: FriesComponent
       },
       {
-          path: 'customizeSandwich',
-          component: CustomizeSandwichComponent
-        },
-        {
-          path: 'hotdog',
-          component: HotdogComponent
-        },
-        {
-          path: 'salad',
-          component: SaladComponent
-        },
-        {
-          path: 'dessert',
-          component: DessertComponent
-        },
-        {
-          path: 'drink',
-          component: DrinkComponent
-        },
-        {
-          path: 'burger',
-          component: BurgerComponent
-        },
-        {
-          path: 'sandwich',
-          component: SandwichComponent
-        }
+        path: 'customizeSandwich',
+        component: CustomizeSandwichComponent
+      },
+      {
+        path: 'hotdog',
+        component: HotdogComponent
+      },
+      {
+        path: 'salad',
+        component: SaladComponent
+      },
+      {
+        path: 'dessert',
+        component: DessertComponent
+      },
+      {
+        path: 'drink',
+        component: DrinkComponent
+      },
+      {
+        path: 'burger',
+        component: BurgerComponent
+      },
+      {
+        path: 'sandwich',
+        component: SandwichComponent
+      }
     ]
   },
   {
-    path: 'profile',
-    component: ProfileComponent,
-    children: [
-      {
-        path: 'userSettings',
-        component: ProfileSettingsComponent
-      },
-      {
-        path: 'userReservations',
-        component: UserReservationsComponent
-      },
-      {
-        path: 'userOrders',
-        component: UserCartsComponent
-      },
-    ]
+    path: 'userSettings',
+    component: ProfileSettingsComponent
   },
   {
-    path: 'test',
-    component: TestComponent
+    path: 'userReservations',
+    component: UserReservationsComponent
+  },
+  {
+    path: 'userOrders',
+    component: UserCartsComponent
   },
   {
     path: 'register',
