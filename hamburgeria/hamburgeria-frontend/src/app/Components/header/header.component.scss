@@ -69,3 +69,45 @@
         font-size: 1rem;
         transform: translateY(-14.5px);
     }
+
+
+    /* ACCORDION */
+
+    .nav-link2 {
+        border-radius: 21px;
+        padding: 10px 50px;
+    }
+
+    .nav-link2:hover {
+        background-color: #fae38e;
+        border-radius: 21px;
+
+    }
+
+    .nav-logout:hover {
+        color: white !important;
+        background-color: #df3545;
+    }
+
+/* Rimuovere la freccia predefinita */
+.accordion-button::after {
+    display: none;
+  }
+  
+  /* Aggiungere una freccia personalizzata */
+  .custom-chevron {
+    margin-left: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    display: inline-block;
+    padding: 5px;
+    transform: rotate(45deg);
+    -webkit-transform: rotate(45deg);
+  }
+  
+  /* Freccia verso l'alto quando il pannello è aperto */
+  [aria-expanded="true"] .custom-chevron {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+  }
+  

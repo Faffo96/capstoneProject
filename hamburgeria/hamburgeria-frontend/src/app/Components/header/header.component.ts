@@ -4,6 +4,7 @@ import { Router, NavigationEnd } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from '../../Services/user.service';
 import { User } from '../../models/user';
+import { NgbAccordionItem } from '@ng-bootstrap/ng-bootstrap';
 
 @Component({
   selector: 'app-header',
@@ -101,6 +102,12 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
     }
     if (this.userSubscription) {
       this.userSubscription.unsubscribe();
+    }
+  }
+
+  closeOtherAccordions(openedItem: NgbAccordionItem) {
+    if (openedItem.collapsed) {
+      openedItem.toggle();
     }
   }
 }

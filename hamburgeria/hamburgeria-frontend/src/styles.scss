@@ -170,6 +170,10 @@ body {
 	background-image: linear-gradient(to top, #eb9438 0% , #eca934 0%, #fae38e 20%);
 }
 
+.bg-color-transparent {
+  background-color: transparent;
+}
+
 .color1 {
 	color: #fbd756;
 }
@@ -330,4 +334,8 @@ body {
 
   .w-55 {
 	width: 55%
+  }
+
+  .dropdown-item:hover {
+    background-color: #f8e9b1;
   }
