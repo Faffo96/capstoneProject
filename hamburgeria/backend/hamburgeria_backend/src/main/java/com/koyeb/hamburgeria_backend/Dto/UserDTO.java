@@ -15,4 +15,5 @@ public class UserDTO {
     private String avatar;
     private Role role;
     private LocalDate creationDate;
+    private int points;
 }

@@ -77,35 +77,6 @@ public class CartService {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = null;
 
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof UserDetails) {
-                currentUserName = ((UserDetails) principal).getUsername();
-            } else {
-                currentUserName = principal.toString();
-            }
-        }
-        try {
-            Employee employee = employeeService.getEmployeeByEmail(currentUserName);
-            cart.setUser(employee);
-        } catch (UserNotFoundException e) {
-            // User not found for Employee, continue checking
-        }
-
-        try {
-            Customer customer = customerService.getCustomerByEmail(currentUserName);
-            cart.setUser(customer);
-        } catch (UserNotFoundException e) {
-            // User not found for Customer, continue checking
-        }
-
-        try {
-            Owner owner = ownerService.getOwnerByEmail(currentUserName);
-            cart.setUser(owner);
-        } catch (UserNotFoundException e) {
-            // User not found for Owner, continue checking
-        }
-
         // Gestione della lista dei prodotti
         List<ProductDTO> productDTOList = cartDTO.getProductList();
         List<Product> productList = new ArrayList<>();
@@ -123,6 +94,48 @@ public class CartService {
         }
 
         cart.setProductList(productList);
+
+        int count = 0;
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getCategory().name().equals("CUSTOM_BURGER")) {
+                count++;
+            }
+        }
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                currentUserName = ((UserDetails) principal).getUsername();
+            } else {
+                currentUserName = principal.toString();
+            }
+        }
+        try {
+            Employee employee = employeeService.getEmployeeByEmail(currentUserName);
+
+            employee.setPoints(employee.getPoints() + count);
+            cart.setUser(employee);
+        } catch (UserNotFoundException e) {
+            // User not found for Employee, continue checking
+        }
+
+        try {
+            Customer customer = customerService.getCustomerByEmail(currentUserName);
+            customer.setPoints(customer.getPoints() + count);
+            cart.setUser(customer);
+        } catch (UserNotFoundException e) {
+            // User not found for Customer, continue checking
+        }
+
+        try {
+            Owner owner = ownerService.getOwnerByEmail(currentUserName);
+            owner.setPoints(owner.getPoints() + count);
+            cart.setUser(owner);
+        } catch (UserNotFoundException e) {
+            // User not found for Owner, continue checking
+        }
+
+
         cart.setCreationDate(LocalDateTime.now());
         cart.setPaid(cartDTO.isPaid());
         cart.setDelivery(cartDTO.isDelivery());

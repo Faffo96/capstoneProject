@@ -28,6 +28,7 @@ public abstract class User implements UserDetails {
     private String surname;
     private String avatar;
     private String password;
+    private int points;
 
     @Enumerated(EnumType.STRING)
     private Role role;

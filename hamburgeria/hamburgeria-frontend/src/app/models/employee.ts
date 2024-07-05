@@ -10,4 +10,5 @@ export interface Employee {
     creationDate: string;
     codiceFiscale: string;
     salary: number;
+    points: number;
   }

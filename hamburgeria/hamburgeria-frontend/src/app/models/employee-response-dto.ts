@@ -7,4 +7,5 @@ export interface EmployeeResponseDTO {
     creationDate: Date;
     codiceFiscale: string;
     salary: number;
+    points: number;
   }

@@ -14,6 +14,7 @@
                      <li class="my-5 my-fs-2 fw-bold">Cognome</li>
                      <li class="my-5 my-fs-2 fw-bold">Data di creazione:</li>
                      <li class="my-5 my-fs-2 fw-bold" *ngIf="user?.role == 'OWNER' || user?.role == 'EMPLOYEE'">Ruolo:</li>
+                     <li class="my-5 my-fs-2 fw-bold">Punti:</li>
                   </ul>
                </div>
                <div class="row col-lg-8">
@@ -25,6 +26,7 @@
                         <li class="my-5 my-fs-2">{{user?.surname}}</li>
                         <li class="my-5 my-fs-2">{{user?.creationDate}}</li>
                         <li class="my-5 my-fs-2" *ngIf="user?.role == 'OWNER' || user?.role == 'EMPLOYEE'">{{user?.role}}</li>
+                        <li class="my-5 my-fs-2"><span>✨</span>{{user?.points}}</li>
                      </ul>
                   </div>
                   <div class="col-lg-4">

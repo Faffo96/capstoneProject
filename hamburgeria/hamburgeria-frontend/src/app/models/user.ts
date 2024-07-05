@@ -8,4 +8,5 @@ export interface User {
     avatar: string;
     role: Role;
     creationDate: string;
+    points: number;
   }
