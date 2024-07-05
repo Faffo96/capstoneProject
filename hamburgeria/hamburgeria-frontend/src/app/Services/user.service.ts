@@ -58,4 +58,11 @@ export class UserService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
     return this.http.patch<User>(`${this.apiURL}api/users/${email}/surname`, { newSurname }, { headers });
   }
+
+  // Patch Points
+  patchUserPoints(email: string, newPoints: number): Observable<User> {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+    return this.http.patch<User>(`${this.apiURL}api/users/${email}/points`, { points: newPoints }, { headers });
+  }
+  
 }
