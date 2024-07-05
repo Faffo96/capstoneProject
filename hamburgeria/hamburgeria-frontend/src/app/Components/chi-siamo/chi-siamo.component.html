@@ -1,0 +1,57 @@
+<section class="our-burgers container-fluid">
+  <div class="container bg-white">
+    <div class="text-center mb-6">
+      <h2 class="playwrite-font color2 fs-2 pt-5 mb-5">Hamburgeria</h2>
+      <h3 class="fw-bolder fs-1"><strong>I MIGLIORI BURGER DI SEMPRE</strong></h3>
+    </div>
+    <div class="row row-cols-1 mx-3 bg-splash">
+      <div *ngFor="let ourBurgersPost of ourBurgersPosts; let i = index" class="container mb-5">
+        <div class="row justify-content-center">
+          <div *ngIf="i % 2 === 0" class="p-0 col-4 d-flex justify-content-center align-items-center overflow-hidden"
+            style="width: 230px; height: 230px;">
+            <img class="rounded-circle object-fit-cover" src="{{ourBurgersPost.photoUrl}}" alt="" width="230px"
+              height="230px">
+          </div>
+          <div class="col-6 d-flex align-items-center">
+            <p class="my-fs-3 lh-base text-black">{{ ourBurgersPost.description }}</p>
+          </div>
+          <div *ngIf="i % 2 !== 0" class="p-0 col-4 d-flex justify-content-center align-items-center overflow-hidden"
+            style="width: 230px; height: 230px;">
+            <img class="rounded-circle object-fit-cover" src="{{ourBurgersPost.photoUrl}}" alt="" width="230px"
+              height="230px">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="container-fluid my-5">
+  <div class="container d-flex flex-column align-items-center">
+    <div>
+      <h3 class="fw-bolder fs-1 mb-3"><strong class="text-center">DOVE SIAMO</strong></h3>
+    </div>
+    <div class="row row-cols-2 my-5">
+      <div class="d-flex flex-column justify-content-center align-items-center">
+        <div class="d-flex flex-column">
+          <h4 class="color2 mb-4 fs-5 fw-bolder text-center">HAMBURGERIA</h4>
+          <address class="text-dark mb-3 my-fs-3"><i class="bi color2 bi-geo-alt-fill me-2"></i>Via de Blasio, 3, 89125 Reggio
+            Calabria</address>
+          <a class="text-dark mb-3 my-fs-3" href="mailto:lol@gmail.com"><i class="bi color2 bi-envelope-fill me-2"></i>
+            hamburgeria&#64;gmail.com</a>
+          <a class="text-dark mb-3 my-fs-3" href="tel:+1234567890"><i class="bi color2 bi-telephone-fill me-2"></i> +39 329
+            6967559</a>
+
+        </div>
+      </div>
+
+
+      <div class="GoogleMaps">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3139.1628299950357!2d15.64928277650764!3d38.113146071902115!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x1314508e13fe0013%3A0xb736536e125c940d!2sVia%20de%20Blasio%2C%203%2C%2089125%20Reggio%20Calabria%20RC!5e0!3m2!1sit!2sit!4v1720195503559!5m2!1sit!2sit"
+          width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"></iframe>
+      </div>
+    </div>
+  </div>
+</section>

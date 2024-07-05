@@ -54,4 +54,52 @@
     transform: scale(1.01); /* Applica lo zoom */
 }
 
-/* TRUSTPILOT */
+.others_article1, .others_article2 {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.219); /* Layer nero trasparente */
+      z-index: 1;
+    }
+  
+    .w-75 {
+      position: relative;
+      z-index: 2; /* Assicurati che il contenuto sia sopra il layer trasparente */
+    }
+  }
+
+
+  /* JUMBOTRON */
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .jumbotron {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  }
+  
+  .jumbotron.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
