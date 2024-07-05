@@ -20,6 +20,7 @@ import { UserCartsComponent } from './Components/user-carts/user-carts.component
 import { BackofficeUsersComponent } from './Components/backoffice-users/backoffice-users.component';
 import { BackofficeEmployeesComponent } from './Components/backoffice-employees/backoffice-employees.component';
 import { BackofficeProductsComponent } from './Components/backoffice-products/backoffice-products.component';
+import { ChiSiamoComponent } from './Components/chi-siamo/chi-siamo.component';
 
 const routes: Routes = [
   {
@@ -29,6 +30,10 @@ const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'chiSiamo',
+    component: ChiSiamoComponent
   },
   {
     path: 'backoffice-users',

@@ -90,6 +90,10 @@
               <div class="col-12 mb-2">
                 <strong>Disponibile:</strong> {{product.available}}
               </div>
+              <div class="col-12 text-end mt-2">
+                <button class="btn btn-primary btn-sm me-2" (click)="openEditProductModal(product)">Modifica</button>
+                <button class="btn btn-danger btn-sm" (click)="confirmDeleteProduct(product.id)">Elimina</button>
+              </div>
             </div>
           </div>
         </div>
@@ -97,3 +101,41 @@
     </div>
   </div>
 </div>
+
+<!-- Modal -->
+<ng-template #editProductModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modifica Prodotto</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="productName" class="form-label">Nome (Italiano)</label>
+      <input type="text" id="productName" class="form-control" [(ngModel)]="editingProduct.italianName">
+    </div>
+    <div class="mb-3">
+      <label for="productEnglishName" class="form-label">Name (English)</label>
+      <input type="text" id="productEnglishName" class="form-control" [(ngModel)]="editingProduct.englishName">
+    </div>
+    <div class="mb-3">
+      <label for="productItalianDescription" class="form-label">Descrizione (Italiano)</label>
+      <input type="text" id="productItalianDescription" class="form-control" [(ngModel)]="editingProduct.italianDescription">
+    </div>
+    <div class="mb-3">
+      <label for="productEnglishDescription" class="form-label">Description (English)</label>
+      <input type="text" id="productEnglishDescription" class="form-control" [(ngModel)]="editingProduct.englishDescription">
+    </div>
+    <div class="mb-3">
+      <label for="productPrice" class="form-label">Prezzo</label>
+      <input type="number" id="productPrice" class="form-control" [(ngModel)]="editingProduct.price">
+    </div>
+    <div class="mb-3">
+      <label for="productCategory" class="form-label">Categoria</label>
+      <input type="text" id="productCategory" class="form-control" [(ngModel)]="editingProduct.category">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Annulla</button>
+    <button type="button" class="btn btn-primary" (click)="saveProductChanges(modal)">Salva</button>
+  </div>
+</ng-template>

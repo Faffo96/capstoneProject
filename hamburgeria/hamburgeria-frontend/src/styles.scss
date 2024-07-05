@@ -160,7 +160,12 @@ body {
 	color: transparent;
 }
 
-
+.bg-splash {
+  background-image: url('./assets/img/background-splash.png');
+    background-size:contain;
+    background-repeat: no-repeat; 
+    background-position: center;
+}
 
 .color0 {
 	color: #f9e188;

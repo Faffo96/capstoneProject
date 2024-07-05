@@ -1,7 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, TemplateRef, ViewChild } from '@angular/core';
 import { Product } from '../../models/product';
 import { ProductService } from '../../Services/product.service';
 import { BehaviorSubject, Observable, combineLatest, map } from 'rxjs';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ConfirmModalService } from '../../Services/confirm-modal.service';
 
 @Component({
   selector: 'app-backoffice-products',
@@ -42,7 +44,6 @@ export class BackofficeProductsComponent {
       id: 'dropdownMenu3',
       name: 'Insalatona',
       items: [
-        'CUSTOMHOTDOG_BASE',
         'CUSTOMSALAD_BASE',
         'CUSTOMSALAD_CHEESE',
         'CUSTOMSALAD_FVEGETABLES',
@@ -123,7 +124,15 @@ export class BackofficeProductsComponent {
     category: ''
   };
 
-  constructor(private productService: ProductService) {
+  editingProduct!: Product;
+
+  @ViewChild('editProductModal', { static: true }) editProductModal!: TemplateRef<any>;
+
+  constructor(
+    private productService: ProductService,
+    private modalService: NgbModal,
+    private confirmModalService: ConfirmModalService
+  ) {
     this.filteredProducts$ = combineLatest([
       this.productService.products$,
       this.selectedCategory
@@ -148,11 +157,6 @@ export class BackofficeProductsComponent {
   }
 
   addProduct(): void {
-    /* if (!this.newProduct.italianName || !this.newProduct.englishName || !this.newProduct.italianDescription || !this.newProduct.englishDescription || !this.newProduct.category) {
-      alert('Please fill in all the fields');
-      return;
-    } */
-
     const newProduct: Product = {
       id: Date.now(),
       italianName: this.newProduct.italianName!,
@@ -166,8 +170,9 @@ export class BackofficeProductsComponent {
 
     this.products$.push(newProduct);
     console.log("new product", newProduct)
-    this.productService.createProduct(newProduct).subscribe();
-    this.productService.setProducts(this.products$);
+    this.productService.createProduct(newProduct).subscribe(() => {
+      this.getProducts();
+    });
     this.newProduct = {
       italianName: '',
       englishName: '',
@@ -176,5 +181,54 @@ export class BackofficeProductsComponent {
       price: 0,
       category: ''
     };
+  }
+
+  openEditProductModal(product: Product): void {
+    this.editingProduct = { ...product };
+    this.modalService.open(this.editProductModal, { centered: true });
+  }
+
+  saveProductChanges(modal: any): void {
+    this.updateProduct(this.editingProduct);
+    modal.close();
+  }
+
+  confirmDeleteProduct(productId: number): void {
+    this.confirmModalService.confirm(
+      'Conferma Eliminazione',
+      'Sei sicuro di voler eliminare questo prodotto?',
+      () => this.deleteProduct(productId)
+    );
+  }
+
+  deleteProduct(productId: number): void {
+    this.productService.deleteProduct(productId).subscribe(
+      () => {
+        this.getProducts();
+        console.log(`Product with id ${productId} deleted successfully.`);
+      },
+      (error) => {
+        console.error('Error deleting product', error);
+      }
+    );
+  }
+
+  updateProduct(product: Product): void {
+    this.productService.updateProduct(product.id, product).subscribe(
+      (updatedProduct) => {
+        this.getProducts();
+        console.log('Product updated:', updatedProduct);
+      },
+      (error) => {
+        console.error('Error updating product', error);
+      }
+    );
+  }
+
+  getProducts(): void {
+    this.productService.getProducts().subscribe(products => {
+      this.products$ = products;
+      this.productService.setProducts(products);
+    });
   }
 }

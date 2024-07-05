@@ -10,25 +10,26 @@
           <div ngbAccordionBody>
             <div class="row">
               <div class="col-12 mb-2">
-                <img *ngIf="customer.avatar" [src]="customer.avatar" alt="Avatar" width="50">
+                <img [src]="customer?.avatar ? customer?.avatar : '../../../assets/img/user.webp'" alt="Avatar" width="50">
               </div>
               <div class="col-12 mb-2">
-                <strong>Nome:</strong> {{customer.name}}
+                <strong class="fw-bold">Nome:</strong> {{customer.name}}
               </div>
               <div class="col-12 mb-2">
-                <strong>Cognome:</strong> {{customer.surname}}
+                <strong class="fw-bold">Cognome:</strong> {{customer.surname}}
               </div>
               <div class="col-12 mb-2">
-                <strong>Email:</strong> {{customer.email}}
+                <strong class="fw-bold">Email:</strong> {{customer.email}}
               </div>
               <div class="col-12 mb-2">
-                <strong>Ruolo:</strong> {{customer.role}}
+                <strong class="fw-bold">Ruolo:</strong> {{customer.role}}
               </div>
               <div class="col-12 mb-2">
-                <strong>Data di Creazione:</strong> {{customer.creationDate}}
+                <strong class="fw-bold">Data di Creazione:</strong> {{customer.creationDate}}
               </div>
               <div class="col-12 text-end mt-2">
-                <button class="btn btn-primary btn-sm" (click)="performAction(customer)">Azione</button>
+                <button class="btn btn-primary btn-sm me-2">Invia Email</button>
+                <button class="btn btn-danger btn-sm" (click)="confirmDeleteProfile(customer)">Elimina Profilo</button>
               </div>
             </div>
           </div>

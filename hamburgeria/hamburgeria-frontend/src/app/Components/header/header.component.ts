@@ -84,8 +84,10 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
             bgImagePath = '../../../assets/img/login-header.jpg';
           } else if (route.startsWith('/register')) {
             bgImagePath = '../../../assets/img/register-header.jpg';
-          } else if (route.startsWith('/profile')) {
+          } else if (route.startsWith('/user')) {
             bgImagePath = '../../../assets/img/profile-header.jpg';
+          }  else if (route.startsWith('/chiSiamo')) {
+            bgImagePath = '../../../assets/img/chiSiamo-header.jpg';
           } else {
             bgImagePath = '../../../assets/img/default-bg.jpg';
           }

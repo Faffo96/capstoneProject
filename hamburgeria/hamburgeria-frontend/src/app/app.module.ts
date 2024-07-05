@@ -39,6 +39,7 @@ import { BackofficeProductsComponent } from './Components/backoffice-products/ba
 import { ResponseModalComponent } from './Components/response-modal/response-modal.component';
 import { ConfirmModalComponent } from './Components/confirm-modal/confirm-modal.component';
 import { DateAndTimePipe } from './pipes/date-and-time.pipe';
+import { ChiSiamoComponent } from './Components/chi-siamo/chi-siamo.component';
 
 @NgModule({
   declarations: [
@@ -73,7 +74,8 @@ import { DateAndTimePipe } from './pipes/date-and-time.pipe';
     BackofficeProductsComponent,
     ResponseModalComponent,
     ConfirmModalComponent,
-    DateAndTimePipe
+    DateAndTimePipe,
+    ChiSiamoComponent
   ],
   imports: [
     NgbModule,
@@ -82,7 +84,7 @@ import { DateAndTimePipe } from './pipes/date-and-time.pipe';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
   ],
   providers: [
     {

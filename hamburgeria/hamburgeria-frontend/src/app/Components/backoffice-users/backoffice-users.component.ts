@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerResponseDTO } from '../../models/customer-response-dto';
 import { CustomerService } from '../../Services/customer.service';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { ConfirmModalService } from '../../Services/confirm-modal.service';
+import { ErrorService } from '../../Services/error-service.service';
 
 @Component({
   selector: 'app-backoffice-users',
@@ -13,7 +16,7 @@ export class BackofficeUsersComponent implements OnInit {
   totalPages: number = 0;
   pages: number[] = [];
 
-  constructor(private customerService: CustomerService) { }
+  constructor(private customerService: CustomerService, private confirmModalService: ConfirmModalService, private errorService: ErrorService) { }
 
   ngOnInit(): void {
     this.getCustomers(this.currentPage);
@@ -30,6 +33,14 @@ export class BackofficeUsersComponent implements OnInit {
       (error: any) => {
         console.error('Error fetching customers', error);
       }
+    );
+  }
+
+  confirmDeleteProfile(customer: CustomerResponseDTO): void {
+    this.confirmModalService.confirm(
+      'Conferma Eliminazione',
+      `Sei sicuro di voler eliminare il profilo di ${customer.name} ${customer.surname}?`,
+      () => this.errorService.showErrorModal('✅ Completato', 'Utente eliminato.')
     );
   }
 

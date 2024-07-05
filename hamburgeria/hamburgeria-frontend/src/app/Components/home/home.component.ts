@@ -1,12 +1,14 @@
-import { AfterViewInit, Component, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ElementRef, ViewChild } from '@angular/core';
 import { NgbCarousel, NgbSlideEvent, NgbSlideEventSource } from '@ng-bootstrap/ng-bootstrap';
+import ScrollReveal from 'scrollreveal';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-export class HomeComponent {
+export class HomeComponent implements AfterViewInit {
+  @ViewChild('jumbotron') jumbotron!: ElementRef;
 
   feedbacks: string[] = [
     '../../../assets/img/recensione1.png',
@@ -29,7 +31,7 @@ export class HomeComponent {
     },
     {
       description: 'Il nostro obiettivo è quello di garantire un servizio eccellente, non solo attraverso i nostri prodotti, ma anche nell’accoglienza, grazie ad uno staff formato, cordiale e sempre a disposizione del cliente. L’HamburgeriaRC è ormai un punto di riferimento fisso a Reggio Calabria, un luogo di incontro, dove mangiare buoni hamburger, tra musica e sorrisi.',
-      photoUrl: "../../../assets/img/header-home.png"
+      photoUrl: "../../../assets/img/Screenshot2024-06-25020842.png"
     },
   ];
 
@@ -67,8 +69,9 @@ export class HomeComponent {
       description: "I nostri dolci sono un'esplosione di creatività e bontà! Preparati con ingredienti particolari e arricchiti con snack e biscotti, sono perfetti per chi ama le golosità uniche.",
       photoUrl: "../../../assets/img/dessert.jpg"
     },
-  ]
- paused = false;
+  ];
+
+  paused = false;
   unpauseOnArrow = false;
   pauseOnIndicator = false;
   pauseOnHover = true;
@@ -89,12 +92,46 @@ export class HomeComponent {
     if (
       this.unpauseOnArrow &&
       slideEvent.paused &&
-      (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || slideEvent.source === NgbSlideEventSource.ARROW_RIGHT)
+      (slideEvent.source === NgbSlideEventSource.ARROW_LEFT || NgbSlideEventSource.ARROW_RIGHT)
     ) {
       this.togglePaused();
     }
     if (this.pauseOnIndicator && !slideEvent.paused && slideEvent.source === NgbSlideEventSource.INDICATOR) {
       this.togglePaused();
     }
+  }
+
+  ngAfterViewInit() {
+    const scrollRevealConfig = {
+      distance: '-100px',
+      duration: 1000,
+      easing: 'ease-in-out',
+      reset: false  // L'animazione si attiva solo una volta
+    };
+
+    ScrollReveal().reveal('.fade-in-left', {
+      ...scrollRevealConfig,
+      origin: 'left'
+    });
+
+    ScrollReveal().reveal('.fade-in-right', {
+      ...scrollRevealConfig,
+      origin: 'right'
+    });
+
+    this.setupScrollAnimation();
+  }
+
+  setupScrollAnimation() {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          this.jumbotron.nativeElement.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    });
+
+    observer.observe(this.jumbotron.nativeElement);
   }
 }
