@@ -3,6 +3,7 @@ import { Product } from '../../models/product';
 import { CustomizableProductDTO } from '../../models/customizable-product-dto';
 import { CustomizableProductService } from '../../Services/customizable-product.service';
 import { ProductService } from '../../Services/product.service';
+import { ErrorService } from '../../Services/error-service.service';
 
 @Component({
   selector: 'app-customize-sandwich',
@@ -20,7 +21,11 @@ export class CustomizeSandwichComponent implements OnInit {
     { name: 'Varie', products: [] }
   ];
 
-  constructor(private productService: ProductService, private customizableProductService: CustomizableProductService) {
+  constructor(
+    private productService: ProductService,
+    private customizableProductService: CustomizableProductService,
+    private errorService: ErrorService
+  ) {
     this.productService.products$.subscribe(data => {
       this.menuProducts = data;
       this.loadCategories();
@@ -89,6 +94,11 @@ export class CustomizeSandwichComponent implements OnInit {
   }
 
   createCustomizableSandwich() {
+    if (!this.isBaseSelected()) {
+      this.errorService.showMenuSectionsError('Per favore, seleziona almeno la base.');
+      return;
+    }
+
     const customizableProduct: CustomizableProductDTO = {
       id: 0,
       italianName: 'Sandwich',
@@ -104,8 +114,10 @@ export class CustomizeSandwichComponent implements OnInit {
     this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
       console.log('Customizable Sandwich created:', response);
       this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
-      window.alert("Club Sandwich aggiunto al carrello");
-      this.selectedProducts = []; // Reset selected products after creating the sandwich
+      this.errorService.showErrorModal('✅ Sandwich aggiunto', 'Club Sandwich aggiunto al carrello');
+      this.selectedProducts = []; 
+    }, error => {
+      this.errorService.showErrorModal('❌ Errore', 'Errore durante la creazione del Club Sandwich');
     });
   }
 

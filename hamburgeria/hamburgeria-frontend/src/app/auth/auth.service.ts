@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, catchError, tap, throwError } from 'rxjs';
 import { environment } from '../../environments/environment.development';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthData } from '../models/auth-data.interface';
 import { Register } from '../models/register.interface';
@@ -9,7 +9,11 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 import { Role } from '../models/role';
 import { User } from '../models/user';
 import { UserService } from '../Services/user.service';
+import { ErrorService } from '../Services/error-service.service';
 
+@Injectable({
+  providedIn: 'root',
+})
 @Injectable({
   providedIn: 'root',
 })
@@ -21,7 +25,12 @@ export class AuthService {
   user$ = this.authSub.asObservable();
   timeOut: any;
 
-  constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
+  constructor(
+    private http: HttpClient,
+    private router: Router,
+    private userService: UserService,
+    private errorService: ErrorService  // Inietta il servizio di gestione degli errori
+  ) {}
 
   getToken(): string | null {
     return localStorage.getItem('token');
@@ -30,7 +39,6 @@ export class AuthService {
   login(data: { email: string; password: string }): Observable<any> {
     return this.http.post(`${this.apiURL}auth/login`, data, { responseType: 'text' }).pipe(
       tap(token => {
-        console.log('Token received: ', token);
         localStorage.setItem('token', token);
         this.userService.getUserFromToken(token).subscribe(userDetails => {
           const authData: AuthData = {
@@ -41,27 +49,17 @@ export class AuthService {
           this.userService.setUser(userDetails).subscribe(() => {
             localStorage.setItem('user', JSON.stringify(authData));
             this.autoLogout(authData);
-            // Sposta la navigazione qui per assicurarti che l'utente sia impostato
             this.router.navigate(['/']);
           });
         });
       }),
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => this.handleError(error))
     );
-  }
-
-  fetchUserDetails(token: string): Observable<User> {
-    return this.http.get<User>(`${this.apiURL}api/users`, {
-      headers: new HttpHeaders({
-        Authorization: `Bearer ${token}`
-      })
-    });
   }
 
   signup(data: User): Observable<any> {
     return this.http.post(`${this.apiURL}auth/registerCustomer`, data).pipe(
       tap(response => {
-        console.log('Signup response: ', response);
         const loginData = { email: data.email, password: data.password };
         this.login(loginData).subscribe(
           loginResponse => {
@@ -72,7 +70,7 @@ export class AuthService {
           }
         );
       }),
-      catchError(this.handleError)
+      catchError((error: HttpErrorResponse) => this.handleError(error))
     );
   }
 
@@ -111,26 +109,16 @@ export class AuthService {
     }, millisecondsExp);
   }
 
-  private handleError(err: any) {
-    console.log('Error occurred:', err.error);
-    let errorMessage = 'Errore nella chiamata';
-    if (typeof err.error === 'string') {
-      errorMessage = err.error;
-    } else if (err.error instanceof ProgressEvent) {
-      errorMessage = 'Errore di rete';
-    } else if (err.error) {
-      switch (err.error) {
-        case 'Email already exists':
-          errorMessage = 'Utente già presente';
-          break;
-        case 'Incorrect password':
-          errorMessage = 'Password errata';
-          break;
-        case 'Cannot find user':
-          errorMessage = 'Utente non trovato';
-          break;
-      }
-    }
-    return throwError(errorMessage);
+  private handleError(error: HttpErrorResponse) {
+    this.errorService.handleError(error); // Utilizza il servizio di gestione degli errori
+    return throwError(() => new Error(error.message));
+  }
+
+  fetchUserDetails(token: string): Observable<User> {
+    return this.http.get<User>(`${this.apiURL}api/users`, {
+      headers: new HttpHeaders({
+        Authorization: `Bearer ${token}`
+      })
+    });
   }
 }

@@ -3,6 +3,7 @@ import { Cart } from '../../models/cart';
 import { CartService } from '../../Services/cart.service';
 import { UserService } from '../../Services/user.service';
 import { User } from '../../models/user';
+import { ConfirmModalService } from '../../Services/confirm-modal.service';
 
 @Component({
   selector: 'app-user-carts',
@@ -19,7 +20,11 @@ export class UserCartsComponent implements OnInit {
   isEditModalOpen: boolean = false;
   user$!: User | null;
 
-  constructor(private cartService: CartService, private userService: UserService) { 
+  constructor(
+    private cartService: CartService,
+    private userService: UserService,
+    private confirmModalService: ConfirmModalService
+  ) { 
     this.userService.user$.subscribe(user => {
       this.user$ = user;
       console.log('User updated:', user);
@@ -28,9 +33,7 @@ export class UserCartsComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void {
-    
-  }
+  ngOnInit(): void {}
 
   getCarts(page: number): void {
     if (this.user$ != null) {
@@ -71,16 +74,22 @@ export class UserCartsComponent implements OnInit {
   }
 
   deleteCart(cartId: number): void {
-    if (confirm('Sei sicuro di voler annullare questo carrello?')) {
-      this.cartService.deleteCart(cartId).subscribe(
-        () => {
-          this.carts = this.carts.filter(cart => cart.id !== cartId);
-          console.log(`Cart with id ${cartId} deleted successfully.`);
-        },
-        (error) => {
-          console.error('Error deleting cart', error);
-        }
-      );
-    }
+    this.confirmModalService.confirm(
+      'Conferma Eliminazione',
+      'Sei sicuro di voler annullare questo carrello?',
+      () => this.confirmDeleteCart(cartId)
+    );
+  }
+
+  private confirmDeleteCart(cartId: number): void {
+    this.cartService.deleteCart(cartId).subscribe(
+      () => {
+        this.carts = this.carts.filter(cart => cart.id !== cartId);
+        console.log(`Cart with id ${cartId} deleted successfully.`);
+      },
+      (error) => {
+        console.error('Error deleting cart', error);
+      }
+    );
   }
 }

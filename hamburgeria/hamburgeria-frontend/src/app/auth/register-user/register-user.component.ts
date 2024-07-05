@@ -3,6 +3,9 @@ import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from
 import { User } from '../../models/user';
 import { Router } from '@angular/router';
 import { AuthService } from '../auth.service';
+import { ResponseModalComponent } from '../../Components/response-modal/response-modal.component';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ErrorService } from '../../Services/error-service.service';
 
 
 @Component({
@@ -20,7 +23,7 @@ export class RegisterUserComponent {
   emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
   passwordPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&<>\^])[A-Za-z\d@$!%*?&<>\^]{8,}$/;
 
-  constructor(private fb: FormBuilder, private authSrv: AuthService, private router: Router) { }
+  constructor(private fb: FormBuilder, private authSrv: AuthService, private router: Router, private modalService: NgbModal, private errorService: ErrorService) { }
 
   ngOnInit(): void {
     this.signupForm = this.fb.group({
@@ -45,9 +48,11 @@ export class RegisterUserComponent {
     
     this.authSrv.signup(newUser).subscribe(
       () => {
+        this.errorService.showErrorModal('✅', 'Registrazione avvenuta con successo')
         this.router.navigate(['profile/login']);
       },
       error => {
+        this.openModal('❌ Errore nella registrazione', 'Registrazione non riuscita. Si prega di riprovare.', true);
         console.error(error);
       }
     );
@@ -94,5 +99,12 @@ export class RegisterUserComponent {
     }
 
     return null;
+  }
+
+  openModal(title: string, message: string, isError: boolean) {
+    const modalRef = this.modalService.open(ResponseModalComponent, { centered: true });
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.message = message;
+    modalRef.componentInstance.isError = isError;
   }
 }

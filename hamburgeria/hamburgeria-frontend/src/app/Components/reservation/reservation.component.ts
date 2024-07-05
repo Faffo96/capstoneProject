@@ -2,11 +2,16 @@ import { Component, OnInit } from '@angular/core';
 import { DiningTableService } from '../../Services/dining-table.service';
 import { DiningTable } from '../../models/dining-table';
 import { ReservationService } from '../../Services/reservation.service';
+import { ErrorService } from '../../Services/error-service.service';
+import { ConfirmModalService } from '../../Services/confirm-modal.service';
+import { DatePipe } from '../../pipes/date.pipe';
+import { DateAndTimePipe } from '../../pipes/date-and-time.pipe';
 
 @Component({
   selector: 'app-reservation',
   templateUrl: './reservation.component.html',
-  styleUrls: ['./reservation.component.scss']
+  styleUrls: ['./reservation.component.scss'],
+  providers: [DateAndTimePipe]
 })
 export class ReservationComponent implements OnInit {
   activeSeat: string | null = null;
@@ -14,8 +19,21 @@ export class ReservationComponent implements OnInit {
   outdoorTables: DiningTable[] = [];
   participants!: number;
   reservationDate!: string;
+  reservationTime!: string;
+  availableTimes: string[] = [
+    '19:00',
+    '20:00',
+    '21:00',
+    '22:00'
+  ];
 
-  constructor(private diningTableService: DiningTableService, private reservationService: ReservationService) {}
+  constructor(
+    private diningTableService: DiningTableService,
+    private reservationService: ReservationService,
+    private errorService: ErrorService,
+    private confirmModalService: ConfirmModalService,
+    private dateAndTimePipe: DateAndTimePipe 
+  ) {}
 
   ngOnInit() {
     this.diningTableService.dbDiningTables$.subscribe(data => {
@@ -25,7 +43,6 @@ export class ReservationComponent implements OnInit {
       console.log('Outdoor Tables:', this.outdoorTables);
     });
 
-    // Fetch initial dining tables from the service
     this.diningTableService.getDiningTables().subscribe(data => {
       this.diningTableService.setDiningTables(data.content);
     });
@@ -54,21 +71,46 @@ export class ReservationComponent implements OnInit {
   bookTable(table: DiningTable) {
     const reservationDTO = {
       id: table.id,
-      bookedDate: this.reservationDate,
+      bookedDate: this.combineDateAndTime(this.reservationDate, this.reservationTime),
       diningTable: table,
       participants: this.participants
     };
 
-    if (!reservationDTO.bookedDate || !reservationDTO.participants) {
-      alert('Perfavore, inserisci una data di prenotazione e un numero di partecipanti.');
+    // Controllo sul numero di partecipanti
+    if (reservationDTO.participants > table.seating) {
+      this.errorService.showReservationError(`Il numero di partecipanti inserito supera il limite del tavolo. Limite: ${table.seating} posti.`);
       return;
     }
 
+    // Controllo sulla data
+    const reservationDate = new Date(reservationDTO.bookedDate);
+    const today = new Date();
+    if (reservationDate < today) {
+      this.errorService.showReservationError('La data di prenotazione non può essere antecedente al giorno di oggi.');
+      return;
+    }
+
+    if (!reservationDTO.bookedDate || !reservationDTO.participants || !this.reservationTime) {
+      this.errorService.showReservationError('Per favore, inserisci una data di prenotazione, un numero di partecipanti e un orario.');
+      return;
+    }
+
+    this.confirmModalService.confirm(
+      'Conferma Prenotazione',
+      `Sei sicuro di voler prenotare il tavolo ${reservationDTO.diningTable.tableNumber} per ${reservationDTO.participants} persone il ` + this.dateAndTimePipe.transform(reservationDTO.bookedDate) + '?',
+      () => this.confirmBooking(reservationDTO)
+    );
+  }
+
+  confirmBooking(reservationDTO: any) {
     this.reservationService.createReservation(reservationDTO).subscribe(response => {
-      alert('Prenotazione effettuata con successo!');
-      // Aggiungi eventuali azioni aggiuntive, come l'aggiornamento della lista delle prenotazioni
+      this.errorService.showErrorModal('Tavolo Prenotato', `Il tavolo ${reservationDTO.diningTable.tableNumber} è stato prenotato per il ` + this.dateAndTimePipe.transform(reservationDTO.bookedDate) + ` per ${reservationDTO.participants} persone`);
     }, error => {
-      alert('Errore durante la prenotazione: ' + error.message);
+      this.errorService.showReservationError('Errore durante la prenotazione: ' + error.message);
     });
+  }
+
+  private combineDateAndTime(date: string, time: string): string {
+    return `${date}T${time}:00`;
   }
 }

@@ -36,6 +36,10 @@ import { PriceFormatPipe } from './pipes/price-format.pipe';
 import { BackofficeUsersComponent } from './Components/backoffice-users/backoffice-users.component';
 import { BackofficeEmployeesComponent } from './Components/backoffice-employees/backoffice-employees.component';
 import { BackofficeProductsComponent } from './Components/backoffice-products/backoffice-products.component';
+import { ResponseModalComponent } from './Components/response-modal/response-modal.component';
+import { ConfirmModalComponent } from './Components/confirm-modal/confirm-modal.component';
+import { DateAndTimePipe } from './pipes/date-and-time.pipe';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -66,7 +70,10 @@ import { BackofficeProductsComponent } from './Components/backoffice-products/ba
     PriceFormatPipe,
     BackofficeUsersComponent,
     BackofficeEmployeesComponent,
-    BackofficeProductsComponent
+    BackofficeProductsComponent,
+    ResponseModalComponent,
+    ConfirmModalComponent,
+    DateAndTimePipe
   ],
   imports: [
     NgbModule,

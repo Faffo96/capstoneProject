@@ -3,6 +3,9 @@ import { AuthData } from '../../models/auth-data.interface';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { ResponseModalComponent } from '../../Components/response-modal/response-modal.component';
+import { ErrorService } from '../../Services/error-service.service';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +19,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private errorService: ErrorService // Inietta il servizio di gestione degli errori
   ) {
     this.authService.user$.subscribe((user) => {
       this.user = user;
@@ -33,17 +37,16 @@ export class LoginComponent implements OnInit {
 
   login() {
     if (this.loginForm.valid) {
-      console.log('Login form is valid. Attempting to login...');
       this.authService.login(this.loginForm.value).subscribe(
         () => {
-          console.log('Login successful. User details should now be available.');
+          this.router.navigate(['/']);
         },
         error => {
-          console.error('Login error:', error);
+          this.errorService.handleError(error); // Utilizza il servizio di gestione degli errori
         }
       );
     } else {
-      console.log('Login form is invalid.');
+      this.errorService.showErrorModal('❌ Errore nel login', 'Per favore, compila correttamente il modulo di login o registrati');
     }
   }
 }

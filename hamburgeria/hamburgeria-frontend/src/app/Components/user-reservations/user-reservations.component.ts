@@ -3,13 +3,14 @@ import { Reservation } from '../../models/reservation';
 import { ReservationService } from '../../Services/reservation.service';
 import { UserService } from '../../Services/user.service';
 import { User } from '../../models/user';
+import { ConfirmModalService } from '../../Services/confirm-modal.service';
 
 @Component({
   selector: 'app-user-reservations',
   templateUrl: './user-reservations.component.html',
   styleUrl: './user-reservations.component.scss'
 })
-export class UserReservationsComponent {
+export class UserReservationsComponent implements OnInit {
 
   reservations: Reservation[] = [];
   currentPage: number = 0;
@@ -19,14 +20,20 @@ export class UserReservationsComponent {
   isEditModalOpen: boolean = false;
   user$!: User | null;
 
-  constructor(private reservationService: ReservationService, private userService: UserService) {
+  constructor(
+    private reservationService: ReservationService,
+    private userService: UserService,
+    private confirmModalService: ConfirmModalService
+  ) {
     this.userService.user$.subscribe(user => {
       this.user$ = user;
       console.log('User updated:', user);
 
       this.getReservations(this.currentPage);
     });
-   }
+  }
+
+  ngOnInit(): void {}
 
   getReservations(page: number): void {
     if (this.user$ != null) {
@@ -78,16 +85,22 @@ export class UserReservationsComponent {
   }
 
   deleteReservation(reservationId: number): void {
-    if (confirm('Sei sicuro di voler annullare questa prenotazione?')) {
-      this.reservationService.deleteReservation(reservationId).subscribe(
-        () => {
-          this.reservations = this.reservations.filter(reservation => reservation.id !== reservationId);
-          console.log(`Reservation with id ${reservationId} deleted successfully.`);
-        },
-        (error) => {
-          console.error('Error deleting reservation', error);
-        }
-      );
-    }
+    this.confirmModalService.confirm(
+      'Conferma Eliminazione',
+      'Sei sicuro di voler annullare questa prenotazione?',
+      () => this.confirmDeleteReservation(reservationId)
+    );
+  }
+
+  private confirmDeleteReservation(reservationId: number): void {
+    this.reservationService.deleteReservation(reservationId).subscribe(
+      () => {
+        this.reservations = this.reservations.filter(reservation => reservation.id !== reservationId);
+        console.log(`Reservation with id ${reservationId} deleted successfully.`);
+      },
+      (error) => {
+        console.error('Error deleting reservation', error);
+      }
+    );
   }
 }

@@ -3,6 +3,9 @@ import { CartService } from '../../Services/cart.service';
 import { Product } from '../../models/product';
 import { CustomizableProduct } from '../../models/customizable-product';
 import { ProductService } from '../../Services/product.service';
+import { ErrorService } from '../../Services/error-service.service';
+import { ResponseModalComponent } from '../response-modal/response-modal.component';
+import { ConfirmModalService } from '../../Services/confirm-modal.service';
 
 @Component({
   selector: 'app-cart',
@@ -13,7 +16,12 @@ export class CartComponent implements OnInit {
   cartProducts: (Product | CustomizableProduct)[] = [];
   total: number = 0;
 
-  constructor(private productService: ProductService, private cartService: CartService) {}
+  constructor(
+    private productService: ProductService,
+    private cartService: CartService,
+    private errorService: ErrorService,
+    private confirmModalService: ConfirmModalService
+  ) {}
 
   ngOnInit() {
     this.productService.currentCartProducts$.subscribe(data => {
@@ -52,6 +60,16 @@ export class CartComponent implements OnInit {
   }
 
   removeProductFromCart(product: Product | CustomizableProduct) {
+    this.confirmModalService.confirm(
+      'Rimuovi Prodotto',
+      `Sei sicuro di voler rimuovere ${product.italianName} dal carrello?`,
+      () => this.removeProduct(product),
+      'Rimuovi',
+      'Annulla'
+    );
+  }
+
+  removeProduct(product: Product | CustomizableProduct) {
     const index = this.cartProducts.findIndex(p => p.id === product.id);
     if (index !== -1) {
       this.cartProducts.splice(index, 1);
@@ -59,6 +77,9 @@ export class CartComponent implements OnInit {
       this.calculateTotal();
     }
   }
+
+
+
 
   removeIngredient(customizableProduct: CustomizableProduct, ingredientIndex: number, event: MouseEvent) {
     event.stopPropagation();
@@ -81,16 +102,37 @@ export class CartComponent implements OnInit {
   }
 
   checkout() {
+    if (this.total < 8.5) {
+      this.confirmModalService.confirm(
+        '❌ Errore',
+        'Il totale deve essere maggiore di 8.5€ per procedere al checkout.',
+        () => {},
+        'Ok',
+        'Annulla'
+      );
+      return;
+    }
+
+    this.confirmModalService.confirm(
+      'Conferma Checkout',
+      'Sei sicuro di voler procedere al checkout?',
+      () => this.processCheckout(),
+      'Conferma',
+      'Annulla'
+    );
+  }
+
+  processCheckout() {
     const cart = {
       productList: this.cartProducts
     };
 
     this.cartService.createCart(cart).subscribe(response => {
       console.log('Cart saved:', response);
-      // Clear the cart after successful checkout
       this.cartProducts = [];
       this.productService.setCartProducts(this.cartProducts);
       this.calculateTotal();
+      this.errorService.showErrorModal('✅ Checkout confermato', 'Checkout effettuato con successo! Stai per essere indirizzato alla pagina di pagamento.');
     }, error => {
       console.error('Error saving cart:', error);
     });

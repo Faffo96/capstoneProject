@@ -3,6 +3,7 @@ import { Product } from '../../models/product';
 import { CustomizableProductService } from '../../Services/customizable-product.service';
 import { CustomizableProductDTO } from '../../models/customizable-product-dto';
 import { ProductService } from '../../Services/product.service';
+import { ErrorService } from '../../Services/error-service.service';
 
 
 @Component({
@@ -19,7 +20,11 @@ export class DessertComponent implements OnInit {
     { name: 'Snack e biscotti (Max 1)', products: [] },
   ];
 
-  constructor(private productService: ProductService, private customizableProductService: CustomizableProductService) {
+  constructor(
+    private productService: ProductService,
+    private customizableProductService: CustomizableProductService,
+    private errorService: ErrorService
+  ) {
     this.productService.products$.subscribe(data => {
       this.menuProducts = data;
       this.loadCategories();
@@ -55,15 +60,6 @@ export class DessertComponent implements OnInit {
   toggleProductSelection(product: Product) {
     if (product.category === 'DESSERT_BASE') {
       this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
-    } else if (product.category === 'DESSERT_TOPPING' && this.selectedProducts.filter(p => p.category === 'DESSERT_TOPPING').length >= 2) {
-      alert('You can select up to 2 toppings only.');
-      return;
-    } else if (product.category === 'DESSERT_SNACK' && this.selectedProducts.filter(p => p.category === 'DESSERT_SNACK').length >= 1) {
-      alert('You can select up to 1 snack or biscuit only.');
-      return;
-    } else if (!this.isBaseSelected()) {
-      alert('Please select a base first.');
-      return;
     }
     this.selectedProducts.push(product);
     console.log('Selected products:', this.selectedProducts.map(p => p.id));
@@ -76,6 +72,10 @@ export class DessertComponent implements OnInit {
   isSelectionDisabled(sectionName: string, product: Product): boolean {
     if (sectionName === 'Base') {
       return false;
+    } else if (sectionName === 'Topping (Max 2)') {
+      return this.selectedProducts.filter(p => p.category === 'DESSERT_TOPPING').length >= 2 || !this.isBaseSelected();
+    } else if (sectionName === 'Snack e biscotti (Max 1)') {
+      return this.selectedProducts.filter(p => p.category === 'DESSERT_SNACK').length >= 1 || !this.isBaseSelected();
     } else {
       return !this.isBaseSelected();
     }
@@ -91,6 +91,11 @@ export class DessertComponent implements OnInit {
   }
 
   createCustomizableDessert() {
+    if (!this.isBaseSelected()) {
+      this.errorService.showMenuSectionsError('Per favore, seleziona almeno la base.');
+      return;
+    }
+
     const customizableProduct: CustomizableProductDTO = {
       id: 0,
       italianName: 'Dessert',
@@ -106,8 +111,10 @@ export class DessertComponent implements OnInit {
     this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
       console.log('Customizable Dessert created:', response);
       this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
-      window.alert("Dolce aggiunto al carrello");
+      this.errorService.showErrorModal('✅ Dolce aggiunto', 'Dolce aggiunto al carrello');
       this.selectedProducts = []; // Reset selected products after creating the dessert
+    }, error => {
+      this.errorService.showErrorModal('❌ Errore', 'Errore durante la creazione del dolce');
     });
   }
 

@@ -3,6 +3,7 @@ import { Product } from '../../models/product';
 import { CustomizableProductService } from '../../Services/customizable-product.service';
 import { CustomizableProductDTO } from '../../models/customizable-product-dto';
 import { ProductService } from '../../Services/product.service';
+import { ErrorService } from '../../Services/error-service.service';
 
 
 @Component({
@@ -22,7 +23,11 @@ export class SaladComponent implements OnInit {
     { name: 'Varie', products: [] }
   ];
 
-  constructor(private productService: ProductService, private customizableProductService: CustomizableProductService) {
+  constructor(
+    private productService: ProductService,
+    private customizableProductService: CustomizableProductService,
+    private errorService: ErrorService
+  ) {
     this.productService.products$.subscribe(data => {
       this.menuProducts = data;
       this.loadCategories();
@@ -94,6 +99,11 @@ export class SaladComponent implements OnInit {
   }
 
   createCustomizableSalad() {
+    if (!this.isBaseSelected()) {
+      this.errorService.showMenuSectionsError('Per favore, seleziona almeno la base.');
+      return;
+    }
+
     const customizableProduct: CustomizableProductDTO = {
       id: 0,
       italianName: 'Insalata',
@@ -109,8 +119,10 @@ export class SaladComponent implements OnInit {
     this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
       console.log('Customizable Salad created:', response);
       this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
-      window.alert("Insalatona aggiunto al carrello");
+      this.errorService.showErrorModal('✅Insalatona aggiunta', 'Insalatona aggiunta al carrello');
       this.selectedProducts = []; // Reset selected products after creating the salad
+    }, error => {
+      this.errorService.showErrorModal('❌ Errore', 'Errore durante la creazione dell\'insalatona');
     });
   }
 }

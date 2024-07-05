@@ -4,6 +4,7 @@ import { Category } from '../../models/category';
 import { CustomizableProductService } from '../../Services/customizable-product.service';
 import { CustomizableProductDTO } from '../../models/customizable-product-dto';
 import { ProductService } from '../../Services/product.service';
+import { ErrorService } from '../../Services/error-service.service';
 
 @Component({
     selector: 'app-customize-burger',
@@ -22,7 +23,11 @@ import { ProductService } from '../../Services/product.service';
       { name: 'Varie', products: [] }
     ];
   
-    constructor(private productService: ProductService, private customizableProductService: CustomizableProductService) {
+    constructor(
+      private productService: ProductService,
+      private customizableProductService: CustomizableProductService,
+      private errorService: ErrorService
+    ) {
       this.productService.products$.subscribe(data => {
         this.menuProducts = data;
         this.loadCategories();
@@ -100,6 +105,11 @@ import { ProductService } from '../../Services/product.service';
     }
   
     createCustomizableBurger() {
+      if (!this.isBreadSelected() || !this.isMeatSelected()) {
+        this.errorService.showMenuSectionsError('Per favore, seleziona almeno il pane e la carne.');
+        return;
+      }
+  
       const customizableProduct: CustomizableProductDTO = {
         id: 0,
         italianName: 'Burger',
@@ -115,7 +125,7 @@ import { ProductService } from '../../Services/product.service';
       this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
         console.log('Customizable Burger created:', response);
         this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
-        window.alert("Burger aggiunto al carrello");
+        this.errorService.showErrorModal('✅ Burger aggiunto', 'Burger aggiunto al carrello')
         this.selectedProducts = []; // Reset selected products after creating the burger
       });
     }

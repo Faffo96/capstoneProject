@@ -5,6 +5,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from '../../Services/user.service';
 import { User } from '../../models/user';
 import { NgbAccordionItem } from '@ng-bootstrap/ng-bootstrap';
+import { AuthService } from '../../auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -26,6 +27,7 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
     private cdr: ChangeDetectorRef,
     private router: Router,
     private userService: UserService,
+    private authSrv: AuthService
   ) {
     this.userSubscription = this.userService.user$.subscribe(user => {
       this.user$ = user;
@@ -110,4 +112,12 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
       openedItem.toggle();
     }
   }
+
+  
+
+
+  logout() {
+      this.authSrv.logout();
+  }
+
 }
