@@ -37,8 +37,14 @@
 </div>
 
 <div class="mt-auto">
+  <div class="form-check mb-3">
+    <input class="form-check-input" type="checkbox" id="applyDiscount" [(ngModel)]="applyDiscount" [disabled]="!canApplyDiscount()" (change)="calculateTotal()">
+    <label class="form-check-label" for="applyDiscount">
+      Usa 10 punti per uno sconto di 10€
+    </label>
+  </div>
   <div class="total">
-    <h5>Totale: {{ total }}&euro;</h5>
+    <h5>Totale: {{ discountedTotal }}&euro;</h5>
   </div>
   <button (click)="checkout()" class="my-button btn btn-primary mt-3">Checkout</button>
 </div>

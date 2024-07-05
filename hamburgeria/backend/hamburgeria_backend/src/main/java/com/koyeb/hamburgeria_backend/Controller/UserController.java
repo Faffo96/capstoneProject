@@ -109,4 +109,14 @@ public class UserController {
         User updatedUser = userService.patchUserSurname(email, newSurname);
         return ResponseEntity.ok(updatedUser);
     }
+
+    @PatchMapping("/{email}/points")
+    public ResponseEntity<User> patchUserPoints(
+            @PathVariable String email,
+            @RequestBody Map<String, Integer> payload
+    ) throws UserNotFoundException {
+        int newPoints = payload.get("points");
+        User updatedUser = userService.patchUserPoints(email, newPoints);
+        return ResponseEntity.ok(updatedUser);
+    }
 }

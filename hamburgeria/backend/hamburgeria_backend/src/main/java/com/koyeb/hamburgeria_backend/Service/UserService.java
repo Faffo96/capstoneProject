@@ -146,4 +146,13 @@ public class UserService {
         loggerInfo.info("Surname updated for user with email " + email);
         return user;
     }
+
+    // Patch Points
+    public User patchUserPoints(String email, int points) throws UserNotFoundException {
+        User user = getUserByEmail(email);
+        user.setPoints(points);
+        userRepository.save(user);
+        loggerInfo.info("Points updated for user with email " + email + ". User points:" + points);
+        return user;
+    }
 }

@@ -6,6 +6,9 @@ import { ProductService } from '../../Services/product.service';
 import { ErrorService } from '../../Services/error-service.service';
 import { ResponseModalComponent } from '../response-modal/response-modal.component';
 import { ConfirmModalService } from '../../Services/confirm-modal.service';
+import { UserService } from '../../Services/user.service';
+import { User } from '../../models/user';
+import { Cart } from '../../models/cart';
 
 @Component({
   selector: 'app-cart',
@@ -15,13 +18,22 @@ import { ConfirmModalService } from '../../Services/confirm-modal.service';
 export class CartComponent implements OnInit {
   cartProducts: (Product | CustomizableProduct)[] = [];
   total: number = 0;
+  discountedTotal: number = 0;
+  applyDiscount: boolean = false;
+  user: User | null = null;
 
   constructor(
     private productService: ProductService,
     private cartService: CartService,
     private errorService: ErrorService,
-    private confirmModalService: ConfirmModalService
-  ) {}
+    private confirmModalService: ConfirmModalService,
+    private userService: UserService
+  ) {
+    this.userService.user$.subscribe(user => {
+      this.user = user;
+      console.log('User updated:', user);
+    });
+  }
 
   ngOnInit() {
     this.productService.currentCartProducts$.subscribe(data => {
@@ -34,6 +46,13 @@ export class CartComponent implements OnInit {
     this.total = this.cartProducts.reduce((sum, product) => {
       return sum + this.getProductTotal(product);
     }, 0);
+
+    // Applica lo sconto se il checkbox è spuntato e l'utente ha abbastanza punti
+    if (this.applyDiscount && this.canApplyDiscount()) {
+      this.discountedTotal = Math.max(this.total - 10, 0);
+    } else {
+      this.discountedTotal = this.total;
+    }
   }
 
   getProductTotal(product: Product | CustomizableProduct): number {
@@ -78,9 +97,6 @@ export class CartComponent implements OnInit {
     }
   }
 
-
-
-
   removeIngredient(customizableProduct: CustomizableProduct, ingredientIndex: number, event: MouseEvent) {
     event.stopPropagation();
     const ingredient = customizableProduct.productList[ingredientIndex];
@@ -101,8 +117,12 @@ export class CartComponent implements OnInit {
     return ingredient.category === 'DESSERT_BASE' || ingredient.category === 'CUSTOMHAM_BREAD' || ingredient.category === 'CUSTOMHAM_MEAT' || ingredient.category === 'CUSTOMSALAD_BASE' || ingredient.category === 'CUSTOMSAND_BASE';
   }
 
+  canApplyDiscount(): boolean {
+    return this.user !== null && this.user.points >= 10 && this.total >= 25;
+  }
+
   checkout() {
-    if (this.total < 8.5) {
+    if (this.discountedTotal < 8.5) {
       this.confirmModalService.confirm(
         '❌ Errore',
         'Il totale deve essere maggiore di 8.5€ per procedere al checkout.',
@@ -127,15 +147,33 @@ export class CartComponent implements OnInit {
       productList: this.cartProducts
     };
 
-    this.cartService.createCart(cart).subscribe(response => {
-      console.log('Cart saved:', response);
-      this.cartProducts = [];
-      this.productService.setCartProducts(this.cartProducts);
-      this.calculateTotal();
-      this.errorService.showErrorModal('✅ Checkout confermato', 'Checkout effettuato con successo! Stai per essere indirizzato alla pagina di pagamento.');
-    }, error => {
-      console.error('Error saving cart:', error);
-    });
+    if (this.applyDiscount && this.canApplyDiscount() && this.user !== null) {
+      const updatedPoints = this.user.points - 10;
+      this.userService.patchUserPoints(this.user.email, updatedPoints).subscribe(updatedUser => {
+        this.userService.setUser(updatedUser);
+        this.cartService.createCart(cart).subscribe(response => {
+          console.log('Cart saved:', response);
+          this.cartProducts = [];
+          this.productService.setCartProducts(this.cartProducts);
+          this.calculateTotal();
+          this.applyDiscount = false; // Deseleziona il checkbox dopo il checkout
+          this.errorService.showErrorModal('✅ Checkout confermato', 'Checkout effettuato con successo! Stai per essere indirizzato alla pagina di pagamento.');
+        }, error => {
+          console.error('Error saving cart:', error);
+        });
+      });
+    } else {
+      this.cartService.createCart(cart).subscribe(response => {
+        console.log('Cart saved:', response);
+        this.cartProducts = [];
+        this.productService.setCartProducts(this.cartProducts);
+        this.calculateTotal();
+        this.applyDiscount = false; // Deseleziona il checkbox dopo il checkout
+        this.errorService.showErrorModal('✅ Checkout confermato', 'Checkout effettuato con successo! Stai per essere indirizzato alla pagina di pagamento.');
+      }, error => {
+        console.error('Error saving cart:', error);
+      });
+    }
   }
 
   getProductById(id: number): Product | undefined {
