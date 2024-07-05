@@ -38,6 +38,14 @@
       <div class="cart border-gray rounded-5 col-3 mt-5 bg-color0">
         <h4 class="text-dark fs-3 fw-bold py-3">Carrello</h4>
         <app-cart></app-cart>
+        <div class="burger-preview mt-3">
+          <img class="w-100 ingredient-img-1" *ngIf="selectedIngredients.length > 0" src="../../../assets/img/bread-bottom.png" alt="Pane inferiore">
+          <img class="w-100 ingredient-img-2" *ngIf="selectedIngredients.length > 1" src="../../../assets/img/meat.png" alt="Carne">
+          <img class="w-100 ingredient-img-3" *ngIf="selectedIngredients.length > 2" src="../../../assets/img/cheese.png" alt="Formaggio">
+          <img class="w-100 ingredient-img-4" *ngIf="selectedIngredients.length > 3" src="../../../assets/img/salad.png" alt="Verdura">
+          <img class="w-100 ingredient-img-5" *ngIf="selectedIngredients.length > 4" src="../../../assets/img/sauce.png" alt="Salsa">
+          <img class="w-100 ingredient-img-6" *ngIf="showTopBread" src="../../../assets/img/bread-top.png" alt="Pane superiore">
+        </div>
       </div>
     </div>
   </div>

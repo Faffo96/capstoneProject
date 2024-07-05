@@ -58,3 +58,46 @@
 .biggerGif {
     transform: scale(1.2);
 }
+
+/* BURGER ANIMATION */
+
+.burger-composition-container {
+    position: relative;
+    width: 200px; /* Dimensioni del contenitore del panino */
+    height: 300px;
+    margin: 0 auto;
+  }
+  
+  .burger-layer {
+    position: absolute;
+    width: 100%;
+    height: auto;
+  }
+  
+  .ingredient-img-1 {
+    transform: translate(3px, 208px);
+  }
+
+  .ingredient-img-2 {
+    
+  }
+
+  .ingredient-img-3 {
+    transform: translate(3px, -179px);
+  }
+
+  .ingredient-img-4 {
+    transform: translate(0px, -382px);
+  }
+
+  .ingredient-img-5 {
+    transform: translate(2px, -580px);
+  }
+
+  .ingredient-img-6 {
+    transform: translate(0px, -828px);
+  }
+
+  .burger-preview {
+    transform: translateY(300px);
+  }

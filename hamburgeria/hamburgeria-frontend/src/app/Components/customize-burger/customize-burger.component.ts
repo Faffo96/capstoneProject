@@ -70,11 +70,23 @@ import { ErrorService } from '../../Services/error-service.service';
     }
   
     toggleProductSelection(product: Product) {
-      if (product.category === 'CUSTOMHAM_MEAT' || product.category === 'CUSTOMHAM_BREAD') {
-        this.selectedProducts = this.selectedProducts.filter(p => p.category !== product.category);
+      if (product.category === 'CUSTOMHAM_BREAD') {
+        this.removeBread();
+      } else if (product.category === 'CUSTOMHAM_MEAT') {
+        this.removeMeat();
       }
+  
       this.selectedProducts.push(product);
+      this.productService.setSelectedProducts(this.selectedProducts);
       console.log('Selected products:', this.selectedProducts.map(p => p.id));
+    }
+  
+    removeBread() {
+      this.selectedProducts = this.selectedProducts.filter(product => product.category !== 'CUSTOMHAM_BREAD');
+    }
+  
+    removeMeat() {
+      this.selectedProducts = this.selectedProducts.filter(product => product.category !== 'CUSTOMHAM_MEAT');
     }
   
     isSelected(product: Product): boolean {
@@ -101,11 +113,12 @@ import { ErrorService } from '../../Services/error-service.service';
   
     resetSelections() {
       this.selectedProducts = [];
+      this.productService.setSelectedProducts(this.selectedProducts);
       console.log('Selections reset');
     }
   
     createCustomizableBurger() {
-      if (!this.isBreadSelected() || !this.isMeatSelected()) {
+      if (this.selectedProducts.length < 2) {
         this.errorService.showMenuSectionsError('Per favore, seleziona almeno il pane e la carne.');
         return;
       }
@@ -125,8 +138,15 @@ import { ErrorService } from '../../Services/error-service.service';
       this.customizableProductService.createCustomizableProduct(customizableProduct).subscribe(response => {
         console.log('Customizable Burger created:', response);
         this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
-        this.errorService.showErrorModal('✅ Burger aggiunto', 'Burger aggiunto al carrello')
-        this.selectedProducts = []; // Reset selected products after creating the burger
+  
+        // Aggiungi l'animazione del top del pane con un ritardo di 1 secondo
+        this.productService.showTopBreadSubject.next(true);
+        setTimeout(() => {
+          this.productService.setCartProducts([...this.productService.getCartProductsValue(), response]);
+          this.errorService.showErrorModal('✅ Burger aggiunto', 'Burger aggiunto al carrello');
+          this.resetSelections();
+          this.productService.showTopBreadSubject.next(false); // Imposta showTopBread su false dopo l'animazione
+        }, 2000);
       });
     }
   }

@@ -17,7 +17,11 @@ export class ProductService {
   private cartProductsSubject = new BehaviorSubject<(Product | CustomizableProduct)[]>([]);
   currentCartProducts$ = this.cartProductsSubject.asObservable();
 
-  private selectedProducts = [];
+  private selectedProductsSubject = new BehaviorSubject<Product[]>([]);
+  selectedProducts$ = this.selectedProductsSubject.asObservable();
+
+  public showTopBreadSubject = new BehaviorSubject<boolean>(false);
+  showTopBread$ = this.showTopBreadSubject.asObservable();
 
   constructor(private http: HttpClient) {}
 
@@ -44,6 +48,14 @@ export class ProductService {
 
   setCartProducts(products: (Product | CustomizableProduct)[]): void {
     this.cartProductsSubject.next(products);
+  }
+
+  setSelectedProducts(products: Product[]): void {
+    this.selectedProductsSubject.next(products);
+  }
+
+  getSelectedProducts(): Product[] {
+    return this.selectedProductsSubject.getValue();
   }
 
   updateProduct(id: number, data: Partial<Product>): Observable<Product> {

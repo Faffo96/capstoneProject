@@ -1,13 +1,15 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { Router, NavigationEnd, Event } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Product } from '../../models/product';
+import { ProductService } from '../../Services/product.service';
 
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
   styleUrls: ['./menu.component.scss']
 })
-export class MenuComponent implements AfterViewInit {
+export class MenuComponent implements AfterViewInit, OnInit {
   menuSections = [
     {
       gif: "../../../assets/icons/animate/gif/hamburger.gif",
@@ -55,10 +57,11 @@ export class MenuComponent implements AfterViewInit {
       route: "sandwich"
     },
   ];
-/*   menuProducts: Product[] = []; */
   currentRoute: string;
+  selectedIngredients: Product[] = [];
+  showTopBread: boolean = false;
 
-  constructor(private router: Router) {
+  constructor(private router: Router, private productService: ProductService) {
     this.currentRoute = '';
 
     this.router.events.pipe(
@@ -66,9 +69,20 @@ export class MenuComponent implements AfterViewInit {
     ).subscribe((event: NavigationEnd) => {
       this.currentRoute = event.urlAfterRedirects;
     });
+
+    this.productService.selectedProducts$.subscribe(products => {
+      this.selectedIngredients = products;
+    });
+
+    this.productService.showTopBread$.subscribe(show => {
+      this.showTopBread = show;
+    });
+  }
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
   }
 
-  ngAfterViewInit() {
+  ngOnInit() {
     const imgs = document.getElementsByClassName('hover-image') as HTMLCollectionOf<HTMLImageElement>;
     const divs = document.getElementsByClassName('menu-section') as HTMLCollectionOf<HTMLDivElement>;
     const iconName = ["hamburger", "chips", "sandwich", "hotdog", "salad", "dessert", "beer", "hamburger2", "sandwich2"];
@@ -99,5 +113,22 @@ export class MenuComponent implements AfterViewInit {
   isCustomizableSection(): boolean {
     const currentRoute = this.router.url;
     return currentRoute.includes('customizeBurger') || currentRoute.includes('customizeSandwich') || currentRoute.includes('salad');
+  }
+
+  getIngredientImage(category: string): string {
+    switch (category) {
+      case 'CUSTOMHAM_CHEESE':
+        return '../../../assets/img/cheese.png';
+      case 'CUSTOMHAM_VEGETABLE':
+        return '../../../assets/img/salad.png';
+      case 'CUSTOMHAM_SAUCE':
+        return '../../../assets/img/sauce.png';
+      default:
+        return '';
+    }
+  }
+
+  isProductSelected(category: string): boolean {
+    return this.selectedIngredients.some(product => product.category === category);
   }
 }
