@@ -59,7 +59,7 @@
             </div>
             <div class="col-lg-4 mt-5 container d-flex flex-column">
                <div>
-                  <img class="profile-avatar" src="{{user?.avatar}}" alt="">
+                  <img [src]="user?.avatar ? user?.avatar : '../../../assets/img/user.webp'" class="profile-avatar" alt="">
                </div>
                <div class="d-flex mt-4">
                   <input type="file" class="form-control my-fs-1">

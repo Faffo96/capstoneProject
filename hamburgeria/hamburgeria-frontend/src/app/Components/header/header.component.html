@@ -12,7 +12,7 @@
         </li>
         <li class="my-fs-3 nav-item"><a class="nav-link text-light fw-bolder" routerLinkActive="color2" routerLink="/reservation">Prenotazioni</a>
         </li>
-        <li class="my-fs-3 nav-item"><a class="nav-link text-light fw-bolder" routerLink="">Chi siamo</a>
+        <li class="my-fs-3 nav-item"><a class="nav-link text-light fw-bolder" routerLinkActive="color2" routerLink="/chiSiamo">Chi siamo</a>
         </li>
         <li *ngIf="user$?.role == 'OWNER' || user$?.role == 'EMPLOYEE'" class="my-fs-3 nav-item" ngbDropdown>
           <a class="nav-link dropdown-toggle text-light fw-bolder" id="backofficeDropdown" ngbDropdownToggle role="button" aria-expanded="false">
@@ -38,7 +38,7 @@
         <li *ngIf="!user$" class="my-fs-3 nav-item2"><a class="nav-link text-light fw-bolder" routerLink="/register">Registrati</a></li>
         <li *ngIf="user$" class="my-fs-3 nav-item2 d-flex align-items-center" ngbDropdown>
           <a class="nav-link dropdown-toggle text-light fw-bolder d-flex align-items-center" id="profileDropdown" ngbDropdownToggle role="button" aria-expanded="false">
-            <img *ngIf="user$.avatar != null" src="{{user$.avatar}}" class="rounded-5 me-2" alt="" width="50px" height="50px">
+            <img [src]="user$.avatar ? user$.avatar : '../../../assets/img/user.webp'" class="rounded-5 me-2" alt="" width="50px" height="50px">
             {{user$.name}} {{user$.surname}}
           </a>
           <ul class="dropdown-menu bg-body-tertiary custom-accordion-body rounded-4" ngbDropdownMenu aria-labelledby="profileDropdown">

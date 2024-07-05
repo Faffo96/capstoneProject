@@ -45,5 +45,12 @@ export class ProductService {
   setCartProducts(products: (Product | CustomizableProduct)[]): void {
     this.cartProductsSubject.next(products);
   }
-}
 
+  updateProduct(id: number, data: Partial<Product>): Observable<Product> {
+    return this.http.put<Product>(`${this.apiURL}api/products/${id}`, data);
+  }
+
+  deleteProduct(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiURL}api/products/${id}`);
+  }
+}

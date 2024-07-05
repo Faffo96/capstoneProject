@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { EmployeeResponseDTO } from '../../models/employee-response-dto';
 import { EmployeeService } from '../../Services/employee.service';
+import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
+import { ConfirmModalService } from '../../Services/confirm-modal.service';
+import { ErrorService } from '../../Services/error-service.service';
 
 @Component({
   selector: 'app-backoffice-employees',
@@ -13,7 +16,7 @@ export class BackofficeEmployeesComponent implements OnInit {
   totalPages: number = 0;
   pages: number[] = [];
 
-  constructor(private employeeService: EmployeeService) { }
+  constructor(private employeeService: EmployeeService, private confirmModalService: ConfirmModalService, private errorService: ErrorService) { }
 
   ngOnInit(): void {
     this.getEmployees(this.currentPage);
@@ -22,6 +25,7 @@ export class BackofficeEmployeesComponent implements OnInit {
   getEmployees(page: number): void {
     this.employeeService.getAllEmployees(page).subscribe(
       (response: any) => {
+        console.log('Employees response:', response);
         this.employees = response.content;
         this.currentPage = response.number;
         this.totalPages = response.totalPages;
@@ -32,6 +36,13 @@ export class BackofficeEmployeesComponent implements OnInit {
       }
     );
   }
+  
+  confirmDeleteProfile(employee: EmployeeResponseDTO): void {
+    this.confirmModalService.confirm(
+      'Conferma Eliminazione',
+      `Sei sicuro di voler eliminare il profilo di ${employee.name} ${employee.surname}?`,
+      () => this.errorService.showErrorModal('✅ Completato', 'Dipendente eliminato.')    );
+  }
 
   changePage(page: number): void {
     if (page >= 0 && page < this.totalPages) {
@@ -40,7 +51,8 @@ export class BackofficeEmployeesComponent implements OnInit {
   }
 
   performAction(employee: EmployeeResponseDTO): void {
-
     console.log('Azione eseguita per:', employee);
+    console.log('Avatar URL:', employee.avatar); // Controlla l'URL dell'avatar qui
   }
+  
 }

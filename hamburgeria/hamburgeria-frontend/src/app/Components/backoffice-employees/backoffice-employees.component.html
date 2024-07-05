@@ -10,31 +10,32 @@
           <div ngbAccordionBody>
             <div class="row">
               <div class="col-12 mb-2">
-                <img *ngIf="employee.avatar" [src]="employee.avatar" alt="Avatar" width="50">
+                <img [src]="'../../../assets/img/user.webp'" alt="Avatar" width="50">
               </div>
               <div class="col-12 mb-2">
-                <strong>Nome:</strong> {{employee.name}}
+                <strong class="fw-bold">Nome:</strong> {{employee.name}}
               </div>
               <div class="col-12 mb-2">
-                <strong>Cognome:</strong> {{employee.surname}}
+                <strong class="fw-bold">Cognome:</strong> {{employee.surname}}
               </div>
               <div class="col-12 mb-2">
-                <strong>Email:</strong> {{employee.email}}
+                <strong class="fw-bold">Email:</strong> {{employee.email}}
               </div>
               <div class="col-12 mb-2">
-                <strong>Ruolo:</strong> {{employee.role}}
+                <strong class="fw-bold">Ruolo:</strong> {{employee.role}}
               </div>
               <div class="col-12 mb-2">
-                <strong>Data di Creazione:</strong> {{employee.creationDate}}
+                <strong class="fw-bold">Data di Creazione:</strong> {{employee.creationDate}}
               </div>
               <div class="col-12 mb-2">
-                <strong>Codice Fiscale:</strong> {{employee.codiceFiscale}}
+                <strong class="fw-bold">Codice Fiscale:</strong> {{employee.codiceFiscale}}
               </div>
               <div class="col-12 mb-2">
-                <strong>Stipendio:</strong> {{employee.salary | number:'1.2-2'}} &euro;
+                <strong class="fw-bold">Stipendio:</strong> {{employee.salary | number:'1.2-2'}} &euro;
               </div>
               <div class="col-12 text-end mt-2">
-                <button class="btn btn-primary btn-sm" (click)="performAction(employee)">Azione</button>
+                <button class="btn btn-primary btn-sm me-2">Invia Email</button>
+                <button class="btn btn-danger btn-sm" (click)="confirmDeleteProfile(employee)">Elimina Profilo</button>
               </div>
             </div>
           </div>
