@@ -28,9 +28,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -255,6 +253,24 @@ public class CartService {
         cartRepository.delete(cart);
         loggerInfo.info("Cart with id " + id + " deleted successfully.");
         return "Cart with id " + id + " deleted successfully.";
+    }
+
+    public Map<String, Double> getMonthlyRevenueByYear(int year) {
+        List<Object[]> results = cartRepository.findMonthlyRevenueByYear(year);
+        Map<String, Double> monthlyRevenue = new HashMap<>();
+
+        for (Object[] result : results) {
+            int month = (int) result[0];
+            double total = (double) result[1];
+            monthlyRevenue.put(getMonthName(month), total);
+        }
+
+        return monthlyRevenue;
+    }
+
+    private String getMonthName(int month) {
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return months[month - 1];
     }
 }
 

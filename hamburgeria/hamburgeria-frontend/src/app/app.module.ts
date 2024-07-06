@@ -40,6 +40,7 @@ import { ResponseModalComponent } from './Components/response-modal/response-mod
 import { ConfirmModalComponent } from './Components/confirm-modal/confirm-modal.component';
 import { DateAndTimePipe } from './pipes/date-and-time.pipe';
 import { ChiSiamoComponent } from './Components/chi-siamo/chi-siamo.component';
+import { GraficiComponent } from './Components/grafici/grafici.component';
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import { ChiSiamoComponent } from './Components/chi-siamo/chi-siamo.component';
     ResponseModalComponent,
     ConfirmModalComponent,
     DateAndTimePipe,
-    ChiSiamoComponent
+    ChiSiamoComponent,
+    GraficiComponent
   ],
   imports: [
     NgbModule,

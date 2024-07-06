@@ -14,6 +14,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/carts")
@@ -92,6 +93,11 @@ public class CartController {
         } catch (CartNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cart not found with id: " + id);
         }
+    }
+
+    @GetMapping("/revenue/monthly")
+    public Map<String, Double> getMonthlyRevenue(@RequestParam int year) {
+        return cartService.getMonthlyRevenueByYear(year);
     }
 }
 

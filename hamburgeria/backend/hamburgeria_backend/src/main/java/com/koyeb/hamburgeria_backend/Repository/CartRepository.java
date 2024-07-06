@@ -8,7 +8,12 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import java.util.List;
+
 public interface CartRepository extends JpaRepository<Cart, Long> {
     @Query("SELECT c FROM Cart c WHERE c.user.email = :email")
     Page<Cart> findByUserEmail(String email, Pageable pageable);
+
+    @Query("SELECT EXTRACT(MONTH FROM c.creationDate) as month, SUM(c.total) as total FROM Cart c WHERE EXTRACT(YEAR FROM c.creationDate) = :year GROUP BY EXTRACT(MONTH FROM c.creationDate) ORDER BY EXTRACT(MONTH FROM c.creationDate)")
+    List<Object[]> findMonthlyRevenueByYear(int year);
 }

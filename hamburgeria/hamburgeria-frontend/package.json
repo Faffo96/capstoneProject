@@ -23,6 +23,7 @@
     "@ng-bootstrap/ng-bootstrap": "^16.0.0",
     "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.3",
+    "chart.js": "^4.4.3",
     "jquery": "^3.7.1",
     "ngx-scrollreveal": "^3.0.0",
     "popper.js": "^1.16.1",

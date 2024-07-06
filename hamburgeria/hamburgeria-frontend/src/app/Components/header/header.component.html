@@ -19,7 +19,7 @@
             Backoffice
           </a>
           <ul class="dropdown-menu bg-body-tertiary custom-accordion-body rounded-4" ngbDropdownMenu aria-labelledby="backofficeDropdown">
-            <li *ngIf="user$?.role == 'OWNER'"><a class="dropdown-item nav-link2 fw-bold" routerLink="/test">Grafici</a></li>
+            <li *ngIf="user$?.role == 'OWNER'"><a class="dropdown-item nav-link2 fw-bold" routerLink="/grafici">Grafici</a></li>
             <li *ngIf="user$?.role == 'OWNER'"><a class="dropdown-item nav-link2 fw-bold" routerLink="/backoffice-users">Lista Utenti</a></li>
             <li *ngIf="user$?.role == 'OWNER'"><a class="dropdown-item nav-link2 fw-bold" routerLink="/backoffice-employees">Lista Impiegati</a></li>
             <li *ngIf="user$?.role == 'OWNER'"><a class="dropdown-item nav-link2 fw-bold" routerLink="/backoffice-products">Gestisci Prodotti</a></li>
@@ -40,7 +40,7 @@
           <div class="nav-link dropdown-toggle text-light fw-bolder d-flex align-items-center" id="profileDropdown" ngbDropdownToggle role="button" aria-expanded="false">
             <img [src]="'../../../assets/img/user.webp'" class="rounded-5 me-2" alt="" width="50px" height="50px">
             <p>{{user$.name}} {{user$.surname}}</p>
-            <p class="mx-2"><span>✨</span>{{user$.points}}</p>
+            <p class="mx-2"><span>✨</span>{{user$.points}}</p> 
           </div>
           <ul class="dropdown-menu bg-body-tertiary custom-accordion-body rounded-4" ngbDropdownMenu aria-labelledby="profileDropdown">
             <li><a class="dropdown-item nav-link2 fw-bold" routerLink="/userSettings">Impostazioni profilo</a></li>
