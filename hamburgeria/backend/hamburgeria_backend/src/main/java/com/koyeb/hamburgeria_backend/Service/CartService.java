@@ -272,5 +272,16 @@ public class CartService {
         String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
         return months[month - 1];
     }
+
+    public Map<String, Double> getDailyRevenueByYearAndMonth(int year, int month) {
+        List<Object[]> results = cartRepository.findDailyRevenueByYearAndMonth(year, month);
+        Map<String, Double> dailyRevenue = new LinkedHashMap<>();
+        for (Object[] result : results) {
+            String day = result[0].toString();
+            Double total = (Double) result[1];
+            dailyRevenue.put(day, total);
+        }
+        return dailyRevenue;
+    }
 }
 

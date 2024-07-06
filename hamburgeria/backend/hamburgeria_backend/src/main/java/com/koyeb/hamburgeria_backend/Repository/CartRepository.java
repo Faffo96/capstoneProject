@@ -16,4 +16,7 @@ public interface CartRepository extends JpaRepository<Cart, Long> {
 
     @Query("SELECT EXTRACT(MONTH FROM c.creationDate) as month, SUM(c.total) as total FROM Cart c WHERE EXTRACT(YEAR FROM c.creationDate) = :year GROUP BY EXTRACT(MONTH FROM c.creationDate) ORDER BY EXTRACT(MONTH FROM c.creationDate)")
     List<Object[]> findMonthlyRevenueByYear(int year);
+
+    @Query("SELECT EXTRACT(DAY FROM c.creationDate) as day, SUM(c.total) as total FROM Cart c WHERE EXTRACT(YEAR FROM c.creationDate) = :year AND EXTRACT(MONTH FROM c.creationDate) = :month GROUP BY EXTRACT(DAY FROM c.creationDate) ORDER BY EXTRACT(DAY FROM c.creationDate)")
+    List<Object[]> findDailyRevenueByYearAndMonth(int year, int month);
 }

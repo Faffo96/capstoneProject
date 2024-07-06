@@ -1,9 +1,58 @@
-<div style="display: block;">
-        <button (click)="changeYear(-1)">Previous Year</button>
-        <span>{{ selectedYear }}</span>
-        <button (click)="changeYear(1)">Next Year</button>
-      </div>
-      <div style="display: block;">
-        <canvas #chart1></canvas>
+
+
+
+<div class="container-fluid">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-8">
+              <div class="card mb-3">
+                <div class="card-body">
+                  <canvas class="w-100 h-100 mx-auto" #chart1></canvas>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center mb-3">
+                <button (click)="changeYear(-1)" class="btn my-button2 mx-2">Anno precedente</button>
+                <span class="align-self-center mx-2">{{ selectedYear }}</span>
+                <button (click)="changeYear(1)" class="btn my-button2 mx-2">Anno successivo</button>
+              </div>
+              <div class="d-flex justify-content-center mb-3">
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="revenueType" id="monthly" value="monthly" [(ngModel)]="revenueType" (change)="updateChartData()">
+                  <label class="form-check-label" for="monthly">Mensile</label>
+                </div>
+                <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="revenueType" id="daily" value="daily" [(ngModel)]="revenueType" (change)="updateChartData()">
+                  <label class="form-check-label" for="daily">Giornaliero</label>
+                </div>
+              </div>
+              <div class="d-flex justify-content-center mb-3" *ngIf="revenueType === 'daily'">
+                <label for="monthSelect" class="form-label mx-2">Mese:</label>
+                <select id="monthSelect" class="form-select" [(ngModel)]="selectedMonth" (change)="updateChartData()">
+                  <option *ngFor="let month of months; let i = index" [value]="i + 1">{{ month }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card">
+                <div class="card-header">
+                  <h3 class="h5 mb-0">Dati del Grafico</h3>
+                </div>
+                <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                    <li *ngFor="let data of chartDataList" class="list-group-item d-flex justify-content-between align-items-center">
+                      {{ data.label }}
+                      <span class="badge bg-primary rounded-pill">{{ data.value }} €</span>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="row mt-4">
+            <div class="col-12">
+              futuro secondo chart
+            </div>
+          </div>
+        </div>
       </div>
       

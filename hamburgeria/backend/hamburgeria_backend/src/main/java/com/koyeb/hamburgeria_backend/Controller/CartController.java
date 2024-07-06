@@ -99,5 +99,10 @@ public class CartController {
     public Map<String, Double> getMonthlyRevenue(@RequestParam int year) {
         return cartService.getMonthlyRevenueByYear(year);
     }
+
+    @GetMapping("/revenue/daily")
+    public Map<String, Double> getDailyRevenue(@RequestParam int year, @RequestParam int month) {
+        return cartService.getDailyRevenueByYearAndMonth(year, month);
+    }
 }
 
