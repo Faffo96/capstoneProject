@@ -1,155 +1,174 @@
 <div class="container-fluid">
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8">
-              <div class="card mb-3">
-                <div class="card-body">
+   <div class="container">
+      <h1 class="fw-bold fs-1 mt-5 text-center">STATISTICHE</h1>
+      <div class="row my-5">
+         <div class="col-md-8">
+            <div class="card mb-3">
+               <div class="card-body">
                   <canvas class="w-100 h-100 mx-auto" #chart1></canvas>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center mb-3">
-                <button (click)="changeYear(-1)" class="btn my-button2 mx-2">Anno precedente</button>
-                <span class="align-self-center mx-2">{{ selectedYear }}</span>
-                <button (click)="changeYear(1)" class="btn my-button2 mx-2">Anno successivo</button>
-              </div>
-              <div class="d-flex justify-content-center mb-3">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="revenueType" id="monthly" value="monthly" [(ngModel)]="revenueType" (change)="updateChartData()">
+               </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+               <button (click)="changeYear(-1)" class="btn my-button2 mx-2">Anno precedente</button>
+               <span class="align-self-center mx-2">{{ selectedYear }}</span>
+               <button (click)="changeYear(1)" class="btn my-button2 mx-2">Anno successivo</button>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+               <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="revenueType" id="monthly" value="monthly"
+                     [(ngModel)]="revenueType" (change)="updateChartData()">
                   <label class="form-check-label" for="monthly">Mensile</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="revenueType" id="daily" value="daily" [(ngModel)]="revenueType" (change)="updateChartData()">
+               </div>
+               <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="revenueType" id="daily" value="daily"
+                     [(ngModel)]="revenueType" (change)="updateChartData()">
                   <label class="form-check-label" for="daily">Giornaliero</label>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center mb-3" *ngIf="revenueType === 'daily'">
-                <label for="monthSelect" class="form-label mx-2">Mese:</label>
-                <select id="monthSelect" class="form-select" [(ngModel)]="selectedMonth" (change)="updateChartData()">
-                  <option *ngFor="let month of months; let i = index" [value]="i + 1">{{ month }}</option>
-                </select>
-              </div>
+               </div>
             </div>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-header">
+            <div class="d-flex justify-content-center mb-3" *ngIf="revenueType === 'daily'">
+               <label for="monthSelect" class="form-label mx-2">Mese:</label>
+               <select id="monthSelect" class="form-select" [(ngModel)]="selectedMonth" (change)="updateChartData()">
+                  <option *ngFor="let month of months; let i = index" [value]="i + 1">{{ month }}</option>
+               </select>
+            </div>
+         </div>
+         <div class="col-md-4">
+            <div class="card">
+               <div class="card-header">
                   <h3 class="h5 mb-0">Dati del Grafico</h3>
-                </div>
-                <div class="card-body">
+               </div>
+               <div class="card-body">
                   <ul class="list-group list-group-flush">
-                    <li *ngFor="let data of chartDataList" class="list-group-item d-flex justify-content-between align-items-center">
-                      {{ data.label }}
-                      <span class="badge bg-primary rounded-pill">{{ data.value }} €</span>
-                    </li>
+                     <li *ngFor="let data of chartDataList"
+                        class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ data.label }}
+                        <span class="badge bg-primary rounded-pill">{{ data.value }} €</span>
+                     </li>
                   </ul>
-                </div>
-              </div>
+               </div>
             </div>
-          </div>
-          
-          <div class="row mt-4">
-            <div class="col-md-8">
-              <div class="card mb-3">
-                <div class="card-body">
-                  <canvas class="w-100 h-100 mx-auto" #productChart></canvas>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center mb-3">
-                <button (click)="changeProductYear(-1)" class="btn my-button2 mx-2">Anno precedente</button>
-                <span class="align-self-center mx-2">{{ selectedProductYear }}</span>
-                <button (click)="changeProductYear(1)" class="btn my-button2 mx-2">Anno successivo</button>
-              </div>
-              <div class="d-flex justify-content-center mb-3">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="productRevenueType" id="productMonthly" value="monthly" [(ngModel)]="productRevenueType" (change)="updateProductChartData()">
-                  <label class="form-check-label" for="productMonthly">Mensile</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="productRevenueType" id="productAnnual" value="annual" [(ngModel)]="productRevenueType" (change)="updateProductChartData()">
-                  <label class="form-check-label" for="productAnnual">Annuale</label>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center mb-3" *ngIf="productRevenueType === 'monthly'">
-                <label for="productMonthSelect" class="form-label mx-2">Mese:</label>
-                <select id="productMonthSelect" class="form-select" [(ngModel)]="selectedProductMonth" (change)="updateProductChartData()">
-                  <option *ngFor="let month of months; let i = index" [value]="i + 1">{{ month }}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="h5 mb-0">Dati del Grafico Prodotti</h3>
-                </div>
-                <div class="card-body">
-                  <ul class="list-group list-group-flush">
-                    <li *ngFor="let data of productChartDataList" class="list-group-item d-flex justify-content-between align-items-center">
-                      {{ data.label }}
-                      <span class="badge bg-primary rounded-pill">{{ data.value }}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-4">
-            <div class="col-md-8">
-              <div class="card mb-3">
-                <div class="card-body">
-                  <canvas class="w-100 h-100 mx-auto" #reservationChart></canvas>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center mb-3">
-                <button (click)="changeReservationYear(-1)" class="btn my-button2 mx-2">Anno precedente</button>
-                <span class="align-self-center mx-2">{{ selectedReservationYear }}</span>
-                <button (click)="changeReservationYear(1)" class="btn my-button2 mx-2">Anno successivo</button>
-              </div>
-              <div class="d-flex justify-content-center mb-3">
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="reservationCountType" id="reservationMonthly" value="monthly" [(ngModel)]="reservationCountType" (change)="updateReservationChartData()">
-                  <label class="form-check-label" for="reservationMonthly">Mensile</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="reservationCountType" id="reservationDaily" value="daily" [(ngModel)]="reservationCountType" (change)="updateReservationChartData()">
-                  <label class="form-check-label" for="reservationDaily">Giornaliero</label>
-                </div>
-                <div class="form-check form-check-inline">
-                  <input class="form-check-input" type="radio" name="reservationCountType" id="reservationHourly" value="hourly" [(ngModel)]="reservationCountType" (change)="updateReservationChartData()">
-                  <label class="form-check-label" for="reservationHourly">Orario</label>
-                </div>
-              </div>
-              <div class="d-flex justify-content-center mb-3" *ngIf="reservationCountType === 'daily'">
-                <label for="reservationMonthSelect" class="form-label mx-2">Mese:</label>
-                <select id="reservationMonthSelect" class="form-select" [(ngModel)]="selectedReservationMonth" (change)="updateReservationChartData()">
-                  <option *ngFor="let month of months; let i = index" [value]="i + 1">{{ month }}</option>
-                </select>
-              </div>
-              <div class="d-flex justify-content-center mb-3" *ngIf="reservationCountType === 'hourly'">
-                <label for="reservationMonthSelect" class="form-label mx-2">Mese:</label>
-                <select id="reservationMonthSelect" class="form-select" [(ngModel)]="selectedReservationMonth" (change)="updateReservationChartData()">
-                  <option *ngFor="let month of months; let i = index" [value]="i + 1">{{ month }}</option>
-                </select>
-                <label for="reservationDaySelect" class="form-label mx-2">Giorno:</label>
-                <select id="reservationDaySelect" class="form-select" [(ngModel)]="selectedReservationDay" (change)="updateReservationChartData()">
-                  <option *ngFor="let day of days" [value]="day">{{ day }}</option>
-                </select>
-              </div>
-            </div>
-            <div class="col-md-4">
-              <div class="card">
-                <div class="card-header">
-                  <h3 class="h5 mb-0">Dati del Grafico Prenotazioni</h3>
-                </div>
-                <div class="card-body">
-                  <ul class="list-group list-group-flush">
-                    <li *ngFor="let data of reservationChartDataList" class="list-group-item d-flex justify-content-between align-items-center">
-                      {{ data.label }}
-                      <span class="badge bg-primary rounded-pill">{{ data.value }}</span>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+         </div>
       </div>
-      
+
+      <hr>
+
+      <div class="row my-5">
+         <div class="col-md-8">
+            <div class="card mb-3">
+               <div class="card-body">
+                  <canvas class="w-100 h-100 mx-auto" #productChart></canvas>
+               </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+               <button (click)="changeProductYear(-1)" class="btn my-button2 mx-2">Anno precedente</button>
+               <span class="align-self-center mx-2">{{ selectedProductYear }}</span>
+               <button (click)="changeProductYear(1)" class="btn my-button2 mx-2">Anno successivo</button>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+               <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="productRevenueType" id="productMonthly"
+                     value="monthly" [(ngModel)]="productRevenueType" (change)="updateProductChartData()">
+                  <label class="form-check-label" for="productMonthly">Mensile</label>
+               </div>
+               <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="productRevenueType" id="productAnnual"
+                     value="annual" [(ngModel)]="productRevenueType" (change)="updateProductChartData()">
+                  <label class="form-check-label" for="productAnnual">Annuale</label>
+               </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3" *ngIf="productRevenueType === 'monthly'">
+               <label for="productMonthSelect" class="form-label mx-2">Mese:</label>
+               <select id="productMonthSelect" class="form-select" [(ngModel)]="selectedProductMonth"
+                  (change)="updateProductChartData()">
+                  <option *ngFor="let month of months; let i = index" [value]="i + 1">{{ month }}</option>
+               </select>
+            </div>
+         </div>
+         <div class="col-md-4">
+            <div class="card">
+               <div class="card-header">
+                  <h3 class="h5 mb-0">Dati del Grafico Prodotti</h3>
+               </div>
+               <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                     <li *ngFor="let data of productChartDataList"
+                        class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ data.label }}
+                        <span class="badge bg-primary rounded-pill">{{ data.value }}</span>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+
+      <hr>
+
+      <div class="row my-5">
+         <div class="col-md-8">
+            <div class="card mb-3">
+               <div class="card-body">
+                  <canvas class="w-100 h-100 mx-auto" #reservationChart></canvas>
+               </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+               <button (click)="changeReservationYear(-1)" class="btn my-button2 mx-2">Anno precedente</button>
+               <span class="align-self-center mx-2">{{ selectedReservationYear }}</span>
+               <button (click)="changeReservationYear(1)" class="btn my-button2 mx-2">Anno successivo</button>
+            </div>
+            <div class="d-flex justify-content-center mb-3">
+               <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="reservationCountType" id="reservationMonthly"
+                     value="monthly" [(ngModel)]="reservationCountType" (change)="updateReservationChartData()">
+                  <label class="form-check-label" for="reservationMonthly">Mensile</label>
+               </div>
+               <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="reservationCountType" id="reservationDaily"
+                     value="daily" [(ngModel)]="reservationCountType" (change)="updateReservationChartData()">
+                  <label class="form-check-label" for="reservationDaily">Giornaliero</label>
+               </div>
+               <div class="form-check form-check-inline">
+                  <input class="form-check-input" type="radio" name="reservationCountType" id="reservationHourly"
+                     value="hourly" [(ngModel)]="reservationCountType" (change)="updateReservationChartData()">
+                  <label class="form-check-label" for="reservationHourly">Orario</label>
+               </div>
+            </div>
+            <div class="d-flex justify-content-center mb-3" *ngIf="reservationCountType === 'daily'">
+               <label for="reservationMonthSelect" class="form-label mx-2">Mese:</label>
+               <select id="reservationMonthSelect" class="form-select" [(ngModel)]="selectedReservationMonth"
+                  (change)="updateReservationChartData()">
+                  <option *ngFor="let month of months; let i = index" [value]="i + 1">{{ month }}</option>
+               </select>
+            </div>
+            <div class="d-flex justify-content-center mb-3" *ngIf="reservationCountType === 'hourly'">
+               <label for="reservationMonthSelect" class="form-label mx-2">Mese:</label>
+               <select id="reservationMonthSelect" class="form-select" [(ngModel)]="selectedReservationMonth"
+                  (change)="updateReservationChartData()">
+                  <option *ngFor="let month of months; let i = index" [value]="i + 1">{{ month }}</option>
+               </select>
+               <label for="reservationDaySelect" class="form-label mx-2">Giorno:</label>
+               <select id="reservationDaySelect" class="form-select" [(ngModel)]="selectedReservationDay"
+                  (change)="updateReservationChartData()">
+                  <option *ngFor="let day of days" [value]="day">{{ day }}</option>
+               </select>
+            </div>
+         </div>
+         <div class="col-md-4">
+            <div class="card">
+               <div class="card-header">
+                  <h3 class="h5 mb-0">Dati del Grafico Prenotazioni</h3>
+               </div>
+               <div class="card-body">
+                  <ul class="list-group list-group-flush">
+                     <li *ngFor="let data of reservationChartDataList"
+                        class="list-group-item d-flex justify-content-between align-items-center">
+                        {{ data.label }}
+                        <span class="badge bg-primary rounded-pill">{{ data.value }}</span>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
