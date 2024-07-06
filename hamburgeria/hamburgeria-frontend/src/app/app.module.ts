@@ -84,7 +84,7 @@ import { ChiSiamoComponent } from './Components/chi-siamo/chi-siamo.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    CommonModule,
+    CommonModule
   ],
   providers: [
     {
