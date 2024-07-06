@@ -21,6 +21,7 @@ import { BackofficeUsersComponent } from './Components/backoffice-users/backoffi
 import { BackofficeEmployeesComponent } from './Components/backoffice-employees/backoffice-employees.component';
 import { BackofficeProductsComponent } from './Components/backoffice-products/backoffice-products.component';
 import { ChiSiamoComponent } from './Components/chi-siamo/chi-siamo.component';
+import { GraficiComponent } from './Components/grafici/grafici.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,10 @@ const routes: Routes = [
   {
     path: 'chiSiamo',
     component: ChiSiamoComponent
+  },
+  {
+    path: 'grafici',
+    component: GraficiComponent
   },
   {
     path: 'backoffice-users',

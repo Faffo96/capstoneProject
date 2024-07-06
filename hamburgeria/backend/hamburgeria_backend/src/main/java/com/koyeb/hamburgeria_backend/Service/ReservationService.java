@@ -27,8 +27,12 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class ReservationService {
@@ -246,5 +250,29 @@ public class ReservationService {
         reservationRepository.delete(reservation);
         loggerInfo.info("Reservation with id " + id + " deleted successfully.");
         return "Reservation with id " + id + " deleted successfully.";
+    }
+
+    public Map<String, Integer> getMonthlyReservationCountByYear(int year) {
+        List<Object[]> results = reservationRepository.findMonthlyReservationCountByYear(year);
+        return results.stream().collect(Collectors.toMap(
+                result -> (String) result[0],
+                result -> ((Number) result[1]).intValue()
+        ));
+    }
+
+    public Map<String, Integer> getDailyReservationCountByYearAndMonth(int year, int month) {
+        List<Object[]> results = reservationRepository.findDailyReservationCountByYearAndMonth(year, month);
+        return results.stream().collect(Collectors.toMap(
+                result -> (String) result[0],
+                result -> ((Number) result[1]).intValue()
+        ));
+    }
+
+    public Map<String, Integer> getHourlyReservationCountByYearMonthAndDay(int year, int month, int day) {
+        List<Object[]> results = reservationRepository.findHourlyReservationCountByYearMonthAndDay(year, month, day);
+        return results.stream().collect(Collectors.toMap(
+                result -> (String) result[0],
+                result -> ((Number) result[1]).intValue()
+        ));
     }
 }

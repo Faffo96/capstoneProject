@@ -106,7 +106,7 @@ export class SaladComponent implements OnInit {
 
     const customizableProduct: CustomizableProductDTO = {
       id: 0,
-      italianName: 'Insalata',
+      italianName: 'Insalata Personalizzata',
       englishName: 'Salad',
       italianDescription: '',
       englishDescription: '',

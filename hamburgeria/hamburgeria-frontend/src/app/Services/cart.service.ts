@@ -49,4 +49,6 @@ export class CartService {
   setCart$(cart: Cart[]): void {
     this.cart.next(cart);
   }
+
+  
 }

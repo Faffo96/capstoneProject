@@ -28,9 +28,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -255,6 +253,53 @@ public class CartService {
         cartRepository.delete(cart);
         loggerInfo.info("Cart with id " + id + " deleted successfully.");
         return "Cart with id " + id + " deleted successfully.";
+    }
+
+    public Map<String, Double> getMonthlyRevenueByYear(int year) {
+        List<Object[]> results = cartRepository.findMonthlyRevenueByYear(year);
+        Map<String, Double> monthlyRevenue = new HashMap<>();
+
+        for (Object[] result : results) {
+            int month = (int) result[0];
+            double total = (double) result[1];
+            monthlyRevenue.put(getMonthName(month), total);
+        }
+
+        return monthlyRevenue;
+    }
+
+    private String getMonthName(int month) {
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return months[month - 1];
+    }
+
+    public Map<String, Double> getDailyRevenueByYearAndMonth(int year, int month) {
+        List<Object[]> results = cartRepository.findDailyRevenueByYearAndMonth(year, month);
+        Map<String, Double> dailyRevenue = new LinkedHashMap<>();
+        for (Object[] result : results) {
+            String day = result[0].toString();
+            Double total = (Double) result[1];
+            dailyRevenue.put(day, total);
+        }
+        return dailyRevenue;
+    }
+
+    public Map<String, Integer> getProductQuantitiesByMonthAndYear(int year, int month) {
+        List<Object[]> results = cartRepository.findProductQuantitiesByMonth(year, month);
+        return results.stream()
+                .collect(Collectors.toMap(
+                        row -> (String) row[0],
+                        row -> ((Number) row[1]).intValue()
+                ));
+    }
+
+    public Map<String, Integer> getProductQuantitiesByYear(int year) {
+        List<Object[]> results = cartRepository.findProductQuantitiesByYear(year);
+        return results.stream()
+                .collect(Collectors.toMap(
+                        row -> (String) row[0],
+                        row -> ((Number) row[1]).intValue()
+                ));
     }
 }
 
