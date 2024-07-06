@@ -27,6 +27,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -251,30 +252,27 @@ public class ReservationService {
         return "Reservation with id " + id + " deleted successfully.";
     }
 
-    public Map<String, Long> getMonthlyReservationCountByYear(int year) {
+    public Map<String, Integer> getMonthlyReservationCountByYear(int year) {
         List<Object[]> results = reservationRepository.findMonthlyReservationCountByYear(year);
-        return results.stream()
-                .collect(Collectors.toMap(
-                        row -> String.valueOf(row[0]),
-                        row -> (Long) row[1]
-                ));
+        return results.stream().collect(Collectors.toMap(
+                result -> (String) result[0],
+                result -> ((Number) result[1]).intValue()
+        ));
     }
 
-    public Map<String, Long> getDailyReservationCountByYearAndMonth(int year, int month) {
+    public Map<String, Integer> getDailyReservationCountByYearAndMonth(int year, int month) {
         List<Object[]> results = reservationRepository.findDailyReservationCountByYearAndMonth(year, month);
-        return results.stream()
-                .collect(Collectors.toMap(
-                        row -> String.valueOf(row[0]),
-                        row -> (Long) row[1]
-                ));
+        return results.stream().collect(Collectors.toMap(
+                result -> (String) result[0],
+                result -> ((Number) result[1]).intValue()
+        ));
     }
 
-    public Map<String, Long> getHourlyReservationCountByYearMonthAndDay(int year, int month, int day) {
+    public Map<String, Integer> getHourlyReservationCountByYearMonthAndDay(int year, int month, int day) {
         List<Object[]> results = reservationRepository.findHourlyReservationCountByYearMonthAndDay(year, month, day);
-        return results.stream()
-                .collect(Collectors.toMap(
-                        row -> String.valueOf(row[0]),
-                        row -> (Long) row[1]
-                ));
+        return results.stream().collect(Collectors.toMap(
+                result -> (String) result[0],
+                result -> ((Number) result[1]).intValue()
+        ));
     }
 }

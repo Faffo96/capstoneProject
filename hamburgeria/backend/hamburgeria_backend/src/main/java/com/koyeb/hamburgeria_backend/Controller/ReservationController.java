@@ -94,17 +94,17 @@ public class ReservationController {
     }
 
     @GetMapping("/count/monthly")
-    public Map<String, Long> getMonthlyReservationCount(@RequestParam int year) {
-        return reservationService.getMonthlyReservationCountByYear(year);
+    public ResponseEntity<Map<String, Integer>> getMonthlyReservationCount(@RequestParam int year) {
+        return ResponseEntity.ok(reservationService.getMonthlyReservationCountByYear(year));
     }
 
     @GetMapping("/count/daily")
-    public Map<String, Long> getDailyReservationCount(@RequestParam int year, @RequestParam int month) {
-        return reservationService.getDailyReservationCountByYearAndMonth(year, month);
+    public ResponseEntity<Map<String, Integer>> getDailyReservationCount(@RequestParam int year, @RequestParam int month) {
+        return ResponseEntity.ok(reservationService.getDailyReservationCountByYearAndMonth(year, month));
     }
 
     @GetMapping("/count/hourly")
-    public Map<String, Long> getHourlyReservationCount(@RequestParam int year, @RequestParam int month, @RequestParam int day) {
-        return reservationService.getHourlyReservationCountByYearMonthAndDay(year, month, day);
+    public ResponseEntity<Map<String, Integer>> getHourlyReservationCount(@RequestParam int year, @RequestParam int month, @RequestParam int day) {
+        return ResponseEntity.ok(reservationService.getHourlyReservationCountByYearMonthAndDay(year, month, day));
     }
 }

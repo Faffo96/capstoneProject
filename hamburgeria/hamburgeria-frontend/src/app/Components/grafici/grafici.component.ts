@@ -20,6 +20,7 @@ export class GraficiComponent implements OnInit {
 
   public selectedYear: number = new Date().getFullYear();
   public selectedMonth: number = new Date().getMonth() + 1;
+  public selectedDay: number = new Date().getDate();
   public selectedProductYear: number = new Date().getFullYear();
   public selectedProductMonth: number = new Date().getMonth() + 1;
   public selectedReservationYear: number = new Date().getFullYear();
