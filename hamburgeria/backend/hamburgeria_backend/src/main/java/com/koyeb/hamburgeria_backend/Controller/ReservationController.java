@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/reservations")
@@ -90,5 +91,20 @@ public class ReservationController {
         } catch (ReservationNotFoundException e) {
             return ResponseEntity.status(404).body("Reservation not found with id: " + id);
         }
+    }
+
+    @GetMapping("/count/monthly")
+    public Map<String, Long> getMonthlyReservationCount(@RequestParam int year) {
+        return reservationService.getMonthlyReservationCountByYear(year);
+    }
+
+    @GetMapping("/count/daily")
+    public Map<String, Long> getDailyReservationCount(@RequestParam int year, @RequestParam int month) {
+        return reservationService.getDailyReservationCountByYearAndMonth(year, month);
+    }
+
+    @GetMapping("/count/hourly")
+    public Map<String, Long> getHourlyReservationCount(@RequestParam int year, @RequestParam int month, @RequestParam int day) {
+        return reservationService.getHourlyReservationCountByYearMonthAndDay(year, month, day);
     }
 }

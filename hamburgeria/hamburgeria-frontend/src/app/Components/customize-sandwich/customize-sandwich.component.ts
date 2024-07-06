@@ -101,7 +101,7 @@ export class CustomizeSandwichComponent implements OnInit {
 
     const customizableProduct: CustomizableProductDTO = {
       id: 0,
-      italianName: 'Sandwich',
+      italianName: 'Sandwich personalizzato',
       englishName: 'Sandwich',
       italianDescription: '',
       englishDescription: '',

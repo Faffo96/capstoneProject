@@ -125,7 +125,7 @@ import { ErrorService } from '../../Services/error-service.service';
   
       const customizableProduct: CustomizableProductDTO = {
         id: 0,
-        italianName: 'Burger',
+        italianName: 'Burger Personalizzato',
         englishName: 'Burger',
         italianDescription: '',
         englishDescription: '',

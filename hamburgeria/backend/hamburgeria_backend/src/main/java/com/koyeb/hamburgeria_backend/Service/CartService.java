@@ -283,5 +283,23 @@ public class CartService {
         }
         return dailyRevenue;
     }
+
+    public Map<String, Integer> getProductQuantitiesByMonthAndYear(int year, int month) {
+        List<Object[]> results = cartRepository.findProductQuantitiesByMonth(year, month);
+        return results.stream()
+                .collect(Collectors.toMap(
+                        row -> (String) row[0],
+                        row -> ((Number) row[1]).intValue()
+                ));
+    }
+
+    public Map<String, Integer> getProductQuantitiesByYear(int year) {
+        List<Object[]> results = cartRepository.findProductQuantitiesByYear(year);
+        return results.stream()
+                .collect(Collectors.toMap(
+                        row -> (String) row[0],
+                        row -> ((Number) row[1]).intValue()
+                ));
+    }
 }
 

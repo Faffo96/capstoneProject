@@ -104,5 +104,16 @@ public class CartController {
     public Map<String, Double> getDailyRevenue(@RequestParam int year, @RequestParam int month) {
         return cartService.getDailyRevenueByYearAndMonth(year, month);
     }
+
+    @GetMapping("/product-quantities")
+    public Map<String, Integer> getProductQuantities(@RequestParam int year, @RequestParam(required = false) Integer month) {
+        if (month != null) {
+            return cartService.getProductQuantitiesByMonthAndYear(year, month);
+        } else {
+            return cartService.getProductQuantitiesByYear(year);
+        }
+    }
+
+
 }
 
