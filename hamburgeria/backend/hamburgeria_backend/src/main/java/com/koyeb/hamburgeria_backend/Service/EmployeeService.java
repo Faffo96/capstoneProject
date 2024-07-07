@@ -24,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Collections;
+import java.util.List;
 
 @Service
 public class EmployeeService {
@@ -111,6 +112,10 @@ public class EmployeeService {
         Page<Employee> employees = employeeRepository.findAll(pageable);
         loggerInfo.info("Retrieved employees page " + page + " with fixed size " + fixedSize + " sorted by " + sortBy);
         return employees;
+    }
+
+    public List<Employee> getAllEmployeesUnpaged() {
+        return employeeRepository.findAll();
     }
 
     public Employee updateEmployee(String email, EmployeeDTO employeeDTO) throws UserNotFoundException {

@@ -52,7 +52,7 @@ public class ShiftService {
         }
 
         // Recuperare l'employee dal nome utente
-        Employee employee = employeeService.getEmployeeByEmail(currentUserName); // Assumendo che usi l'email come username
+        Employee employee = employeeService.getEmployeeByEmail(shiftDTO.getEmployee().getEmail()); // Assumendo che usi l'email come username
 
         if (employee == null) {
             throw new UsernameNotFoundException("Employee not found with email: " + currentUserName);

@@ -1,0 +1,108 @@
+<div class="container-fluid">
+    <div class="container">
+        <div class="shift-creation-panel my-5">
+            <form (ngSubmit)="createShifts()">
+              <div class="form-group">
+                <label for="employee">Employee</label>
+                <select class="form-control" id="employee" [(ngModel)]="newShift.employeeEmail" name="employee" required>
+                  <option *ngFor="let employee of employees" [value]="employee.email">{{ employee.name }} {{ employee.surname }}</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="startDate">Start Date</label>
+                <input type="datetime-local" class="form-control" id="startDate" [(ngModel)]="newShift.startDate" name="startDate" required>
+              </div>
+              <div class="form-group">
+                <label for="endDate">End Date</label>
+                <input type="datetime-local" class="form-control" id="endDate" [(ngModel)]="newShift.endDate" name="endDate" required>
+              </div>
+              <div class="d-flex align-items-center mt-3">
+                <p class="fw-bold">Repeat every:</p>
+                  <div class="form-check ms-2 d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="repeatMondays" [(ngModel)]="newShift.repeatDays.monday" name="repeatMondays">
+                    <label class="form-check-label" for="repeatMondays">
+                      Monday
+                    </label>
+                  </div>
+                  <div class="form-check ms-2 d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="repeatTuesdays" [(ngModel)]="newShift.repeatDays.tuesday" name="repeatTuesdays">
+                    <label class="form-check-label" for="repeatTuesdays">
+                      Tuesday
+                    </label>
+                  </div>
+                  <div class="form-check ms-2 d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="repeatWednesdays" [(ngModel)]="newShift.repeatDays.wednesday" name="repeatWednesdays">
+                    <label class="form-check-label" for="repeatWednesdays">
+                      Wednesday
+                    </label>
+                  </div>
+                  <div class="form-check ms-2 d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="repeatThursdays" [(ngModel)]="newShift.repeatDays.thursday" name="repeatThursdays">
+                    <label class="form-check-label" for="repeatThursdays">
+                      Thursday
+                    </label>
+                  </div>
+                  <div class="form-check ms-2 d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="repeatFridays" [(ngModel)]="newShift.repeatDays.friday" name="repeatFridays">
+                    <label class="form-check-label" for="repeatFridays">
+                      Friday
+                    </label>
+                  </div>
+                  <div class="form-check ms-2 d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="repeatSaturdays" [(ngModel)]="newShift.repeatDays.saturday" name="repeatSaturdays">
+                    <label class="form-check-label" for="repeatSaturdays">
+                      Saturday
+                    </label>
+                  </div>
+                  <div class="form-check ms-2 d-flex align-items-center">
+                    <input class="form-check-input" type="checkbox" id="repeatSundays" [(ngModel)]="newShift.repeatDays.sunday" name="repeatSundays">
+                    <label class="form-check-label" for="repeatSundays">
+                      Sunday
+                    </label>
+                  </div>
+              </div>
+              <button type="submit" class="btn my-button2 mt-3">Create Shift</button>
+            </form>
+        </div>
+        
+          
+        
+        <div class="my-5">
+            <div class="d-flex justify-content-between mb-5">
+              <div class="btn-group">
+                <button class="btn my-button2" (click)="setView(CalendarView.Month)">Mese</button>
+                <button class="btn my-button2" (click)="setView(CalendarView.Week)">Settimana</button>
+                <button class="btn my-button2" (click)="setView(CalendarView.Day)">Giorno</button>
+              </div>
+              <div class="btn-group">
+                <button class="btn my-button2" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="updateMonthName()">Indietro</button>
+                <button class="btn my-button2" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="updateMonthName()">{{monthName}}</button>
+                <button class="btn my-button2" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="updateMonthName()">Avanti</button>
+              </div>
+            </div>
+            
+            <mwl-calendar-month-view
+                *ngIf="view === CalendarView.Month"
+                [viewDate]="viewDate"
+                [events]="events"
+                (dayClicked)="dayClicked($event.day)"
+                (eventTimesChanged)="eventTimesChanged($event)"
+                [activeDayIsOpen]="activeDayIsOpen">
+            </mwl-calendar-month-view>
+            
+            <mwl-calendar-week-view
+                *ngIf="view === CalendarView.Week"
+                [viewDate]="viewDate"
+                [events]="events"
+                (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-week-view>
+            
+            <mwl-calendar-day-view
+                *ngIf="view === CalendarView.Day"
+                [viewDate]="viewDate"
+                [events]="events"
+                (eventTimesChanged)="eventTimesChanged($event)">
+            </mwl-calendar-day-view>
+          </div>
+    </div>
+</div>

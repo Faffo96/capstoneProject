@@ -22,6 +22,7 @@ import { BackofficeEmployeesComponent } from './Components/backoffice-employees/
 import { BackofficeProductsComponent } from './Components/backoffice-products/backoffice-products.component';
 import { ChiSiamoComponent } from './Components/chi-siamo/chi-siamo.component';
 import { GraficiComponent } from './Components/grafici/grafici.component';
+import { ShiftsCalendarComponent } from './Components/shifts-calendar/shifts-calendar.component';
 
 const routes: Routes = [
   {
@@ -39,6 +40,10 @@ const routes: Routes = [
   {
     path: 'grafici',
     component: GraficiComponent
+  },
+  {
+    path: 'shiftsCalendar',
+    component: ShiftsCalendarComponent
   },
   {
     path: 'backoffice-users',
