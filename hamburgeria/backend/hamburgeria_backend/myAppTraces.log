@@ -89,3 +89,7 @@
 2024-07-02 16:01:48,715 TRACE [http-nio-8080-exec-5] loggerTrace [CustomerService.java:74] -- Customer with email gianlucapelaggi@gmail.com saved.
 2024-07-05 18:52:41,788 TRACE [main] loggerTrace [OwnerService.java:72] -- Registration email sent to owner: fabioscar96@gmail.com
 2024-07-05 18:52:43,548 TRACE [main] loggerTrace [OwnerService.java:74] -- Owner with email fabioscar96@gmail.com saved.
+2024-07-07 21:45:40,760 TRACE [http-nio-8080-exec-1] loggerTrace [EmployeeService.java:71] -- Registration email sent to employee: customer@example.com
+2024-07-07 21:45:42,848 TRACE [http-nio-8080-exec-1] loggerTrace [EmployeeService.java:73] -- Employee with email customer@example.com saved.
+2024-07-07 22:16:15,627 TRACE [http-nio-8080-exec-9] loggerTrace [EmployeeService.java:71] -- Registration email sent to employee: customer2@example.com
+2024-07-07 22:16:17,668 TRACE [http-nio-8080-exec-9] loggerTrace [EmployeeService.java:73] -- Employee with email customer2@example.com saved.

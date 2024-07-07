@@ -41,6 +41,11 @@ import { ConfirmModalComponent } from './Components/confirm-modal/confirm-modal.
 import { DateAndTimePipe } from './pipes/date-and-time.pipe';
 import { ChiSiamoComponent } from './Components/chi-siamo/chi-siamo.component';
 import { GraficiComponent } from './Components/grafici/grafici.component';
+import { CalendarModule, DateAdapter } from 'angular-calendar';
+import { adapterFactory } from 'angular-calendar/date-adapters/date-fns';
+import { ShiftsCalendarComponent } from './Components/shifts-calendar/shifts-calendar.component';
+import { TimePipe } from './pipes/time.pipe';
+
 
 @NgModule({
   declarations: [
@@ -77,7 +82,9 @@ import { GraficiComponent } from './Components/grafici/grafici.component';
     ConfirmModalComponent,
     DateAndTimePipe,
     ChiSiamoComponent,
-    GraficiComponent
+    GraficiComponent,
+    ShiftsCalendarComponent,
+    TimePipe
   ],
   imports: [
     NgbModule,
@@ -86,7 +93,8 @@ import { GraficiComponent } from './Components/grafici/grafici.component';
     ReactiveFormsModule,
     HttpClientModule,
     FormsModule,
-    CommonModule
+    CommonModule,
+    CalendarModule.forRoot({ provide: DateAdapter, useFactory: adapterFactory })
   ],
   providers: [
     {

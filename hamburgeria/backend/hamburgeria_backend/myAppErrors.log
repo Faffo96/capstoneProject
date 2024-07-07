@@ -154,3 +154,6 @@
 2024-07-03 13:22:31,544 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
 2024-07-03 13:22:37,281 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
 2024-07-05 19:10:10,735 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-07 21:44:52,719 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: customer@example.com
+2024-07-07 21:46:14,382 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:41] -- Employee not found with email: fabioscar96@gmail.com
+2024-07-07 21:47:16,510 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:41] -- Employee not found with email: fabioscar96@gmail.com

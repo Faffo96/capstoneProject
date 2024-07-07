@@ -21,6 +21,7 @@ export class CartComponent implements OnInit {
   discountedTotal: number = 0;
   applyDiscount: boolean = false;
   user: User | null = null;
+  handler:any = null;
 
   constructor(
     private productService: ProductService,
@@ -40,6 +41,7 @@ export class CartComponent implements OnInit {
       this.cartProducts = data;
       this.calculateTotal();
     });
+    this.loadStripe();
   }
 
   calculateTotal() {
@@ -158,6 +160,7 @@ export class CartComponent implements OnInit {
           this.calculateTotal();
           this.applyDiscount = false; // Deseleziona il checkbox dopo il checkout
           this.errorService.showErrorModal('✅ Checkout confermato', 'Checkout effettuato con successo! Stai per essere indirizzato alla pagina di pagamento.');
+          this.pay(this.total);
         }, error => {
           console.error('Error saving cart:', error);
         });
@@ -170,6 +173,7 @@ export class CartComponent implements OnInit {
         this.calculateTotal();
         this.applyDiscount = false; // Deseleziona il checkbox dopo il checkout
         this.errorService.showErrorModal('✅ Checkout confermato', 'Checkout effettuato con successo! Stai per essere indirizzato alla pagina di pagamento.');
+        this.pay(this.total);
       }, error => {
         console.error('Error saving cart:', error);
       });
@@ -184,5 +188,56 @@ export class CartComponent implements OnInit {
 
   isCustomizableProduct(product: Product | CustomizableProduct): product is CustomizableProduct {
     return (product as CustomizableProduct).productList !== undefined;
+  }
+
+  pay(amount: any) {
+    var handler = (<any>window).StripeCheckout.configure({
+      key: 'pk_test_51PZge2RpMi0g99Ub9PmSOdpSUWT13sB9HBiQf1lC3fo9G8Oe20mKutoUXmRjmoX4C87EAdxXNTiMwdmrfGpVQHn200vzRoiBEc',
+      locale: 'auto',
+      image: 'https://www.hamburgeriarc.com/wp-content/uploads/2020/01/logo-con-ombre-senza-fondo.png', // URL del tuo logo
+      panelLabel: 'Paga {{amount}}', // Etichetta del pulsante di pagamento
+      token: function (token: any) {
+        console.log(token);
+        alert('Token Created!!');
+      }
+    });
+  
+    handler.open({
+      name: 'Demo Site',
+      description: '2 widgets',
+      amount: amount * 100,
+      currency: 'eur',
+      opened: function() {
+        console.log('Stripe Checkout opened');
+      },
+      closed: function() {
+        console.log('Stripe Checkout closed');
+      }
+    });
+  }
+  
+ 
+  loadStripe() {
+     
+    if(!window.document.getElementById('stripe-script')) {
+      var s = window.document.createElement("script");
+      s.id = "stripe-script";
+      s.type = "text/javascript";
+      s.src = "https://checkout.stripe.com/checkout.js";
+      s.onload = () => {
+        this.handler = (<any>window).StripeCheckout.configure({
+          key: 'pk_test_51PZge2RpMi0g99Ub9PmSOdpSUWT13sB9HBiQf1lC3fo9G8Oe20mKutoUXmRjmoX4C87EAdxXNTiMwdmrfGpVQHn200vzRoiBEc',
+          locale: 'auto',
+          token: function (token: any) {
+            // You can access the token ID with `token.id`.
+            // Get the token ID to your server-side code for use.
+            console.log(token)
+            alert('Payment Success!!');
+          }
+        });
+      }
+       
+      window.document.body.appendChild(s);
+    }
   }
 }
