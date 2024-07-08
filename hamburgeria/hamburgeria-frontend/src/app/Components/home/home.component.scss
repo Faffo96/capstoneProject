@@ -1,0 +1,108 @@
+/* OUR BURGERS */
+.our-burgers_img {
+    border-radius: 50%;
+    object-fit: cover; 
+    transition: transform 0.5s ease-in-out; /* Aggiungi una transizione per uno zoom fluido */
+}
+
+.our-burgers_img:hover {
+    transform: scale(1.1); /* Applica lo zoom */
+}
+
+/* OTHERS CAROUSEL */
+.carousel-article {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+}
+
+.carousel-inner {
+    height: 500px;
+}
+
+.carousel-article .carousel-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    object-fit: cover;
+}
+
+.others {
+    /* transform: translateY(-300px); */
+}
+
+.ngb-carousel1 {
+    height: 500px;
+    z-index: 2;
+}
+
+.overflow-hidden {
+
+}
+
+.others_article1, .others_article2 {
+    height: 650px;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    transition: transform 0.5s ease-in-out;
+    overflow: hidden; /* Aggiungi overflow: hidden per evitare che l'immagine ingrandita invada l'immagine adiacente */
+}
+
+.others_article1:hover, .others_article2:hover {
+    transform: scale(1.01); /* Applica lo zoom */
+}
+
+.others_article1, .others_article2 {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    overflow: hidden;
+    
+    &::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.219); /* Layer nero trasparente */
+      z-index: 1;
+    }
+  
+    .w-75 {
+      position: relative;
+      z-index: 2; /* Assicurati che il contenuto sia sopra il layer trasparente */
+    }
+  }
+
+
+  /* JUMBOTRON */
+
+  @keyframes fadeInUp {
+    0% {
+      opacity: 0;
+      transform: translateY(50px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .jumbotron {
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+  }
+  
+  .jumbotron.animate {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .burger-img {
+    transform: translateY(-20px);
+  }

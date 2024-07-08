@@ -1,0 +1,174 @@
+<div class="container-fluid py-5">
+   <div class="container bg-color1 pt-4 rounded-5 pb-3 mb-5 shadow-rb">
+      <div class="bg-light rounded-5 m-5 p-5">
+         <div>
+            <h1 class="fw-bold fs-1 mb-4">Impostazioni Profilo</h1>
+         </div>
+         <div class="row">
+            <div class="row col-lg-8">
+               <div class="col-lg-4">
+                  <ul>
+                     <li class="my-5 my-fs-2 fw-bold">Email</li>
+                     <li class="my-5 my-fs-2 fw-bold">Password</li>
+                     <li class="my-5 my-fs-2 fw-bold">Nome</li>
+                     <li class="my-5 my-fs-2 fw-bold">Cognome</li>
+                     <li class="my-5 my-fs-2 fw-bold">Data di creazione:</li>
+                     <li class="my-5 my-fs-2 fw-bold" *ngIf="user?.role == 'OWNER' || user?.role == 'EMPLOYEE'">Ruolo:</li>
+                     <li class="my-5 my-fs-2 fw-bold">Punti:</li>
+                  </ul>
+               </div>
+               <div class="row col-lg-8">
+                  <div class="col-lg-6">
+                     <ul>
+                        <li class="my-5 my-fs-2">{{user?.email}}</li>
+                        <li class="my-5 my-fs-2">**********</li>
+                        <li class="my-5 my-fs-2">{{user?.name}}</li>
+                        <li class="my-5 my-fs-2">{{user?.surname}}</li>
+                        <li class="my-5 my-fs-2">{{user?.creationDate}}</li>
+                        <li class="my-5 my-fs-2" *ngIf="user?.role == 'OWNER' || user?.role == 'EMPLOYEE'">{{user?.role}}</li>
+                        <li class="my-5 my-fs-2"><span>✨</span>{{user?.points}}</li>
+                     </ul>
+                  </div>
+                  <div class="col-lg-6">
+                     <ul>
+                        <li class="my-5">
+                           <a class="text-primary my-fs-2" href="" data-bs-toggle="modal" data-bs-target="#emailModal"
+                              data-bs-whatever="@getbootstrap">
+                              Modifica email
+                           </a>
+                        </li>
+                        <li class="my-5">
+                           <a class="text-primary my-fs-2" href="" data-bs-toggle="modal" data-bs-target="#passwordModal"
+                              data-bs-whatever="@getbootstrap">
+                              Modifica password
+                           </a>
+                        </li>
+                        <li class="my-5">
+                           <a class="text-primary my-fs-2" href="" data-bs-toggle="modal" data-bs-target="#nameModal"
+                              data-bs-whatever="@getbootstrap">
+                              Modifica nome
+                           </a>
+                        </li>
+                        <li class="my-5">
+                           <a class="text-primary my-fs-2" href="" data-bs-toggle="modal" data-bs-target="#surnameModal"
+                              data-bs-whatever="@getbootstrap">
+                              Modifica cognome
+                           </a>
+                        </li>
+                     </ul>
+                  </div>
+               </div>
+            </div>
+            <div class="col-lg-4 mt-5 container d-flex flex-column">
+               <div>
+                  <img [src]="user?.avatar == null ? user?.avatar : '../../../assets/img/user.webp'" class="profile-avatar" alt="">
+               </div>
+               <div class="d-flex mt-4">
+                  <input type="file" class="form-control my-fs-1">
+                  <button class="my-fs-1">Cambia foto profilo</button>
+               </div>
+            </div>
+         </div>
+
+      </div>
+   </div>
+</div>
+
+<!-- Email Modal -->
+<div class="modal fade" id="emailModal" tabindex="-1" aria-labelledby="emailModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5" id="emailModalLabel">Modifica Email</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <form (ngSubmit)="updateEmail()">
+               <div class="mb-3">
+                  <label for="new-email" class="col-form-label">Nuova Email:</label>
+                  <input type="email" class="form-control" id="new-email" [(ngModel)]="newEmail" name="newEmail"
+                     required>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                  <button type="submit" class="btn btn-primary">Aggiorna Email</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- Password Modal -->
+<div class="modal fade" id="passwordModal" tabindex="-1" aria-labelledby="passwordModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5" id="passwordModalLabel">Modifica Password</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <form (ngSubmit)="updatePassword()">
+               <div class="mb-3">
+                  <label for="new-password" class="col-form-label">Nuova Password:</label>
+                  <input type="password" class="form-control" id="new-password" [(ngModel)]="newPassword"
+                     name="newPassword" required>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                  <button type="submit" class="btn btn-primary">Aggiorna Password</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- Name Modal -->
+<div class="modal fade" id="nameModal" tabindex="-1" aria-labelledby="nameModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5" id="nameModalLabel">Modifica Nome</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <form (ngSubmit)="updateName()">
+               <div class="mb-3">
+                  <label for="new-name" class="col-form-label">Nuovo Nome:</label>
+                  <input type="text" class="form-control" id="new-name" [(ngModel)]="newName" name="newName" required>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                  <button type="submit" class="btn btn-primary">Aggiorna Nome</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- Surname Modal -->
+<div class="modal fade" id="surnameModal" tabindex="-1" aria-labelledby="surnameModalLabel" aria-hidden="true">
+   <div class="modal-dialog">
+      <div class="modal-content">
+         <div class="modal-header">
+            <h1 class="modal-title fs-5" id="surnameModalLabel">Modifica Cognome</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         </div>
+         <div class="modal-body">
+            <form (ngSubmit)="updateSurname()">
+               <div class="mb-3">
+                  <label for="new-surname" class="col-form-label">Nuovo Cognome:</label>
+                  <input type="text" class="form-control" id="new-surname" [(ngModel)]="newSurname" name="newSurname"
+                     required>
+               </div>
+               <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Chiudi</button>
+                  <button type="submit" class="btn btn-primary">Aggiorna Cognome</button>
+               </div>
+            </form>
+         </div>
+      </div>
+   </div>
+</div>

@@ -22,7 +22,10 @@ public enum Category {
 */
 
 public enum Category {
+
+
     HAMBURGER,
+    CUSTOM_BURGER,
 
     CUSTOMHAM_MEAT,
     CUSTOMHAM_BREAD,
@@ -37,6 +40,7 @@ public enum Category {
     FRI_SAUCE,
 
     SANDWICH,
+    CUSTOM_SANDWICH,
 
     CUSTOMSAND_BASE,
     CUSTOMSANDHOT_CHEESE,
@@ -48,6 +52,9 @@ public enum Category {
 
     CUSTOMHOTDOG_BASE,
 
+    SALAD,
+    CUSTOM_SALAD,
+
     CUSTOMSALAD_BASE,
     CUSTOMSALAD_CHEESE,
     CUSTOMSALAD_FVEGETABLES,
@@ -56,6 +63,7 @@ public enum Category {
     CUSTOMSALAD_OTHER,
 
     DESSERT,
+    CUSTOM_DESSERT,
 
     DESSERT_BASE,
     DESSERT_TOPPING,

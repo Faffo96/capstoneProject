@@ -38,3 +38,230 @@
 2024-06-23 00:39:37,172 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- Email alien@gmail.com already in use.
 2024-06-23 02:21:01,248 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:67] -- Error in authorization, relogin!
 2024-06-23 02:29:40,178 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:67] -- Error in authorization, relogin!
+2024-06-23 03:39:02,217 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- Email alieno@gmail.com already in use.
+2024-06-23 03:39:24,538 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- Email alieno@gmail.com already in use.
+2024-06-23 03:39:33,897 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:39:34,350 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:39:34,874 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:39:35,065 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:39:35,255 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:39:44,312 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- Email alienoo@gmail.com already in use.
+2024-06-23 03:40:32,712 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- Email alienooo@gmail.com already in use.
+2024-06-23 03:44:28,798 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- Email alieni@gmail.com already in use.
+2024-06-23 03:49:49,680 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:145] -- Owner already exists!
+2024-06-23 13:46:43,680 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- Email fabioscar956@gmail.com already in use.
+2024-06-23 14:04:11,796 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:41] -- Customer not found with email: fabioscarra96@gmail.com
+2024-06-23 14:12:08,112 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- Email customer@example.com already in use.
+2024-06-23 14:12:20,109 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- Email customer@example.com already in use.
+2024-06-28 13:47:49,640 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 14:01:52,069 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 14:17:05,671 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 15:14:23,201 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 15:24:07,880 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: alien@gmail.com
+2024-06-28 15:24:09,441 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: alien@gmail.com
+2024-06-28 15:24:26,024 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 15:24:26,721 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 15:27:09,928 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 15:44:07,737 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 15:48:30,844 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 16:19:17,392 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 16:34:23,944 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-28 22:45:30,379 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-06-28 22:45:37,921 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-06-29 11:15:16,367 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-29 11:15:17,448 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-06-30 01:33:08,186 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: paola.rossi@example.com
+2024-07-01 00:35:24,542 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: fabioscar96@gmail.com
+2024-07-01 00:35:28,637 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: fabioscar96@gmail.com
+2024-07-01 00:56:01,716 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 00:57:17,447 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 00:57:17,581 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 00:57:17,660 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 00:57:17,840 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 00:57:33,542 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:29,752 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:30,522 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:31,153 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:31,356 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:31,519 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:31,687 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:04:31,845 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:10:23,962 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:12:40,605 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:14:24,770 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:26] -- Content-Type 'multipart/form-data;boundary=--------------------------720863866170266027980026;charset=UTF-8' not supported. Supported content types: application/json, application/*+json
+2024-07-01 01:17:57,494 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:18:04,097 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 01:27:36,803 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 11:10:32,577 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:132] -- DiningTable not found with id: 1
+2024-07-01 13:48:51,756 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:52,327 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:52,759 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:53,135 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:53,475 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:53,750 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:54,111 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:54,401 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:54,631 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:54,907 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:55,140 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:48:55,472 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:49:40,671 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:49:42,643 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:49:49,673 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:50:05,949 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 13:50:17,032 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:184] -- The total price of the cart must be at least 8.5
+2024-07-01 16:45:27,994 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-01 16:45:29,291 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-02 16:56:32,471 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 17:05:06,350 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 17:05:25,878 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 17:05:32,982 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 17:05:42,623 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 18:42:57,479 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 18:43:24,326 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 18:43:34,338 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 18:43:44,429 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 18:44:28,790 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 18:44:57,106 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-02 21:39:33,797 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: alien@gmail.com
+2024-07-03 13:02:58,247 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:03:52,352 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:05:15,798 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:05:26,949 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:05:36,905 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:05:40,872 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:07:12,257 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:07:20,851 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:08:50,428 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:09:29,618 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:09:47,649 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:09:53,194 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:09:59,321 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:10:03,950 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:10:06,506 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:10:10,189 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:10:12,811 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:10:21,026 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:10:26,333 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:13:18,562 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:13:25,084 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:15:36,325 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:15:39,136 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:15:40,158 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:17:19,613 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:21:20,576 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:22:11,176 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:22:31,544 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-03 13:22:37,281 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-05 19:10:10,735 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-07 21:44:52,719 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:41] -- User not found with email: customer@example.com
+2024-07-07 21:46:14,382 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:41] -- Employee not found with email: fabioscar96@gmail.com
+2024-07-07 21:47:16,510 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:41] -- Employee not found with email: fabioscar96@gmail.com
+2024-07-07 23:18:20,088 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:119] -- Email customer3@example.com already in use.
+2024-07-08 11:17:43,483 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 11:17:48,502 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 11:18:01,548 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 11:18:19,395 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 14:55:31,776 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- Error in authorization, relogin!
+2024-07-08 15:49:08,783 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:08,797 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:11,868 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:12,695 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:13,122 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:13,489 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:14,006 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:14,413 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:14,836 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:15,277 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:15,881 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:16,391 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:17,658 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:49:18,089 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:59:34,390 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:59:34,405 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:59:59,759 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 15:59:59,770 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:00:05,647 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:00:05,698 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:00:09,051 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:00:09,070 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:03:02,813 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:03:03,182 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:03:55,933 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:03:55,943 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:00,304 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:00,613 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:17,066 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:17,423 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:23,545 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:23,888 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:40,411 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:40,752 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:44,785 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:45,102 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:49,941 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:50,277 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:55,519 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:04:55,865 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:03,215 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:03,569 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:07,254 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:07,593 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:13,534 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:13,861 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:38,978 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:39,310 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:42,993 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:43,358 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:48,136 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:05:48,436 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:06:12,000 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:06:12,368 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:06:18,768 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:06:19,088 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:06:35,445 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:06:35,827 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:06:41,538 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:06:41,874 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:06:56,651 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:06:57,006 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:07:05,750 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:07:06,129 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:07:26,707 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:07:27,097 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:07:41,474 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:07:41,862 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:08:34,624 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:08:34,638 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:08:39,184 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:08:39,525 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:08:41,362 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:08:41,377 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:09:25,111 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:09:25,594 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:10:02,156 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:10:02,550 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:10:14,890 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:10:15,327 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:12:06,695 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:12:07,147 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:12:15,575 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:12:15,924 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:13:42,492 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:13:42,864 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:13:50,537 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:13:50,893 ERROR [http-nio-8080-exec-2] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:14:45,707 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:14:46,049 ERROR [http-nio-8080-exec-3] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:15:30,666 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:15:30,677 ERROR [http-nio-8080-exec-7] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:15:34,570 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:15:34,618 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:15:40,313 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:15:40,362 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:16:37,574 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:16:38,004 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:17:07,603 ERROR [http-nio-8080-exec-4] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:17:07,981 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:17:27,221 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-08 16:17:27,604 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts

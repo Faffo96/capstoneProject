@@ -24,6 +24,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -65,7 +66,7 @@ public class CustomerService {
         customer.setPassword(passwordEncoder.encode(customerDTO.getPassword()));
         customer.setAvatar(customerDTO.getAvatar());
         customer.setRole(Role.valueOf(Role.CUSTOMER.name()));
-        customer.setCreationDate(customerDTO.getCreationDate());
+        customer.setCreationDate(LocalDate.now());
 
         customerRepository.save(customer);
         loggerTrace.trace("Registration email sent to customer: " + customer.getEmail());
@@ -82,7 +83,7 @@ public class CustomerService {
             // Email not found for Owner, continue checking
         }
 
-        Optional<Employee> employeeOptional = employeeRepository.findByEmail(email);
+        Optional<Employee> employeeOptional = employeeRepository.findOneByEmail(email);
         if (employeeOptional.isPresent()) {
             return true;
         }
@@ -99,7 +100,7 @@ public class CustomerService {
 
 
     public Customer getCustomerByEmail(String email) throws UserNotFoundException {
-        return customerRepository.findByEmail(email)
+        return customerRepository.findOneByEmail(email)
                 .orElseThrow(() -> new UserNotFoundException("Customer not found with email: " + email));
     }
 

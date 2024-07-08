@@ -1,0 +1,111 @@
+/* MENU SECTIONS */
+
+.menu-sections {
+    height: 831.5px;
+}
+
+.menu-section {
+    padding: 0 75px
+}
+
+.selected-menu-section {
+  background: linear-gradient(180deg, rgb(248, 238, 201) 13%, rgba(249,225,136,1) 81%);
+}
+
+.menu-section:hover {
+  background: linear-gradient(180deg, rgb(248, 238, 201) 13%, rgba(249,225,136,1) 81%);
+  filter: brightness(110%);
+}
+
+.rounded-top {
+    border-top-left-radius: 2rem !important; 
+    border-top-right-radius: 2rem !important; 
+}
+
+.rounded-bottom {
+    border-bottom-left-radius: 2rem !important; 
+    border-bottom-right-radius: 2rem !important; 
+}
+
+/* ICONS */
+
+.image-icon {
+    width: 130px;
+    position: relative;
+}
+
+.image-icon img {
+    width: 130px;
+    object-fit: cover; 
+}
+
+.my-image-icon img {
+    width: 50px;
+}
+
+/* MENU */
+
+.menu {
+    width: 45%;
+}
+
+/* CART */
+
+.cart {
+    max-height: 500px;
+}
+
+.biggerGif {
+    transform: scale(1.2);
+}
+
+/* BURGER ANIMATION */
+
+.burger-composition-container {
+    position: relative;
+    width: 200px; /* Dimensioni del contenitore del panino */
+    height: 300px;
+    margin: 0 auto;
+  }
+  
+  .burger-layer {
+    position: absolute;
+    width: 100%;
+    height: auto;
+  }
+  
+  .ingredient-img-1 {
+    transform: translate(3px, 208px);
+  }
+
+  .ingredient-img-2 {
+    
+  }
+
+  .ingredient-img-3 {
+    transform: translate(3px, -179px);
+  }
+
+  .ingredient-img-4 {
+    transform: translate(0px, -382px);
+  }
+
+  .ingredient-img-5 {
+    transform: translate(2px, -580px);
+  }
+
+  .ingredient-img-6 {
+    transform: translate(0px, -828px);
+  }
+
+  .burger-preview {
+    transform: translateY(-50px);
+  }
+
+  .sticky-top {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Assicurati che l'elemento rimanga in primo piano */
+  }
+  

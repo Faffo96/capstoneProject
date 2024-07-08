@@ -1,3 +1,6 @@
+@import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+
 /* You can add global styles to this file, and also import other style files */
 
 /* Importing Bootstrap SCSS file. */
@@ -5,3 +8,354 @@
 
 /* Importing Bootstrap SCSS file. */
 @import 'bootstrap/scss/bootstrap';
+
+/* CSS RESET
+
+   http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+	display: block;
+}
+
+body {
+	line-height: 1;
+}
+
+ol,
+ul {
+	list-style: none;
+}
+
+blockquote,
+q {
+	quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+	content: '';
+	content: none;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+a {
+	text-decoration: none;
+	color: white;
+}
+
+/* MY CSS */
+
+.font1,
+body {
+	font-family: "Roboto", sans-serif;
+}
+
+.transparent {
+	color: transparent;
+}
+
+.bg-splash {
+  background-image: url('./assets/img/background-splash.png');
+    background-size:contain;
+    background-repeat: no-repeat; 
+    background-position: center;
+}
+
+.color0 {
+	color: #f9e188;
+}
+
+.bg-color0 {
+	background-image: linear-gradient(to top, #eb9438 0% , #eca934 0%, #fae38e 20%);
+}
+
+.bg-color-transparent {
+  background-color: transparent;
+}
+
+.color1 {
+	color: #fbd756;
+}
+
+.bg-color1 {
+	background-color: #fbd756;
+}
+
+.color2 {
+	color: #fdbb46 !important;
+}
+
+.bg-color2 {
+	background-color: #fdbb46;
+}
+
+.color3 {
+	color: #e78924;
+}
+
+.bg-color3 {
+	background-color: #e78924;
+}
+
+.color4 {
+	color: #e78924;
+}
+
+.bg-color4 {
+	background-color: #e78924;
+}
+
+.color5 {
+	color: rgb(181, 115, 1);
+}
+
+.bg-color5 {
+	background-color: rgb(181, 115, 1);
+}
+
+.my-fs {
+	font-size: 0.5rem;
+}
+
+.my-fs-1 {
+	font-size: 0.7rem;
+}
+
+.my-fs-2 {
+	font-size: 0.9rem;
+}
+
+.my-fs-3 {
+	font-size: 1.1rem;
+}
+
+.mb-6 {
+	margin-bottom: 90px;
+}
+
+.mb-7 {
+	margin-bottom: 120px;
+}
+
+.mb-8 {
+	margin-bottom: 150px;
+}
+
+.shadow-top {
+	box-shadow: 1px 17px 22px 20px rgba(0, 0, 0, 0.75);
+}
+
+.shadow-rb {
+  box-shadow: 10px 10px 15px -10px rgba(0,0,0,0.75);
+}
+
+.text-shadow {
+	filter: drop-shadow(-10px 4px 2px rgba(0, 0, 0, 0.5));
+}
+
+.text-shadow {
+	filter: drop-shadow(7px 7px 10px rgba(0, 0, 0, 0.5));
+}
+
+.border-gray {
+		border: 1px solid gray;
+}
+
+.border-bottom-gray {
+	border-bottom: 1px solid gray;
+}
+
+.playwrite-font {
+	font-family: "Playwrite MX", cursive;
+}
+
+.pointer {
+	cursor: pointer;
+}
+
+/* MENU PRODUCTS BUTTONS */
+
+.my-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    width: 170px;
+    height: 50px;
+    background-image: linear-gradient(to top, #f8e9b1 0%, #f7db77 80%, #f7d046 100%); 
+    border-radius: 30px;
+    border: 1px solid #8F9092;
+    transition: all 0.2s ease;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #606060;
+    text-shadow: 0 1px #fff;
+  }
+
+  .my-button2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    outline: none;
+    cursor: pointer;
+    width: 170px;
+    height: 50px;
+    background-image: linear-gradient(to top, #f8e9b1 0%, #f7db77 80%, #f7d046 100%); 
+    border-radius: 30px;
+    border: 1px solid #8F9092;
+    transition: all 0.2s ease;
+    font-family: "Source Sans Pro", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #606060;
+    text-shadow: 0 1px #fff;
+  }
+  
+  .my-button:hover {
+    box-shadow: 0 4px 3px 1px #fdbb46, 0 6px 8px #fdbb46, 0 -4px 4px #fdbb46, 0 -6px 4px #fdbb46, inset 0 0 3px 3px #fdbb46;
+  }
+  
+  .my-button:active {
+    box-shadow: 0 4px 3px 1px #fdbb46, 0 6px 8px #fdbb46, 0 -4px 4px #fdbb46, 0 -6px 4px #fdbb46, inset 0 0 5px 3px #fdbb46, inset 0 0 30px #fdbb46;
+  }
+  
+  .my-button:focus {
+    box-shadow: 0 4px 3px 1px #fdbb46, 0 6px 8px #fdbb46, 0 -4px 4px #fdbb46, 0 -6px 4px #fdbb46, inset 0 0 5px 3px #fdbb46, inset 0 0 30px #fdbb46;
+    background-image: linear-gradient(to top, #fae38e 0%, #eca934 80%, #eb9438 100%);
+  }
+  
+  .my-button.selected {
+    background-image: linear-gradient(to top, #fae38e 0%, #eca934 80%, #eb9438 100%);
+    box-shadow: 0 4px 3px 1px #fdbb46, 0 6px 8px #fdbb46, 0 -4px 4px #fdbb46, 0 -6px 4px #fdbb46, inset 0 0 5px 3px #fdbb46, inset 0 0 30px #fdbb46;
+  }
+  
+  .scrollable-content {
+    overflow-y: auto;
+  }
+  
+  .h-70 {
+  height: 70%;
+  }
+
+  .w-55 {
+	width: 55%
+  }
+
+  .dropdown-item:hover {
+    background-color: #f8e9b1;
+  }
+
+  .bg-light {
+    background-color: white !important;
+  }

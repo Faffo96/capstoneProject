@@ -37,6 +37,9 @@ public class UserService {
     @Autowired
     private Cloudinary cloudinary;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     private static final Logger loggerWarn = LoggerFactory.getLogger("loggerWarn");
     private static final Logger loggerTrace = LoggerFactory.getLogger("loggerTrace");
     private static final Logger loggerInfo = LoggerFactory.getLogger("loggerInfo");
@@ -106,5 +109,50 @@ public class UserService {
             loggerError.error("User email: " + userEmail + " not found.");
             return "User with email=" + userEmail + " not found.";
         }
+    }
+
+    // Patch Email
+    public User patchUserEmail(String currentEmail, String newEmail) throws UserNotFoundException {
+        User user = getUserByEmail(currentEmail);
+        user.setEmail(newEmail);
+        userRepository.save(user);
+        loggerInfo.info("User email updated from " + currentEmail + " to " + newEmail);
+        return user;
+    }
+
+    // Patch Password
+    public User patchUserPassword(String email, String newPassword) throws UserNotFoundException {
+        User user = getUserByEmail(email);
+        user.setPassword(passwordEncoder.encode(newPassword));  // Assicurati di codificare la password
+        userRepository.save(user);
+        loggerInfo.info("Password updated for user with email " + email);
+        return user;
+    }
+
+    // Patch Name
+    public User patchUserName(String email, String newName) throws UserNotFoundException {
+        User user = getUserByEmail(email);
+        user.setName(newName);
+        userRepository.save(user);
+        loggerInfo.info("Name updated for user with email " + email);
+        return user;
+    }
+
+    // Patch Surname
+    public User patchUserSurname(String email, String newSurname) throws UserNotFoundException {
+        User user = getUserByEmail(email);
+        user.setSurname(newSurname);
+        userRepository.save(user);
+        loggerInfo.info("Surname updated for user with email " + email);
+        return user;
+    }
+
+    // Patch Points
+    public User patchUserPoints(String email, int points) throws UserNotFoundException {
+        User user = getUserByEmail(email);
+        user.setPoints(points);
+        userRepository.save(user);
+        loggerInfo.info("Points updated for user with email " + email + ". User points:" + points);
+        return user;
     }
 }

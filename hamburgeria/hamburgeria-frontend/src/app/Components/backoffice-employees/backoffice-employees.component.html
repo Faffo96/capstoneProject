@@ -1,0 +1,61 @@
+<div class="container-fluid py-5">
+  <div class="container bg-color1 pt-4 rounded-5 pb-4 px-4 shadow-rb">
+    <h1 class="fw-bold bg-light rounded-3 shadow-rb p-3 fs-1 mb-5">Impiegati</h1>
+    <div ngbAccordion [closeOthers]="true" class="mt-3 shadow-rb">
+      <div ngbAccordionItem *ngFor="let employee of employees">
+        <h2 ngbAccordionHeader>
+          <button ngbAccordionButton>{{employee.email}}</button>
+        </h2>
+        <div ngbAccordionCollapse>
+          <div ngbAccordionBody>
+            <div class="row">
+              <div class="col-12 mb-2">
+                <img [src]="'../../../assets/img/user.webp'" alt="Avatar" width="50">
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Nome:</strong> {{employee.name}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Cognome:</strong> {{employee.surname}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Email:</strong> {{employee.email}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Ruolo:</strong> {{employee.role}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Data di Creazione:</strong> {{employee.creationDate}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Codice Fiscale:</strong> {{employee.codiceFiscale}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Stipendio:</strong> {{employee.salary | number:'1.2-2'}} &euro;
+              </div>
+              <div class="col-12 text-end mt-2">
+                <button class="btn btn-primary btn-sm me-2">Invia Email</button>
+                <button class="btn btn-danger btn-sm" (click)="confirmDeleteProfile(employee)">Elimina Profilo</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination controls -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center mt-4">
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <a class="page-link" (click)="changePage(currentPage - 1)" href="javascript:void(0)">Precedente</a>
+        </li>
+        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+          <a class="page-link" (click)="changePage(page)" href="javascript:void(0)">{{ page + 1 }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+          <a class="page-link" (click)="changePage(currentPage + 1)" href="javascript:void(0)">Successivo</a>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</div>

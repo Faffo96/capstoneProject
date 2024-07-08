@@ -52,8 +52,16 @@ public class Config {
     @Bean
     public CorsFilter corsFilter() {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
-        corsConfiguration.setAllowedOrigins(List.of("http://localhost:4200"));
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        corsConfiguration.setAllowedOrigins(List.of(
+                "http://localhost:4200",
+                "localhost:4200",
+                "https://essential-berget-faff-846119c1.koyeb.app",
+                "https://hamburgeriarc.netlify.app",
+                "hamburgeriarc.netlify.app",
+                "https://66886b5f04e1c1e68f941a36--hamburgeriarc.netlify.app/",
+                "hamburgeria-backend.essential-berget.internal:8000"
+        ));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH","DELETE", "OPTIONS"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
         corsConfiguration.setAllowCredentials(true); // Se vuoi permettere l'invio di cookie
 
@@ -62,5 +70,6 @@ public class Config {
 
         return new CorsFilter(source);
     }
-
 }
+
+

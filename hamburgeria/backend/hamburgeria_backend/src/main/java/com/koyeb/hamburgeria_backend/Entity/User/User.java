@@ -20,11 +20,15 @@ import java.util.List;
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public abstract class User implements UserDetails {
     @Id
+    @GeneratedValue
+    private Long id;
+
     private String email;
     private String name;
     private String surname;
     private String avatar;
     private String password;
+    private int points;
 
     @Enumerated(EnumType.STRING)
     private Role role;

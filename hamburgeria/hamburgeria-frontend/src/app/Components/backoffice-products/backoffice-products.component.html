@@ -1,0 +1,141 @@
+<div class="container-fluid py-5">
+  <div class="container bg-color1 pt-4 rounded-5 pb-4 px-4 shadow-rb">
+    <h1 class="fw-bold bg-light rounded-3 p-3 fs-1 mb-5 shadow-rb">Prodotti</h1>
+    <h2 class="mb-5 fw-bold fs-5">Aggiungi prodotti:</h2>
+    <!-- Input Form for New Product -->
+    <div class="row mb-5">
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductName" class="mb-2">Nome (Italiano)</label>
+        <input type="text" id="newProductName" class="form-control shadow-rb mb-2" [(ngModel)]="newProduct.italianName">
+      </div>
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductEnglishName" class="mb-2">Name (English)</label>
+        <input type="text" id="newProductEnglishName" class="form-control shadow-rb mb-2" [(ngModel)]="newProduct.englishName">
+      </div>
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductItalianDescription" class="mb-2">Descrizione (Italiano)</label>
+        <input type="text" id="newProductItalianDescription" class="form-control shadow-rb mb-2" [(ngModel)]="newProduct.italianDescription">
+      </div>
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductEnglishDescription" class="mb-2">Description (English)</label>
+        <input type="text" id="newProductEnglishDescription" class="form-control shadow-rb mb-2" [(ngModel)]="newProduct.englishDescription">
+      </div>
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductPrice" class="mb-2">Prezzo</label>
+        <input type="number" id="newProductPrice" class="form-control shadow-rb mb-2" [(ngModel)]="newProduct.price">
+      </div>
+      <div class="fw-bold col-12 col-md-6 mb-2">
+        <label for="newProductCategory" class="mb-2">Categoria</label>
+        <div ngbDropdown class="d-inline-block w-100">
+          <button class="btn my-button2 dropdown-toggle w-100 shadow-rb" id="newProductCategoryDropdown" ngbDropdownToggle>
+            {{newProduct.category || 'Select Category'}}
+          </button>
+          <div ngbDropdownMenu [attr.aria-labelledby]="'newProductCategoryDropdown'">
+            <button ngbDropdownItem *ngFor="let category of categories" (click)="selectNewProductCategory(category)">
+              {{category}}
+            </button>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 text-end">
+        <button class="btn btn-success mt-2 shadow-rb" (click)="addProduct()">Aggiungi Prodotto</button>
+      </div>
+    </div>
+
+    <!-- Dropdowns for Category Filtering -->
+    <div class="d-flex mb-3">
+      <div ngbDropdown class="d-inline-block me-2" *ngFor="let section of sections">
+        <button class="btn my-button2 shadow-rb" id="{{section.id}}" ngbDropdownToggle>
+          {{section.name}}
+        </button>
+        <div ngbDropdownMenu [attr.aria-labelledby]="section.id">
+          <div *ngFor="let item of section.items" ngbDropdownItem class="d-flex align-items-center">
+            <input class="form-check-input me-2 border-black" type="radio" id="{{item}}" name="{{section.id}}" value="{{item}}" (change)="selectCategory(item)">
+            <label class="form-check-label fw-bold" for="{{item}}">{{item}}</label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Accordion -->
+    <div ngbAccordion [closeOthers]="true" class="mt-3 shadow-rb">
+      <div ngbAccordionItem *ngFor="let product of products$; let i = index">
+        <h2 ngbAccordionHeader>
+          <button ngbAccordionButton>{{product.italianName}}</button>
+        </h2>
+        <div ngbAccordionCollapse>
+          <div ngbAccordionBody>
+            <div class="row">
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Id:</strong> {{product.id}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Nome:</strong> {{product.italianName}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Name:</strong> {{product.englishName}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Descrizione:</strong> {{product.italianDescription}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Description:</strong> {{product.englishDescription}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Prezzo:</strong> {{product.price}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Categoria:</strong> {{product.category}}
+              </div>
+              <div class="col-12 mb-2">
+                <strong class="fw-bold">Disponibile:</strong> {{product.available}}
+              </div>
+              <div class="col-12 text-end mt-2">
+                <button class="btn btn-primary btn-sm me-2" (click)="openEditProductModal(product)">Modifica</button>
+                <button class="btn btn-danger btn-sm" (click)="confirmDeleteProduct(product.id)">Elimina</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<ng-template #editProductModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Modifica Prodotto</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
+  </div>
+  <div class="modal-body">
+    <div class="mb-3">
+      <label for="productName" class="form-label">Nome (Italiano)</label>
+      <input type="text" id="productName" class="form-control" [(ngModel)]="editingProduct.italianName">
+    </div>
+    <div class="mb-3">
+      <label for="productEnglishName" class="form-label">Name (English)</label>
+      <input type="text" id="productEnglishName" class="form-control" [(ngModel)]="editingProduct.englishName">
+    </div>
+    <div class="mb-3">
+      <label for="productItalianDescription" class="form-label">Descrizione (Italiano)</label>
+      <input type="text" id="productItalianDescription" class="form-control" [(ngModel)]="editingProduct.italianDescription">
+    </div>
+    <div class="mb-3">
+      <label for="productEnglishDescription" class="form-label">Description (English)</label>
+      <input type="text" id="productEnglishDescription" class="form-control" [(ngModel)]="editingProduct.englishDescription">
+    </div>
+    <div class="mb-3">
+      <label for="productPrice" class="form-label">Prezzo</label>
+      <input type="number" id="productPrice" class="form-control" [(ngModel)]="editingProduct.price">
+    </div>
+    <div class="mb-3">
+      <label for="productCategory" class="form-label">Categoria</label>
+      <input type="text" id="productCategory" class="form-control" [(ngModel)]="editingProduct.category">
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-secondary" (click)="modal.dismiss('cancel click')">Annulla</button>
+    <button type="button" class="btn btn-primary" (click)="saveProductChanges(modal)">Salva</button>
+  </div>
+</ng-template>

@@ -1,0 +1,82 @@
+-Scegliere delle icone dal sito di lordicon
+
+https://lordicon.com/icons/wired/lineal/567-french-fries-chips
+https://lordicon.com/icons/wired/lineal/542-burger-hamburger
+https://lordicon.com/icons/wired/lineal/550-meat
+https://lordicon.com/icons/wired/lineal/502-two-glasses-pint-beer
+https://lordicon.com/icons/wired/lineal/524-basket-vegetables
+https://lordicon.com/icons/wired/lineal/565-toast-sandwich
+https://lordicon.com/icons/wired/lineal/575-hotdog
+https://lordicon.com/icons/wired/lineal/597-gluten-free
+https://lordicon.com/icons/wired/lineal/518-french-macarons
+https://lordicon.com/icons/wired/lineal/153-bar-chart
+
+-Acquisire l'immagine con Obs dalla scheda di dettaglio dell'icona
+
+-Modificare il formato del video facendolo passare attraverso Clipchamp (windows)
+
+-Trasformare il video in gif in questo sito e aggiustare la durata del video: https://giphy.com/create/gifmaker
+
+-Scaricare e caricare l'immagine su quest'altro sito: https://ezgif.com/speed/ezgif-7-7fb47d896c.gif
+
+-Modficare a proprio piacimento la gif (crop, velocità, loop, etc)
+
+-Codice html da inserire:
+
+<div class="d-flex align-items-center">
+    <div class="image-icon">
+        <img class="hover-image" src="../../../assets/icons/animate/gif/chips.gif" alt="Hamburger Icon">
+    </div>
+
+    <div class="my-image-icon">
+        <img class="hover-image" src="../../../assets/icons/animate/gif/hamburger.gif" alt="Hamburger Icon">
+    </div>
+</div>
+
+-Codice css da inserire:
+
+.image-icon {
+    width: 130px;
+    position: relative;
+}
+
+.image-icon img {
+    width: 130px;
+    object-fit: cover; 
+}
+
+.my-image-icon img {
+    width: 80px;
+}
+
+codice typescript Component da inserire:
+
+import { AfterViewInit, Component } from '@angular/core';
+
+@Component({
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrls: ['./home.component.scss']
+})
+export class HomeComponent implements AfterViewInit {
+  ngAfterViewInit() {
+    const imgs = document.getElementsByClassName('hover-image') as HTMLCollectionOf<HTMLImageElement>;
+    const iconName = ["chips", "hamburger", "chicken", "beer", "salad", "dessert", "hotdog", "gluten-free", "sandwich"];
+  
+    for (let i = 0; i < imgs.length; i++) {
+      const img = imgs[i];
+  
+      img.addEventListener('mouseenter', () => {
+        const hoverSrc = img.getAttribute('src');
+        if (hoverSrc) {
+          img.src = hoverSrc;
+          img.src = `../../../assets/icons/animate/gif/${iconName[i]}.gif`;
+        }
+      });
+    }
+  }
+  
+}
+
+-Eventualmente rimuovere lo sfondo con questo link: https://onlinegiftools.com/remove-gif-background#tool
+

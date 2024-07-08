@@ -1,0 +1,68 @@
+<div class="container-fluid py-5">
+  <div class="container bg-color1 pt-4 rounded-5 pb-4 px-4 shadow-rb">
+    <h1 class="fw-bold bg-light shadow-rb rounded-3 p-3 fs-1 mb-5">Le mie prenotazioni</h1>
+    <div class="row">
+      
+      <div class="col-md-4 mb-4" *ngFor="let reservation of reservations">
+        <div class="bg-light shadow-rb rounded-4 p-3 h-100">
+          <div class="card-body">
+            <h5 class="card-title my-2"><strong class="fw-bold">Codice di Prenotazione:</strong> {{ reservation.id }}</h5>
+            <p class="card-text my-2"><strong class="fw-bold">Data di creazione:</strong> {{ reservation.creationDate | date }}</p>
+            <p class="card-text my-2"><strong class="fw-bold">Data di prenotazione:</strong> {{ reservation.bookedDate | date }}</p>
+            <p class="card-text mt-2 mb-4"><strong class="fw-bold">Numero di Partecipanti:</strong> {{ reservation.participants }}</p>
+            <button class="btn btn-primary btn-sm me-3" (click)="openEditModal(reservation)">Modifica</button>
+            <button class="btn btn-danger btn-sm" (click)="deleteReservation(reservation.id)">Annulla
+              Prenotazione</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination controls -->
+    <nav aria-label="Page navigation example">
+      <ul class="pagination justify-content-center">
+        <li class="page-item" [class.disabled]="currentPage === 0">
+          <a class="page-link" (click)="changePage(currentPage - 1)" href="javascript:void(0)">Precedente</a>
+        </li>
+        <li class="page-item" *ngFor="let page of pages" [class.active]="page === currentPage">
+          <a class="page-link" (click)="changePage(page)" href="javascript:void(0)">{{ page + 1 }}</a>
+        </li>
+        <li class="page-item" [class.disabled]="currentPage === totalPages - 1">
+          <a class="page-link" (click)="changePage(currentPage + 1)" href="javascript:void(0)">Successivo</a>
+        </li>
+      </ul>
+    </nav>
+
+    <!-- Edit Modal -->
+    <div *ngIf="isEditModalOpen" class="modal fade show" style="display: block;" tabindex="-1" role="dialog"
+      aria-labelledby="editModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="editModalLabel">Modifica Prenotazione</h5>
+            <button type="button" class="close" aria-label="Close" (click)="closeEditModal()">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <label for="bookedDate">Data di prenotazione</label>
+              <input type="datetime-local" id="bookedDate" class="form-control"
+                [(ngModel)]="selectedReservation.bookedDate">
+            </div>
+            <div class="form-group">
+              <label for="participants">Numero di Partecipanti</label>
+              <input type="number" id="participants" class="form-control"
+                [(ngModel)]="selectedReservation.participants">
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeEditModal()">Chiudi</button>
+            <button type="button" class="btn btn-primary" (click)="saveChanges()">Salva modifiche</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="isEditModalOpen" class="modal-backdrop fade show"></div>
+  </div>
+</div>

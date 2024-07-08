@@ -52,7 +52,7 @@ public class ShiftService {
         }
 
         // Recuperare l'employee dal nome utente
-        Employee employee = employeeService.getEmployeeByEmail(currentUserName); // Assumendo che usi l'email come username
+        Employee employee = employeeService.getEmployeeByEmail(shiftDTO.getEmployee().getEmail()); // Assumendo che usi l'email come username
 
         if (employee == null) {
             throw new UsernameNotFoundException("Employee not found with email: " + currentUserName);
@@ -86,6 +86,10 @@ public class ShiftService {
         Page<Shift> shifts = shiftRepository.findAll(pageable);
         loggerInfo.info("Retrieved shifts page " + page + " with fixed size " + fixedSize + " sorted by " + sortBy);
         return shifts;
+    }
+
+    public List<Shift> getAllShiftsUnpaged() {
+        return shiftRepository.findAll();
     }
 
     public Shift updateShift(Long id, ShiftDTO shiftDTO) throws ShiftNotFoundException, UnauthorizedException {

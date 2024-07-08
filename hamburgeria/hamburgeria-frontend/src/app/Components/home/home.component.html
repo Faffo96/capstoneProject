@@ -1,1 +1,96 @@
-<p>home works!</p>
+<section class="container-fluid my-5">
+  <div class="jumbotron container bg-color1 rounded-5 p-5 shadow-rb" #jumbotron>
+    <div>
+      <div class="d-flex">
+        <img class="burger-img me-3 text-shadow" src="../../../assets/img/bread-full.png" alt="" width="100px"> 
+        <h1 class="display-4 fs-1 fw-bold mb-4">Ordina Ora!</h1>
+      </div>
+      <p class="lead w-75 lh-base fw-b">Iscriviti per ordinare o prenotare in un attimo. <br> In più, ad ogni Burger acquistato otterrai <strong class="fw-bold">1 Punto</strong> e una volta arrivato a 10 potrai avere un <strong class="fw-bold">Burger gratis</strong> a tua scelta!</p>
+      <hr class="my-4">
+      <p class="lead mt-3">
+        <a class="btn my-button2 fs-6 fw-normal text-dark mt-4 shadow-rb" href="#" role="button">Iscriviti ora</a>
+      </p>
+    </div>
+  </div>
+</section>
+
+<section class="our-burgers container-fluid mb-5">
+  <div class="container bg-white">
+    <div class="text-center mb-6">
+      <h2 class="playwrite-font color2 fs-2 pt-5 mb-5">Hamburgeria</h2>
+      <h3 class="fw-bolder fs-1"><strong>UN AMBIENTE SPECIALE</strong></h3>
+    </div>
+    <div class="row row-cols-1 mx-3 bg-splash">
+      <div class="d-flex my-5 align-items-center justify-content-between">
+        <div class="fade-in-right">
+          <img class="rounded-5 shadow-rb" src="../../../assets/img/sala1.png" alt="">
+        </div>
+        <div class="w-50 fade-in-left">
+          <p class="fs-3 lh-base">Benvenuti alla nostra Hamburgeria, un luogo dove l'amore per il cibo e l'attenzione ai dettagli si
+            incontrano. Il nostro interno, decorato con cura e originalità, crea un'atmosfera unica e accogliente.
+            Decorazioni appese, tovaglie colorate e luci soffuse trasformano ogni pasto in un'esperienza speciale. Vieni a scoprire un ambiente che combina il calore della casa con un tocco di magia!</p>
+        </div>
+      </div>
+      <div class="d-flex my-5 lh-lg align-items-center justify-content-between fade-in-left">
+        <div class="w-50 fade-in-right">
+          <p class="fs-4 lh-base">La nostra area esterna è il posto ideale per godersi un pasto all'aria aperta. Situata in una delle vie più suggestive della città, offre una vista pittoresca che arricchisce l'esperienza gastronomica. Tavoli in legno, sedie comode e una disposizione spaziosa garantiscono comfort e relax. Sia che tu voglia una pausa pranzo al sole o una cena al tramonto, il nostro spazio esterno ti accoglie con la sua atmosfera vivace e accogliente.</p>
+        </div>
+        <div class="fade-in-left">
+          <img class="rounded-5 shadow-rb" src="../../../assets/img/salaout1.png" alt="">
+        </div>
+      </div>
+      <div class="d-flex my-5 align-items-center justify-content-between">
+        <div class="fade-in-right">
+          <img class="rounded-5 shadow-rb" src="../../../assets/img/sign.png" alt="">
+        </div>
+        <div class="w-50 fade-in-left">
+          <p class="fs-3 lh-base">L'essenza dell'Hamburgeria è <strong class="fw-bold">Qualità</strong>, <strong class="fw-bold">Creatività</strong> e <strong class="fw-bold">Passione</strong> per il buon cibo. Ogni sera, sotto il cielo al tramonto, l'insegna guida gli amanti degli hamburger verso un'esperienza culinaria indimenticabile. È il nostro modo di dire "benvenuti", invitandovi a scoprire i sapori unici e l'ospitalità che ci contraddistinguono.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<ngb-carousel
+  #carousel
+  [interval]="4000"
+  [pauseOnHover]="pauseOnHover"
+  [pauseOnFocus]="pauseOnFocus"
+  (slide)="onSlide($event)"
+  class=".ngb-carousel shadow-rb"
+>
+  <ng-template ngbSlide *ngFor="let othersPost1 of othersPosts1; let i = index">
+    <section class="others container-fluid bg-color2">
+        <div class="row row-cols-2">
+            <article class="w-50 pb-4 others_article1 d-flex flex-column justify-content-end overflow-hidden" [ngStyle]="{'background-image': 'url(' + othersPosts1[i].photoUrl + ')'}">
+                <div class="w-75 ms-3 d-flex flex-column">
+                    <h3 class="color2 fs-1 mb-4 playwrite-font text-shadow">{{othersPost1.name}}</h3>
+                    <p class="text-light lh-base">{{othersPost1.description}}</p>
+                </div>
+            </article>
+    
+            <article *ngIf="othersPosts2[i]" class="w-50 pb-4 others_article2 d-flex flex-column justify-content-end overflow-hidden" [ngStyle]="{'background-image': 'url(' + othersPosts2[i].photoUrl + ')'}">
+                <div class="w-75 ms-3 d-flex flex-column">
+                    <h3 class="color2 fs-1 mb-4 playwrite-font text-shadow">{{othersPosts2[i].name}}</h3>
+                    <p class="text-light lh-base">{{othersPosts2[i].description}}</p>
+                </div>
+            </article>
+        </div>
+    </section>
+  </ng-template>
+</ngb-carousel>
+
+<div class="trustpilot mt-3 mb-5 d-flex flex-column align-items-center justify-content-center">
+    <div class="mb-3">
+      <h2 class="playwrite-font color2 fs-2 pt-5 mb-5">Le vostre recensioni</h2>
+    </div>
+    <div class="mb-5 w-100">
+      <ngb-carousel *ngIf="feedbacks.length > 0">
+        <ng-template ngbSlide *ngFor="let feedback of feedbacks; let i = index">
+          <div class="picsum-img-wrapper d-flex justify-content-center">
+            <img class="w-55 shadow-rb my-3 rounded-3" [src]="feedback" alt="Recensione {{ i + 1 }}">
+          </div>
+        </ng-template>
+      </ngb-carousel>
+    </div>
+</div>

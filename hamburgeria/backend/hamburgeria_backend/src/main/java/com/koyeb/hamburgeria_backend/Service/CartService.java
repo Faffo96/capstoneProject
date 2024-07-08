@@ -22,13 +22,13 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.time.LocalDateTime;
+import java.util.*;
 import java.util.stream.Collectors;
 
 @Service
@@ -60,7 +60,7 @@ public class CartService {
     private static final Logger loggerTrace = LoggerFactory.getLogger("loggerTrace");
     private static final Logger loggerWarn = LoggerFactory.getLogger("loggerWarn");
 
-    public Cart createCart(CartDTO cartDTO) throws ReservationNotFoundException, UserNotFoundException, ProductNotFoundException {
+    public Cart createCart(CartDTO cartDTO) throws ReservationNotFoundException, UserNotFoundException, ProductNotFoundException, MinimumTotalException {
         Cart cart = new Cart();
 
         // Gestione della prenotazione
@@ -74,35 +74,6 @@ public class CartService {
         // Ottenere l'utente autenticato dal contesto di sicurezza
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String currentUserName = null;
-
-        if (authentication != null && authentication.isAuthenticated()) {
-            Object principal = authentication.getPrincipal();
-            if (principal instanceof UserDetails) {
-                currentUserName = ((UserDetails) principal).getUsername();
-            } else {
-                currentUserName = principal.toString();
-            }
-        }
-        try {
-            Employee employee = employeeService.getEmployeeByEmail(currentUserName);
-            cart.setUser(employee);
-        } catch (UserNotFoundException e) {
-            // User not found for Employee, continue checking
-        }
-
-        try {
-            Customer customer = customerService.getCustomerByEmail(currentUserName);
-            cart.setUser(customer);
-        } catch (UserNotFoundException e) {
-            // User not found for Customer, continue checking
-        }
-
-        try {
-            Owner owner = ownerService.getOwnerByEmail(currentUserName);
-            cart.setUser(owner);
-        } catch (UserNotFoundException e) {
-            // User not found for Owner, continue checking
-        }
 
         // Gestione della lista dei prodotti
         List<ProductDTO> productDTOList = cartDTO.getProductList();
@@ -121,9 +92,62 @@ public class CartService {
         }
 
         cart.setProductList(productList);
-        cart.setCreationDate(cartDTO.getCreationDate());
+
+        int count = 0;
+        for (int i = 0; i < productList.size(); i++) {
+            if (productList.get(i).getCategory().name().equals("CUSTOM_BURGER")) {
+                count++;
+            }
+        }
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                currentUserName = ((UserDetails) principal).getUsername();
+            } else {
+                currentUserName = principal.toString();
+            }
+        }
+        try {
+            Employee employee = employeeService.getEmployeeByEmail(currentUserName);
+
+            employee.setPoints(employee.getPoints() + count);
+            cart.setUser(employee);
+        } catch (UserNotFoundException e) {
+            // User not found for Employee, continue checking
+        }
+
+        try {
+            Customer customer = customerService.getCustomerByEmail(currentUserName);
+            customer.setPoints(customer.getPoints() + count);
+            cart.setUser(customer);
+        } catch (UserNotFoundException e) {
+            // User not found for Customer, continue checking
+        }
+
+        try {
+            Owner owner = ownerService.getOwnerByEmail(currentUserName);
+            owner.setPoints(owner.getPoints() + count);
+            cart.setUser(owner);
+        } catch (UserNotFoundException e) {
+            // User not found for Owner, continue checking
+        }
+
+
+        cart.setCreationDate(LocalDateTime.now());
         cart.setPaid(cartDTO.isPaid());
         cart.setDelivery(cartDTO.isDelivery());
+        cart.setDeliveryFee(cartDTO.isDelivery() ? 2.0 : 0.0);
+
+        // Calcola il totale dei prodotti nel carrello
+        double total = productList.stream().mapToDouble(Product::getPrice).sum();
+        cart.setTotal(total + (cart.isDelivery() ? cart.getDeliveryFee() : 0));
+
+        // Verifica che il totale sia almeno 8.5
+        if (total < 8.5) {
+            throw new MinimumTotalException("The total price of the cart must be at least 8.5");
+        }
+
         cartRepository.save(cart);
         loggerInfo.info("Cart with id " + cart.getId() + " created.");
         return cart;
@@ -152,6 +176,40 @@ public class CartService {
             throw new CartNotFoundException("Cart with id " + id + " not found.");
         }
     }
+
+    public Page<Cart> getCartsByUserEmail(String userEmail, Pageable pageable) throws UnauthorizedException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String currentUserName = null;
+        boolean isAdminOrOwner = false;
+
+        if (authentication != null && authentication.isAuthenticated()) {
+            Object principal = authentication.getPrincipal();
+            if (principal instanceof UserDetails) {
+                currentUserName = ((UserDetails) principal).getUsername();
+                for (GrantedAuthority authority : ((UserDetails) principal).getAuthorities()) {
+                    if (authority.getAuthority().equals("ROLE_ADMIN") || authority.getAuthority().equals("ROLE_OWNER")) {
+                        isAdminOrOwner = true;
+                        break;
+                    }
+                }
+            } else {
+                currentUserName = principal.toString();
+            }
+        }
+
+        if (currentUserName == null) {
+            throw new UnauthorizedException("User not authenticated");
+        }
+
+        if (isAdminOrOwner || currentUserName.equals(userEmail)) {
+            Page<Cart> carts = cartRepository.findByUserEmail(userEmail, pageable);
+            loggerInfo.info("Retrieved carts for user with email " + userEmail + ", page " + pageable.getPageNumber());
+            return carts;
+        } else {
+            throw new UnauthorizedException("User not authorized to access these carts");
+        }
+    }
+
 
     public Cart updateCart(Long id, CartDTO cartDTO) throws CartNotFoundException, ProductNotFoundException, MinimumTotalException {
         Cart cart = getCartById(id);
@@ -195,6 +253,53 @@ public class CartService {
         cartRepository.delete(cart);
         loggerInfo.info("Cart with id " + id + " deleted successfully.");
         return "Cart with id " + id + " deleted successfully.";
+    }
+
+    public Map<String, Double> getMonthlyRevenueByYear(int year) {
+        List<Object[]> results = cartRepository.findMonthlyRevenueByYear(year);
+        Map<String, Double> monthlyRevenue = new HashMap<>();
+
+        for (Object[] result : results) {
+            int month = (int) result[0];
+            double total = (double) result[1];
+            monthlyRevenue.put(getMonthName(month), total);
+        }
+
+        return monthlyRevenue;
+    }
+
+    private String getMonthName(int month) {
+        String[] months = {"January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"};
+        return months[month - 1];
+    }
+
+    public Map<String, Double> getDailyRevenueByYearAndMonth(int year, int month) {
+        List<Object[]> results = cartRepository.findDailyRevenueByYearAndMonth(year, month);
+        Map<String, Double> dailyRevenue = new LinkedHashMap<>();
+        for (Object[] result : results) {
+            String day = result[0].toString();
+            Double total = (Double) result[1];
+            dailyRevenue.put(day, total);
+        }
+        return dailyRevenue;
+    }
+
+    public Map<String, Integer> getProductQuantitiesByMonthAndYear(int year, int month) {
+        List<Object[]> results = cartRepository.findProductQuantitiesByMonth(year, month);
+        return results.stream()
+                .collect(Collectors.toMap(
+                        row -> (String) row[0],
+                        row -> ((Number) row[1]).intValue()
+                ));
+    }
+
+    public Map<String, Integer> getProductQuantitiesByYear(int year) {
+        List<Object[]> results = cartRepository.findProductQuantitiesByYear(year);
+        return results.stream()
+                .collect(Collectors.toMap(
+                        row -> (String) row[0],
+                        row -> ((Number) row[1]).intValue()
+                ));
     }
 }
 

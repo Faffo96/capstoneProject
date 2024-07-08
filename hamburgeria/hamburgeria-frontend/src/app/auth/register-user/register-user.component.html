@@ -1,51 +1,53 @@
-<div class="d-flex justify-content-center align-items-center mt-2">
-    <form [formGroup]="signupForm" class="form" (ngSubmit)="onSubmit(signupForm)">
-        <p class="title">Register </p>
-        <p class="message">Signup now and get full access to our app. </p>
-        <div class="flex">
-            <label>
-                <input id="name" required="" placeholder="" type="text" class="input" formControlName="name">
-                <span>Firstname</span>
-            </label>
-
-            <label>
-                <input id="surname" required="" placeholder="" type="text" class="input" formControlName="surname">
-                <span>Lastname</span>
-            </label>
-        </div>
+<div class="d-flex justify-content-center align-items-center my-5">
+    <form [formGroup]="signupForm" class="form border-gray shadow-rb" (ngSubmit)="onSubmit(signupForm)">
+      <p class="title color1">Registrati</p>
+      <p class="message">Registrati ora e ottieni pieno accesso alla nostra app.</p>
+      <div class="flex">
         <label>
-            <input id="email" required="" placeholder="" type="email" class="input" formControlName="email">
-            <span>Email</span>
+          <input id="name" required="" placeholder="" type="text" class="input" formControlName="name">
+          <span>Nome</span>
+          <span *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.hasError('required')" class="text-danger fw-bold my-fs-1">Il nome è obbligatorio</span>
+          <span *ngIf="signupForm.get('name')?.touched && signupForm.get('name')?.hasError('maxlength')" class="text-danger fw-bold my-fs-1">Il nome non può superare i 15 caratteri</span>
         </label>
+  
         <label>
-            <input id="password" required="" placeholder="" type="password" class="input" formControlName="password">
-            <span>Password</span>
+          <input id="surname" required="" placeholder="" type="text" class="input" formControlName="surname">
+          <span>Cognome</span>
+          <span *ngIf="signupForm.get('surname')?.touched && signupForm.get('surname')?.hasError('required')" class="text-danger fw-bold my-fs-1">Il cognome è obbligatorio</span>
+          <span *ngIf="signupForm.get('surname')?.touched && signupForm.get('surname')?.hasError('maxlength')" class="text-danger fw-bold my-fs-1">Il cognome non può superare i 15 caratteri</span>
         </label>
-       <!--  <label>
-            <input id="confirmPassword" required="" placeholder="" type="password" class="input"
-                formControlName="confirmPassword">
-            <span>Confirm password</span>
-            <span *ngIf="
-                                getFormC('user.username')?.invalid &&
-                                getFormC('user.username')?.touched
-                            ">
-                <ng-container *ngIf="
-                                    getErrorsC('userInfo.username', 'required')
-                                "><strong class="text-danger">Campo username obbligatorio</strong></ng-container>
-                <ng-container *ngIf="
-                                    getErrorsC('userInfo.username', 'proibito')
-                                "><strong class="text-danger">Username non consentito</strong>
-                </ng-container>
-            </span>
-        </label> -->
-        <label>
-            <span>Profile image</span>
-            <input id="avatar" placeholder="" type="file" class="input" formControlName="avatar">
-
-        </label>
-
-        <button type="button" (click)="onSubmit(signupForm)" class="submit" [disabled]="signupForm.invalid">Submit</button>
-        <p class="signin">Already have an account ? <a [routerLink]="['/login']" routerLinkActive="active">Login</a>
-        </p>
+      </div>
+      <label>
+        <input id="email" required="" placeholder="" type="email" class="input" formControlName="email">
+        <span>Email</span>
+        <span *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.hasError('required')" class="text-danger fw-bold my-fs-1">L'email è obbligatoria</span>
+        <span *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.hasError('pattern')" class="text-danger fw-bold my-fs-1">Inserisci un'email valida</span>
+        <span *ngIf="signupForm.get('email')?.touched && signupForm.get('email')?.hasError('maxlength')" class="text-danger fw-bold my-fs-1">L'email non può superare i 25 caratteri</span>
+      </label>
+      <label>
+        <input id="password" required="" placeholder="" type="password" class="input" formControlName="password">
+        <span class="password-label-text" [ngClass]="{
+          'text-muted': !signupForm.get('password')?.touched,
+          'text-success': signupForm.get('password')?.valid && signupForm.get('password')?.touched,
+          'text-danger': signupForm.get('password')?.invalid && signupForm.get('password')?.touched
+        }">Password</span>
+        <span *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.hasError('required')" class="text-danger fw-bold my-fs-1">La password è obbligatoria</span>
+        <span *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.hasError('minlength')" class="text-danger fw-bold my-fs-1">La password deve contenere almeno 8 caratteri</span>
+        <span *ngIf="signupForm.get('password')?.touched && signupForm.get('password')?.hasError('pattern')" class="text-danger fw-bold my-fs-1">La password deve contenere almeno una lettera maiuscola, una lettera minuscola, un numero e un carattere speciale (&commat;$!%*?&lt;&gt;)</span>
+      </label>
+      <label>
+        <input id="confirmPassword" required="" placeholder="" type="password" class="input" formControlName="confirmPassword">
+        <span [ngClass]="{'text-success': passwordsMatch && confirmPasswordTouched, 'text-danger fw-bold my-fs-1': !passwordsMatch && confirmPasswordTouched}">Conferma Password</span>
+        <span *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.hasError('required')" class="text-danger fw-bold my-fs-1">La conferma della password è obbligatoria</span>
+        <span *ngIf="signupForm.get('confirmPassword')?.touched && signupForm.get('confirmPassword')?.hasError('passwordMismatch')" class="text-danger fw-bold my-fs-1">Le password non coincidono</span>
+      </label>
+      <label>
+        <span>Immagine Profilo</span>
+        <input id="avatar" placeholder="" type="file" class="input mb-1" formControlName="avatar">
+        <span *ngIf="signupForm.get('avatar')?.touched && signupForm.get('avatar')?.hasError('invalidFileType')" class="text-danger fw-bold my-fs-1">Tipo di file non valido. Sono consentiti solo jpeg, png e gif</span>
+      </label>
+  
+      <button type="submit" class="submit my-button2 shadow-rb" [disabled]="signupForm.invalid">Invia</button>
+      <p class="signin my-3">Hai già un account? <a routerLink="/login" routerLinkActive="active">Accedi</a></p>
     </form>
-</div>
+  </div>

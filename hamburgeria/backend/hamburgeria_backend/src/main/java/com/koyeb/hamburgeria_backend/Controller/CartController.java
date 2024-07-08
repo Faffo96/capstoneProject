@@ -6,11 +6,15 @@ import com.koyeb.hamburgeria_backend.Exception.*;
 import com.koyeb.hamburgeria_backend.Service.CartService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/api/carts")
@@ -20,7 +24,7 @@ public class CartController {
     private CartService cartService;
 
     @PostMapping
-    public ResponseEntity<Cart> createCart(@RequestBody CartDTO cartDTO) throws UserNotFoundException, ProductNotFoundException, ReservationNotFoundException {
+    public ResponseEntity<Cart> createCart(@RequestBody CartDTO cartDTO) throws UserNotFoundException, ProductNotFoundException, ReservationNotFoundException, MinimumTotalException {
         try {
             Cart createdCart = cartService.createCart(cartDTO);
             return ResponseEntity.ok(createdCart);
@@ -30,6 +34,8 @@ public class CartController {
             throw new ReservationNotFoundException(e.getMessage());
         } catch (ProductNotFoundException e) {
             throw new ProductNotFoundException(e.getMessage()); // Product not found
+        } catch (MinimumTotalException e) {
+            throw new MinimumTotalException(e.getMessage());
         }
     }
 
@@ -41,6 +47,19 @@ public class CartController {
         } catch (CartNotFoundException e) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null); // Cart not found
         }
+    }
+
+    @GetMapping("/user")
+    public ResponseEntity<Page<Cart>> getCartsByUserEmail(
+            @RequestParam String email,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "id") String sortBy,
+            @RequestParam(defaultValue = "desc") String order) {
+
+        Sort sort = Sort.by(Sort.Direction.fromString(order), sortBy);
+        Pageable pageable = PageRequest.of(page, 10, sort);
+        Page<Cart> carts = cartService.getCartsByUserEmail(email, pageable);
+        return ResponseEntity.ok(carts);
     }
 
     @GetMapping
@@ -75,5 +94,26 @@ public class CartController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cart not found with id: " + id);
         }
     }
+
+    @GetMapping("/revenue/monthly")
+    public Map<String, Double> getMonthlyRevenue(@RequestParam int year) {
+        return cartService.getMonthlyRevenueByYear(year);
+    }
+
+    @GetMapping("/revenue/daily")
+    public Map<String, Double> getDailyRevenue(@RequestParam int year, @RequestParam int month) {
+        return cartService.getDailyRevenueByYearAndMonth(year, month);
+    }
+
+    @GetMapping("/product-quantities")
+    public Map<String, Integer> getProductQuantities(@RequestParam int year, @RequestParam(required = false) Integer month) {
+        if (month != null) {
+            return cartService.getProductQuantitiesByMonthAndYear(year, month);
+        } else {
+            return cartService.getProductQuantitiesByYear(year);
+        }
+    }
+
+
 }
 

@@ -1,1 +1,74 @@
-<p>reservation works!</p>
+<div class="container-fluid py-5">
+   <div class="container bg-color1 pt-4 rounded-5 shadow-rb">
+      <div class="d-flex mt-4 flex-column">
+         <div class="w-50 ms-4 text-center bg-light mb-4 d-flex flex-column rounded-4 shadow-rb">
+            <h1 class="fs-1 p-3 fw-bold">Prenota un tavolo</h1>
+            <h2 class="fs-4 p-3">Clicca sul tavolo che preferisci!</h2>
+         </div>
+         <div class="d-flex flex-column">
+            <div class="mb-5">
+               <div class="d-flex ms-5">
+                  <div class="me-4">
+                     <label for="participants" class="form-label">Quanti siete?</label>
+                     <input type="number" id="participants" class="form-control shadow-rb" [(ngModel)]="participants">
+                  </div>
+                  <div class="me-4">
+                     <label for="reservationDate" class="form-label">Quando vuoi prenotare?</label>
+                     <input type="date" id="reservationDate" class="form-control shadow-rb" [(ngModel)]="reservationDate">
+                  </div>
+                  <div>
+                     <label for="reservationTime" class="form-label">Seleziona l'orario</label>
+                     <select id="reservationTime" class="form-control shadow-rb" [(ngModel)]="reservationTime">
+                        <option *ngFor="let time of availableTimes" [value]="time">{{ time }}</option>
+                     </select>
+                  </div>
+               </div>
+            </div>
+            <div class="row">
+               <div class="bg-plan m-5">
+                  <img class="w-55 text-shadow" src="../../../assets/img/plan.png" alt="">
+                  <ul class="indoor d-flex">
+                     <li *ngFor="let table of indoorTables; let i = index" [ngClass]="getClassList(table, i, false)"
+                        (click)="toggleTooltip('seat-' + i)">
+                        <div [class.tooltip-active]="activeSeat === 'seat-' + i" class="tooltip-container p-0">
+                           <div class="tooltip rounded-5 py-3 px-2">
+                              <div class="bg-light h-100 rounded-5 text-dark p-3">
+                                 <h1 class="fs-3 fw-6">Tavolo {{table.tableNumber}}</h1>
+                                 <h2 class="mb-3">Posti disponibili: <span>{{table.seating}}</span></h2>
+                                 <div class="d-flex justify-content-end">
+                                    <button class="my-button" (click)="bookTable(table)">Prenota</button>
+                                 </div>
+                              </div>
+                              <div class="tooltip-tail" [ngClass]="{'tooltip-tail2': table.seating === 2}">
+                                 <div></div>
+                              </div>
+                           </div>
+                        </div>
+                     </li>
+                  </ul>
+                  <ul class="outdoor d-flex">
+                     <li *ngFor="let table of outdoorTables; let i = index" [ngClass]="getClassList(table, i, true)"
+                        (click)="toggleTooltip('seat-out-' + i)">
+                        <div [class.tooltip-active]="activeSeat === 'seat-out-' + i"
+                           class="tooltip-container tooltip-container2 p-0">
+                           <div class="tooltip rounded-5 py-3 px-2">
+                              <div class="bg-light h-100 rounded-5 text-dark p-3">
+                                 <h1 class="fs-3 fw-6">Tavolo {{table.tableNumber}}</h1>
+                                 <h2 class="mb-3">Posti disponibili: <span>{{table.seating}}</span></h2>
+                                 <div class="d-flex justify-content-end">
+                                    <button class="my-button" (click)="bookTable(table)">Prenota</button>
+                                 </div>
+                              </div>
+                              <div class="tooltip-tail" [ngClass]="{'tooltip-tail2': table.seating === 2}">
+                                 <div></div>
+                              </div>
+                           </div>
+                        </div>
+                     </li>
+                  </ul>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+</div>
