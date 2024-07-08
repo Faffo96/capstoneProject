@@ -88,6 +88,10 @@ public class ShiftService {
         return shifts;
     }
 
+    public List<Shift> getAllShiftsUnpaged() {
+        return shiftRepository.findAll();
+    }
+
     public Shift updateShift(Long id, ShiftDTO shiftDTO) throws ShiftNotFoundException, UnauthorizedException {
         Shift shift = getShiftById(id);
         Employee employee = shift.getEmployee();

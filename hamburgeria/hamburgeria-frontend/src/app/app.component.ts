@@ -14,48 +14,17 @@ import { Observable, of, switchMap } from 'rxjs';
 })
 export class AppComponent implements OnInit {
 
-  user: User | null = null;
-
   constructor(
     private authService: AuthService,
-    private userService: UserService,
     private productService: ProductService,
     private diningTableService: DiningTableService
   ) {
     this.authService.restore();
-    this.loadLoggedUser();
     this.loadProducts();
     this.loadDiningTables();
-
-    this.userService.user$.subscribe(user => {
-      this.user = user;
-      console.log('User updated:', user);
-    });
   }
 
-  ngOnInit() {
-    
-  }
-
-  loadLoggedUser(): void {
-    const token = this.authService.getToken();
-    if (token) {
-      this.userService.getUserFromToken(token).pipe(
-        switchMap((user: User) => {
-          return this.userService.setUser(user)
-        })
-      ).subscribe(
-        (user: User | null) => {
-          console.log('User loaded and set:', user);
-        },
-        error => {
-          console.error('Error fetching user', error);
-        }
-      );
-    } else {
-      console.error('Token is null');
-    }
-  }
+  ngOnInit() { }
 
   loadProducts(): void {
     this.productService.getProducts().subscribe(

@@ -1,5 +1,5 @@
 <div class="d-flex justify-content-center align-items-center my-5">
-    <form [formGroup]="signupForm" class="form" (ngSubmit)="onSubmit(signupForm)">
+    <form [formGroup]="signupForm" class="form border-gray shadow-rb" (ngSubmit)="onSubmit(signupForm)">
       <p class="title color1">Registrati</p>
       <p class="message">Registrati ora e ottieni pieno accesso alla nostra app.</p>
       <div class="flex">
@@ -47,7 +47,7 @@
         <span *ngIf="signupForm.get('avatar')?.touched && signupForm.get('avatar')?.hasError('invalidFileType')" class="text-danger fw-bold my-fs-1">Tipo di file non valido. Sono consentiti solo jpeg, png e gif</span>
       </label>
   
-      <button type="submit" class="submit my-button" [disabled]="signupForm.invalid">Invia</button>
-      <p class="signin my-3">Hai già un account? <a [routerLink]="['/login']" routerLinkActive="active">Accedi</a></p>
+      <button type="submit" class="submit my-button2 shadow-rb" [disabled]="signupForm.invalid">Invia</button>
+      <p class="signin my-3">Hai già un account? <a routerLink="/login" routerLinkActive="active">Accedi</a></p>
     </form>
   </div>

@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="container">
     <div class="row mb-5">
-      <div class="menu-sections col-3 border-gray mt-5 rounded-5 p-0">
+      <div class="menu-sections col-3 border-gray mt-5 rounded-5 p-0 shadow-rb">
         <div class="d-flex flex-column">
           <div>
             <a *ngFor="let menuSection of menuSections; let i = index" 
@@ -24,7 +24,7 @@
         </div>
       </div>
 
-      <div class="menu border-gray rounded-5 col-6 mt-5 mx-3 pb-3 bg-color0">
+      <div class="menu border-gray rounded-5 col-6 mt-5 mx-3 pb-3 bg-color0 shadow-rb">
         <div class="py-3">
           <h1 class="fs-1 fw-bold">MENU</h1>
           <h2 class="mt-3">Componi il tuo ordine come preferisci!</h2>
@@ -35,10 +35,10 @@
         </div>
       </div>
 
-      <div class="cart border-gray rounded-5 col-3 mt-5 bg-color0">
+      <div class="cart border-gray rounded-5 col-3 mt-5 bg-color0 shadow-rb sticky-lg-top" id="cart">
         <h4 class="text-dark fs-3 fw-bold py-3">Carrello</h4>
         <app-cart></app-cart>
-        <div class="burger-preview mt-3">
+        <div class="burger-preview mt-3 sticky-top">
           <img class="w-100 ingredient-img-1" *ngIf="selectedIngredients.length > 0" src="../../../assets/img/bread-bottom.png" alt="Pane inferiore">
           <img class="w-100 ingredient-img-2" *ngIf="selectedIngredients.length > 1" src="../../../assets/img/meat.png" alt="Carne">
           <img class="w-100 ingredient-img-3" *ngIf="selectedIngredients.length > 2" src="../../../assets/img/cheese.png" alt="Formaggio">

@@ -14,8 +14,8 @@ export class ShiftService {
 
   constructor(private http: HttpClient) { }
 
-  getShifts(): Observable<PagedResponse<ShiftDTO>> {
-    return this.http.get<PagedResponse<ShiftDTO>>(`${this.apiURL}api/shifts`);
+  getShifts(): Observable<ShiftDTO[]> {
+    return this.http.get<ShiftDTO[]>(`${this.apiURL}api/shifts/all`);
   }
 
   createShift(shift: ShiftDTO): Observable<ShiftDTO> {

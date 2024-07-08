@@ -1,5 +1,5 @@
 <div class="container-fluid">
-    <div class="container">
+    <div class="container bg-color1 px-5 py-1 my-5 rounded-5 shadow-rb">
         <div class="shift-creation-panel my-5">
             <form (ngSubmit)="createShifts()">
               <div class="form-group">
@@ -61,7 +61,7 @@
                     </label>
                   </div>
               </div>
-              <button type="submit" class="btn my-button2 mt-3">Create Shift</button>
+              <button type="submit" class="btn my-button2 mt-3 shadow-rb">Create Shift</button>
             </form>
         </div>
         
@@ -70,39 +70,42 @@
         <div class="my-5">
             <div class="d-flex justify-content-between mb-5">
               <div class="btn-group">
-                <button class="btn my-button2" (click)="setView(CalendarView.Month)">Mese</button>
-                <button class="btn my-button2" (click)="setView(CalendarView.Week)">Settimana</button>
-                <button class="btn my-button2" (click)="setView(CalendarView.Day)">Giorno</button>
+                <button class="btn my-button2 shadow-rb" (click)="setView(CalendarView.Month)">Mese</button>
+                <button class="btn my-button2 shadow-rb" (click)="setView(CalendarView.Week)">Settimana</button>
+                <button class="btn my-button2 shadow-rb" (click)="setView(CalendarView.Day)">Giorno</button>
               </div>
               <div class="btn-group">
-                <button class="btn my-button2" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="updateMonthName()">Indietro</button>
-                <button class="btn my-button2" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="updateMonthName()">{{monthName}}</button>
-                <button class="btn my-button2" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="updateMonthName()">Avanti</button>
+                <button class="btn my-button2 shadow-rb" mwlCalendarPreviousView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="updateMonthName()">Indietro</button>
+                <button class="btn my-button2 shadow-rb" mwlCalendarToday [(viewDate)]="viewDate" (viewDateChange)="updateMonthName()">{{monthName}}</button>
+                <button class="btn my-button2 shadow-rb" mwlCalendarNextView [view]="view" [(viewDate)]="viewDate" (viewDateChange)="updateMonthName()">Avanti</button>
               </div>
             </div>
-            
-            <mwl-calendar-month-view
-                *ngIf="view === CalendarView.Month"
-                [viewDate]="viewDate"
-                [events]="events"
-                (dayClicked)="dayClicked($event.day)"
-                (eventTimesChanged)="eventTimesChanged($event)"
-                [activeDayIsOpen]="activeDayIsOpen">
-            </mwl-calendar-month-view>
-            
-            <mwl-calendar-week-view
-                *ngIf="view === CalendarView.Week"
-                [viewDate]="viewDate"
-                [events]="events"
-                (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-week-view>
-            
-            <mwl-calendar-day-view
-                *ngIf="view === CalendarView.Day"
-                [viewDate]="viewDate"
-                [events]="events"
-                (eventTimesChanged)="eventTimesChanged($event)">
-            </mwl-calendar-day-view>
+
+            <div class="shadow-rb">
+                <mwl-calendar-month-view
+                    *ngIf="view === CalendarView.Month"
+                    [viewDate]="viewDate"
+                    [events]="events"
+                    (dayClicked)="dayClicked($event.day)"
+                    (eventTimesChanged)="eventTimesChanged($event)"
+                    [activeDayIsOpen]="activeDayIsOpen">
+                </mwl-calendar-month-view>
+                
+                <mwl-calendar-week-view
+                    *ngIf="view === CalendarView.Week"
+                    [viewDate]="viewDate"
+                    [events]="events"
+                    (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-week-view>
+                
+                <mwl-calendar-day-view
+                    *ngIf="view === CalendarView.Day"
+                    [viewDate]="viewDate"
+                    [events]="events"
+                    (eventTimesChanged)="eventTimesChanged($event)">
+                </mwl-calendar-day-view>
+            </div>
+
           </div>
     </div>
 </div>

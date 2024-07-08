@@ -14,9 +14,6 @@ import { ErrorService } from '../Services/error-service.service';
 @Injectable({
   providedIn: 'root',
 })
-@Injectable({
-  providedIn: 'root',
-})
 export class AuthService {
   apiURL = `${environment.apiURL}`;
   jwtHelper = new JwtHelperService();
@@ -29,7 +26,7 @@ export class AuthService {
     private http: HttpClient,
     private router: Router,
     private userService: UserService,
-    private errorService: ErrorService  // Inietta il servizio di gestione degli errori
+    private errorService: ErrorService
   ) {}
 
   getToken(): string | null {
@@ -93,8 +90,9 @@ export class AuthService {
         User: user
       };
       this.authSub.next(authData);
-      this.userService.setUser(user);
-      this.autoLogout(authData);
+      this.userService.setUser(user).subscribe(() => {
+        this.autoLogout(authData);
+      });
     }, error => {
       console.error('Error fetching user details', error);
       this.logout();
@@ -110,7 +108,7 @@ export class AuthService {
   }
 
   private handleError(error: HttpErrorResponse) {
-    this.errorService.handleError(error); // Utilizza il servizio di gestione degli errori
+    this.errorService.handleError(error);
     return throwError(() => new Error(error.message));
   }
 
@@ -119,6 +117,8 @@ export class AuthService {
       headers: new HttpHeaders({
         Authorization: `Bearer ${token}`
       })
-    });
+    }).pipe(
+      catchError((error: HttpErrorResponse) => this.handleError(error))
+    );
   }
 }

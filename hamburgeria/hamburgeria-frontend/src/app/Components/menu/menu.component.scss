@@ -9,12 +9,12 @@
 }
 
 .selected-menu-section {
-    background-color: #f9e188;
+  background: linear-gradient(180deg, rgb(248, 238, 201) 13%, rgba(249,225,136,1) 81%);
 }
 
 .menu-section:hover {
-    /* background-color: rgb(233, 231, 231); */
-    background-color: #f9e188;
+  background: linear-gradient(180deg, rgb(248, 238, 201) 13%, rgba(249,225,136,1) 81%);
+  filter: brightness(110%);
 }
 
 .rounded-top {
@@ -52,7 +52,7 @@
 /* CART */
 
 .cart {
-    max-height: 750px;
+    max-height: 500px;
 }
 
 .biggerGif {
@@ -99,5 +99,13 @@
   }
 
   .burger-preview {
-    transform: translateY(300px);
+    transform: translateY(-50px);
   }
+
+  .sticky-top {
+    position: -webkit-sticky; /* Safari */
+    position: sticky;
+    top: 0;
+    z-index: 1000; /* Assicurati che l'elemento rimanga in primo piano */
+  }
+  

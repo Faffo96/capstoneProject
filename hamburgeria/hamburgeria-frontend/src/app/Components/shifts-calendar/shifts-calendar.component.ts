@@ -74,8 +74,8 @@ export class ShiftsCalendarComponent implements OnInit {
   }
 
   loadShifts(): void {
-    this.shiftService.getShifts().subscribe((data: PagedResponse<ShiftDTO>) => {
-      this.events = data.content.map(shift => ({
+    this.shiftService.getShifts().subscribe((data: ShiftDTO[]) => {
+      this.events = data.map(shift => ({
         start: new Date(shift.startDate),
         end: new Date(shift.endDate),
         title: `${shift.employee.name}: ${this.timePipe.transform(shift.startDate)} - ${this.timePipe.transform(shift.endDate)}`,
@@ -88,6 +88,7 @@ export class ShiftsCalendarComponent implements OnInit {
       }));
     });
   }
+  
 
   loadEmployees(): void {
     this.employeeService.getAllEmployeesUnpaged().subscribe((data: EmployeeResponseDTO[]) => {
@@ -150,6 +151,8 @@ export class ShiftsCalendarComponent implements OnInit {
         sunday: false 
       } 
     };
+
+    console.log("shifts:", this.loadShifts());
   }
 
   convertToISOString(date: Date): string {

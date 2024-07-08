@@ -254,8 +254,16 @@ body {
 	box-shadow: 1px 17px 22px 20px rgba(0, 0, 0, 0.75);
 }
 
+.shadow-rb {
+  box-shadow: 10px 10px 15px -10px rgba(0,0,0,0.75);
+}
+
 .text-shadow {
 	filter: drop-shadow(-10px 4px 2px rgba(0, 0, 0, 0.5));
+}
+
+.text-shadow {
+	filter: drop-shadow(7px 7px 10px rgba(0, 0, 0, 0.5));
 }
 
 .border-gray {

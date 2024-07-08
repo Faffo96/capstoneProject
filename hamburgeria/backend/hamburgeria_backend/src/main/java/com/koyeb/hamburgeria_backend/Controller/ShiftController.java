@@ -2,6 +2,7 @@ package com.koyeb.hamburgeria_backend.Controller;
 
 import com.koyeb.hamburgeria_backend.Dto.ShiftDTO;
 import com.koyeb.hamburgeria_backend.Entity.Shift;
+import com.koyeb.hamburgeria_backend.Entity.User.Employee;
 import com.koyeb.hamburgeria_backend.Exception.ShiftNotFoundException;
 import com.koyeb.hamburgeria_backend.Exception.UnauthorizedException;
 import com.koyeb.hamburgeria_backend.Exception.UserNotFoundException;
@@ -44,6 +45,12 @@ import java.util.List;
                 @RequestParam(defaultValue = "id") String sortBy) {
 
             Page<Shift> shifts = shiftService.getAllShifts(page, sortBy);
+            return ResponseEntity.ok(shifts);
+        }
+
+        @GetMapping("/all")
+        public ResponseEntity<List<Shift>> getAllShiftsUnpaged() {
+            List<Shift> shifts = shiftService.getAllShiftsUnpaged();
             return ResponseEntity.ok(shifts);
         }
 

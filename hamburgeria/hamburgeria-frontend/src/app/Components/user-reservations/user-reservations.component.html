@@ -1,10 +1,10 @@
 <div class="container-fluid py-5">
-  <div class="container bg-color1 pt-4 rounded-5 pb-4 px-4">
-    <h1 class="fw-bold bg-light rounded-5 p-3 fs-1 mb-5">Le mie prenotazioni</h1>
+  <div class="container bg-color1 pt-4 rounded-5 pb-4 px-4 shadow-rb">
+    <h1 class="fw-bold bg-light shadow-rb rounded-3 p-3 fs-1 mb-5">Le mie prenotazioni</h1>
     <div class="row">
       
       <div class="col-md-4 mb-4" *ngFor="let reservation of reservations">
-        <div class="bg-light rounded-4 p-3 h-100">
+        <div class="bg-light shadow-rb rounded-4 p-3 h-100">
           <div class="card-body">
             <h5 class="card-title my-2"><strong class="fw-bold">Codice di Prenotazione:</strong> {{ reservation.id }}</h5>
             <p class="card-text my-2"><strong class="fw-bold">Data di creazione:</strong> {{ reservation.creationDate | date }}</p>

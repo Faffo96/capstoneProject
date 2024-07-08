@@ -1,7 +1,7 @@
 import { AfterViewChecked, AfterViewInit, ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, Renderer2 } from '@angular/core';
 import { RouteService } from '../../Services/route.service';
 import { Router, NavigationEnd } from '@angular/router';
-import { Subscription } from 'rxjs';
+import { Subscription, switchMap } from 'rxjs';
 import { UserService } from '../../Services/user.service';
 import { User } from '../../models/user';
 import { NgbAccordionItem } from '@ng-bootstrap/ng-bootstrap';
@@ -27,18 +27,18 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
     private cdr: ChangeDetectorRef,
     private router: Router,
     private userService: UserService,
-    private authSrv: AuthService
+    private authService: AuthService
   ) {
+    this.authService.restore();
     this.userSubscription = this.userService.user$.subscribe(user => {
       this.user$ = user;
       console.log('User updated:', user);
-
     });
+
+    this.loadLoggedUser();
   }
 
-  ngAfterViewInit() {
-    
-  }
+  ngAfterViewInit() { }
 
   ngAfterViewChecked() {
     if (!this.initialized) {
@@ -119,11 +119,27 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
     }
   }
 
-  
-
-
   logout() {
-      this.authSrv.logout();
+    this.authService.logout();
   }
 
+  private loadLoggedUser(): void {
+    const token = this.authService.getToken();
+    if (token) {
+      this.userService.getUserFromToken(token).pipe(
+        switchMap((user: User) => {
+          return this.userService.setUser(user)
+        })
+      ).subscribe(
+        (user: User | null) => {
+          console.log('User loaded and set:', user);
+        },
+        error => {
+          console.error('Error fetching user', error);
+        }
+      );
+    } else {
+      console.error('Token is null');
+    }
+  }
 }
