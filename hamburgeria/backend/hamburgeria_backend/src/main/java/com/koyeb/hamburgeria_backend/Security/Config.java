@@ -54,16 +54,18 @@ public class Config {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOrigins(List.of(
                 "http://localhost:4200",
-                "localhost:4200",
-                "https://essential-berget-faff-846119c1.koyeb.app",
+                "https://668ced96bfe56b0997b58087--hamburgeriarc.netlify.app",
                 "https://hamburgeriarc.netlify.app",
-                "hamburgeriarc.netlify.app",
-                "https://66886b5f04e1c1e68f941a36--hamburgeriarc.netlify.app/",
-                "hamburgeria-backend.essential-berget.internal:8000"
+                "https://essential-berget-faff-846119c1.koyeb.app",
+                "localhost:4200",
+                "668ced96bfe56b0997b58087--hamburgeriarc.netlify.app",
+                "https://hamburgeriarc.netlify.app",
+                "essential-berget-faff-846119c1.koyeb.app/"
+
         ));
-        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH","DELETE", "OPTIONS"));
+        corsConfiguration.setAllowedMethods(List.of("GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"));
         corsConfiguration.setAllowedHeaders(List.of("*"));
-        corsConfiguration.setAllowCredentials(true); // Se vuoi permettere l'invio di cookie
+        corsConfiguration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", corsConfiguration);

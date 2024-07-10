@@ -2,7 +2,6 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Cart } from '../models/cart';
 import { environment } from '../../environments/environment.development';
-import { Product } from '../models/product';
 import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({

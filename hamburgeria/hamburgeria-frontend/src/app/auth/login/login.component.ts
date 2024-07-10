@@ -3,8 +3,6 @@ import { AuthData } from '../../models/auth-data.interface';
 import { AuthService } from '../auth.service';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { ResponseModalComponent } from '../../Components/response-modal/response-modal.component';
 import { ErrorService } from '../../Services/error-service.service';
 
 @Component({

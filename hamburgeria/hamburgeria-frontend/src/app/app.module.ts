@@ -7,7 +7,6 @@ import { HomeComponent } from './Components/home/home.component';
 import { ReservationComponent } from './Components/reservation/reservation.component';
 import { MenuComponent } from './Components/menu/menu.component';
 import { HeaderComponent } from './Components/header/header.component';
-import { Route, RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './auth/login/login.component';

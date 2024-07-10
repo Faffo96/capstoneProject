@@ -78,11 +78,12 @@ export class MenuComponent implements AfterViewInit, OnInit {
       this.showTopBread = show;
     });
   }
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
+
+  ngOnInit(): void {
+    // Altri codici di inizializzazione
   }
 
-  ngOnInit() {
+  ngAfterViewInit(): void {
     const imgs = document.getElementsByClassName('hover-image') as HTMLCollectionOf<HTMLImageElement>;
     const divs = document.getElementsByClassName('menu-section') as HTMLCollectionOf<HTMLDivElement>;
     const iconName = ["hamburger", "chips", "sandwich", "hotdog", "salad", "dessert", "beer", "hamburger2", "sandwich2"];
@@ -94,8 +95,15 @@ export class MenuComponent implements AfterViewInit, OnInit {
       div.addEventListener('mouseenter', () => {
         const hoverSrc = img.getAttribute('src');
         if (hoverSrc) {
-          img.src = hoverSrc;
           img.src = `../../../assets/icons/animate/gif/${iconName[i]}.gif`;
+        }
+      });
+
+      div.addEventListener('mouseleave', () => {
+        // Optional: Restore the original src when mouse leaves
+        const originalSrc = this.menuSections[i].gif;
+        if (originalSrc) {
+          img.src = originalSrc;
         }
       });
     }
