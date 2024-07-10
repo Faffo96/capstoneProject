@@ -4,7 +4,6 @@ import { DiningTable } from '../../models/dining-table';
 import { ReservationService } from '../../Services/reservation.service';
 import { ErrorService } from '../../Services/error-service.service';
 import { ConfirmModalService } from '../../Services/confirm-modal.service';
-import { DatePipe } from '../../pipes/date.pipe';
 import { DateAndTimePipe } from '../../pipes/date-and-time.pipe';
 
 @Component({

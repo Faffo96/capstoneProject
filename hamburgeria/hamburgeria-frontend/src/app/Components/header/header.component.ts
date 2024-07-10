@@ -35,10 +35,12 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
       console.log('User updated:', user);
     });
 
-    this.loadLoggedUser();
+
   }
 
-  ngAfterViewInit() { }
+  ngAfterViewInit() { 
+    this.loadLoggedUser();
+  }
 
   ngAfterViewChecked() {
     if (!this.initialized) {
@@ -66,6 +68,7 @@ export class HeaderComponent implements AfterViewInit, OnInit, AfterViewChecked,
   }
 
   ngOnInit() {
+    this.loadLoggedUser();
     this.routeSubscription = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
         this.routeService.getCurrentRoute().subscribe(route => {

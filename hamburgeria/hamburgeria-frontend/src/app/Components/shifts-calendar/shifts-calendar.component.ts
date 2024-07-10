@@ -8,7 +8,6 @@ import { DatePipe } from '@angular/common';
 import { ShiftService } from '../../Services/shift.service';
 import { EmployeeService } from '../../Services/employee.service';
 import { ShiftDTO } from '../../models/shift-dto';
-import { PagedResponse } from '../../models/paged-response';
 import { TimePipe } from '../../pipes/time.pipe';
 import { isSameDay, isSameMonth } from 'date-fns';
 import { EmployeeResponseDTO } from '../../models/employee-response-dto';
@@ -75,6 +74,7 @@ export class ShiftsCalendarComponent implements OnInit {
 
   loadShifts(): void {
     this.shiftService.getShifts().subscribe((data: ShiftDTO[]) => {
+      console.log(data)
       this.events = data.map(shift => ({
         start: new Date(shift.startDate),
         end: new Date(shift.endDate),

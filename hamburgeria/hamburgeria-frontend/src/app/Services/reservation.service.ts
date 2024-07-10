@@ -1,10 +1,8 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment.development';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { DiningTable } from '../models/dining-table';
+import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { Reservation } from '../models/reservation';
-import { ReservationDTO } from '../models/reservation-dto';
 
 @Injectable({
   providedIn: 'root'

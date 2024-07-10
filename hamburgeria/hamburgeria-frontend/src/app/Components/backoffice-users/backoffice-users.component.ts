@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CustomerResponseDTO } from '../../models/customer-response-dto';
 import { CustomerService } from '../../Services/customer.service';
-import { ConfirmModalComponent } from '../confirm-modal/confirm-modal.component';
 import { ConfirmModalService } from '../../Services/confirm-modal.service';
 import { ErrorService } from '../../Services/error-service.service';
 

@@ -4,18 +4,14 @@
       <div class="menu-sections col-3 border-gray mt-5 rounded-5 p-0 shadow-rb">
         <div class="d-flex flex-column">
           <div>
-            <a *ngFor="let menuSection of menuSections; let i = index" 
-               [ngClass]="{
+            <a *ngFor="let menuSection of menuSections; let i = index" [ngClass]="{
                  'border-bottom-gray': i !== menuSections.length - 1,
                  'rounded-top': i === 0,
                  'rounded-bottom': i === menuSections.length - 1,
                  'selected-menu-section': isSelected(menuSection.route)
-               }" 
-               class="menu-section text-dark pointer d-flex align-items-center py-3" 
-               aria-current="page"
-               [routerLink]="['/menu', menuSection.route]">
-              <div class="me-3" 
-                   [ngClass]="{'my-image-icon': true, 'biggerGif': biggerGif(menuSection.name)}">
+               }" class="menu-section text-dark pointer d-flex align-items-center py-3" aria-current="page"
+              [routerLink]="['/menu', menuSection.route]">
+              <div class="me-3" [ngClass]="{'my-image-icon': true, 'biggerGif': biggerGif(menuSection.name)}">
                 <img class="hover-image" [src]="menuSection.gif" alt="Icona del menu">
               </div>
               <p class="w-50 my-fs-2 fw-semibold">{{menuSection.name}}</p>
@@ -28,7 +24,8 @@
         <div class="py-3">
           <h1 class="fs-1 fw-bold">MENU</h1>
           <h2 class="mt-3">Componi il tuo ordine come preferisci!</h2>
-          <p *ngIf="isCustomizableSection()" class="my-fs-1 fw-bold mt-4">Max 5 ingredienti compresi nel prezzo (+0.50&euro; dal sesto in poi)</p>
+          <p *ngIf="isCustomizableSection()" class="my-fs-1 fw-bold mt-4">Max 5 ingredienti compresi nel prezzo
+            (+0.50&euro; dal sesto in poi)</p>
         </div>
         <div>
           <router-outlet></router-outlet>
@@ -39,12 +36,18 @@
         <h4 class="text-dark fs-3 fw-bold py-3">Carrello</h4>
         <app-cart></app-cart>
         <div class="burger-preview mt-3 sticky-top">
-          <img class="w-100 ingredient-img-1" *ngIf="selectedIngredients.length > 0" src="../../../assets/img/bread-bottom.png" alt="Pane inferiore">
-          <img class="w-100 ingredient-img-2" *ngIf="selectedIngredients.length > 1" src="../../../assets/img/meat.png" alt="Carne">
-          <img class="w-100 ingredient-img-3" *ngIf="selectedIngredients.length > 2" src="../../../assets/img/cheese.png" alt="Formaggio">
-          <img class="w-100 ingredient-img-4" *ngIf="selectedIngredients.length > 3" src="../../../assets/img/salad.png" alt="Verdura">
-          <img class="w-100 ingredient-img-5" *ngIf="selectedIngredients.length > 4" src="../../../assets/img/sauce.png" alt="Salsa">
-          <img class="w-100 ingredient-img-6" *ngIf="showTopBread" src="../../../assets/img/bread-top.png" alt="Pane superiore">
+          <img class="w-100 ingredient-img-1" *ngIf="selectedIngredients.length > 0"
+            src="../../../assets/img/bread-bottom.png" alt="Pane inferiore">
+          <img class="w-100 ingredient-img-2" *ngIf="selectedIngredients.length > 1" src="../../../assets/img/meat.png"
+            alt="Carne">
+          <img class="w-100 ingredient-img-3" *ngIf="selectedIngredients.length > 2"
+            src="../../../assets/img/cheese.png" alt="Formaggio">
+          <img class="w-100 ingredient-img-4" *ngIf="selectedIngredients.length > 3" src="../../../assets/img/salad.png"
+            alt="Verdura">
+          <img class="w-100 ingredient-img-5" *ngIf="selectedIngredients.length > 4" src="../../../assets/img/sauce.png"
+            alt="Salsa">
+          <img class="w-100 ingredient-img-6" *ngIf="showTopBread" src="../../../assets/img/bread-top.png"
+            alt="Pane superiore">
         </div>
       </div>
     </div>

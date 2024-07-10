@@ -4,11 +4,9 @@ import { Product } from '../../models/product';
 import { CustomizableProduct } from '../../models/customizable-product';
 import { ProductService } from '../../Services/product.service';
 import { ErrorService } from '../../Services/error-service.service';
-import { ResponseModalComponent } from '../response-modal/response-modal.component';
 import { ConfirmModalService } from '../../Services/confirm-modal.service';
 import { UserService } from '../../Services/user.service';
 import { User } from '../../models/user';
-import { Cart } from '../../models/cart';
 
 @Component({
   selector: 'app-cart',

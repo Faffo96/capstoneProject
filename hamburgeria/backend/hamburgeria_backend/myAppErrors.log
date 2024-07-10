@@ -265,3 +265,7 @@
 2024-07-08 16:17:07,981 ERROR [http-nio-8080-exec-9] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
 2024-07-08 16:17:27,221 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
 2024-07-08 16:17:27,604 ERROR [http-nio-8080-exec-10] loggerError [CentralizedExceptionHandler.java:93] -- User not authorized to access these carts
+2024-07-09 00:50:55,305 ERROR [http-nio-8080-exec-8] loggerError [CentralizedExceptionHandler.java:119] -- Email customer@example.com already in use.
+2024-07-09 00:51:05,188 ERROR [http-nio-8080-exec-5] loggerError [CentralizedExceptionHandler.java:119] -- Email customer@example.com already in use.
+2024-07-09 00:51:23,492 ERROR [http-nio-8080-exec-6] loggerError [CentralizedExceptionHandler.java:119] -- Email customer2@example.com already in use.
+2024-07-09 00:51:30,001 ERROR [http-nio-8080-exec-1] loggerError [CentralizedExceptionHandler.java:119] -- Email customer3@example.com already in use.
