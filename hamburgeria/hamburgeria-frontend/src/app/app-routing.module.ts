@@ -23,6 +23,7 @@ import { BackofficeProductsComponent } from './Components/backoffice-products/ba
 import { ChiSiamoComponent } from './Components/chi-siamo/chi-siamo.component';
 import { GraficiComponent } from './Components/grafici/grafici.component';
 import { ShiftsCalendarComponent } from './Components/shifts-calendar/shifts-calendar.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -39,77 +40,95 @@ const routes: Routes = [
   },
   {
     path: 'grafici',
-    component: GraficiComponent
+    component: GraficiComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'shiftsCalendar',
-    component: ShiftsCalendarComponent
+    component: ShiftsCalendarComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'backoffice-users',
-    component: BackofficeUsersComponent
+    component: BackofficeUsersComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'backoffice-employees',
-    component: BackofficeEmployeesComponent
+    component: BackofficeEmployeesComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'backoffice-products',
-    component: BackofficeProductsComponent
+    component: BackofficeProductsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'menu',
     component: MenuComponent,
+    canActivate: [AuthGuard],
     children: [
       {
         path: 'customizeBurger',
-        component: CustomizeBurgerComponent
+        component: CustomizeBurgerComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'fries',
-        component: FriesComponent
+        component: FriesComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'customizeSandwich',
-        component: CustomizeSandwichComponent
+        component: CustomizeSandwichComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'hotdog',
-        component: HotdogComponent
+        component: HotdogComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'salad',
-        component: SaladComponent
+        component: SaladComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'dessert',
-        component: DessertComponent
+        component: DessertComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'drink',
-        component: DrinkComponent
+        component: DrinkComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'burger',
-        component: BurgerComponent
+        component: BurgerComponent,
+        canActivate: [AuthGuard]
       },
       {
         path: 'sandwich',
-        component: SandwichComponent
+        component: SandwichComponent,
+        canActivate: [AuthGuard]
       }
     ]
   },
   {
     path: 'userSettings',
-    component: ProfileSettingsComponent
+    component: ProfileSettingsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'userReservations',
-    component: UserReservationsComponent
+    component: UserReservationsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'userOrders',
-    component: UserCartsComponent
+    component: UserCartsComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: 'register',
@@ -121,7 +140,8 @@ const routes: Routes = [
   },
   {
     path: 'reservation',
-    component: ReservationComponent
+    component: ReservationComponent,
+    canActivate: [AuthGuard]
   },
   {
     path: '**',

@@ -54,11 +54,11 @@ public class Config {
         CorsConfiguration corsConfiguration = new CorsConfiguration();
         corsConfiguration.setAllowedOrigins(List.of(
                 "http://localhost:4200",
-                "https://668ced96bfe56b0997b58087--hamburgeriarc.netlify.app",
+                "https://6693b233dc51f32c3a9bc849--hamburgeriarc.netlify.app",
                 "https://hamburgeriarc.netlify.app",
                 "https://essential-berget-faff-846119c1.koyeb.app",
                 "localhost:4200",
-                "668ced96bfe56b0997b58087--hamburgeriarc.netlify.app",
+                "6693b233dc51f32c3a9bc849--hamburgeriarc.netlify.app",
                 "https://hamburgeriarc.netlify.app",
                 "essential-berget-faff-846119c1.koyeb.app/"
 
