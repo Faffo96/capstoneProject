@@ -100,3 +100,7 @@
 2024-07-09 00:51:36,728 TRACE [http-nio-8080-exec-4] loggerTrace [CustomerService.java:72] -- Registration email sent to customer: customer4@example.com
 2024-07-09 00:51:37,841 TRACE [http-nio-8080-exec-4] loggerTrace [CustomerService.java:74] -- Customer with email customer4@example.com saved.
 2024-07-09 01:06:23,735 TRACE [http-nio-8080-exec-4] loggerTrace [UserService.java:106] -- User with email=fabioscar96@gmail.com updated successfully with the sent photo.
+2024-08-19 13:35:25,679 TRACE [http-nio-8080-exec-1] loggerTrace [CustomerService.java:72] -- Registration email sent to customer: g7284x611q@dygovil.com
+2024-08-19 13:35:27,659 TRACE [http-nio-8080-exec-1] loggerTrace [CustomerService.java:74] -- Customer with email g7284x611q@dygovil.com saved.
+2024-08-19 13:39:10,578 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:72] -- Registration email sent to customer: 474ckc3nco@vafyxh.com
+2024-08-19 13:39:12,151 TRACE [http-nio-8080-exec-2] loggerTrace [CustomerService.java:74] -- Customer with email 474ckc3nco@vafyxh.com saved.
