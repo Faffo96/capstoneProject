@@ -13,6 +13,7 @@ import { ErrorService } from '../../Services/error-service.service';
   templateUrl: './register-user.component.html',
   styleUrl: './register-user.component.scss'
 })
+
 export class RegisterUserComponent {
   signupForm!: FormGroup;
   user!: User;

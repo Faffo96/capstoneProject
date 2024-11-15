@@ -1,7 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
-    <list default="true" id="262e06b9-9bf4-40ba-be76-25b3c6143732" name="Changes" comment="" />
+    <list default="true" id="262e06b9-9bf4-40ba-be76-25b3c6143732" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hamburgeria/backend/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/hamburgeria/backend/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hamburgeria/backend/hamburgeria_backend/myAppErrors.log" beforeDir="false" afterPath="$PROJECT_DIR$/hamburgeria/backend/hamburgeria_backend/myAppErrors.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hamburgeria/backend/hamburgeria_backend/myAppTraces.log" beforeDir="false" afterPath="$PROJECT_DIR$/hamburgeria/backend/hamburgeria_backend/myAppTraces.log" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hamburgeria/backend/hamburgeria_backend/src/main/java/com/koyeb/hamburgeria_backend/Runner.java" beforeDir="false" afterPath="$PROJECT_DIR$/hamburgeria/backend/hamburgeria_backend/src/main/java/com/koyeb/hamburgeria_backend/Runner.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hamburgeria/backend/hamburgeria_backend/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/hamburgeria/backend/hamburgeria_backend/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hamburgeria/hamburgeria-frontend/src/app/auth/register-user/register-user.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hamburgeria/hamburgeria-frontend/src/app/auth/register-user/register-user.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hamburgeria/hamburgeria-frontend/src/environments/environment.development.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hamburgeria/hamburgeria-frontend/src/environments/environment.development.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/hamburgeria/hamburgeria-frontend/src/environments/environment.ts" beforeDir="false" afterPath="$PROJECT_DIR$/hamburgeria/hamburgeria-frontend/src/environments/environment.ts" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -10,9 +23,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 8
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 8
+}</component>
   <component name="ProjectId" id="2i2zplMAhhPQhNfbW23RI5gkykA" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -21,9 +34,9 @@
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "develop",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/fabio/OneDrive/Desktop/capstoneProject"
+    "last_opened_file_path": "D:/Portfolio/mail-sender"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />

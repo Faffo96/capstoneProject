@@ -30,8 +30,6 @@ public class Config {
         httpSecurity.csrf(http->http.disable());
         httpSecurity.sessionManagement(http->http.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
         httpSecurity.cors(Customizer.withDefaults());
-        //permette l'accesso a tutti dei servizi con endpoint /api/users e metodi get (naturalmente dopo l'autenticazione)
-
         httpSecurity.authorizeHttpRequests(http->http.requestMatchers("/api/**").permitAll());
         httpSecurity.authorizeHttpRequests(http->http.requestMatchers("/api/users/**").permitAll());
 
@@ -73,5 +71,5 @@ public class Config {
         return new CorsFilter(source);
     }
 }
-
+/*jdbc:postgresql://ep-purple-rice-a22jh1kl.eu-central-1.pg.koyeb.app/koyebdb*/
 
